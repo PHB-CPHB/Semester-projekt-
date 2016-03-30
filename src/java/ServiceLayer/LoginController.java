@@ -38,27 +38,32 @@ public class LoginController extends HttpServlet {
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
+     * @throws java.lang.ClassNotFoundException
+     * @throws java.sql.SQLException
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ClassNotFoundException, SQLException, ClassNotFoundException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            //Connect to the database
+            
+            //Connect to the database.
             ResultSet rs = null;
             Statement statement = null;
             Connection connection = null;
             Class.forName(DBConnector.driver);
             connection = DriverManager.getConnection(DBConnector.URL, DBConnector.ID, DBConnector.ID);
             statement = connection.createStatement();
-            //Setup for username and password
-            String Username = (String) request.getParameter("Username");
-            String Password = (String) request.getParameter("Password");
+            
+            //Setup for username, password and the next jsp.
+            String Username = (String) request.getParameter("ausername");
+            String Password = (String) request.getParameter("apassword");
             String nextJSP = "Cusadd.jsp";
             String doThis = request.getParameter("doThis");
             doThis = doThis.toLowerCase();
             String Query;
             String Role = null;
-            //check if username and password maches
+            
+            //check if username and password maches.
             switch(doThis) {
                 case "doThis":
                     Query = "select ausername, apassword from admin where ausername ="+ Username + "  and apassword =" + Password;  //insert from database!!
@@ -66,16 +71,15 @@ public class LoginController extends HttpServlet {
                     while(rs.next()) {
                         Role = rs.getString(1);
                     }
-                    if("Admin".equals(Role)) {
+                    if("admin".equals(Role)) {
                         nextJSP = "Cusadd.jsp";
-                    } else if ("Customer".equals(Role)){
+                    } else if ("customer".equals(Role)){
                         nextJSP = "Cusadd.jsp";
                     } else {
                         nextJSP = "Cusadd.jsp";
                     }
             }
             response.sendRedirect(nextJSP);
-            
         }
     }
 
