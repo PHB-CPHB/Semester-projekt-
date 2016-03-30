@@ -27,7 +27,7 @@
             Size of building(m^2):<br>
             <input type="text" name="size"><br>
             Building year:<br>
-            <input type="text" name="year zx"><br>
+            <input type="text" name="year"><br>
             <input type="submit" value="add" name="dothis">
         </form>
     </body>
