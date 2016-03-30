@@ -61,7 +61,7 @@ public class LoginController extends HttpServlet {
             //check if username and password maches
             switch(doThis) {
                 case "doThis":
-                    Query = "Select cusername and cpassword from customer";  //insert from database!!
+                    Query = "select ausername, apassword from admin where ausername ="+ Username + "  and apassword =" + Password;  //insert from database!!
                     rs = statement.executeQuery(Query);
                     while(rs.next()) {
                         Role = rs.getString(1);
