@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ServiceLayer.Interfaces;
+package ServiceLayer.Entity;
 
 /**
  *
  * @author philliphbrink
  */
-public interface Bla {
+public class Customer {
     
 }

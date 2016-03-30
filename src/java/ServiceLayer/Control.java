@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package PressentationLayer;
+package ServiceLayer;
 
 /**
  *
  * @author philliphbrink
  */
-public class Bla {
+public class Control {
     
 }
