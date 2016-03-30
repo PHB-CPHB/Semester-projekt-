@@ -10,5 +10,13 @@ package DataAccessLayer;
  * @author philliphbrink
  */
 public class DBFacade {
+    private static DBFacade instance;
+    private DBFacade() {
+    }
     
+    public static DBFacade getInstance() {
+        if(instance == null)
+            instance = new DBFacade();
+        return instance;
+    }
 }
