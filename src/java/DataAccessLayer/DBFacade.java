@@ -5,12 +5,22 @@
  */
 package DataAccessLayer;
 
+import DataAccessLayer.Mappers.BuildingMapper;
+import DataAccessLayer.Mappers.CustomerMapper;
+import ServiceLayer.Entity.Building;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+
 /**
  *
  * @author philliphbrink
  */
 public class DBFacade {
     private static DBFacade instance;
+    private BuildingMapper BMapper;
+    private CustomerMapper CMapper;
     private DBFacade() {
     }
     //Dette er hvor vi kan kalde forbindelse og skrive hvad vi vil hente fra Databasen (Phillip)
@@ -23,4 +33,9 @@ public class DBFacade {
     /*Efter denne kommentar kan vi begynde at skrive kode som enten 
       kan hente fra databasen eller ligge nye ting ned i databasen.
     */
+    
+    public ArrayList<Building> getAllCutsomerBuildings(String customers_name) {
+        int customers_id = CMapper.getCustomer(customers_name);
+        return BMapper.getAllCustomersBuildings(customers_id);
+    }
 }

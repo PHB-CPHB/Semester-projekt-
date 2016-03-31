@@ -4,6 +4,7 @@
     Author     : philliphbrink
 --%>
 
+<%@page import="DataAccessLayer.DBFacade"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="ServiceLayer.Entity.Building"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -20,16 +21,17 @@
             <tr>
                 <td>username</td><td>password</td><td>email</td><td>userrole</td>
             </tr>
-            <% databasen db = (databasen) session.getAttribute("database");
-                System.out.println("We we at A");
-               ArrayList<Building> users = db.getAllUsers();
-               System.out.println("We we at B");
+            <% DBFacade db = (DBFacade) session.getAttribute("database");
+                String customers_name = (String) session.getAttribute("Username");
+               ArrayList<Building> buildings = db.getAllCutsomerBuildings(customers_name);
                for ( Building building : buildings){
                    out.println("<tr>");
-                   out.print("<td>" + building + "</td>");
-                   out.print("<td>" + building + "</td>");
-                   out.print("<td>" + building + "</td>");
-                   out.println("<td>" + building + "</td>");
+                   out.println("<td>" + building.getBuildingId() + "</td>");
+                   out.print("<td>" + building.getAdress() + "</td>");
+                   out.print("<td>" + building.getBuildingName() + "</td>");
+                   out.print("<td>" + building.getBuildingStatus() + "</td>");
+                   out.println("<td>" + building.getCity() + "</td>");
+                   out.println("<td>" + building.getZipCode() + "</td>");
                    out.println("</tr>");
                } 
             %>

@@ -16,17 +16,26 @@ public class Building {
     private int roomSize;
     private String adress;
     private String buildingName;
-    private String postal;
+    private int zipCode;
     private String city;
     private String buildingStatus;
 
-    public Building(int buildingId, int roomId, int roomSize, String adress, String buildingName, String postal, String city, String buildingStatus) {
+    public Building(int buildingId, int roomId, int roomSize, String adress, String buildingName, int zipCode, String city, String buildingStatus) {
         this.buildingId = buildingId;
         this.roomId = roomId;
         this.roomSize = roomSize;
         this.adress = adress;
         this.buildingName = buildingName;
-        this.postal = postal;
+        this.zipCode = zipCode;
+        this.city = city;
+        this.buildingStatus = buildingStatus;
+    }
+    
+    public Building (int buildingId, String adress, String buildingName, int zipCode, String city, String buildingStatus) {
+        this.buildingId = buildingId;
+        this.adress = adress;
+        this.buildingName = buildingName;
+        this.zipCode = zipCode;
         this.city = city;
         this.buildingStatus = buildingStatus;
     }
@@ -79,12 +88,12 @@ public class Building {
         this.buildingName = buildingName;
     }
 
-    public String getPostal() {
-        return postal;
+    public int getZipCode() {
+        return zipCode;
     }
 
-    public void setPostal(String postal) {
-        this.postal = postal;
+    public void setZipCode(int zipCode) {
+        this.zipCode = zipCode;
     }
 
     public String getCity() {
