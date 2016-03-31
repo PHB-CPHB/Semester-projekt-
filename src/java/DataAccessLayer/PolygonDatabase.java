@@ -39,10 +39,10 @@ public class PolygonDatabase {
     public String getUserRole(String username) {
         try {
             Statement stmt = con.createStatement();
-            String query = "select user_role from login where name='" + username + "'";
+            String query = "select user_role from login where username='" + username + "'";
             ResultSet rs = stmt.executeQuery(query);
             rs.next();
-            return rs.getString("userrole");
+            return rs.getString("user_role");
         } catch (SQLException ex) {
             return "guest";
         }

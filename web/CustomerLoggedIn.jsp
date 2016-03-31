@@ -12,6 +12,9 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Hello customer <%= session.getAttribute("LI") %>.</h1>
+        <h1>Hello customer <%= session.getAttribute("username") %>.</h1>
+        View my buildings <br>
+        <form action="CustomerBuildings.jsp" method="POST">
+            <input type="submit" value="View buildings" />
     </body>
 </html>
