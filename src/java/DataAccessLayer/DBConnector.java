@@ -15,7 +15,7 @@ import org.jboss.logging.Logger;
  * @author philliphbrink
  */
 public class DBConnector {
-
+//Dette er hvor vi opretter selve forbindelse (Phillip)
     public static String driver = "com.mysql.jdbc.Driver";
     public static String URL = "jdbc:mysql://localhost/polygon";
     public static String ID = "root";
