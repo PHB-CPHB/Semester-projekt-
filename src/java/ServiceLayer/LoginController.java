@@ -55,8 +55,8 @@ public class LoginController extends HttpServlet {
             statement = connection.createStatement();
             
             //Setup for username, password and the next jsp.
-            String Username = (String) request.getParameter("ausername");
-            String Password = (String) request.getParameter("apassword");
+            String Username = (String) request.getParameter("Username");
+            String Password = (String) request.getParameter("Password");
             String nextJSP = "Cusadd.jsp";
             String doThis = request.getParameter("doThis");
             doThis = doThis.toLowerCase();
