@@ -50,7 +50,6 @@ public class AddBuildingController extends HttpServlet {
             Statement statement = null;
             Connection connection = null;
             String nextJSP = null;
-            String Query;
             String doThis = request.getParameter("doThis");
             doThis = doThis.toLowerCase();
             statement = connection.createStatement();
@@ -68,9 +67,8 @@ public class AddBuildingController extends HttpServlet {
                     if ("zipcode".equals(building_zipcode) && "adress".equals(building_adress) && "parcel".equals(building_parcelno)) {
                         nextJSP = "Cusadd.jsp";
                     } else {
-                        Query = "INSERT INTO buildings (building_name, building_status, building_type, adress, year, zipcode, city, areasize) VALUES (" + building_name + "," + null + "," + building_type + "," + building_adress + "," + building_year + "," + building_zipcode + "," + building_city + "," + building_size + ")";
-                        rs = statement.executeQuery(Query);
-                        nextJSP = "Cusadd.jsp";
+                        
+                        nextJSP = "CustomerBuildings.jsp";
                     }
                     response.sendRedirect(nextJSP);
             }
