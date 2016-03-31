@@ -3,9 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ServiceLayer.Interfaces;
+package PressentationLayer;
 
 import DataAccessLayer.DBConnector;
+import DataAccessLayer.PolygonDatabase;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -19,6 +20,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -42,6 +44,8 @@ public class AddBuildingController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             DBConnector.getConnection();
+            HttpSession session = request.getSession(true);
+            PolygonDatabase Data = (PolygonDatabase) session.getAttribute("database");
             ResultSet rs = null;
             Statement statement = null;
             Connection connection = null;
@@ -59,14 +63,16 @@ public class AddBuildingController extends HttpServlet {
             String building_year = (String) request.getParameter("year");
             String building_type = (String) request.getParameter("type");
             switch (doThis) {
-                case "doThis":
+                case "add":
                     //inserts into database!
-                    Query = "INSERT INTO buildings (building_name, building_status, building_type, adress, year, zipcode, city, areasize) VALUES (" + building_name + "," + null + "," + building_type + "," + building_adress + "," + building_year + "," + building_zipcode + "," + building_city + "," + building_size + ")";
-                    rs = statement.executeQuery(Query);
-                    if ("Building".equals(rs)) {
-
+                    if ("zipcode".equals(building_zipcode) && "adress".equals(building_adress) && "parcel".equals(building_parcelno)) {
+                        nextJSP = "Cusadd.jsp";
+                    } else {
+                        Query = "INSERT INTO buildings (building_name, building_status, building_type, adress, year, zipcode, city, areasize) VALUES (" + building_name + "," + null + "," + building_type + "," + building_adress + "," + building_year + "," + building_zipcode + "," + building_city + "," + building_size + ")";
+                        rs = statement.executeQuery(Query);
+                        nextJSP = "Cusadd.jsp";
                     }
-
+                    response.sendRedirect(nextJSP);
             }
         }
     }

@@ -47,9 +47,11 @@ public class LoginController extends HttpServlet {
         HttpSession session = request.getSession(true);
         PolygonDatabase Data = (PolygonDatabase) session.getAttribute("polygon");
         Data = new PolygonDatabase();
+        String dothis = request.getParameter("dothis");
         if (Data == null) {
             Data = new PolygonDatabase();
             session.setAttribute("polygon", Data);
+            session.setAttribute("database", Data);
         }
         String user = request.getParameter("username");
         String password = request.getParameter("password");
@@ -73,7 +75,8 @@ public class LoginController extends HttpServlet {
                 
                 forward(request, response, "/Login.jsp");
         
-    }
+        }
+    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
