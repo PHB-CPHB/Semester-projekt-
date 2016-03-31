@@ -5,9 +5,8 @@ package ServiceLayer;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
-
 import DataAccessLayer.DBConnector;
+import DataAccessLayer.PolygonDatabase;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -22,6 +21,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -42,44 +42,34 @@ public class LoginController extends HttpServlet {
      * @throws java.sql.SQLException
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, ClassNotFoundException, SQLException, ClassNotFoundException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            
-            //Connect to the database.
-            ResultSet rs = null;
-            Statement statement = null;
-            Connection connection = null;
-            Class.forName(DBConnector.driver);
-            connection = DriverManager.getConnection(DBConnector.URL, DBConnector.ID, DBConnector.ID);
-            statement = connection.createStatement();
-            
-            //Setup for username, password and the next jsp.
-            String Username = (String) request.getParameter("ausername");
-            String Password = (String) request.getParameter("apassword");
-            String nextJSP = "Cusadd.jsp";
-            String doThis = request.getParameter("doThis");
-            doThis = doThis.toLowerCase();
-            String Query;
-            String Role = null;
-            
-            //check if username and password maches.
-            switch(doThis) {
-                case "doThis":
-                    Query = "select username, password from admin where ausername ="+ Username + "  and apassword =" + Password;  //insert from database!!
-                    rs = statement.executeQuery(Query);
-                    while(rs.next()) {
-                        Role = rs.getString(1);
-                    }
-                    if("admin".equals(Role)) {
-                        nextJSP = "Cusadd.jsp";
-                    } else if ("customer".equals(Role)){
-                        nextJSP = "Cusadd.jsp";
+            throws ServletException, IOException, ClassNotFoundException, SQLException {
+        String dothis = request.getParameter("dothis");
+        HttpSession session = request.getSession(true);    
+        PolygonDatabase Data = (PolygonDatabase) session.getAttribute("database");
+        if(Data == null){
+            Data = new PolygonDatabase();
+            session.setAttribute("database",Data);
+        }
+        dothis = dothis.toLowerCase();
+        String user = request.getParameter("username");
+        String password = request.getParameter("password");
+        String JSP;
+        //check if username and password maches.
+        switch (dothis) {
+            case "login":
+                if (Data.validate(user, password) == true) {
+                    if (Data.getUserRole(user).equals("admin")) {
+                        JSP = "admin.jsp";
+                    } else if (Data.getUserRole(user).equals("customer")) {
+                        JSP = "customer.jsp";
                     } else {
-                        nextJSP = "Cusadd.jsp";
+                        JSP = "login.jsp";
                     }
-            }
-            response.sendRedirect(nextJSP);
+                    session.setAttribute("username", user);
+                } else {
+                    JSP = "login.jsp";
+                }
+                response.sendRedirect(JSP);
         }
     }
 
