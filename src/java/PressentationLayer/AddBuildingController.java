@@ -6,6 +6,7 @@
 package PressentationLayer;
 
 import DataAccessLayer.DBConnector;
+import DataAccessLayer.DBFacade;
 import DataAccessLayer.PolygonDatabase;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -28,6 +29,8 @@ import javax.servlet.http.HttpSession;
  */
 @WebServlet(name = "AddBuildingController", urlPatterns = {"/AddBuildingController"})
 public class AddBuildingController extends HttpServlet {
+
+    private DBFacade DBF;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -58,7 +61,7 @@ public class AddBuildingController extends HttpServlet {
             String building_zipcode = (String) request.getParameter("zipcode");
             String building_parcelno = (String) request.getParameter("parcel");
             String building_city = (String) request.getParameter("city");
-            String building_size = (String) request.getParameter("size");
+            String building_areasize = (String) request.getParameter("size");
             String building_year = (String) request.getParameter("year");
             String building_type = (String) request.getParameter("type");
             switch (doThis) {
@@ -67,7 +70,7 @@ public class AddBuildingController extends HttpServlet {
                     if ("zipcode".equals(building_zipcode) && "adress".equals(building_adress) && "parcel".equals(building_parcelno)) {
                         nextJSP = "Cusadd.jsp";
                     } else {
-                        
+                        DBF.addBuilding(building_name, building_type, building_adress, building_year, building_zipcode, building_city, building_areasize, building_parcelno);
                         nextJSP = "CustomerBuildings.jsp";
                     }
                     response.sendRedirect(nextJSP);
