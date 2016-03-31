@@ -20,15 +20,15 @@ import java.util.ArrayList;
 public class PolygonDatabase {
       Connection con;
 
-    public JDBCWebDatabase() throws ClassNotFoundException, SQLException {
-        Class.forName(DB.driver);
-        con = DriverManager.getConnection(DB.URL, DB.ID, DB.PW);
+    public PolygonDatabase() throws ClassNotFoundException, SQLException {
+        Class.forName(DBConnector.driver);
+        con = DriverManager.getConnection(DBConnector.URL, DBConnector.ID, DBConnector.PW);
     }
 
     public boolean validate(String username, String password) {
         try {
             Statement stmt = con.createStatement();
-            String query = "select * from userInfo where name='" + username + "' and pwd='" + password + "'";
+            String query = "select * from login where username='" + username + "' and password='" + password + "'";
             ResultSet rs = stmt.executeQuery(query);
             return rs.next(); // If no next, it is because we did not find a match in the database
         } catch (SQLException ex) {
@@ -39,7 +39,7 @@ public class PolygonDatabase {
     public String getUserRole(String username) {
         try {
             Statement stmt = con.createStatement();
-            String query = "select userrole from userInfo where name='" + username + "'";
+            String query = "select user_role from login where name='" + username + "'";
             ResultSet rs = stmt.executeQuery(query);
             rs.next();
             return rs.getString("userrole");
@@ -47,7 +47,7 @@ public class PolygonDatabase {
             return "guest";
         }
     }
-
+   /*
     public ArrayList<UserInfo> getAllUsers() {
         try {
             ArrayList<UserInfo> list = new ArrayList<>();
@@ -100,7 +100,5 @@ public class PolygonDatabase {
         }
         
     }
-
-}
-
+    */
 }
