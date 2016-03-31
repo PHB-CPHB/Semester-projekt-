@@ -44,11 +44,11 @@ public class LoginController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ClassNotFoundException, SQLException {
         String dothis = request.getParameter("dothis");
-        HttpSession session = request.getSession(true);    
+        HttpSession session = request.getSession(true);
         PolygonDatabase Data = (PolygonDatabase) session.getAttribute("database");
-        if(Data == null){
+        if (Data == null) {
             Data = new PolygonDatabase();
-            session.setAttribute("database",Data);
+            session.setAttribute("database", Data);
         }
         dothis = dothis.toLowerCase();
         String user = request.getParameter("username");
@@ -69,7 +69,7 @@ public class LoginController extends HttpServlet {
                 } else {
                     JSP = "login.jsp";
                 }
-                response.sendRedirect(JSP);
+            response.sendRedirect(JSP);
         }
     }
 
