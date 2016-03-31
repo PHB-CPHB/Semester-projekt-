@@ -13,12 +13,12 @@
     </head>
     <body>
         <h1>Please enter your login</h1>
-        <form action="loginctrl" method="POST">
+        <form action="LoginController" method="POST">
             Username:<br>
             <input type="text" name="username"><br>
             Password:<br>
             <input type="text" name="password"><br>
-            <input type="submit" value="login" name="dothis">
+            <input type="submit" value="login">
         </form>
     </body>
 </html>

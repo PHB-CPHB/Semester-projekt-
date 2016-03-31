@@ -1,6 +1,6 @@
 <%-- 
-    Document   : AdminLoggedIn
-    Created on : 31-03-2016, 10:45:27
+    Document   : CustomerBuildings
+    Created on : 31-03-2016, 11:24:56
     Author     : Oliver
 --%>
 
@@ -12,8 +12,6 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Hello admin <%= session.getAttribute("username")%>.</h1>
-        <form action="CreateCustomer.jsp" method="POST">
-            <input type="submit" value="Create customer" />
+        <h1>Here are you current buildings.</h1>
     </body>
 </html>

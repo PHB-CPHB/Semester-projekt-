@@ -16,6 +16,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -43,34 +44,35 @@ public class LoginController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ClassNotFoundException, SQLException {
-        String dothis = request.getParameter("dothis");
-        HttpSession session = request.getSession(true);    
-        PolygonDatabase Data = (PolygonDatabase) session.getAttribute("database");
-        if(Data == null){
+        HttpSession session = request.getSession(true);
+        PolygonDatabase Data = (PolygonDatabase) session.getAttribute("polygon");
+        Data = new PolygonDatabase();
+        if (Data == null) {
             Data = new PolygonDatabase();
-            session.setAttribute("database",Data);
+            session.setAttribute("polygon", Data);
         }
-        dothis = dothis.toLowerCase();
         String user = request.getParameter("username");
         String password = request.getParameter("password");
-        String JSP;
         //check if username and password maches.
-        switch (dothis) {
-            case "login":
+
+                
                 if (Data.validate(user, password) == true) {
                     if (Data.getUserRole(user).equals("admin")) {
-                        JSP = "admin.jsp";
+                        session.setAttribute("username", user);
+                        forward(request, response, "/AdminLoggedIn.jsp");
                     } else if (Data.getUserRole(user).equals("customer")) {
-                        JSP = "customer.jsp";
+                        session.setAttribute("username", user);
+                        forward(request, response, "/CustomerLoggedIn.jsp");
                     } else {
-                        JSP = "login.jsp";
+                        forward(request, response, "/Login.jsp");
                     }
-                    session.setAttribute("username", user);
+                    
                 } else {
-                    JSP = "login.jsp";
+                    forward(request, response, "/Login.jsp");
                 }
-                response.sendRedirect(JSP);
-        }
+                
+                forward(request, response, "/Login.jsp");
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -124,4 +126,8 @@ public class LoginController extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
+    protected void forward(HttpServletRequest request, HttpServletResponse response, String url) throws IOException, ServletException {
+        RequestDispatcher requestDispatcher = getServletContext().getRequestDispatcher(url);
+        requestDispatcher.forward(request, response);
+    }
 }
