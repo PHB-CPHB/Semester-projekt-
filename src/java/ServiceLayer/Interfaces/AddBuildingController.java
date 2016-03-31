@@ -12,6 +12,8 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -43,23 +45,28 @@ public class AddBuildingController extends HttpServlet {
             ResultSet rs = null;
             Statement statement = null;
             Connection connection = null;
-            String Query;
             String nextJSP = null;
+            String Query;
             String doThis = request.getParameter("doThis");
             doThis = doThis.toLowerCase();
             statement = connection.createStatement();
             String building_name = (String) request.getParameter("name");
-            String building_ = (String) request.getParameter("name");
-            String building_name = (String) request.getParameter("name");
-            String building_name = (String) request.getParameter("name");
+            String building_adress = (String) request.getParameter("adress");
+            String building_zipcode = (String) request.getParameter("zipcode");
+            String building_parcelno = (String) request.getParameter("parcel");
+            String building_city = (String) request.getParameter("city");
+            String building_size = (String) request.getParameter("size");
+            String building_year = (String) request.getParameter("year");
+            String building_type = (String) request.getParameter("type");
             switch (doThis) {
                 case "doThis":
-                    Query = "select ausername, apassword from admin where ausername ="+ Username + "  and apassword =" + Password;  //insert from database!!
+                    //inserts into database!
+                    Query = "INSERT INTO buildings (building_name, building_status, building_type, adress, year, zipcode, city, areasize) VALUES (" + building_name + "," + null + "," + building_type + "," + building_adress + "," + building_year + "," + building_zipcode + "," + building_city + "," + building_size + ")";
                     rs = statement.executeQuery(Query);
-                    if("Building".equals(rs)){
-                        
+                    if ("Building".equals(rs)) {
+
                     }
-                    
+
             }
         }
     }
@@ -76,7 +83,11 @@ public class AddBuildingController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(AddBuildingController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -90,7 +101,11 @@ public class AddBuildingController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(AddBuildingController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
