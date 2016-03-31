@@ -22,7 +22,7 @@ public class BuildingMapper {
     public ArrayList<Building> getAllCustomersBuildings(int customers_id) {
         try {
             ArrayList<Building> list = new ArrayList<>();
-            PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("select * from buildings where customers_id = ?");
+            PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("select * from buildings where user_id = ?");
             pstmt.setInt(1 , customers_id);
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
@@ -35,7 +35,18 @@ public class BuildingMapper {
             }
             return list;
         } catch (SQLException ex) {
+            System.out.println(ex);
             return null;
+        }
+    }
+    
+    public void deleteBuilding(int building_id) {
+        try {
+            PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("DELETE FROM buildings WHERE building_id = ?");
+            pstmt.setInt(1 , building_id);
+            pstmt.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println(ex);
         }
     }
 }

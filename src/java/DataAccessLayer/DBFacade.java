@@ -38,4 +38,8 @@ public class DBFacade {
         int customers_id = CMapper.getCustomer(customers_name);
         return BMapper.getAllCustomersBuildings(customers_id);
     }
+    
+    public void deleteBuilding (int building_id) {
+        BMapper.deleteBuilding(building_id);
+    }
 }
