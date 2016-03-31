@@ -1,9 +1,10 @@
-DROP TABLE IF EXISTS buildings;
-DROP TABLE IF EXISTS admin;
-DROP TABLE IF EXISTS customer;
 DROP DATABASE IF EXISTS polygon;
 CREATE DATABASE polygon;
 USE polygon;
+DROP TABLE IF EXISTS buildings;
+DROP TABLE IF EXISTS admin;
+DROP TABLE IF EXISTS customer;
+
 
 CREATE TABLE buildings(
 building_name VARCHAR(45),
