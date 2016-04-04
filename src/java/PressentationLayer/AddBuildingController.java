@@ -64,13 +64,14 @@ public class AddBuildingController extends HttpServlet {
             String building_areasize = (String) request.getParameter("size");
             String building_year = (String) request.getParameter("year");
             String building_type = (String) request.getParameter("type");
+            String building_floor = (String) request.getParameter("floor");
             switch (doThis) {
                 case "add":
                     //inserts into database!
                     if ("zipcode".equals(building_zipcode) && "adress".equals(building_adress) && "parcel".equals(building_parcelno)) {
                         nextJSP = "Cusadd.jsp";
                     } else {
-                        DBF.addBuilding(building_name, building_type, building_adress, building_year, building_zipcode, building_city, building_areasize, building_parcelno);
+                        DBF.addBuilding(building_name, building_type, building_adress, building_year, building_zipcode, building_city, building_areasize, building_parcelno, building_floor);
                         nextJSP = "CustomerBuildings.jsp";
                     }
                     response.sendRedirect(nextJSP);

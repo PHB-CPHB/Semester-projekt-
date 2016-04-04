@@ -26,10 +26,12 @@
             <input type="text" name="parcel"><br>
             Size of building(m^2):<br>
             <input type="text" name="size"><br>
-            Building year:<br>
-            <input type="text" name="year"><br>      
+            Building type:<br>
+            <input type="text" name="type"><br>      
             Building year:<br>
             <input type="text" name="year"><br>
+            Building floor:<br>
+            <input type="text" name="floor"><br>
             <input type="submit" value="add" name="dothis">
         </form>
     </body>

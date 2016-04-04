@@ -10,7 +10,6 @@ import ServiceLayer.Entity.Building;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 
 /**
@@ -45,6 +44,23 @@ public class BuildingMapper {
             PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("DELETE FROM buildings WHERE building_id = ?");
             pstmt.setInt(1 , building_id);
             pstmt.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+    }
+    
+    public void addBuilding(String building_name, String building_type, String building_adress, String building_year, String building_zipcode, String building_areasize, String building_parcelno, String building_floor) {
+        try {
+       PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("INSERT INTO buildings (building_name, building_type, building_adress, building_year, building_zipcode, building_areasize, building_parcelno, building_floor) VALUES ('?', '?', '?', '?', '?', ?, '?', '?')");
+       pstmt.setString(1, building_name);
+       pstmt.setString(2, building_type);
+       pstmt.setString(3, building_adress);
+       pstmt.setString(4, building_year);
+       pstmt.setString(5, building_zipcode);
+       pstmt.setString(6, building_areasize);
+       pstmt.setString(7, building_parcelno);
+       pstmt.setString(8, building_floor);
+       pstmt.executeUpdate();
         } catch (SQLException ex) {
             System.out.println(ex);
         }
