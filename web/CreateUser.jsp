@@ -21,8 +21,8 @@
             <option value="admin">Admin</option>
             <option value="customer">Customer</option>
         </select>
-        <form action=="CreateCustomer.jsp" method="POST">
-            <input type="hidden" name="do_this" value="CreateCustomer"/>
+        <form action="AdminServlet" method="POST">
+            <input type="hidden" name="do_this" value="createUser"/>
             <input type="submit" value="Create customer" />
     </body>
 </html>

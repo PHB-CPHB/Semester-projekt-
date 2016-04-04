@@ -13,7 +13,7 @@
     </head>
     <body>
         <h1>Hello admin <%= session.getAttribute("username")%>.</h1>
-        <form action="CreateUser.jsp" method="POST">
-            <input type="submit" value="Create user" />
+        <h1><a href="CreateUser.jsp">Create an user</a></h1>
+        <h1><a href="AllUsers.jsp">Show users</a></h1>
     </body>
 </html>
