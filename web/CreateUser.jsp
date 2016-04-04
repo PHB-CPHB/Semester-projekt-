@@ -17,6 +17,10 @@
         <input type="text" name="username"><br>
         Password <br>
         <input type="text" name="password"><br>
+        <select name="role">
+            <option value="admin">Admin</option>
+            <option value="customer">Customer</option>
+        </select>
         <form action=="CreateCustomer.jsp" method="POST">
             <input type="hidden" name="do_this" value="CreateCustomer"/>
             <input type="submit" value="Create customer" />
