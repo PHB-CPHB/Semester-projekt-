@@ -24,14 +24,14 @@ public class BuildingMapper {
             PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("select * from buildings where user_id = ?");
             pstmt.setInt(1 , user_id);
             ResultSet rs = pstmt.executeQuery();
-            System.out.println("5");
             while (rs.next()) {
                 list.add(new Building(rs.getInt("building_id"),
                         rs.getString("building_adress"),
                         rs.getString("building_name"),
                         rs.getInt("building_zipcode"),
                         rs.getString("building_city"),
-                        rs.getString("building_status")));
+                        rs.getString("building_status"),
+                        rs.getString("building_firm")));
             }
             return list;
         } catch (SQLException ex) {
