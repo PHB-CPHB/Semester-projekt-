@@ -24,7 +24,8 @@
             <option value="admin">Admin</option>
             <option value="customer">Customer</option>
         </select>
-            <input type="submit" name="do_this" value="createUser" />
+        <input type="hidden" name="do_this" value="createUser"/>
+            <input type="submit" value="Create User" />
         </form>
     </body>
 </html>

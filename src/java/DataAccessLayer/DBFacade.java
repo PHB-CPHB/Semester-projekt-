@@ -35,8 +35,9 @@ public class DBFacade {
     */
     
     public ArrayList<Building> getAllCutsomerBuildings(String username) {
-        String user_firm = CustomerMapper.getCustomer(username);
-        return BuildingMapper.getAllCustomersBuildings(user_firm);
+        int user_id = CustomerMapper.getCustomerId(username);
+        System.out.println(user_id);
+        return BuildingMapper.getAllCustomersBuildings(user_id);
     }
     // This method is for 
     public void deleteBuilding (int building_id) {
