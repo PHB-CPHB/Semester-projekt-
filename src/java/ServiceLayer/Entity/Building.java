@@ -19,8 +19,9 @@ public class Building {
     private int zipCode;
     private String city;
     private String buildingStatus;
+    private String buildingFirm;
 
-    public Building(int buildingId, int roomId, int roomSize, String adress, String buildingName, int zipCode, String city, String buildingStatus) {
+    public Building(int buildingId, int roomId, int roomSize, String adress, String buildingName, int zipCode, String city, String buildingStatus,String buildingFirm) {
         this.buildingId = buildingId;
         this.roomId = roomId;
         this.roomSize = roomSize;
@@ -29,15 +30,17 @@ public class Building {
         this.zipCode = zipCode;
         this.city = city;
         this.buildingStatus = buildingStatus;
+        this.buildingFirm = buildingFirm;
     }
     
-    public Building (int buildingId, String adress, String buildingName, int zipCode, String city, String buildingStatus) {
+    public Building (int buildingId, String adress, String buildingName, int zipCode, String city, String buildingStatus, String buildingFirm) {
         this.buildingId = buildingId;
         this.adress = adress;
         this.buildingName = buildingName;
         this.zipCode = zipCode;
         this.city = city;
         this.buildingStatus = buildingStatus;
+        this.buildingFirm = buildingFirm;
     }
 
     public int getBuildingId() {
@@ -103,6 +106,13 @@ public class Building {
     public void setCity(String city) {
         this.city = city;
     }
-
+    
+    public String getBuildingFirm() {
+        return buildingFirm;
+    }
+    
+    public void setBuildingFirm(String buildingFirm) {
+        this.buildingFirm = buildingFirm;
+    }
     
 }
