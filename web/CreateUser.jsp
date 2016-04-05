@@ -21,8 +21,7 @@
             <option value="admin">Admin</option>
             <option value="customer">Customer</option>
         </select>
-        <form action="AdminServlet" method="POST">
-            <input type="hidden" name="do_this" value="createUser"/>
-            <input type="submit" value="Create customer" />
+        <form action="AdminLoggedInController" method="POST">
+            <input type="submit" name="dothis" value="Create user" />
     </body>
 </html>
