@@ -6,7 +6,6 @@
 package DataAccessLayer.Mappers;
 
 import DataAccessLayer.DBConnector;
-import ServiceLayer.Entity.Building;
 import ServiceLayer.Entity.Customer;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -35,7 +34,23 @@ public class CustomerMapper {
         return user_id;
     }
 
-    public ArrayList<Customer> getAllUsers(int user_id) {
+
+    public static boolean createCustomer(String username, String password, String user_role) {
+        try {
+            PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("INSERT INTO login (username, password, user_role) VALUES ('?', '?', ?, '?')");
+            pstmt.setString(1, username);
+            pstmt.setString(2, password);
+            pstmt.setString(4, user_role);
+            pstmt.executeUpdate();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+
+    public static ArrayList<Customer> getAllUsers(int user_id) {
+
         try {
             ArrayList<Customer> list = new ArrayList<>();
             PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("select * from login where user_id = ?");
@@ -47,7 +62,7 @@ public class CustomerMapper {
                         rs.getString("user_role")));
             }
             return list;
-        } catch (SQLException ex) {
+        } catch (SQLException | NullPointerException ex) {
             System.out.println(ex);
             return null;
         }
