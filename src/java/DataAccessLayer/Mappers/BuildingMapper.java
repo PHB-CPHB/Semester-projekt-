@@ -21,7 +21,7 @@ public class BuildingMapper {
     public static ArrayList<Building> getAllCustomersBuildings(String user_firm) {
         try {
             ArrayList<Building> list = new ArrayList<>();
-            PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("select * from buildings where user_firm = ?");
+            PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("SELECT * FROM buildings WHERE building_firm = ?");
             pstmt.setString(1 , user_firm);
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {

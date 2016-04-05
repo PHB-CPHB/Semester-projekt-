@@ -34,9 +34,7 @@ public class DBFacade {
     */
     
     public ArrayList<Building> getAllCutsomerBuildings(String username) {
-        System.out.println(username);
         String user_firm = CustomerMapper.getCustomer(username);
-        System.out.println(user_firm);
         return BuildingMapper.getAllCustomersBuildings(user_firm);
     }
     // This method is for 

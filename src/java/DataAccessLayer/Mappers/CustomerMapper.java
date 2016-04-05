@@ -22,10 +22,9 @@ public class CustomerMapper {
 
 
     public static String getCustomer(String username) {
-        System.out.println(username);
         String user_firm = "";
         try {
-            PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("SELECT * FROM login WHERE username = '?'");
+            PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("SELECT * FROM login WHERE username = ?");
             pstmt.setString(1, username);
             ResultSet rs = pstmt.executeQuery();
             rs.next();
