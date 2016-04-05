@@ -15,5 +15,6 @@
         <h1>Hello admin <%= session.getAttribute("username")%>.</h1>
         <h1><a href="CreateUser.jsp">Create an user</a></h1>
         <h1><a href="AllUsers.jsp">Show users</a></h1>
+        <h1><a href="Cusdelete.jsp">Show buildings</a></h1>
     </body>
 </html>

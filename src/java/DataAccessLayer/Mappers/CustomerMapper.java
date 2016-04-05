@@ -6,7 +6,6 @@
 package DataAccessLayer.Mappers;
 
 import DataAccessLayer.DBConnector;
-import ServiceLayer.Entity.Building;
 import ServiceLayer.Entity.Customer;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -21,10 +20,10 @@ import java.util.logging.Logger;
  */
 public class CustomerMapper {
 
-    public int getCustomer(String username) {
+    public static int getCustomer(String username) {
         int customer_id = 0;
         try {
-            PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("SELECT * FROM customer WHERE username = ?");
+            PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("SELECT * FROM login WHERE username = '?'");
             pstmt.setString(1, username);
             ResultSet rs = pstmt.executeQuery();
             rs.next();
@@ -35,7 +34,7 @@ public class CustomerMapper {
         return customer_id;
     }
 
-    public ArrayList<Customer> getAllUsers(int user_id) {
+    public static ArrayList<Customer> getAllUsers(int user_id) {
         try {
             ArrayList<Customer> list = new ArrayList<>();
             PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("select * from login where user_id = ?");
@@ -47,7 +46,7 @@ public class CustomerMapper {
                         rs.getString("user_role")));
             }
             return list;
-        } catch (SQLException ex) {
+        } catch (SQLException | NullPointerException ex) {
             System.out.println(ex);
             return null;
         }

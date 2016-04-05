@@ -5,15 +5,10 @@ package PressentationLayer;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-import DataAccessLayer.DBConnector;
+import DataAccessLayer.DBFacade;
 import DataAccessLayer.PolygonDatabase;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -46,12 +41,12 @@ public class LoginController extends HttpServlet {
             throws ServletException, IOException, ClassNotFoundException, SQLException {
         HttpSession session = request.getSession(true);
         PolygonDatabase Data = (PolygonDatabase) session.getAttribute("polygon");
+        session.setAttribute("database", DBFacade.getInstance());
         Data = new PolygonDatabase();
         String dothis = request.getParameter("dothis");
         if (Data == null) {
             Data = new PolygonDatabase();
             session.setAttribute("polygon", Data);
-            session.setAttribute("database", Data);
         }
         String user = request.getParameter("username");
         String password = request.getParameter("password");
