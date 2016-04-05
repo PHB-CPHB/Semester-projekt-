@@ -20,10 +20,12 @@ import java.util.logging.Logger;
  */
 public class CustomerMapper {
 
-    public int getCustomer(String username) {
+
+    public static int getCustomer(String username) {
+
         int user_id = 0;
         try {
-            PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("SELECT * FROM login WHERE username = ?");
+            PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("SELECT * FROM login WHERE username = '?'");
             pstmt.setString(1, username);
             ResultSet rs = pstmt.executeQuery();
             rs.next();
@@ -59,7 +61,8 @@ public class CustomerMapper {
             while (rs.next()) {
                 list.add(new Customer(rs.getString("username"),
                         rs.getInt("user_id"),
-                        rs.getString("user_role")));
+                        rs.getString("user_role"),
+                        rs.getString("user_firm")));
             }
             return list;
         } catch (SQLException | NullPointerException ex) {
