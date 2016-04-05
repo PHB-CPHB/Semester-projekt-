@@ -22,17 +22,17 @@ import java.util.logging.Logger;
 public class CustomerMapper {
 
     public int getCustomer(String username) {
-        int customer_id = 0;
+        int user_id = 0;
         try {
-            PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("SELECT * FROM customer WHERE username = ?");
+            PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("SELECT * FROM login WHERE username = ?");
             pstmt.setString(1, username);
             ResultSet rs = pstmt.executeQuery();
             rs.next();
-            customer_id = rs.getInt("user_id");
+            user_id = rs.getInt("user_id");
         } catch (SQLException ex) {
             Logger.getLogger(CustomerMapper.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return customer_id;
+        return user_id;
     }
 
     public ArrayList<Customer> getAllUsers(int user_id) {
