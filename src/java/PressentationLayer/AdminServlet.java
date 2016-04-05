@@ -47,7 +47,7 @@ public class AdminServlet extends HttpServlet {
             case "deleteUser":
                 String userToRemove = request.getParameter("userToRemove");
                 Mapper.deleteCustomer(userToRemove);
-                forward(request, response, "/AdminLoggedIn.jsp");
+                forward(request, response, "/AllUsers.jsp");
                 break;
             case "createUser":
                 String uName = request.getParameter("username");
@@ -55,8 +55,10 @@ public class AdminServlet extends HttpServlet {
                 String uRole = request.getParameter("user_role");
                 Mapper.createCustomer(uName, uPwd, uRole);
                 
-                forward(request, response, "/AdminLoggedIn.jsp");
+                forward(request, response, "/AllUsers.jsp");
                 break;
+            case "return":
+                forward(request, response, "/AdminLoggedIn.jsp");
         }
     }
 

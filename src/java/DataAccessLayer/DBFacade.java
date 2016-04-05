@@ -20,8 +20,6 @@ import java.util.ArrayList;
  */
 public class DBFacade {
     private static DBFacade instance;
-    private BuildingMapper BMapper;
-    private CustomerMapper CMapper;
     private DBFacade() {
     }
     //Dette er hvor vi kan kalde forbindelse og skrive hvad vi vil hente fra Databasen (Phillip)
@@ -35,21 +33,23 @@ public class DBFacade {
       kan hente fra databasen eller ligge nye ting ned i databasen.
     */
     
-    public ArrayList<Building> getAllCutsomerBuildings(String customers_name) {
-        int customers_id = CMapper.getCustomer(customers_name);
-        return BMapper.getAllCustomersBuildings(customers_id);
+    public ArrayList<Building> getAllCutsomerBuildings(String username) {
+        System.out.println(username);
+        int user_id = CustomerMapper.getCustomer(username);
+        System.out.println(user_id);
+        return BuildingMapper.getAllCustomersBuildings(user_id);
     }
     // This method is for 
     public void deleteBuilding (int building_id) {
-        BMapper.deleteBuilding(building_id);
+        BuildingMapper.deleteBuilding(building_id);
     }
 
     public void addBuilding(String building_name, String building_type, String building_adress, String building_year, String building_zipcode, String building_city, String building_areasize, String building_parcelno, String building_floor) {
-        BMapper.addBuilding(building_name, building_type, building_adress, building_year, building_zipcode, building_areasize, building_parcelno, building_floor);
+        BuildingMapper.addBuilding(building_name, building_type, building_adress, building_year, building_zipcode, building_areasize, building_parcelno, building_floor);
     }
     
    public ArrayList<Customer> getAllUsers(String username) {
-       int customers_id = CMapper.getCustomer(username);
-       return CMapper.getAllUsers(customers_id);
+       int user_id = CustomerMapper.getCustomer(username);
+       return CustomerMapper.getAllUsers(user_id);
    }
 }

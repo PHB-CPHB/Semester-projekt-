@@ -18,12 +18,13 @@ import java.util.ArrayList;
  */
 public class BuildingMapper {
     
-    public ArrayList<Building> getAllCustomersBuildings(int customers_id) {
+    public static ArrayList<Building> getAllCustomersBuildings(int user_id) {
         try {
             ArrayList<Building> list = new ArrayList<>();
             PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("select * from buildings where user_id = ?");
-            pstmt.setInt(1 , customers_id);
+            pstmt.setInt(1 , user_id);
             ResultSet rs = pstmt.executeQuery();
+            System.out.println("5");
             while (rs.next()) {
                 list.add(new Building(rs.getInt("building_id"),
                         rs.getString("building_adress"),
@@ -39,7 +40,7 @@ public class BuildingMapper {
         }
     }
     
-    public void deleteBuilding(int building_id) {
+    public static void deleteBuilding(int building_id) {
         try {
             PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("DELETE FROM buildings WHERE building_id = ?");
             pstmt.setInt(1 , building_id);
@@ -49,7 +50,7 @@ public class BuildingMapper {
         }
     }
     
-    public void addBuilding(String building_name, String building_type, String building_adress, String building_year, String building_zipcode, String building_areasize, String building_parcelno, String building_floor) {
+    public static void addBuilding(String building_name, String building_type, String building_adress, String building_year, String building_zipcode, String building_areasize, String building_parcelno, String building_floor) {
         try {
        PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("INSERT INTO buildings (building_name, building_type, building_adress, building_year, building_zipcode, building_areasize, building_parcelno, building_floor) VALUES ('?', '?', '?', '?', '?', ?, '?', '?')");
        pstmt.setString(1, building_name);
