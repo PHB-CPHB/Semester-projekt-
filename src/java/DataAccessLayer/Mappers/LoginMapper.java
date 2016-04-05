@@ -19,9 +19,7 @@ public class LoginMapper {
 
     public static boolean validate(String username, String password) {
         try {
-            System.out.println("3");
             PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("select * from login where username=? and password=?");
-            System.out.println("4");
             pstmt.setString(1, username);
             pstmt.setString(2,password);
             ResultSet rs = pstmt.executeQuery();

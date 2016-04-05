@@ -14,15 +14,15 @@
     <body>
         <h1>Hello admin <%= session.getAttribute("username")%>.</h1>
         <form action="CreateUser.jsp">
-            <input type="submit" name="dothis" value="Create user">
+            <input type="submit" name="dothis" value="Create User">
         </form>
         <br>
             <form action="AllUsers.jsp">
-                <input type="submit" name="dothis" value="View user">
+                <input type="submit" name="dothis" value="View User">
             </form>
         <br>
         <form action="DeleteBuilding.jsp">
-            <input type="submit" name="dothis" value="Remove Building">
+            <input type="submit" name="dothis" value="View Buildings">
         </form>
     </body>
 </html>
