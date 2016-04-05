@@ -19,12 +19,12 @@
         <p>Here you have an overview of your buildings and are able to delete them</p>
         <table>
             <tr>
-                <td>username</td><td>password</td><td>email</td><td>userrole</td>
+                <td>Building ID</td><td>Building Adress</td><td>Building Name</td><td>Building Status</td><td>City</td><td>Zip Code</td><td>Firm</td>
             </tr>
             <% DBFacade DBF = (DBFacade) session.getAttribute("database");
-                String customers_name = (String) session.getAttribute("username");
+                String username = (String) session.getAttribute("username");
 
-                ArrayList<Building> buildings = DBF.getAllCutsomerBuildings(customers_name);
+                ArrayList<Building> buildings = DBF.getAllCutsomerBuildings(username);
                 for (Building building : buildings) {
                     out.println("<tr>");
                     out.println("<td>" + building.getBuildingId() + "</td>");
