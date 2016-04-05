@@ -7,6 +7,7 @@ package PressentationLayer;
 
 import DataAccessLayer.Mappers.AdminMapper;
 import DataAccessLayer.PolygonDatabase;
+import ServiceLayer.Entity.Customer;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -60,7 +61,7 @@ public class AdminServlet extends HttpServlet {
                 System.out.println(uPwd);
                 System.out.println(uFirm);
                 System.out.println(uRole);
-                Mapper.createCustomer(uName, uPwd, uRole, uFirm);
+                Mapper.createCustomer(new Customer (uName, uPwd, uRole, uFirm));
                 
                 forward(request, response, "/AllUsers.jsp");
                 break;

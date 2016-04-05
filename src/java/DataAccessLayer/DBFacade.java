@@ -52,7 +52,7 @@ public class DBFacade {
        return CustomerMapper.getAllUsers(user_firm);
    }
    
-   public void createCustomer(String username, String password, String user_role, String user_firm) {
-       AdminMapper.createCustomer(username, password, user_role, user_firm);
+   public void createCustomer(Customer newCustomer) {
+       AdminMapper.createCustomer(Customer(newCustomer.getUsername(), newCustomer.getPassword(), newCustomer.getUser_role(), newCustomer.getUser_firm()));
    }
 }

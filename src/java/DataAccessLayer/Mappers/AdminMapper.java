@@ -8,6 +8,7 @@ package DataAccessLayer.Mappers;
 
 import DataAccessLayer.DBConnector;
 import static DataAccessLayer.DBConnector.getConnection;
+import ServiceLayer.Entity.Customer;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -21,18 +22,14 @@ import javax.servlet.http.HttpSession;
  */
 public class AdminMapper {
 
-    public static boolean createCustomer(String username, String password, String user_role, String user_firm) {
+    public static boolean createCustomer(Customer newCustomer) {
         try {
             System.out.println("3");
-            System.out.println(username);
-            System.out.println(password);
-            System.out.println(user_role);
-            System.out.println(user_firm);
-            PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("INSERT INTO login (login.username, login.password, login.user_role, login.user_firm) VALUES(?, ?, ?, ?)");
-            pstmt.setString(1, username);
-            pstmt.setString(2, password);
-            pstmt.setString(3, user_role);
-            pstmt.setString(4, user_firm);
+            PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("INSERT INTO login (username, password, user_role, user_firm) VALUES(?, ?, ?, ?)");
+            pstmt.setString(1, newCustomer.getUsername());
+            pstmt.setString(2, newCustomer.getPassword());
+            pstmt.setString(3, newCustomer.getUser_role());
+            pstmt.setString(4, newCustomer.getUser_firm());
             pstmt.executeUpdate();
             System.out.println("update");
         } catch (SQLException ex) {
