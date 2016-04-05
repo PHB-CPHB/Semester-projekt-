@@ -84,7 +84,7 @@ public class DeleteBuildingController extends HttpServlet {
                 forward(request, response, "/cusdelete.jsp");
 
             case "Return":
-                forward(request, response, "/customerLoggedIn.jsp.jsp");
+                forward(request, response, "/customerLoggedIn.jsp");
         }
     }
 
