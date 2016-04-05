@@ -15,7 +15,7 @@
         <h1>Hello customer <%= session.getAttribute("username")%>.</h1>
         View my buildings <br>
 
-        <form action="Cusdelete.jsp" method="POST">
+        <form action="DeleteBuilding.jsp" method="POST">
             <input type="submit" value="View buildings" </input>
         </form>
         <br>
