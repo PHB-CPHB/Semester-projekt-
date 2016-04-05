@@ -5,6 +5,7 @@
  */
 package DataAccessLayer;
 
+import DataAccessLayer.Mappers.AdminMapper;
 import DataAccessLayer.Mappers.BuildingMapper;
 import DataAccessLayer.Mappers.CustomerMapper;
 import ServiceLayer.Entity.Building;
@@ -35,9 +36,9 @@ public class DBFacade {
     
     public ArrayList<Building> getAllCutsomerBuildings(String username) {
         System.out.println(username);
-        int user_id = CustomerMapper.getCustomer(username);
-        System.out.println(user_id);
-        return BuildingMapper.getAllCustomersBuildings(user_id);
+        String user_firm = CustomerMapper.getCustomer(username);
+        System.out.println(user_firm);
+        return BuildingMapper.getAllCustomersBuildings(user_firm);
     }
     // This method is for 
     public void deleteBuilding (int building_id) {
@@ -49,7 +50,11 @@ public class DBFacade {
     }
     
    public ArrayList<Customer> getAllUsers(String username) {
-       int user_id = CustomerMapper.getCustomer(username);
-       return CustomerMapper.getAllUsers(user_id);
+       String user_firm = CustomerMapper.getCustomer(username);
+       return CustomerMapper.getAllUsers(user_firm);
+   }
+   
+   public void createCustomer(String username, String password, String user_role, String user_firm) {
+       AdminMapper.createCustomer(username, password, user_role, user_firm);
    }
 }

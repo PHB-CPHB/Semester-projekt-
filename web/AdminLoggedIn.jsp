@@ -21,9 +21,8 @@
                 <input type="submit" name="dothis" value="View user">
             </form>
         <br>
-        <form action="CustomerBuildings.jsp">
-                <input type="submit" name="dothis" value="View Buildings">
-            </form>
-        
-                    </body>
-                    </html>
+        <form action="Cusdelete.jsp">
+            <input type="submit" name="dothis" value="Remove Building">
+        </form>
+    </body>
+</html>

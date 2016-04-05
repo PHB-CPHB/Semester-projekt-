@@ -72,7 +72,7 @@ public class AddBuildingController extends HttpServlet {
                         nextJSP = "Cusadd.jsp";
                     } else {
                         DBF.addBuilding(building_name, building_type, building_adress, building_year, building_zipcode, building_city, building_areasize, building_parcelno, building_floor);
-                        nextJSP = "CustomerBuildings.jsp";
+                        nextJSP = "Cusdelete.jsp";
                     }
                     response.sendRedirect(nextJSP);
             }

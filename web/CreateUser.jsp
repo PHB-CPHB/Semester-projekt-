@@ -13,16 +13,18 @@
     </head>
     <body>
         <h1>Create user</h1>
+        <form action="AdminServlet" method="POST">
         Username <br>
         <input type="text" name="username"><br>
         Password <br>
         <input type="text" name="password"><br>
+        Firm <br>
+        <input type="text" name="user_firm"><br>
         <select name="role">
             <option value="admin">Admin</option>
             <option value="customer">Customer</option>
         </select>
-        <form action="AdminServlet" method="POST">
-            <input type="hidden" name="do_this" value="createUser"/>
-            <input type="submit" value="Create customer" />
+            <input type="submit" name="do_this" value="createUser" />
+        </form>
     </body>
 </html>

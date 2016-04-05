@@ -38,12 +38,13 @@ public class CustomerMapper {
     }
 
 
-    public static boolean createCustomer(String username, String password, String user_role) {
+    public static boolean createCustomer(String username, String password, String user_role, String user_firm) {
         try {
-            PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("INSERT INTO login (username, password, user_role) VALUES ('?', '?', ?, '?')");
+            PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("INSERT INTO login (username, password, user_role, user_firm) VALUES ('?', '?', ?, '?', '?')");
             pstmt.setString(1, username);
             pstmt.setString(2, password);
-            pstmt.setString(4, user_role);
+            pstmt.setString(3, user_role);
+            pstmt.setString(4, user_firm);
             pstmt.executeUpdate();
         } catch (SQLException ex) {
             ex.printStackTrace();

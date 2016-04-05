@@ -17,7 +17,7 @@
     <body>
                 <table>
             <tr>
-                <td>username</td><td>password</td><td>email</td><td>userrole</td>
+                <td>Username</td><td>User Role</td><td>User ID</td><td>User Firm</td>
             </tr>
             <%  DBFacade DBF = (DBFacade) session.getAttribute("database");
                 String username = (String) session.getAttribute("username");
@@ -29,6 +29,7 @@
                     out.println("<td>" + customer.getUsername() + "</td>");
                     out.print("<td>" + customer.getUser_role() + "</td>");
                     out.print("<td>" + customer.getUser_id() + "</td>");
+                    out.print("<td>" + customer.getUser_firm() + "</td>");%>
                     <td> <form action="/AdminServlet" method="POST">
                     <input type="hidden" name="do_this" value="deleteUser"/>
                     <input type="hidden" name="RemoveCustomer" value="<%= customer.getUser_id() %>" />
@@ -39,9 +40,9 @@
                 }
             %>
         </table>
-        <td> <form action="/AdminServlet" method="POST">
-            <input type="hidden" name="do_this" value="return"/>
-            <input type="submit" value="Return"/>
+        <td> <form action="AdminLoggedIn.jsp" method="POST">
+            
+            <input type="submit" value="return"/>
         </form>
     </td>
     </body>

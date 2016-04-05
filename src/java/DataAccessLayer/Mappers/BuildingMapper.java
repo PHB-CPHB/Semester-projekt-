@@ -18,11 +18,11 @@ import java.util.ArrayList;
  */
 public class BuildingMapper {
     
-    public static ArrayList<Building> getAllCustomersBuildings(int user_id) {
+    public static ArrayList<Building> getAllCustomersBuildings(String user_firm) {
         try {
             ArrayList<Building> list = new ArrayList<>();
-            PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("select * from buildings where user_id = ?");
-            pstmt.setInt(1 , user_id);
+            PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("select * from buildings where user_firm = ?");
+            pstmt.setString(1 , user_firm);
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
                 list.add(new Building(rs.getInt("building_id"),
