@@ -14,21 +14,18 @@ public class Customer {
     private String password;
     private int user_id;
     private String user_role;
-    private String user_firm;
 
-    public Customer(String username, String password, int user_id, String user_role, String user_firm) {
+    public Customer(String username, String password, int user_id, String user_role) {
         this.username = username;
         this.password = password;
         this.user_id = user_id;
         this.user_role = user_role;
-        this.user_firm = user_firm;
     }
 
-    public Customer(String username, int user_id, String user_role, String user_firm) {
+    public Customer(String username, int user_id, String user_role) {
         this.username = username;
         this.user_id = user_id;
         this.user_role = user_role;
-        this.user_firm = user_firm;
     }
     
 
@@ -63,13 +60,4 @@ public class Customer {
     public void setUser_role(String user_role) {
         this.user_role = user_role;
     }
-
-    public String getUser_firm() {
-        return user_firm;
-    }
-
-    public void setUser_firm(String user_firm) {
-        this.user_firm = user_firm;
-    }
-
 }

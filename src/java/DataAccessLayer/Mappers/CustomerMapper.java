@@ -55,14 +55,12 @@ public class CustomerMapper {
 
         try {
             ArrayList<Customer> list = new ArrayList<>();
-            PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("select * from login where user_id = ?");
-            pstmt.setInt(1, user_id);
+            PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("select * from login");
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
                 list.add(new Customer(rs.getString("username"),
                         rs.getInt("user_id"),
                         rs.getString("user_role"),
-                        rs.getString("user_firm")));
             }
             return list;
         } catch (SQLException | NullPointerException ex) {
