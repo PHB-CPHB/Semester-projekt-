@@ -59,6 +59,7 @@ public class AdminServlet extends HttpServlet {
                 break;
             case "return":
                 forward(request, response, "/AdminLoggedIn.jsp");
+                break;
         }
     }
 

@@ -7,6 +7,7 @@ package DataAccessLayer;
 
 import DataAccessLayer.Mappers.BuildingMapper;
 import DataAccessLayer.Mappers.CustomerMapper;
+import DataAccessLayer.Mappers.LoginMapper;
 import ServiceLayer.Entity.Building;
 import ServiceLayer.Entity.Customer;
 import java.sql.ResultSet;
@@ -52,4 +53,10 @@ public class DBFacade {
        String user_firm = CustomerMapper.getCustomer(username);
        return CustomerMapper.getAllUsers(user_firm);
    }
+   public boolean validate(String username, String password) {
+       return LoginMapper.validate(username,password);
+   }
+       public String getUserRole(String username) {
+           return LoginMapper.getUserRole(username);
+    }
 }

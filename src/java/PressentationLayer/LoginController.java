@@ -6,7 +6,6 @@ package PressentationLayer;
  * and open the template in the editor.
  */
 import DataAccessLayer.DBFacade;
-import DataAccessLayer.PolygonDatabase;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -25,7 +24,6 @@ import javax.servlet.http.HttpSession;
  */
 @WebServlet(name = "LoginController", urlPatterns = {"/LoginController"})
 public class LoginController extends HttpServlet {
-
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -40,24 +38,17 @@ public class LoginController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ClassNotFoundException, SQLException {
         HttpSession session = request.getSession(true);
-        PolygonDatabase Data = (PolygonDatabase) session.getAttribute("polygon");
         session.setAttribute("database", DBFacade.getInstance());
-        Data = new PolygonDatabase();
-        String dothis = request.getParameter("dothis");
-        if (Data == null) {
-            Data = new PolygonDatabase();
-            session.setAttribute("polygon", Data);
-        }
+        DBFacade DBF = (DBFacade) session.getAttribute("database");
         String user = request.getParameter("username");
         String password = request.getParameter("password");
         //check if username and password maches.
 
-                
-                if (Data.validate(user, password) == true) {
-                    if (Data.getUserRole(user).equals("admin")) {
+                if (DBF.validate(user, password) == true) {
+                    if (DBF.getUserRole(user).equals("admin")) {
                         session.setAttribute("username", user);
                         forward(request, response, "/AdminLoggedIn.jsp");
-                    } else if (Data.getUserRole(user).equals("customer")) {
+                    } else if (DBF.getUserRole(user).equals("customer")) {
                         session.setAttribute("username", user);
                         forward(request, response, "/CustomerLoggedIn.jsp");
                     } else {
