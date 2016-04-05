@@ -12,9 +12,15 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Hello customer <%= session.getAttribute("username") %>.</h1>
+        <h1>Hello customer <%= session.getAttribute("username")%>.</h1>
         View my buildings <br>
-        <form action="CustomerBuildings.jsp" method="POST">
-            <input type="submit" value="View buildings" />
-    </body>
-</html>
+
+        <form action="Cusdelete.jsp" method="POST">
+            <input type="submit" value="View buildings" </input>
+        </form>
+        <br>
+            <form action="Cusadd.jsp" method="POST">
+                <input type="submit" value="Add building" </input> 
+            </form>
+                </body>
+                </html>
