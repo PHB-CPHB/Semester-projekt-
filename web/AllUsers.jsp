@@ -17,7 +17,7 @@
     <body>
                 <table>
             <tr>
-                <td>username</td><td>password</td><td>email</td><td>userrole</td>
+                <td>Username</td><td>User Role</td><td>User ID</td><td>User Firm</td>
             </tr>
             <%  DBFacade DBF = (DBFacade) session.getAttribute("database");
                 String username = (String) session.getAttribute("username");

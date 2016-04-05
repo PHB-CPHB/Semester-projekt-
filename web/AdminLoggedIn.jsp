@@ -20,5 +20,9 @@
         <form action="AllUsers.jsp">
             <input type="submit" name="dothis" value="View user">
         </form>
+        <br>
+        <form action="Cusdelete.jsp">
+            <input type="submit" name="dothis" value="Remove Building">
+        </form>
     </body>
 </html>
