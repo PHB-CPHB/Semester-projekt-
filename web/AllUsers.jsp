@@ -28,7 +28,8 @@
                     out.println("<tr>");
                     out.println("<td>" + customer.getUsername() + "</td>");
                     out.print("<td>" + customer.getUser_role() + "</td>");
-                    out.print("<td>" + customer.getUser_id() + "</td>");%>
+                    out.print("<td>" + customer.getUser_id() + "</td>");
+                    out.print("<td>" + customer.getUser_firm() + "</td>");%>
                     <td> <form action="/AdminServlet" method="POST">
                     <input type="hidden" name="do_this" value="deleteUser"/>
                     <input type="hidden" name="RemoveCustomer" value="<%= customer.getUser_id() %>" />

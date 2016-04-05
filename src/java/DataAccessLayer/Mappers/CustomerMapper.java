@@ -23,21 +23,17 @@ public class CustomerMapper {
 
     public static int getCustomer(String username) {
 
-        int customer_id = 0;
+        int user_id = 0;
         try {
             PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("SELECT * FROM login WHERE username = '?'");
             pstmt.setString(1, username);
             ResultSet rs = pstmt.executeQuery();
             rs.next();
-
-            customer_id = rs.getInt("customer_id");
-
-            customer_id = rs.getInt("user_id");
-
+            user_id = rs.getInt("user_id");
         } catch (SQLException ex) {
             Logger.getLogger(CustomerMapper.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return customer_id;
+        return user_id;
     }
 
 
@@ -65,7 +61,8 @@ public class CustomerMapper {
             while (rs.next()) {
                 list.add(new Customer(rs.getString("username"),
                         rs.getInt("user_id"),
-                        rs.getString("user_role")));
+                        rs.getString("user_role"),
+                        rs.getString("user_firm")));
             }
             return list;
         } catch (SQLException | NullPointerException ex) {
