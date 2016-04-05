@@ -21,19 +21,20 @@ import java.util.logging.Logger;
 public class CustomerMapper {
 
 
-    public static int getCustomer(String username) {
-
-        int user_id = 0;
+    public static String getCustomer(String username) {
+        System.out.println(username);
+        String user_firm = "";
         try {
             PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("SELECT * FROM login WHERE username = '?'");
             pstmt.setString(1, username);
             ResultSet rs = pstmt.executeQuery();
             rs.next();
-            user_id = rs.getInt("user_id");
+            user_firm = rs.getString("user_firm");
+            System.out.println(user_firm);
         } catch (SQLException ex) {
             Logger.getLogger(CustomerMapper.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return user_id;
+        return user_firm;
     }
 
 
@@ -51,16 +52,18 @@ public class CustomerMapper {
         return true;
     }
 
-    public static ArrayList<Customer> getAllUsers(int user_id) {
+    public static ArrayList<Customer> getAllUsers(String user_firm) {
 
         try {
             ArrayList<Customer> list = new ArrayList<>();
             PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("select * from login");
+            //pstmt.setInt(1, user_firm);
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
                 list.add(new Customer(rs.getString("username"),
                         rs.getInt("user_id"),
                         rs.getString("user_role"),
+                        rs.getString("user_firm")));
             }
             return list;
         } catch (SQLException | NullPointerException ex) {
