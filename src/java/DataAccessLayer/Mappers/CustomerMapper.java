@@ -22,7 +22,6 @@ public class CustomerMapper {
 
 
     public static String getCustomer(String username) {
-        System.out.println(username);
         String user_firm = "";
         try {
             PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("SELECT * FROM login WHERE username = '?'");
@@ -30,20 +29,33 @@ public class CustomerMapper {
             ResultSet rs = pstmt.executeQuery();
             rs.next();
             user_firm = rs.getString("user_firm");
-            System.out.println(user_firm);
         } catch (SQLException ex) {
             Logger.getLogger(CustomerMapper.class.getName()).log(Level.SEVERE, null, ex);
         }
         return user_firm;
     }
 
-
-    public static boolean createCustomer(String username, String password, String user_role) {
+    public static int getCustomerId(String username) {
+        int user_id = 0;
         try {
-            PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("INSERT INTO login (username, password, user_role) VALUES ('?', '?', ?, '?')");
+            PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("SELECT * FROM login WHERE username = ?");
+            pstmt.setString(1, username);
+            ResultSet rs = pstmt.executeQuery();
+            rs.next();
+            user_id = rs.getInt("user_id");
+        } catch (SQLException ex) {
+            Logger.getLogger(CustomerMapper.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return user_id;
+    }
+
+    public static boolean createCustomer(String username, String password, String user_role, String user_firm) {
+        try {
+            PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("INSERT INTO login (username, password, user_role, user_firm) VALUES ('?', '?', ?, '?', '?')");
             pstmt.setString(1, username);
             pstmt.setString(2, password);
-            pstmt.setString(4, user_role);
+            pstmt.setString(3, user_role);
+            pstmt.setString(4, user_firm);
             pstmt.executeUpdate();
         } catch (SQLException ex) {
             ex.printStackTrace();

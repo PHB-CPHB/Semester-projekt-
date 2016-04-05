@@ -20,8 +20,9 @@ public class Building {
     private String city;
     private String buildingStatus;
     private String buildingFirm;
+    private int buildingFirmId;
 
-    public Building(int buildingId, int roomId, int roomSize, String adress, String buildingName, int zipCode, String city, String buildingStatus,String buildingFirm) {
+    public Building(int buildingId, int roomId, int roomSize, String adress, String buildingName, int zipCode, String city, String buildingStatus,String buildingFirm, int buildingFirmId) {
         this.buildingId = buildingId;
         this.roomId = roomId;
         this.roomSize = roomSize;
@@ -31,6 +32,7 @@ public class Building {
         this.city = city;
         this.buildingStatus = buildingStatus;
         this.buildingFirm = buildingFirm;
+        this.buildingFirmId = buildingFirmId;
     }
     
     public Building (int buildingId, String adress, String buildingName, int zipCode, String city, String buildingStatus, String buildingFirm) {
@@ -113,6 +115,14 @@ public class Building {
     
     public void setBuildingFirm(String buildingFirm) {
         this.buildingFirm = buildingFirm;
+    }
+
+    public int getBuildingFirmId() {
+        return buildingFirmId;
+    }
+
+    public void setBuildingFirmId(int buildingFirmId) {
+        this.buildingFirmId = buildingFirmId;
     }
     
 }

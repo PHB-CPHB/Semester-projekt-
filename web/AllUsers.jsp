@@ -40,9 +40,9 @@
                 }
             %>
         </table>
-        <td> <form action="/AdminServlet" method="POST">
-            <input type="hidden" name="do_this" value="return"/>
-            <input type="submit" value="Return"/>
+        <td> <form action="AdminLoggedIn.jsp" method="POST">
+            
+            <input type="submit" value="return"/>
         </form>
     </td>
     </body>
