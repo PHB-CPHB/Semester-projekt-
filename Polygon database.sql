@@ -22,7 +22,6 @@ primary key (building_id)
 CREATE TABLE login(
 username VARCHAR(10),
 password VARCHAR(10),
-
 user_id INT(10) NOT NULL AUTO_INCREMENT,
 user_role VARCHAR(10),
 primary key (user_id, username)
