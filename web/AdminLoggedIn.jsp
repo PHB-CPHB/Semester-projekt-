@@ -17,9 +17,8 @@
             <input type="submit" name="dothis" value="Create user">
         </form>
         <br>
-            <form action="AllUsers.jsp">
-                <input type="submit" name="dothis" value="View user">
-            </form>
-        
-                    </body>
-                    </html>
+        <form action="AllUsers.jsp">
+            <input type="submit" name="dothis" value="View user">
+        </form>
+    </body>
+</html>

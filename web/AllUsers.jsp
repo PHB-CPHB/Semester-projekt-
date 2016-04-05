@@ -19,19 +19,31 @@
             <tr>
                 <td>username</td><td>password</td><td>email</td><td>userrole</td>
             </tr>
-            <% DBFacade DBF = (DBFacade) session.getAttribute("polygon");
+            <%  DBFacade DBF = (DBFacade) session.getAttribute("database");
                 String username = (String) session.getAttribute("username");
-
-                ArrayList<Customer> customers = DBF.getAllUsers(username);
+                System.out.println(username);
+                ArrayList<Customer> customers = new ArrayList();
+                customers = DBF.getAllUsers(username);
                 for (Customer customer : customers) {
                     out.println("<tr>");
                     out.println("<td>" + customer.getUsername() + "</td>");
                     out.print("<td>" + customer.getUser_role() + "</td>");
                     out.print("<td>" + customer.getUser_id() + "</td>");
+                    out.print("<td>" + customer.getUser_firm() + "</td>");%>
+                    <td> <form action="/AdminServlet" method="POST">
+                    <input type="hidden" name="do_this" value="deleteUser"/>
+                    <input type="hidden" name="RemoveCustomer" value="<%= customer.getUser_id() %>" />
+                    <input type="submit" value="Delete"/>
+                </form>
             </td>
             <%out.println("</tr>");
                 }
             %>
         </table>
+        <td> <form action="/AdminServlet" method="POST">
+            <input type="hidden" name="do_this" value="return"/>
+            <input type="submit" value="Return"/>
+        </form>
+    </td>
     </body>
 </html>

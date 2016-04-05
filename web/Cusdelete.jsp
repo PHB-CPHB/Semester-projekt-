@@ -32,7 +32,8 @@
                     out.print("<td>" + building.getBuildingName() + "</td>");
                     out.print("<td>" + building.getBuildingStatus() + "</td>");
                     out.println("<td>" + building.getCity() + "</td>");
-                    out.println("<td>" + building.getZipCode() + "</td>");%>
+                    out.println("<td>" + building.getZipCode() + "</td>");
+                    out.println("<td>" + building.getBuildingFirm() + "</td>");%>
             <td> <form action="/DeleteBuildingController" method="POST">
                     <input type="hidden" name="do_this" value="delete"/>
                     <input type="hidden" name="deletebuilding" value="<%= building.getBuildingId()%>" />
