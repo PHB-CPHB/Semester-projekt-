@@ -13,7 +13,7 @@
     </head>
     <body>
         <h1>Please enter building infomation</h1>
-        <form action="loginctrl" method="POST">
+        <form action="AddBuildingController" method="POST">
             Name of building:<br>
             <input type="text" name="name"><br>
             Address:<br>
