@@ -53,10 +53,10 @@ public class AdminServlet extends HttpServlet {
                 String building_firm_name = request.getParameter("deletebuilding");
                 
                 int user_id = Integer.parseInt(user_id_name);
-                String building_firm = String(building_firm_name);
+                //String building_firm = String(building_firm_name);
                 
                 DBF.deleteCustomer(user_id);
-                DBF.deleteAllBuildings(building_firm);
+                //DBF.deleteAllBuildings(building_firm);
                 
                 forward(request, response, "/AllUsers.jsp");
                 break;
