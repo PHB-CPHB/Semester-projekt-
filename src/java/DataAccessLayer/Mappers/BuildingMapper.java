@@ -28,11 +28,14 @@ public class BuildingMapper {
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
                 list.add(new Building(rs.getInt("building_id"),
-                        rs.getString("building_adress"),
-                        rs.getString("building_name"),
-                        rs.getInt("building_zipcode"),
-                        rs.getString("building_city"),
                         rs.getString("building_status"),
+                        rs.getString("building_type"),
+                        rs.getInt("building_year"),
+                        rs.getInt("building_areasize"),
+                        rs.getString("building_name"),
+                        rs.getString("building_adress"),
+                        rs.getString("building_floor"),
+                        rs.getInt("building_zipcode"),
                         rs.getString("building_firm")));
             }
             return list;
