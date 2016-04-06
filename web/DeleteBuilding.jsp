@@ -21,7 +21,7 @@
             <tr>
                 <%--This part is writen by Phillip
                 The code is to show the customers building and so that they can delete them--%>
-                <td>Building ID</td><td>Building Adress</td><td>Building Name</td><td>Building Status</td><td>City</td><td>Zip Code</td><td>Firm</td>
+                <td>Building ID</td><td>Building Status</td><td>Building Type</td><td>Building Year</td><td>Size</td><td>Building Name</td><td>Building Adress</td><td>Floor</td><td>Zipcode</td><td>Firm</td>
             </tr>
             <% DBFacade DBF = (DBFacade) session.getAttribute("database");
                 String username = (String) session.getAttribute("username");
@@ -30,10 +30,13 @@
                 for (Building building : buildings) {
                     out.println("<tr>");
                     out.println("<td>" + building.getBuilding_id()+ "</td>");
-                    out.print("<td>" + building.getBuilding_adress() + "</td>");
-                    out.print("<td>" + building.getBuilding_name() + "</td>");
                     out.print("<td>" + building.getBuilding_status() + "</td>");
-                    out.println("<td>" + building.getBuilding_city() + "</td>");
+                    out.print("<td>" + building.getBuilding_type() + "</td>");
+                    out.print("<td>" + building.getBuilding_year() + "</td>");
+                    out.print("<td>" + building.getBuilding_areasize() + "</td>");
+                    out.print("<td>" + building.getBuilding_name() + "</td>");
+                    out.print("<td>" + building.getBuilding_adress() + "</td>");
+                    out.println("<td>" + building.getBuilding_floor() + "</td>");
                     out.println("<td>" + building.getBuilding_zipcode() + "</td>");
                     out.println("<td>" + building.getBuilding_firm() + "</td>");%>
                     <%--This is the delete button--%>

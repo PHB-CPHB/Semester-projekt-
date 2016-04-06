@@ -19,20 +19,23 @@ import java.util.logging.Logger;
  * @author philliphbrink
  */
 public class BuildingMapper {
-    
+
     public static ArrayList<Building> getAllCustomersBuildings(int user_id) {
         try {
             ArrayList<Building> list = new ArrayList<>();
             PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("select * FROM buildings Where building_firm_id = ?");
-            pstmt.setInt(1 , user_id);
+            pstmt.setInt(1, user_id);
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
                 list.add(new Building(rs.getInt("building_id"),
-                        rs.getString("building_adress"),
-                        rs.getString("building_name"),
-                        rs.getInt("building_zipcode"),
-                        rs.getString("building_city"),
                         rs.getString("building_status"),
+                        rs.getString("building_type"),
+                        rs.getInt("building_year"),
+                        rs.getInt("building_areasize"),
+                        rs.getString("building_name"),
+                        rs.getString("building_adress"),
+                        rs.getString("building_floor"),
+                        rs.getInt("building_zipcode"),
                         rs.getString("building_firm")));
             }
             return list;
@@ -41,39 +44,39 @@ public class BuildingMapper {
             return null;
         }
     }
-    
+
     public static void deleteBuilding(int building_id) {
         try {
             PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("DELETE FROM buildings WHERE building_id = ?");
-            pstmt.setInt(1 , building_id);
+            pstmt.setInt(1, building_id);
             pstmt.executeUpdate();
         } catch (SQLException ex) {
             System.out.println(ex);
         }
     }
-    
+
     public static void addBuilding(String building_name, String building_type, String building_adress, int building_year, int building_zipcode, int building_areasize, String building_parcelno, String building_floor, String building_firm) {
         String building_status = "Ikke klar i nu";
         try {
-       PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("INSERT INTO buildings (building_name, building_status, building_type, building_adress, building_year, building_zipcode, building_areasize, building_parcel_no, building_floor, building_firm) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-       pstmt.setString(1, building_name);
-       pstmt.setString(2, building_status);
-       pstmt.setString(3, building_type);
-       pstmt.setString(4, building_adress);
-       pstmt.setInt(5, building_year);
-       pstmt.setInt(6, building_zipcode);
-       pstmt.setInt(7, building_areasize);
-       pstmt.setString(8, building_parcelno);
-       pstmt.setString(9, building_floor);
-       pstmt.setString(10, building_firm);
-       pstmt.executeUpdate();
+            PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("INSERT INTO buildings (building_name, building_status, building_type, building_adress, building_year, building_zipcode, building_areasize, building_parcel_no, building_floor, building_firm) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            pstmt.setString(1, building_name);
+            pstmt.setString(2, building_status);
+            pstmt.setString(3, building_type);
+            pstmt.setString(4, building_adress);
+            pstmt.setInt(5, building_year);
+            pstmt.setInt(6, building_zipcode);
+            pstmt.setInt(7, building_areasize);
+            pstmt.setString(8, building_parcelno);
+            pstmt.setString(9, building_floor);
+            pstmt.setString(10, building_firm);
+            pstmt.executeUpdate();
         } catch (SQLException ex) {
             System.out.println(ex);
         }
     }
 
     public static String getCity(int building_zipcode) {
-    String city = "";
+        String city = "";
         try {
             PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("SELECT * FROM Zip WHERE zipcode = ?");
             pstmt.setInt(1, building_zipcode);
@@ -85,5 +88,5 @@ public class BuildingMapper {
         }
         return city;
     }
-    
+
 }
