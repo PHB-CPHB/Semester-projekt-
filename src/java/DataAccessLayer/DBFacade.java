@@ -50,7 +50,7 @@ public class DBFacade {
     }
 
     public void addBuilding(String building_name, String building_type, String building_adress, String building_year, String building_zipcode, String building_city, String building_areasize, String building_parcelno, String building_floor) {
-        BuildingMapper.addBuilding(building_name, building_type, building_adress, building_year, building_zipcode, building_areasize, building_parcelno, building_floor);
+        BuildingMapper.addBuilding(building_name, building_type, building_adress, 0, 0, 0, building_parcelno, building_floor, building_city);
     }
 
     public ArrayList<Customer> getAllUsers(String username) {

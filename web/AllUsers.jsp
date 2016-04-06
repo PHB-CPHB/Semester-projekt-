@@ -44,8 +44,9 @@
                 }
             %>
         </table>
-    <td> <form action="AdminLoggedIn.jsp" method="POST">         
-            <input type="submit" value="return"/>
+        <td> <form action="AdminLoggedIn.jsp" method="POST">
+            
+            <input type="submit" value="Return"/>
         </form>
     </td>
 </body>
