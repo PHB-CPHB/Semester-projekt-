@@ -55,6 +55,10 @@ public class Building {
         this.building_firm = buildingFirm;
     }
 
+    public Building() {
+    }
+
+    
     public int getRoomId() {
         return roomId;
     }

@@ -41,3 +41,4 @@ INSERT INTO buildings (building_name, building_status, building_type, building_a
 INSERT INTO buildings (building_name, building_status, building_type, building_adress, building_year, building_zipcode, building_city, building_areasize, building_firm, building_firm_id) VALUES ('Olivers bygning', 'I stand', 'Hus', 'Kappa 123', 1978, 3240, 'Metrocity', 70, 'PC', 4);
 INSERT INTO buildings (building_name, building_status, building_type, building_adress, building_year, building_zipcode, building_city, building_areasize, building_firm, building_firm_id) VALUES ('Olivers bygning', 'I stand', 'Hus', 'Kappa 123', 1978, 3240, 'Metrocity', 70, 'PC', 4);
 select * FROM buildings Where building_firm_id = 1;
+select * from login where username = 'Hans';

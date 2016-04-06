@@ -48,7 +48,11 @@ public class DBFacade {
     public void deleteBuilding(int building_id) {
         BuildingMapper.deleteBuilding(building_id);
     }
-
+    
+    public void deleteAllBuildings(String building_firm) {
+        BuildingMapper.deleteAllBuildings(building_firm);
+    }
+    
     public void addBuilding(String building_name, String building_type, String building_adress, int building_year, int building_zipcode, int building_areasize, String building_parcelno, String building_floor, String username) {
         String building_firm = CustomerMapper.getFirm(username);
         BuildingMapper.addBuilding(building_name, building_type, building_adress, building_year, building_zipcode, building_areasize, building_parcelno, building_floor, building_firm);

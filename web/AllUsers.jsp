@@ -22,10 +22,8 @@
             </tr>
             <%  DBFacade DBF = (DBFacade) session.getAttribute("database");
                 String username = (String) session.getAttribute("username");
-
+                Building building = new Building();
                 ArrayList<Customer> customers = DBF.getAllUsers(username);
-                ArrayList<Building> buildings = DBF.getAllCutsomerBuildings(username);
-
                 customers = DBF.getAllUsers(username);
 
                 for (Customer customer : customers) {
@@ -37,6 +35,7 @@
             <td> <form action="AdminServlet" method="POST">
                     <input type="hidden" name="do_this" value="deleteUser"/>
                     <input type="hidden" name="RemoveCustomer" value="<%= customer.getUser_id()%>" />
+                    <input type="hidden" name="deletebuilding" value="<%= building.getBuilding_id()%>" />
                     <input type="submit" value="Delete"/>
                 </form>
             </td>
