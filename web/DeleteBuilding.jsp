@@ -29,17 +29,17 @@
                 ArrayList<Building> buildings = DBF.getAllCutsomerBuildings(username);
                 for (Building building : buildings) {
                     out.println("<tr>");
-                    out.println("<td>" + building.getBuildingId() + "</td>");
-                    out.print("<td>" + building.getAdress() + "</td>");
-                    out.print("<td>" + building.getBuildingName() + "</td>");
-                    out.print("<td>" + building.getBuildingStatus() + "</td>");
-                    out.println("<td>" + building.getCity() + "</td>");
-                    out.println("<td>" + building.getZipCode() + "</td>");
-                    out.println("<td>" + building.getBuildingFirm() + "</td>");%>
+                    out.println("<td>" + building.getBuilding_id()+ "</td>");
+                    out.print("<td>" + building.getBuilding_adress() + "</td>");
+                    out.print("<td>" + building.getBuilding_name() + "</td>");
+                    out.print("<td>" + building.getBuilding_status() + "</td>");
+                    out.println("<td>" + building.getBuilding_city() + "</td>");
+                    out.println("<td>" + building.getBuilding_zipcode() + "</td>");
+                    out.println("<td>" + building.getBuilding_firm() + "</td>");%>
                     <%--This is the delete button--%>
             <td> <form action="DeleteBuildingController" method="POST">
                     <input type="hidden" name="do_this" value="delete"/>
-                    <input type="hidden" name="deletebuilding" value="<%=building.getBuildingId()%>" />
+                    <input type="hidden" name="deletebuilding" value="<%=building.getBuilding_id()%>" />
                     <input type="submit" value="Delete"/>
                 </form>
             </td>

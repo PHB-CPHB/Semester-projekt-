@@ -42,7 +42,7 @@
         </table>
         <td> <form action="AdminLoggedIn.jsp" method="POST">
             
-            <input type="submit" value="return"/>
+            <input type="submit" value="Return"/>
         </form>
     </td>
     </body>
