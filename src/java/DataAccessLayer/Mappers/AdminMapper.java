@@ -23,33 +23,26 @@ public class AdminMapper {
 
     public static boolean createCustomer(String username, String password, String user_role, String user_firm) {
         try {
-            System.out.println("3");
-            System.out.println(username);
-            System.out.println(password);
-            System.out.println(user_role);
-            System.out.println(user_firm);
             PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("INSERT INTO login (login.username, login.password, login.user_role, login.user_firm) VALUES(?, ?, ?, ?)");
             pstmt.setString(1, username);
             pstmt.setString(2, password);
             pstmt.setString(3, user_role);
             pstmt.setString(4, user_firm);
             pstmt.executeUpdate();
-            System.out.println("update");
         } catch (SQLException ex) {
             Logger.getLogger(AdminMapper.class.getName()).log(Level.SEVERE, null, ex);
             return false;
         }
-        System.out.println("4");
         return true;
     }
 
-    public void deleteCustomer(String userToRemove) {
+    public static void deleteCustomer(int user_id) {
         try {
-            PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("DELETE FROM login WHERE" + userToRemove + " = ?");
-            pstmt.setString(1 , userToRemove);
+            PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("DELETE FROM login WHERE user_id = ?");
+            pstmt.setInt(1, user_id);
             pstmt.executeUpdate();
         } catch (SQLException ex) {
             System.out.println(ex);
         }
-}
+    }
 }
