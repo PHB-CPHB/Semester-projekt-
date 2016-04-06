@@ -105,7 +105,7 @@ public class AddBuildingController extends HttpServlet {
                     if ("zipcode".equals(building_zipcode) && "adress".equals(building_adress) && "parcel".equals(building_parcelno)) {
                         forward(request, response, "/AddBuilding.jsp");
                     } else {
-                        DBF.addBuilding(building_name, building_type, building_adress, building_floor, building_type, building_type, building_adress, building_parcelno, building_floor);
+                        DBF.addBuilding(building_name, building_type, building_adress, building_year, building_zipcode, building_areasize, building_parcelno, building_floor, username);
                         forward(request, response, "/DeleteBuilding.jsp");
                     }
             }
