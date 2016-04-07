@@ -40,7 +40,6 @@ public class DBFacade {
      */
     public ArrayList<Building> getAllCutsomerBuildings(String username) {
         int user_id = CustomerMapper.getCustomerId(username);
-        System.out.println(user_id);
         return BuildingMapper.getAllCustomersBuildings(user_id);
     }
 
@@ -54,8 +53,8 @@ public class DBFacade {
     }
     
     public void addBuilding(String building_name, String building_type, String building_adress, int building_year, int building_zipcode, int building_areasize, String building_parcelno, String building_floor, String username) {
-        String building_firm = CustomerMapper.getFirm(username);
-        BuildingMapper.addBuilding(building_name, building_type, building_adress, building_year, building_zipcode, building_areasize, building_parcelno, building_floor, building_firm);
+        int building_firm_id = CustomerMapper.getBuildingFirmId(username);
+        BuildingMapper.addBuilding(building_name, building_type, building_adress, building_year, building_zipcode, building_areasize, building_parcelno, building_floor, building_firm_id);
     }
 
     public ArrayList<Customer> getAllUsers(String username) {
@@ -71,8 +70,12 @@ public class DBFacade {
         return LoginMapper.getUserRole(username);
     }
 
-    public void createCustomer(String username, String password, String user_role, String user_firm) {
-        AdminMapper.createCustomer(username, password, user_role, user_firm);
+    public boolean createCustomer(String username, String password, String user_firm, String user_role) {
+        if (AdminMapper.createCustomer(username, password, user_role, user_firm) == true) {
+        int user_id = CustomerMapper.getCustomerId(username);
+        return AdminMapper.createFirm(user_id, user_firm);
+        }
+        return false;
     }
 
     public void deleteCustomer(int user_id) {
