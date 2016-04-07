@@ -7,13 +7,10 @@
 package DataAccessLayer.Mappers;
 
 import DataAccessLayer.DBConnector;
-import static DataAccessLayer.DBConnector.getConnection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -26,8 +23,8 @@ public class AdminMapper {
             PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("INSERT INTO login (login.username, login.password, login.user_role, login.user_firm) VALUES(?, ?, ?, ?)");
             pstmt.setString(1, username);
             pstmt.setString(2, password);
-            pstmt.setString(3, user_role);
-            pstmt.setString(4, user_firm);
+            pstmt.setString(3, user_firm);
+            pstmt.setString(4, user_role);
             pstmt.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(AdminMapper.class.getName()).log(Level.SEVERE, null, ex);
@@ -44,5 +41,18 @@ public class AdminMapper {
         } catch (SQLException ex) {
             System.out.println(ex);
         }
+    }
+
+    public static boolean createFirm(int user_id, String user_firm) {
+        try {
+            PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("INSERT INTO firm (firm.firm_name, firm.firm_leader_id) VALUES(?, ?)");
+            pstmt.setString(1, user_firm);
+            pstmt.setInt(2, user_id);
+            pstmt.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminMapper.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
+        return true;
     }
 }

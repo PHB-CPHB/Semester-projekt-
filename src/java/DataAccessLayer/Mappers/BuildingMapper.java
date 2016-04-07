@@ -104,7 +104,3 @@ public class BuildingMapper {
     }
 
 }
-
-//KIG HERE DU SKAL RETTE "CREATE USER" SÅDAN SÅ AT NÅR MAN LAVER ET FIRM KOMMER DET OGSÅ NED I FIRM I DATABASEN OG FÅR ID!
-//Forbind bygning_id med rapport_id oprret rapport i databasen, lav knap inde ved delete til view rapport.
-//Sørg for at hvis en bygning bliver slette bliver rapport overført til arkiv med nyt id...

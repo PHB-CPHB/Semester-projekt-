@@ -101,7 +101,7 @@ public class CustomerMapper {
     public static int getBuildingFirmId( String username) {
       int building_firm_id = 0;
       try {
-            PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("SELECT firm.firm_id FROM firm INNER JOIN login ON login.user_id = firm.firm_leader_id WHERE login.username = ?");
+            PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("SELECT firm.firm_id FROM firm INNER JOIN login ON login.user_id = firm.firm_id WHERE login.username = ?");
             pstmt.setString(1, username);
             ResultSet rs = pstmt.executeQuery();
             rs.next();
