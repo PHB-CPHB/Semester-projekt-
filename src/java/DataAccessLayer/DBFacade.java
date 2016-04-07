@@ -36,7 +36,7 @@ public class DBFacade {
     }
 
     /*Efter denne kommentar kan vi begynde at skrive kode som enten 
-      kan hente fra databasen eller ligge nye ting ned i databasen.
+     kan hente fra databasen eller ligge nye ting ned i databasen.
      */
     public ArrayList<Building> getAllCutsomerBuildings(String username) {
         int user_id = CustomerMapper.getCustomerId(username);
@@ -47,11 +47,12 @@ public class DBFacade {
     public void deleteBuilding(int building_id) {
         BuildingMapper.deleteBuilding(building_id);
     }
-    
+
+    // Made by Michael
     public void deleteAllBuildings(String building_firm) {
         BuildingMapper.deleteAllBuildings(building_firm);
     }
-    
+
     public void addBuilding(String building_name, String building_type, String building_adress, int building_year, int building_zipcode, int building_areasize, String building_parcelno, String building_floor, String username) {
         int building_firm_id = CustomerMapper.getBuildingFirmId(username);
         BuildingMapper.addBuilding(building_name, building_type, building_adress, building_year, building_zipcode, building_areasize, building_parcelno, building_floor, building_firm_id);
@@ -79,6 +80,13 @@ public class DBFacade {
     }
 
     public void deleteCustomer(int user_id) {
+//        ArrayList<Building> array = BuildingMapper.getAllCustomersBuildings(user_id);
+//        for(int i = 0; i < array.size(); i++){
+//            BuildingMapper.getBuildingId(user_id);
+//            BuildingMapper.deleteBuilding(user_id);
+//        }
         AdminMapper.deleteCustomer(user_id);
+        
+
     }
 }

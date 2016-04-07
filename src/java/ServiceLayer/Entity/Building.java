@@ -9,6 +9,8 @@ package ServiceLayer.Entity;
  *
  * @author philliphbrink
  */
+
+// Made by Michael
 public class Building {
 
     private int roomId;
