@@ -6,11 +6,7 @@
 package PressentationLayer;
 
 import DataAccessLayer.DBFacade;
-import DataAccessLayer.Mappers.AdminMapper;
-import DataAccessLayer.PolygonDatabase;
-import ServiceLayer.Entity.Customer;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -49,18 +45,19 @@ public class AdminServlet extends HttpServlet {
             return;
         }
         switch (do_this) {
+            // Made by Michael
             case "deleteUser":
+//                String username = (String) session.getAttribute("username");
+//                
+//                String building_firm_name = request.getParameter("deletebuilding");
+//                String building_firm = request.getParameter(building_firm_name);
+//                DBF.deleteAllBuildings(building_firm);
                 String user_id_name = request.getParameter("RemoveCustomer");
-                String building_firm_name = request.getParameter("deletebuilding");
-                
                 int user_id = Integer.parseInt(user_id_name);
-                //String building_firm = String(building_firm_name);
-                
                 DBF.deleteCustomer(user_id);
-                //DBF.deleteAllBuildings(building_firm);
-                
                 forward(request, response, "/AllUsers.jsp");
                 break;
+
             case "createUser":
                 String uName = request.getParameter("username");
                 String uPwd = request.getParameter("password");

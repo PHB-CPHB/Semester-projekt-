@@ -54,7 +54,7 @@ public class BuildingMapper {
             System.out.println(ex);
         }
     }
-
+// Made by Michael
     public static void deleteAllBuildings(String building_firm) {
         try {
             PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("delete from buildings where building_firm = ?");
@@ -100,7 +100,7 @@ public class BuildingMapper {
     }
 
     public static String getFirm(String username) {
-    String building_firm = "";
+        String building_firm = "";
         try {
             PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("SELECT * FROM firm WHERE firm_is = ?");
             pstmt.setString(1, username);
@@ -111,6 +111,20 @@ public class BuildingMapper {
             Logger.getLogger(CustomerMapper.class.getName()).log(Level.SEVERE, null, ex);
         }
         return building_firm;
+    }
+
+    public static int getBuildingId(int user_id) {
+        int building_id = 0;
+        try {
+            PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("SELECT firm.firm_id FROM firm INNER JOIN login ON login.user_id = firm.firm_id WHERE login.username = ?");
+            //pstmt.setString(1, );
+            ResultSet rs = pstmt.executeQuery();
+            rs.next();
+            building_id = rs.getInt("firm_id");
+        } catch (SQLException ex) {
+            Logger.getLogger(CustomerMapper.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return building_id;
     }
 
 }
