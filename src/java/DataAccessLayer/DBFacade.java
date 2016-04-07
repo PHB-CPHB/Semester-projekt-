@@ -11,9 +11,6 @@ import DataAccessLayer.Mappers.CustomerMapper;
 import DataAccessLayer.Mappers.LoginMapper;
 import ServiceLayer.Entity.Building;
 import ServiceLayer.Entity.Customer;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 
 /**
@@ -25,6 +22,8 @@ public class DBFacade {
     private static DBFacade instance;
     private BuildingMapper BMapper = new BuildingMapper();
     private CustomerMapper CMapper = new CustomerMapper();
+    private AdminMapper AMapper = new AdminMapper();
+    private LoginMapper LMapper = new LoginMapper();
 
     private DBFacade() {
         
@@ -42,53 +41,53 @@ public class DBFacade {
      kan hente fra databasen eller ligge nye ting ned i databasen.
      */
     public ArrayList<Building> getAllCutsomerBuildings(String username) {
-        int user_id = CustomerMapper.getCustomerId(username);
-        return BuildingMapper.getAllCustomersBuildings(user_id);
+        int user_id = CMapper.getCustomerId(username);
+        return BMapper.getAllCustomersBuildings(user_id);
     }
 
     // This method is for 
     public void deleteBuilding(int building_id) {
-        BuildingMapper.deleteBuilding(building_id);
+        BMapper.deleteBuilding(building_id);
     }
 
     // Made by Michael
     public void deleteAllBuildings(String building_firm) {
-        BuildingMapper.deleteAllBuildings(building_firm);
+        BMapper.deleteAllBuildings(building_firm);
     }
 
     public void addBuilding(String building_name, String building_type, String building_adress, int building_year, int building_zipcode, int building_areasize, String building_parcelno, String building_floor, String username) {
-        int building_firm_id = CustomerMapper.getBuildingFirmId(username);
-        BuildingMapper.addBuilding(building_name, building_type, building_adress, building_year, building_zipcode, building_areasize, building_parcelno, building_floor, building_firm_id);
+        int building_firm_id = CMapper.getBuildingFirmId(username);
+        BMapper.addBuilding(building_name, building_type, building_adress, building_year, building_zipcode, building_areasize, building_parcelno, building_floor, building_firm_id);
     }
 
     public ArrayList<Customer> getAllUsers(String username) {
-        String user_firm = CustomerMapper.getCustomer(username);
-        return CustomerMapper.getAllUsers(user_firm);
+        String user_firm = CMapper.getCustomer(username);
+        return CMapper.getAllUsers(user_firm);
     }
 
     public boolean validate(String username, String password) {
-        return LoginMapper.validate(username, password);
+        return LMapper.validate(username, password);
     }
 
     public String getUserRole(String username) {
-        return LoginMapper.getUserRole(username);
+        return LMapper.getUserRole(username);
     }
 
-    public boolean createCustomer(String username, String password, String user_firm, String user_role) {
-        if (AdminMapper.createCustomer(username, password, user_role, user_firm) == true) {
-        int user_id = CustomerMapper.getCustomerId(username);
-        return AdminMapper.createFirm(user_id, user_firm);
+    public boolean createCustomer(String username, String password, String user_role, String user_firm) {
+        if (AMapper.createCustomer(username, password, user_role, user_firm) == true) {
+        int user_id = CMapper.getCustomerId(username);
+        return AMapper.createFirm(user_id, user_firm);
         }
         return false;
     }
 
     public void deleteCustomer(int user_id) {
-//        ArrayList<Building> array = BuildingMapper.getAllCustomersBuildings(user_id);
+//        ArrayList<Building> array = BMapper.getAllCustomersBuildings(user_id);
 //        for(int i = 0; i < array.size(); i++){
-//            BuildingMapper.getBuildingId(user_id);
-//            BuildingMapper.deleteBuilding(user_id);
+//            BMapper.getBuildingId(user_id);
+//            BMapper.deleteBuilding(user_id);
 //        }
-        AdminMapper.deleteCustomer(user_id);
+        AMapper.deleteCustomer(user_id);
         
 
     }

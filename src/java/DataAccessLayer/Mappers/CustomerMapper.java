@@ -21,7 +21,7 @@ import java.util.logging.Logger;
 public class CustomerMapper {
 
 
-    public static String getCustomer(String username) {
+    public String getCustomer(String username) {
         String user_firm = "";
         try {
             PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("SELECT * FROM login WHERE username = '?'");
@@ -35,7 +35,7 @@ public class CustomerMapper {
         return user_firm;
     }
 
-    public static int getCustomerId(String username) {
+    public int getCustomerId(String username) {
         int user_id = 0;
         try {
             PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("SELECT * FROM login WHERE username = ?");
@@ -49,7 +49,7 @@ public class CustomerMapper {
         return user_id;
     }
 
-    public static boolean createCustomer(String username, String password, String user_role, String user_firm) {
+    public boolean createCustomer(String username, String password, String user_role, String user_firm) {
         try {
             PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("INSERT INTO login (username, password, user_role, user_firm) VALUES ('?', '?', ?, '?', '?')");
             pstmt.setString(1, username);
@@ -64,7 +64,7 @@ public class CustomerMapper {
         return true;
     }
 
-    public static ArrayList<Customer> getAllUsers(String user_firm) {
+    public ArrayList<Customer> getAllUsers(String user_firm) {
 
         try {
             ArrayList<Customer> list = new ArrayList<>();
@@ -84,7 +84,7 @@ public class CustomerMapper {
         }
     }
 
-    public static String getFirm(String username) {
+    public String getFirm(String username) {
         String user_firm = "";
         try {
             PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("SELECT * FROM login WHERE username = ?");
@@ -98,7 +98,7 @@ public class CustomerMapper {
         return user_firm;
     }
 
-    public static int getBuildingFirmId( String username) {
+    public int getBuildingFirmId( String username) {
       int building_firm_id = 0;
       try {
             PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("SELECT firm.firm_id FROM firm INNER JOIN login ON login.user_id = firm.firm_id WHERE login.username = ?");

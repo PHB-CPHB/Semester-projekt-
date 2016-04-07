@@ -85,6 +85,9 @@ public class DeleteBuildingController extends HttpServlet {
                 int building_id = Integer.parseInt(building_id_name);
                 DBF.deleteBuilding(building_id);
                 forward(request, response, "/DeleteBuilding.jsp");
+            case "report":
+                forward(request,response,"/Report.jsp");
+                break;
                 
           /*  case "addBuilding":   
                 forward(request, response, "/AddBuilding.jsp");

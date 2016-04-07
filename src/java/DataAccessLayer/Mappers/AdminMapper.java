@@ -18,7 +18,7 @@ import java.util.logging.Logger;
  */
 public class AdminMapper {
 
-    public static boolean createCustomer(String username, String password, String user_role, String user_firm) {
+    public boolean createCustomer(String username, String password, String user_role, String user_firm) {
         try {
             PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("INSERT INTO login (login.username, login.password, login.user_role, login.user_firm) VALUES(?, ?, ?, ?)");
             pstmt.setString(1, username);
@@ -33,7 +33,7 @@ public class AdminMapper {
         return true;
     }
 
-    public static void deleteCustomer(int user_id) {
+    public void deleteCustomer(int user_id) {
         try {
             PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("DELETE FROM login WHERE user_id = ?");
             pstmt.setInt(1, user_id);
@@ -43,7 +43,7 @@ public class AdminMapper {
         }
     }
 
-    public static boolean createFirm(int user_id, String user_firm) {
+    public boolean createFirm(int user_id, String user_firm) {
         try {
             PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("INSERT INTO firm (firm.firm_name, firm.firm_leader_id) VALUES(?, ?)");
             pstmt.setString(1, user_firm);

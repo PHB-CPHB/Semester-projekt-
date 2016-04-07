@@ -22,5 +22,9 @@
             <form action="AddBuilding.jsp" method="POST">
                 <input type="submit" value="Add building" </input> 
             </form>
+        <br>
+        <form action="AdminServlet">
+            <input type="submit" name="do_this" value="logout">
+        </form>
                 </body>
                 </html>
