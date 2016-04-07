@@ -83,4 +83,18 @@ public class CustomerMapper {
             return null;
         }
     }
+
+    public static String getFirm(String username) {
+        String user_firm = "";
+        try {
+            PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("SELECT * FROM login WHERE username = ?");
+            pstmt.setString(1, username);
+            ResultSet rs = pstmt.executeQuery();
+            rs.next();
+            user_firm = rs.getString("user_firm");
+        } catch (SQLException ex) {
+            Logger.getLogger(CustomerMapper.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return user_firm;
+    }
 }

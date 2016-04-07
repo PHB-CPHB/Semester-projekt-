@@ -16,6 +16,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -29,8 +30,6 @@ import javax.servlet.http.HttpSession;
  */
 @WebServlet(name = "AddBuildingController", urlPatterns = {"/AddBuildingController"})
 public class AddBuildingController extends HttpServlet {
-
-    private DBFacade DBF;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -46,36 +45,7 @@ public class AddBuildingController extends HttpServlet {
             throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            DBConnector.getConnection();
-            HttpSession session = request.getSession(true);
-            PolygonDatabase Data = (PolygonDatabase) session.getAttribute("database");
-            ResultSet rs = null;
-            Statement statement = null;
-            Connection connection = null;
-            String nextJSP = null;
-            String doThis = request.getParameter("doThis");
-            doThis = doThis.toLowerCase();
-            statement = connection.createStatement();
-            String building_name = (String) request.getParameter("name");
-            String building_adress = (String) request.getParameter("adress");
-            String building_zipcode = (String) request.getParameter("zipcode");
-            String building_parcelno = (String) request.getParameter("parcel");
-            String building_city = (String) request.getParameter("city");
-            String building_areasize = (String) request.getParameter("size");
-            String building_year = (String) request.getParameter("year");
-            String building_type = (String) request.getParameter("type");
-            String building_floor = (String) request.getParameter("floor");
-            switch (doThis) {
-                case "add":
-                    //inserts into database!
-                    if ("zipcode".equals(building_zipcode) && "adress".equals(building_adress) && "parcel".equals(building_parcelno)) {
-                        nextJSP = "Cusadd.jsp";
-                    } else {
-                        DBF.addBuilding(building_name, building_type, building_adress, building_year, building_zipcode, building_city, building_areasize, building_parcelno, building_floor);
-                        nextJSP = "Cusdelete.jsp";
-                    }
-                    response.sendRedirect(nextJSP);
-            }
+            
         }
     }
 
@@ -91,11 +61,11 @@ public class AddBuildingController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
+       /* try {
             processRequest(request, response);
         } catch (SQLException ex) {
             Logger.getLogger(AddBuildingController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        }*/
     }
 
     /**
@@ -109,11 +79,37 @@ public class AddBuildingController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (SQLException ex) {
-            Logger.getLogger(AddBuildingController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+            //processRequest(request, response);
+        HttpSession session = request.getSession(true);
+            DBFacade DBF = (DBFacade) session.getAttribute("database");
+            String username = (String) session.getAttribute("username");
+            String do_this = request.getParameter("do_this");
+            String building_name = request.getParameter("name");
+            String building_adress = request.getParameter("address");
+            String zipcode = request.getParameter("zipcode");
+            int building_zipcode = Integer.parseInt(zipcode);
+            String building_parcelno = request.getParameter("parcel");
+            String areasize = request.getParameter("size");
+            int building_areasize = Integer.parseInt(areasize);
+            String year = request.getParameter("year");
+            int building_year = Integer.parseInt(year);
+            String building_type = request.getParameter("type");
+            String building_floor = request.getParameter("floor");
+            if (do_this == null) {
+            forward(request, response, "/customerLoggedIn.jsp");
+            return;
+            }
+            switch (do_this) {
+                case "add":
+                    //inserts into database!
+                    if ("zipcode".equals(building_zipcode) && "adress".equals(building_adress) && "parcel".equals(building_parcelno)) {
+                        forward(request, response, "/AddBuilding.jsp");
+                    } else {
+                        DBF.addBuilding(building_name, building_type, building_adress, building_year, building_zipcode, building_areasize, building_parcelno, building_floor, username);
+                        forward(request, response, "/DeleteBuilding.jsp");
+                    }
+            }
+        
     }
 
     /**
@@ -126,4 +122,8 @@ public class AddBuildingController extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
+    protected void forward(HttpServletRequest request, HttpServletResponse response, String url) throws IOException, ServletException {
+        RequestDispatcher requestDispatcher = getServletContext().getRequestDispatcher(url);
+        requestDispatcher.forward(request, response);
+    }
 }

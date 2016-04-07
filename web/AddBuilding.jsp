@@ -32,7 +32,12 @@
             <input type="text" name="year"><br>
             Building floor:<br>
             <input type="text" name="floor"><br>
-            <input type="submit" value="add" name="dothis">
+            <input type="submit" value="add" name="do_this">
+        </form>
+        <br>
+        <form action="DeleteBuilding.jsp" method="POST">
+            
+            <input type="submit" value="Return"/>
         </form>
     </body>
 </html>

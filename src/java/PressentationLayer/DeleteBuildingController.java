@@ -23,7 +23,6 @@ import javax.servlet.http.HttpSession;
  */
 @WebServlet(name = "DeleteBuildingController", urlPatterns = {"/DeleteBuildingController"})
 public class DeleteBuildingController extends HttpServlet {
-    private DBFacade DBF;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -71,6 +70,7 @@ public class DeleteBuildingController extends HttpServlet {
             throws ServletException, IOException {
         //processRequest(request, response);
         HttpSession session = request.getSession(true);
+        DBFacade DBF = (DBFacade) session.getAttribute("database");
 
         String do_this = request.getParameter("do_this");
         if (do_this == null) {
@@ -79,12 +79,16 @@ public class DeleteBuildingController extends HttpServlet {
         }
         switch (do_this) {
             case "delete":
-                int building_id = (int) request.getAttribute("deletebuilding");
+                String building_id_name = request.getParameter("deletebuilding");
+                int building_id = Integer.parseInt(building_id_name);
                 DBF.deleteBuilding(building_id);
-                forward(request, response, "/cusdelete.jsp");
+                forward(request, response, "/DeleteBuilding.jsp");
+                
+          /*  case "addBuilding":   
+                forward(request, response, "/AddBuilding.jsp");
 
             case "Return":
-                forward(request, response, "/customerLoggedIn.jsp");
+                forward(request, response, "/customerLoggedIn.jsp"); */
         }
     }
 

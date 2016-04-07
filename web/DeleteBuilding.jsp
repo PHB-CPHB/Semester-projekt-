@@ -19,24 +19,29 @@
         <p>Here you have an overview of your buildings and are able to delete them</p>
         <table>
             <tr>
-                <td>Building ID</td><td>Building Adress</td><td>Building Name</td><td>Building Status</td><td>City</td><td>Zip Code</td><td>Firm</td>
+                <%--This part is writen by Phillip
+                The code is to show the customers building and so that they can delete them--%>
+                <td>Building ID</td><td>Building Status</td><td>Building Type</td><td>Building Year</td><td>Size</td><td>Building Name</td><td>Building Adress</td><td>Floor</td><td>Zipcode</td><td>Firm</td>
             </tr>
             <% DBFacade DBF = (DBFacade) session.getAttribute("database");
                 String username = (String) session.getAttribute("username");
-
                 ArrayList<Building> buildings = DBF.getAllCutsomerBuildings(username);
                 for (Building building : buildings) {
                     out.println("<tr>");
-                    out.println("<td>" + building.getBuildingId() + "</td>");
-                    out.print("<td>" + building.getAdress() + "</td>");
-                    out.print("<td>" + building.getBuildingName() + "</td>");
-                    out.print("<td>" + building.getBuildingStatus() + "</td>");
-                    out.println("<td>" + building.getCity() + "</td>");
-                    out.println("<td>" + building.getZipCode() + "</td>");
-                    out.println("<td>" + building.getBuildingFirm() + "</td>");%>
-            <td> <form action="/DeleteBuildingController" method="POST">
+                    out.println("<td>" + building.getBuilding_id()+ "</td>");
+                    out.print("<td>" + building.getBuilding_status() + "</td>");
+                    out.print("<td>" + building.getBuilding_type() + "</td>");
+                    out.print("<td>" + building.getBuilding_year() + "</td>");
+                    out.print("<td>" + building.getBuilding_areasize() + "</td>");
+                    out.print("<td>" + building.getBuilding_name() + "</td>");
+                    out.print("<td>" + building.getBuilding_adress() + "</td>");
+                    out.println("<td>" + building.getBuilding_floor() + "</td>");
+                    out.println("<td>" + building.getBuilding_zipcode() + "</td>");
+                    out.println("<td>" + building.getBuilding_firm() + "</td>");%>
+                    <%--This is the delete button--%>
+            <td> <form action="DeleteBuildingController" method="POST">
                     <input type="hidden" name="do_this" value="delete"/>
-                    <input type="hidden" name="deletebuilding" value="<%= building.getBuildingId()%>" />
+                    <input type="hidden" name="deletebuilding" value="<%=building.getBuilding_id()%>" />
                     <input type="submit" value="Delete"/>
                 </form>
             </td>
@@ -44,8 +49,14 @@
                 }
             %>
         </table>
-    <td> <form action="/DeleteBuildingController" method="POST">
-            <input type="hidden" name="do_this" value="return"/>
+        <br>
+    <td>
+        <%--This is to add a building--%>
+        <form action="AddBuilding.jsp">
+            <input type="submit" value="Add Building"/>
+        </form>
+        <%--This is to return to previous site--%>
+    <td> <form action="AdminLoggedIn.jsp">
             <input type="submit" value="Return"/>
         </form>
     </td>

@@ -37,13 +37,13 @@ public class AdminMapper {
         return true;
     }
 
-    public void deleteCustomer(String userToRemove) {
+    public static void deleteCustomer(int user_id) {
         try {
-            PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("DELETE FROM login WHERE" + userToRemove + " = ?");
-            pstmt.setString(1 , userToRemove);
+            PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("DELETE FROM login WHERE user_id = ?");
+            pstmt.setInt(1, user_id);
             pstmt.executeUpdate();
         } catch (SQLException ex) {
             System.out.println(ex);
         }
-}
+    }
 }

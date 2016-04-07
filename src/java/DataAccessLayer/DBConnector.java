@@ -21,7 +21,7 @@ public class DBConnector {
     public static String ID = "root";
     public static String PW = "1234";
     public static Connection connection = null;
-
+    
     public static Connection getConnection() {
         if (connection == null) {
             try {
