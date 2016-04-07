@@ -55,8 +55,18 @@ public class BuildingMapper {
         }
     }
 
+    public static void deleteAllBuildings(String building_firm) {
+        try {
+            PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("delete from buildings where building_firm = ?");
+            pstmt.setString(1, building_firm);
+            pstmt.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+    }
+
     public static void addBuilding(String building_name, String building_type, String building_adress, int building_year, int building_zipcode, int building_areasize, String building_parcelno, String building_floor, int building_firm_id) {
-        String building_status = "Not Ready";
+        String building_status = "Ikke klar i nu";
         try {
             PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("INSERT INTO buildings (building_name, building_status, building_type, building_adress, building_year, building_zipcode, building_areasize, building_parcel_no, building_floor, building_firm_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
             pstmt.setString(1, building_name);

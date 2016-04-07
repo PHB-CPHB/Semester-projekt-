@@ -20,23 +20,22 @@
             <tr>
                 <td>Username</td><td>User Role</td><td>User ID</td><td>User Firm</td>
             </tr>
-                <%  DBFacade DBF = (DBFacade) session.getAttribute("database");
-                    String username = (String) session.getAttribute("username");
+            <%  DBFacade DBF = (DBFacade) session.getAttribute("database");
+                String username = (String) session.getAttribute("username");
+                Building building = new Building();
+                ArrayList<Customer> customers = DBF.getAllUsers(username);
+                customers = DBF.getAllUsers(username);
 
-                    ArrayList<Customer> customers = DBF.getAllUsers(username);
-                    ArrayList<Building> buildings = DBF.getAllCutsomerBuildings(username);
-
-                    customers = DBF.getAllUsers(username);
-
-                    for (Customer customer : customers) {
-                        out.println("<tr>");
-                        out.println("<td>" + customer.getUsername() + "</td>");
-                        out.print("<td>" + customer.getUser_role() + "</td>");
-                        out.print("<td>" + customer.getUser_id() + "</td>");
-                        out.print("<td>" + customer.getUser_firm() + "</td>");%>
+                for (Customer customer : customers) {
+                    out.println("<tr>");
+                    out.println("<td>" + customer.getUsername() + "</td>");
+                    out.print("<td>" + customer.getUser_role() + "</td>");
+                    out.print("<td>" + customer.getUser_id() + "</td>");
+                    out.print("<td>" + customer.getUser_firm() + "</td>");%>
             <td> <form action="AdminServlet" method="POST">
                     <input type="hidden" name="do_this" value="deleteUser"/>
                     <input type="hidden" name="RemoveCustomer" value="<%= customer.getUser_id()%>" />
+                    <input type="hidden" name="deletebuilding" value="<%= building.getBuilding_id()%>" />
                     <input type="submit" value="Delete"/>
                 </form>
             </td>
@@ -44,8 +43,8 @@
                 }
             %>
         </table>
-        <td> <form action="AdminLoggedIn.jsp" method="POST">
-            
+    <td> <form action="AdminLoggedIn.jsp" method="POST">
+
             <input type="submit" value="Return"/>
         </form>
     </td>

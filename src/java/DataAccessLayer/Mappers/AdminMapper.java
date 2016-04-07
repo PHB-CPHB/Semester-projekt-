@@ -23,8 +23,8 @@ public class AdminMapper {
             PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("INSERT INTO login (login.username, login.password, login.user_role, login.user_firm) VALUES(?, ?, ?, ?)");
             pstmt.setString(1, username);
             pstmt.setString(2, password);
-            pstmt.setString(3, user_firm);
-            pstmt.setString(4, user_role);
+            pstmt.setString(3, user_role);
+            pstmt.setString(4, user_firm);
             pstmt.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(AdminMapper.class.getName()).log(Level.SEVERE, null, ex);

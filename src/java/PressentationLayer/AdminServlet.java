@@ -50,8 +50,14 @@ public class AdminServlet extends HttpServlet {
         switch (do_this) {
             case "deleteUser":
                 String user_id_name = request.getParameter("RemoveCustomer");
+                String building_firm_name = request.getParameter("deletebuilding");
+                
                 int user_id = Integer.parseInt(user_id_name);
+                //String building_firm = String(building_firm_name);
+                
                 DBF.deleteCustomer(user_id);
+                //DBF.deleteAllBuildings(building_firm);
+                
                 forward(request, response, "/AllUsers.jsp");
                 break;
             case "createUser":
@@ -59,7 +65,7 @@ public class AdminServlet extends HttpServlet {
                 String uPwd = request.getParameter("password");
                 String uFirm = request.getParameter("user_firm");
                 String uRole = request.getParameter("role");
-                DBF.createCustomer(uName, uPwd, uRole, uFirm);
+                DBF.createCustomer(uName, uPwd, uFirm, uRole);
                 forward(request, response, "/AllUsers.jsp");
             case "return":
                 forward(request, response, "/AdminLoggedIn.jsp");

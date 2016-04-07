@@ -61,6 +61,10 @@ public class Building {
     
     
 
+    public Building() {
+    }
+
+    
     public int getRoomId() {
         return roomId;
     }
