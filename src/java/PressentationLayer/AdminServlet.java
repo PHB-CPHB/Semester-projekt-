@@ -39,7 +39,6 @@ public class AdminServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ClassNotFoundException, SQLException {
-        System.out.println("1");
         AdminMapper Mapper = new AdminMapper();
         HttpSession session = request.getSession(true);
         PolygonDatabase Data = (PolygonDatabase) session.getAttribute("polygon");
@@ -52,22 +51,15 @@ public class AdminServlet extends HttpServlet {
                 forward(request, response, "/AllUsers.jsp");
                 break;
             case "createUser":
-                System.out.println("2");
-                String uName = (String)request.getAttribute("username");
-                String uPwd = (String)request.getAttribute("password");
-                String uRole = (String)request.getAttribute("user_role");
-                String uFirm = (String)request.getAttribute("user_firm");
-                System.out.println(uName);
-                System.out.println(uPwd);
-                System.out.println(uFirm);
-                System.out.println(uRole);
-                Mapper.createCustomer(new Customer (uName, uPwd, uRole, uFirm));
+                String uName = request.getParameter("username");
+                String uPwd = request.getParameter("password");
+                String uFirm = request.getParameter("user_firm");
+                String uRole = request.getParameter("role");
+                Mapper.createCustomer(uName, uPwd, uFirm, uRole);
                 
                 forward(request, response, "/AllUsers.jsp");
-                break;
             case "return":
                 forward(request, response, "/AdminLoggedIn.jsp");
-                break;
         }
     }
 
