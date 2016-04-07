@@ -23,8 +23,11 @@ import java.util.ArrayList;
 public class DBFacade {
 
     private static DBFacade instance;
+    private BuildingMapper BMapper = new BuildingMapper();
+    private CustomerMapper CMapper = new CustomerMapper();
 
     private DBFacade() {
+        
     }
 
     //Dette er hvor vi kan kalde forbindelse og skrive hvad vi vil hente fra Databasen (Phillip)
