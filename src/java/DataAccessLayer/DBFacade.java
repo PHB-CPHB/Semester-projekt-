@@ -40,7 +40,6 @@ public class DBFacade {
      */
     public ArrayList<Building> getAllCutsomerBuildings(String username) {
         int user_id = CustomerMapper.getCustomerId(username);
-        System.out.println(user_id);
         return BuildingMapper.getAllCustomersBuildings(user_id);
     }
 
@@ -50,8 +49,8 @@ public class DBFacade {
     }
 
     public void addBuilding(String building_name, String building_type, String building_adress, int building_year, int building_zipcode, int building_areasize, String building_parcelno, String building_floor, String username) {
-        String building_firm = CustomerMapper.getFirm(username);
-        BuildingMapper.addBuilding(building_name, building_type, building_adress, building_year, building_zipcode, building_areasize, building_parcelno, building_floor, building_firm);
+        int building_firm_id = CustomerMapper.getBuildingFirmId(username);
+        BuildingMapper.addBuilding(building_name, building_type, building_adress, building_year, building_zipcode, building_areasize, building_parcelno, building_floor, building_firm_id);
     }
 
     public ArrayList<Customer> getAllUsers(String username) {

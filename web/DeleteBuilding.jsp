@@ -25,7 +25,6 @@
             </tr>
             <% DBFacade DBF = (DBFacade) session.getAttribute("database");
                 String username = (String) session.getAttribute("username");
-                System.out.println("BLABLABLABLABLABLABLABLABLA");
                 ArrayList<Building> buildings = DBF.getAllCutsomerBuildings(username);
                 for (Building building : buildings) {
                     out.println("<tr>");
