@@ -48,6 +48,7 @@ public class DBFacade {
         BuildingMapper.deleteBuilding(building_id);
     }
 
+    // Made by Michael
     public void deleteAllBuildings(String building_firm) {
         BuildingMapper.deleteAllBuildings(building_firm);
     }
@@ -81,6 +82,7 @@ public class DBFacade {
     public void deleteCustomer(int user_id) {
 //        ArrayList<Building> array = BuildingMapper.getAllCustomersBuildings(user_id);
 //        for(int i = 0; i < array.size(); i++){
+//            BuildingMapper.getBuildingId(user_id);
 //            BuildingMapper.deleteBuilding(user_id);
 //        }
         AdminMapper.deleteCustomer(user_id);
