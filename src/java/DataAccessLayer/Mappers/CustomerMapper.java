@@ -97,4 +97,18 @@ public class CustomerMapper {
         }
         return user_firm;
     }
+
+    public static int getBuildingFirmId( String username) {
+      int building_firm_id = 0;
+      try {
+            PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("SELECT firm.firm_id FROM firm INNER JOIN login ON login.user_id = firm.firm_id WHERE login.username = ?");
+            pstmt.setString(1, username);
+            ResultSet rs = pstmt.executeQuery();
+            rs.next();
+            building_firm_id = rs.getInt("firm_id");
+        } catch (SQLException ex) {
+            Logger.getLogger(CustomerMapper.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return building_firm_id;
+    }
 }
