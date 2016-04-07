@@ -24,5 +24,9 @@
         <form action="DeleteBuilding.jsp">
             <input type="submit" name="dothis" value="View Buildings">
         </form>
+        <br>
+        <form action="AdminServlet">
+            <input type="submit" name="do_this" value="logout">
+        </form>
     </body>
 </html>

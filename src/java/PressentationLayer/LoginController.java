@@ -43,7 +43,6 @@ public class LoginController extends HttpServlet {
         String user = request.getParameter("username");
         String password = request.getParameter("password");
         //check if username and password maches.
-
                 if (DBF.validate(user, password) == true) {
                     if (DBF.getUserRole(user).equals("admin")) {
                         session.setAttribute("username", user);

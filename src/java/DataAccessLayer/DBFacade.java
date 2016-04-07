@@ -70,7 +70,7 @@ public class DBFacade {
         return LoginMapper.getUserRole(username);
     }
 
-    public boolean createCustomer(String username, String password, String user_firm, String user_role) {
+    public boolean createCustomer(String username, String password, String user_role, String user_firm) {
         if (AdminMapper.createCustomer(username, password, user_role, user_firm) == true) {
         int user_id = CustomerMapper.getCustomerId(username);
         return AdminMapper.createFirm(user_id, user_firm);

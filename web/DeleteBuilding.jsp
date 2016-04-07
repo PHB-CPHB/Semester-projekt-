@@ -45,6 +45,12 @@
                     <input type="submit" value="Delete"/>
                 </form>
             </td>
+            <td> <form action="DeleteBuildingController" method="POST">
+                    <input type="hidden" name="do_this" value="report"/>
+                    <input type="hidden" name="deletebuilding" value="<%=building.getBuilding_id()%>" />
+                    <input type="submit" value="View reports"/>
+                </form>
+            </td>
             <%out.println("</tr>");
                 }
             %>
