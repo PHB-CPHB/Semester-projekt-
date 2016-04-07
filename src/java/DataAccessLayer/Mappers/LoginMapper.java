@@ -16,7 +16,7 @@ import java.sql.Statement;
  * @author Thesoap
  */
 public class LoginMapper {
-
+    // Made by Tim
     public static boolean validate(String username, String password) {
         try {
             PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("select * from login where username=? and password=?");
@@ -28,7 +28,7 @@ public class LoginMapper {
             return false;
         }
     }
-
+    // Made by Tim
     public static String getUserRole(String username) {
         try {
             PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("select user_role from login where username=?");

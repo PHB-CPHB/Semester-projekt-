@@ -57,7 +57,7 @@ public class DBFacade {
         int building_firm_id = CustomerMapper.getBuildingFirmId(username);
         BuildingMapper.addBuilding(building_name, building_type, building_adress, building_year, building_zipcode, building_areasize, building_parcelno, building_floor, building_firm_id);
     }
-
+//Made by Oliver
     public ArrayList<Customer> getAllUsers(String username) {
         String user_firm = CustomerMapper.getCustomer(username);
         return CustomerMapper.getAllUsers(user_firm);
@@ -70,7 +70,7 @@ public class DBFacade {
     public String getUserRole(String username) {
         return LoginMapper.getUserRole(username);
     }
-
+//Made by Oliver
     public boolean createCustomer(String username, String password, String user_firm, String user_role) {
         if (AdminMapper.createCustomer(username, password, user_role, user_firm) == true) {
         int user_id = CustomerMapper.getCustomerId(username);

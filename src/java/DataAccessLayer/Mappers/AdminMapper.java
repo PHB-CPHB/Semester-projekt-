@@ -17,7 +17,7 @@ import java.util.logging.Logger;
  * @author Oliver
  */
 public class AdminMapper {
-
+    // Made by Oliver
     public static boolean createCustomer(String username, String password, String user_role, String user_firm) {
         try {
             PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("INSERT INTO login (login.username, login.password, login.user_role, login.user_firm) VALUES(?, ?, ?, ?)");
