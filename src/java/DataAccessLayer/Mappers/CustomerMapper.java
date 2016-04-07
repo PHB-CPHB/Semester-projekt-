@@ -5,6 +5,7 @@
  */
 package DataAccessLayer.Mappers;
 
+import DataAccessLayer.Interfaces.CustomerMapperInterface;
 import DataAccessLayer.DBConnector;
 import ServiceLayer.Entity.Customer;
 import java.sql.PreparedStatement;
@@ -18,9 +19,10 @@ import java.util.logging.Logger;
  *
  * @author philliphbrink
  */
-public class CustomerMapper {
+public class CustomerMapper implements CustomerMapperInterface {
 
 
+    @Override
     public String getCustomer(String username) {
         String user_firm = "";
         try {
@@ -35,6 +37,7 @@ public class CustomerMapper {
         return user_firm;
     }
 
+    @Override
     public int getCustomerId(String username) {
         int user_id = 0;
         try {
@@ -49,6 +52,7 @@ public class CustomerMapper {
         return user_id;
     }
 
+    @Override
     public boolean createCustomer(String username, String password, String user_role, String user_firm) {
         try {
             PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("INSERT INTO login (username, password, user_role, user_firm) VALUES ('?', '?', ?, '?', '?')");
@@ -64,6 +68,7 @@ public class CustomerMapper {
         return true;
     }
 
+    @Override
     public ArrayList<Customer> getAllUsers(String user_firm) {
 
         try {
@@ -84,6 +89,7 @@ public class CustomerMapper {
         }
     }
 
+    @Override
     public String getFirm(String username) {
         String user_firm = "";
         try {
@@ -98,6 +104,7 @@ public class CustomerMapper {
         return user_firm;
     }
 
+    @Override
     public int getBuildingFirmId( String username) {
       int building_firm_id = 0;
       try {

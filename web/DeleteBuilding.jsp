@@ -24,8 +24,8 @@
                 <td>Building ID</td><td>Building Status</td><td>Building Type</td><td>Building Year</td><td>Size</td><td>Building Name</td><td>Building Adress</td><td>Floor</td><td>Zipcode</td><td>Firm</td>
             </tr>
             <% DBFacade DBF = (DBFacade) session.getAttribute("database");
-                String username = (String) session.getAttribute("username");
-                ArrayList<Building> buildings = DBF.getAllCutsomerBuildings(username);
+                int user_id =  Integer.parseInt(session.getAttribute("user_id").toString());
+                ArrayList<Building> buildings = DBF.getAllCutsomerBuildings(user_id);
                 for (Building building : buildings) {
                     out.println("<tr>");
                     out.println("<td>" + building.getBuilding_id()+ "</td>");

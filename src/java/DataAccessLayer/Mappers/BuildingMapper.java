@@ -5,6 +5,7 @@
  */
 package DataAccessLayer.Mappers;
 
+import DataAccessLayer.Interfaces.BuildingMapperInterface;
 import DataAccessLayer.DBConnector;
 import ServiceLayer.Entity.Building;
 import java.sql.PreparedStatement;
@@ -18,8 +19,10 @@ import java.util.logging.Logger;
  *
  * @author philliphbrink
  */
-public class BuildingMapper {
+public class BuildingMapper implements BuildingMapperInterface  {
 
+    
+    
     public ArrayList<Building> getAllCustomersBuildings(int user_id) {
         try {
             ArrayList<Building> list = new ArrayList<>();
@@ -45,6 +48,8 @@ public class BuildingMapper {
         }
     }
 
+    
+    @Override
     public void deleteBuilding(int building_id) {
         try {
             PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("DELETE FROM buildings WHERE building_id = ?");
@@ -55,6 +60,8 @@ public class BuildingMapper {
         }
     }
 // Made by Michael
+    
+    @Override
     public void deleteAllBuildings(String building_firm) {
         try {
             PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("delete from buildings where building_firm = ?");
@@ -65,6 +72,8 @@ public class BuildingMapper {
         }
     }
 
+    
+    
     public void addBuilding(String building_name, String building_type, String building_adress, int building_year, int building_zipcode, int building_areasize, String building_parcelno, String building_floor, int building_firm_id) {
         String building_status = "Ikke klar i nu";
         try {
@@ -85,6 +94,8 @@ public class BuildingMapper {
         }
     }
 
+    
+    @Override
     public String getCity(int building_zipcode) {
         String city = "";
         try {
@@ -99,6 +110,8 @@ public class BuildingMapper {
         return city;
     }
 
+    
+    @Override
     public String getFirm(String username) {
         String building_firm = "";
         try {
@@ -113,6 +126,8 @@ public class BuildingMapper {
         return building_firm;
     }
 
+    
+    @Override
     public int getBuildingId(int user_id) {
         int building_id = 0;
         try {

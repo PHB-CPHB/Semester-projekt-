@@ -5,6 +5,7 @@
  */
 package DataAccessLayer.Mappers;
 
+import DataAccessLayer.Interfaces.LoginMapperInterface;
 import DataAccessLayer.DBConnector;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -15,8 +16,9 @@ import java.sql.Statement;
  *
  * @author Thesoap
  */
-public class LoginMapper {
+public class LoginMapper implements LoginMapperInterface {
 
+    @Override
     public boolean validate(String username, String password) {
         try {
             PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("select * from login where username=? and password=?");
@@ -29,6 +31,7 @@ public class LoginMapper {
         }
     }
 
+    @Override
     public String getUserRole(String username) {
         try {
             PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("select user_role from login where username=?");
@@ -39,5 +42,20 @@ public class LoginMapper {
         } catch (SQLException ex) {
             return "guest";
         }
+    }
+
+    public int getUserId(String user, String password) {
+        int user_id = 0;
+    try {
+            PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("select * from login where username=? and password=?");
+            pstmt.setString(1, user);
+            pstmt.setString(2,password);
+            ResultSet rs = pstmt.executeQuery();
+            rs.next();
+            user_id = rs.getInt("user_id");
+        } catch (SQLException ex) {
+            return 0;
+        }
+    return user_id;
     }
 }

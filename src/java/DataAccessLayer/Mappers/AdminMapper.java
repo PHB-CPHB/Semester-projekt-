@@ -6,6 +6,7 @@
  */
 package DataAccessLayer.Mappers;
 
+import DataAccessLayer.Interfaces.AdminMapperInterface;
 import DataAccessLayer.DBConnector;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -16,8 +17,9 @@ import java.util.logging.Logger;
  *
  * @author Oliver
  */
-public class AdminMapper {
+public class AdminMapper implements AdminMapperInterface {
 
+    @Override
     public boolean createCustomer(String username, String password, String user_role, String user_firm) {
         try {
             PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("INSERT INTO login (login.username, login.password, login.user_role, login.user_firm) VALUES(?, ?, ?, ?)");
@@ -33,6 +35,7 @@ public class AdminMapper {
         return true;
     }
 
+    @Override
     public void deleteCustomer(int user_id) {
         try {
             PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("DELETE FROM login WHERE user_id = ?");
@@ -43,6 +46,7 @@ public class AdminMapper {
         }
     }
 
+    @Override
     public boolean createFirm(int user_id, String user_firm) {
         try {
             PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("INSERT INTO firm (firm.firm_name, firm.firm_leader_id) VALUES(?, ?)");
@@ -55,4 +59,5 @@ public class AdminMapper {
         }
         return true;
     }
+
 }

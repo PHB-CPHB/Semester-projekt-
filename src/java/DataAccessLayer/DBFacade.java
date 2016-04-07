@@ -5,6 +5,11 @@
  */
 package DataAccessLayer;
 
+
+import DataAccessLayer.Interfaces.AdminMapperInterface;
+import DataAccessLayer.Interfaces.BuildingMapperInterface;
+import DataAccessLayer.Interfaces.CustomerMapperInterface;
+import DataAccessLayer.Interfaces.LoginMapperInterface;
 import DataAccessLayer.Mappers.AdminMapper;
 import DataAccessLayer.Mappers.BuildingMapper;
 import DataAccessLayer.Mappers.CustomerMapper;
@@ -17,7 +22,7 @@ import java.util.ArrayList;
  *
  * @author philliphbrink
  */
-public class DBFacade {
+public class DBFacade implements AdminMapperInterface, BuildingMapperInterface, CustomerMapperInterface, LoginMapperInterface{
 
     private static DBFacade instance;
     private BuildingMapper BMapper = new BuildingMapper();
@@ -40,39 +45,51 @@ public class DBFacade {
     /*Efter denne kommentar kan vi begynde at skrive kode som enten 
      kan hente fra databasen eller ligge nye ting ned i databasen.
      */
-    public ArrayList<Building> getAllCutsomerBuildings(String username) {
-        int user_id = CMapper.getCustomerId(username);
+    
+    public ArrayList<Building> getAllCutsomerBuildings(int user_id) {
         return BMapper.getAllCustomersBuildings(user_id);
     }
 
     // This method is for 
+    
+    @Override
     public void deleteBuilding(int building_id) {
         BMapper.deleteBuilding(building_id);
     }
 
     // Made by Michael
+    
+    @Override
     public void deleteAllBuildings(String building_firm) {
         BMapper.deleteAllBuildings(building_firm);
     }
-
+    
     public void addBuilding(String building_name, String building_type, String building_adress, int building_year, int building_zipcode, int building_areasize, String building_parcelno, String building_floor, String username) {
         int building_firm_id = CMapper.getBuildingFirmId(username);
         BMapper.addBuilding(building_name, building_type, building_adress, building_year, building_zipcode, building_areasize, building_parcelno, building_floor, building_firm_id);
     }
 
+    
+    @Override
     public ArrayList<Customer> getAllUsers(String username) {
         String user_firm = CMapper.getCustomer(username);
         return CMapper.getAllUsers(user_firm);
     }
 
+    
+    @Override
     public boolean validate(String username, String password) {
         return LMapper.validate(username, password);
     }
 
+    
+    @Override
     public String getUserRole(String username) {
         return LMapper.getUserRole(username);
     }
 
+    
+    @Override
     public boolean createCustomer(String username, String password, String user_role, String user_firm) {
         if (AMapper.createCustomer(username, password, user_role, user_firm) == true) {
         int user_id = CMapper.getCustomerId(username);
@@ -81,6 +98,8 @@ public class DBFacade {
         return false;
     }
 
+    
+    @Override
     public void deleteCustomer(int user_id) {
 //        ArrayList<Building> array = BMapper.getAllCustomersBuildings(user_id);
 //        for(int i = 0; i < array.size(); i++){
@@ -91,4 +110,44 @@ public class DBFacade {
         
 
     }
+
+    @Override
+    public boolean createFirm(int user_id, String user_firm) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public int getBuildingId(int user_id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String getCity(int building_zipcode) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String getFirm(String username) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public int getBuildingFirmId(String username) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String getCustomer(String username) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public int getCustomerId(String username) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public int getUserId(String user, String password) {
+       return LMapper.getUserId(user, password);
+    }
+
 }

@@ -44,11 +44,14 @@ public class LoginController extends HttpServlet {
         String password = request.getParameter("password");
         //check if username and password maches.
                 if (DBF.validate(user, password) == true) {
+                    int user_id = DBF.getUserId(user, password);
                     if (DBF.getUserRole(user).equals("admin")) {
                         session.setAttribute("username", user);
+                        session.setAttribute("user_id", user_id);
                         forward(request, response, "/AdminLoggedIn.jsp");
                     } else if (DBF.getUserRole(user).equals("customer")) {
                         session.setAttribute("username", user);
+                        session.setAttribute("user_id", user_id);
                         forward(request, response, "/CustomerLoggedIn.jsp");
                     } else {
                         forward(request, response, "/Login.jsp");
