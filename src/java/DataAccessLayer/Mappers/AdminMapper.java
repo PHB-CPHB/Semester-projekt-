@@ -18,7 +18,7 @@ import java.util.logging.Logger;
  * @author Oliver
  */
 public class AdminMapper implements AdminMapperInterface {
-
+    // Made by Oliver
     @Override
     public boolean createCustomer(String username, String password, String user_role, String user_firm) {
         try {

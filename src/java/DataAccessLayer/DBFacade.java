@@ -69,7 +69,7 @@ public class DBFacade implements AdminMapperInterface, BuildingMapperInterface, 
         BMapper.addBuilding(building_name, building_type, building_adress, building_year, building_zipcode, building_areasize, building_parcelno, building_floor, building_firm_id);
     }
 
-    
+    // Made by Oliver corrected by Phillip
     @Override
     public ArrayList<Customer> getAllUsers(String username) {
         String user_firm = CMapper.getCustomer(username);

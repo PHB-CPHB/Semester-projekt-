@@ -67,7 +67,7 @@ public class CustomerMapper implements CustomerMapperInterface {
         }
         return true;
     }
-
+    // Made by Oliver corrected by Phillip
     @Override
     public ArrayList<Customer> getAllUsers(String user_firm) {
 

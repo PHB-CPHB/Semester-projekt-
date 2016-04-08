@@ -35,6 +35,7 @@ public class LoginController extends HttpServlet {
      * @throws java.lang.ClassNotFoundException
      * @throws java.sql.SQLException
      */
+    // Made by Tim corrected by Oliver
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ClassNotFoundException, SQLException {
         HttpSession session = request.getSession(true);

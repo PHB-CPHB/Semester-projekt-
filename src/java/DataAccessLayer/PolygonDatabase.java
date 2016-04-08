@@ -22,7 +22,7 @@ public class PolygonDatabase {
         Class.forName(DBConnector.driver);
         con = DriverManager.getConnection(DBConnector.URL, DBConnector.ID, DBConnector.PW);
     }
-
+    // Made by Tim
     public boolean validate(String username, String password) {
         try {
             Statement stmt = con.createStatement();
@@ -33,7 +33,7 @@ public class PolygonDatabase {
             return false;
         }
     }
-
+    // Made by Tim
     public String getUserRole(String username) {
         try {
             Statement stmt = con.createStatement();
