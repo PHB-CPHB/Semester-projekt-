@@ -35,6 +35,7 @@ public class LoginController extends HttpServlet {
      * @throws java.lang.ClassNotFoundException
      * @throws java.sql.SQLException
      */
+    // Made by Tim corrected by Oliver
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ClassNotFoundException, SQLException {
         HttpSession session = request.getSession(true);
@@ -44,11 +45,14 @@ public class LoginController extends HttpServlet {
         String password = request.getParameter("password");
         //check if username and password maches.
                 if (DBF.validate(user, password) == true) {
+                    int user_id = DBF.getUserId(user, password);
                     if (DBF.getUserRole(user).equals("admin")) {
                         session.setAttribute("username", user);
+                        session.setAttribute("user_id", user_id);
                         forward(request, response, "/AdminLoggedIn.jsp");
                     } else if (DBF.getUserRole(user).equals("customer")) {
                         session.setAttribute("username", user);
+                        session.setAttribute("user_id", user_id);
                         forward(request, response, "/CustomerLoggedIn.jsp");
                     } else {
                         forward(request, response, "/Login.jsp");

@@ -5,6 +5,7 @@
  */
 package DataAccessLayer.Mappers;
 
+import DataAccessLayer.Interfaces.BuildingMapperInterface;
 import DataAccessLayer.DBConnector;
 import ServiceLayer.Entity.Building;
 import java.sql.PreparedStatement;
@@ -18,9 +19,11 @@ import java.util.logging.Logger;
  *
  * @author philliphbrink
  */
-public class BuildingMapper {
+public class BuildingMapper implements BuildingMapperInterface  {
 
-    public static ArrayList<Building> getAllCustomersBuildings(int user_id) {
+    
+    
+    public ArrayList<Building> getAllCustomersBuildings(int user_id) {
         try {
             ArrayList<Building> list = new ArrayList<>();
             PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("select buildings.building_id, buildings.building_status, buildings.building_type, buildings.building_year, buildings.building_areasize, buildings.building_name, buildings.building_adress, buildings.building_floor, buildings.building_zipcode, firm.firm_name FROM buildings INNER JOIN firm ON buildings.building_firm_id = firm.firm_id Where building_firm_id = ?");
@@ -45,7 +48,9 @@ public class BuildingMapper {
         }
     }
 
-    public static void deleteBuilding(int building_id) {
+    
+    @Override
+    public void deleteBuilding(int building_id) {
         try {
             PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("DELETE FROM buildings WHERE building_id = ?");
             pstmt.setInt(1, building_id);
@@ -55,7 +60,9 @@ public class BuildingMapper {
         }
     }
 // Made by Michael
-    public static void deleteAllBuildings(String building_firm) {
+    
+    @Override
+    public void deleteAllBuildings(String building_firm) {
         try {
             PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("delete from buildings where building_firm = ?");
             pstmt.setString(1, building_firm);
@@ -65,7 +72,9 @@ public class BuildingMapper {
         }
     }
 
-    public static void addBuilding(String building_name, String building_type, String building_adress, int building_year, int building_zipcode, int building_areasize, String building_parcelno, String building_floor, int building_firm_id) {
+    
+    
+    public void addBuilding(String building_name, String building_type, String building_adress, int building_year, int building_zipcode, int building_areasize, String building_parcelno, String building_floor, int building_firm_id) {
         String building_status = "Ikke klar i nu";
         try {
             PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("INSERT INTO buildings (building_name, building_status, building_type, building_adress, building_year, building_zipcode, building_areasize, building_parcel_no, building_floor, building_firm_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
@@ -85,7 +94,9 @@ public class BuildingMapper {
         }
     }
 
-    public static String getCity(int building_zipcode) {
+    
+    @Override
+    public String getCity(int building_zipcode) {
         String city = "";
         try {
             PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("SELECT * FROM Zip WHERE zipcode = ?");
@@ -99,7 +110,9 @@ public class BuildingMapper {
         return city;
     }
 
-    public static String getFirm(String username) {
+    
+    @Override
+    public String getFirm(String username) {
         String building_firm = "";
         try {
             PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("SELECT * FROM firm WHERE firm_is = ?");
@@ -113,7 +126,9 @@ public class BuildingMapper {
         return building_firm;
     }
 
-    public static int getBuildingId(int user_id) {
+    
+    @Override
+    public int getBuildingId(int user_id) {
         int building_id = 0;
         try {
             PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("SELECT firm.firm_id FROM firm INNER JOIN login ON login.user_id = firm.firm_id WHERE login.username = ?");
