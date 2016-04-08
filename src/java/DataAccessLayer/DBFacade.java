@@ -76,13 +76,13 @@ public class DBFacade implements AdminMapperInterface, BuildingMapperInterface, 
         return CMapper.getAllUsers(user_firm);
     }
 
-    
+    //Made by Tim
     @Override
     public boolean validate(String username, String password) {
         return LMapper.validate(username, password);
     }
 
-    
+    //Made by Tim
     @Override
     public String getUserRole(String username) {
         return LMapper.getUserRole(username);

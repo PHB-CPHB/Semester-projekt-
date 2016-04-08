@@ -1,7 +1,7 @@
 <%-- 
     Document   : CreateCustomer
     Created on : 31-03-2016, 11:07:34
-    Author     : Oliver
+    Author     : Tim
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>

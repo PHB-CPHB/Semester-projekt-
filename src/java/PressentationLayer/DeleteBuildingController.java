@@ -89,9 +89,8 @@ public class DeleteBuildingController extends HttpServlet {
             case "report":
                 forward(request,response,"/Report.jsp");
                 break;
+                //Made by Tim
             case "Return":
-                System.out.println("1");
-                    System.out.println(session.getAttribute("username"));
                 if(DBF.getUserRole((String)session.getAttribute("username")).equals("customer")){
                     forward(request, response, "/CustomerLoggedIn.jsp");
                 }else if(DBF.getUserRole((String)session.getAttribute("username")).equals("admin")){

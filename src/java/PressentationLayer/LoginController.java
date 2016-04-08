@@ -44,6 +44,7 @@ public class LoginController extends HttpServlet {
         String user = request.getParameter("username");
         String password = request.getParameter("password");
         //check if username and password maches.
+        //Made by Tim
                 if (DBF.validate(user, password) == true) {
                     int user_id = DBF.getUserId(user, password);
                     if (DBF.getUserRole(user).equals("admin")) {
