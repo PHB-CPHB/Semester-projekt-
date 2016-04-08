@@ -20,7 +20,8 @@
         <table>
             <tr>
                 <%--This part is writen by Phillip
-                The code is to show the customers building and so that they can delete them--%>
+                The code is to show the customers building and so that they can delete them
+                For them to see their buildings they need user_id--%>
                 <td>Building ID</td><td>Building Status</td><td>Building Type</td><td>Building Year</td><td>Size</td><td>Building Name</td><td>Building Adress</td><td>Floor</td><td>Zipcode</td><td>Firm</td>
             </tr>
             <% DBFacade DBF = (DBFacade) session.getAttribute("database");
