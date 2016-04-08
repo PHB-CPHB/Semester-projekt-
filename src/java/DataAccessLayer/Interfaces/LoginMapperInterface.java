@@ -9,6 +9,10 @@ package DataAccessLayer.Interfaces;
  *
  * @author philliphbrink
  */
-public interface IDBFacade {
+public interface LoginMapperInterface {
+
+    String getUserRole(String username);
+
+    boolean validate(String username, String password);
     
 }

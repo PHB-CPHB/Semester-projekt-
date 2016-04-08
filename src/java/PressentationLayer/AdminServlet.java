@@ -63,10 +63,14 @@ public class AdminServlet extends HttpServlet {
                 String uPwd = request.getParameter("password");
                 String uFirm = request.getParameter("user_firm");
                 String uRole = request.getParameter("role");
-                DBF.createCustomer(uName, uPwd, uFirm, uRole);
+                DBF.createCustomer(uName, uPwd, uRole, uFirm);
                 forward(request, response, "/AllUsers.jsp");
             case "return":
                 forward(request, response, "/AdminLoggedIn.jsp");
+                break;
+            case "logout":
+                session.invalidate();
+                forward(request,response,"/Login.jsp");
                 break;
         }
     }
