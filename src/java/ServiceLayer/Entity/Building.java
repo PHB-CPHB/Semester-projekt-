@@ -72,8 +72,10 @@ public class Building {
         this.building_floor = building_floor;
         this.building_firm_id = building_firm_id;
     }
-    
-    
+
+    public Building(int building_id) {
+        this.building_id = building_id;
+    }
 
     public Building() {
     }

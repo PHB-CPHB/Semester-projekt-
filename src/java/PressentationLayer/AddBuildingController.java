@@ -7,6 +7,7 @@ package PressentationLayer;
 
 import DataAccessLayer.DBFacade;
 import ServiceLayer.Controller;
+import ServiceLayer.Entity.Customer;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -78,8 +79,7 @@ public class AddBuildingController extends HttpServlet {
             //processRequest(request, response);
         HttpSession session = request.getSession(true);
             Controller con = (Controller) session.getAttribute("Controller");
-            String username = (String) session.getAttribute("username");
-            int user_id = Integer.parseInt((String) session.getAttribute("user_id").toString());
+            Customer c = (Customer) session.getAttribute("LoggedInCustomer");
             String do_this = request.getParameter("do_this");
             String building_name = request.getParameter("name");
             String building_adress = request.getParameter("address");
@@ -101,10 +101,12 @@ public class AddBuildingController extends HttpServlet {
             switch (do_this) {
                 case "add":
                     //inserts into database!
+                    System.out.println("1");
                     if ("zipcode".equals(building_zipcode) && "adress".equals(building_adress) && "parcel".equals(building_parcel_no)) {
                         forward(request, response, "/AddBuilding.jsp");
                     } else {
-                        con.addNewBuilding(building_name, building_type, building_adress, building_year, building_zipcode, building_areasize, building_parcel_no, building_floor, username, user_id);
+                        System.out.println("2");
+                        con.addNewBuilding(building_name, building_type, building_adress, building_year, building_zipcode, building_areasize, building_parcel_no, building_floor, c.getUsername(), c.getUser_id());
                         forward(request, response, "/DeleteBuilding.jsp");
                     }
             }

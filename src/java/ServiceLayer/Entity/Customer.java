@@ -35,7 +35,12 @@ public class Customer {
     public Customer(String username, int user_id){
        this.username = username;
        this.user_id = user_id;
-    }   
+    } 
+    
+    public Customer(String username, String password){
+        this.username = username;
+        this.password = password;
+    }
 
     public String getUser_firm() {
         return user_firm;

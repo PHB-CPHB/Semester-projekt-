@@ -8,6 +8,7 @@ package DataAccessLayer.Mappers;
 import DataAccessLayer.Interfaces.BuildingMapperInterface;
 import DataAccessLayer.DBConnector;
 import ServiceLayer.Entity.Building;
+import ServiceLayer.Entity.Customer;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -23,11 +24,11 @@ public class BuildingMapper implements BuildingMapperInterface  {
 
     
     
-    public ArrayList<Building> getAllCustomersBuildings(int user_id) {
+    public ArrayList<Building> getAllCustomersBuildings(Customer c) {
         try {
             ArrayList<Building> list = new ArrayList<>();
             PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("select buildings.building_id, buildings.building_status, buildings.building_type, buildings.building_year, buildings.building_areasize, buildings.building_name, buildings.building_adress, buildings.building_floor, buildings.building_zipcode, firm.firm_name FROM buildings INNER JOIN firm ON buildings.building_firm_id = firm.firm_id Where building_firm_id = ?");
-            pstmt.setInt(1, user_id);
+            pstmt.setInt(1, c.getUser_id());
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
                 list.add(new Building(rs.getInt("building_id"),
@@ -50,10 +51,10 @@ public class BuildingMapper implements BuildingMapperInterface  {
 
     
     @Override
-    public void deleteBuilding(int building_id) {
+    public void deleteBuilding(Building b) {
         try {
             PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("DELETE FROM buildings WHERE building_id = ?");
-            pstmt.setInt(1, building_id);
+            pstmt.setInt(1, b.getBuilding_id());
             pstmt.executeUpdate();
         } catch (SQLException ex) {
             System.out.println(ex);
@@ -62,10 +63,10 @@ public class BuildingMapper implements BuildingMapperInterface  {
 // Made by Michael
     
     @Override
-    public void deleteAllBuildings(String building_firm) {
+    public void deleteAllBuildings(Building b) {
         try {
             PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("delete from buildings where building_firm = ?");
-            pstmt.setString(1, building_firm);
+            pstmt.setString(1, b.getBuilding_firm());
             pstmt.executeUpdate();
         } catch (SQLException ex) {
             System.out.println(ex);
@@ -94,13 +95,12 @@ public class BuildingMapper implements BuildingMapperInterface  {
         }
     }
 
-    
     @Override
-    public String getCity(int building_zipcode) {
+    public String getCity(Building b) {
         String city = "";
         try {
             PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("SELECT * FROM Zip WHERE zipcode = ?");
-            pstmt.setInt(1, building_zipcode);
+            pstmt.setInt(1, b.getBuilding_zipcode());
             ResultSet rs = pstmt.executeQuery();
             rs.next();
             city = rs.getString("city");
@@ -108,38 +108,6 @@ public class BuildingMapper implements BuildingMapperInterface  {
             Logger.getLogger(CustomerMapper.class.getName()).log(Level.SEVERE, null, ex);
         }
         return city;
-    }
-
-    
-    @Override
-    public String getFirm(String username) {
-        String building_firm = "";
-        try {
-            PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("SELECT * FROM firm WHERE firm_is = ?");
-            pstmt.setString(1, username);
-            ResultSet rs = pstmt.executeQuery();
-            rs.next();
-            building_firm = rs.getString("firm_name");
-        } catch (SQLException ex) {
-            Logger.getLogger(CustomerMapper.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return building_firm;
-    }
-
-    
-    @Override
-    public int getBuildingId(int user_id) {
-        int building_id = 0;
-        try {
-            PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("SELECT firm.firm_id FROM firm INNER JOIN login ON login.user_id = firm.firm_id WHERE login.username = ?");
-            //pstmt.setString(1, );
-            ResultSet rs = pstmt.executeQuery();
-            rs.next();
-            building_id = rs.getInt("firm_id");
-        } catch (SQLException ex) {
-            Logger.getLogger(CustomerMapper.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return building_id;
     }
 
 }

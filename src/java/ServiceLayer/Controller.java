@@ -30,8 +30,45 @@ public class Controller {
     public void addNewBuilding(String building_name,  String building_type, String building_adress, int building_year, int building_zipcode, int building_areasize, String building_parcelno, String building_floor, String username, int user_id) {
         Customer c = new Customer(username, user_id);
         int building_firm_id = DBF.getBuildingFirmId(c);
+        System.out.println("Custoer og " + building_firm_id);
         Building b = new Building(building_name, building_type, building_adress, building_year, building_zipcode, building_areasize, building_parcelno, building_floor, building_firm_id);
+        System.out.println(b.getBuilding_name() + b.getBuilding_type() + b.getBuilding_adress() + b.getBuilding_year() + b.getBuilding_zipcode() +b.getBuilding_areasize() + b.getBuilding_parcel_no() + b.getBuilding_floor() + b.getBuilding_firm_id());
         DBF.addBuilding(b);
         
+    }
+
+    public void deleteCustomer(String username, int user_id) {
+        Customer customer = new Customer(username, user_id);
+        DBF.deleteCustomer(customer);
+    }
+
+    public void createCustomer(String uName, String uPwd, String uRole, String uFirm) {
+        Customer customer = new Customer(uName, uPwd, uRole, uFirm);
+        DBF.createCustomer(customer);
+    }
+
+    public void deleteBuilding(int building_id) {
+        Building building = new Building(building_id);
+        DBF.deleteBuilding(building);
+    }
+
+    public Object getUserRole(String username, String password) {
+        Customer customer = new Customer(username, password);
+        return DBF.getUserRole(customer);
+    }
+
+    public int getUserId(String user, String password) {
+        Customer customer = new Customer(user, password);
+        return DBF.getUserId(customer);
+    }
+
+    public boolean validate(String user, String password) {
+        Customer customer = new Customer(user, password);
+        return DBF.validate(customer);
+    }
+
+    public Customer requestAccess(String username, String password) {
+        Customer customer = new Customer(username, password);
+        return DBF.requestAccessWithRole(customer);
     }
 }

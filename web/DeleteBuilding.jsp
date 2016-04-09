@@ -4,6 +4,7 @@
     Author     : philliphbrink
 --%>
 
+<%@page import="ServiceLayer.Entity.Customer"%>
 <%@page import="DataAccessLayer.DBFacade"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="ServiceLayer.Entity.Building"%>
@@ -14,8 +15,9 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Delete Bulding</title>
     </head>
+    <% Customer c = (Customer) session.getAttribute("LoggedInCustomer"); %>
     <body>
-        <h1>Hello <%= session.getAttribute("username")%></h1>
+        <h1>Hello <%= c.getUsername() %></h1>
         <p>Here you have an overview of your buildings and are able to delete them</p>
         <table>
             <tr>
@@ -25,8 +27,7 @@
                 <td>Building ID</td><td>Building Status</td><td>Building Type</td><td>Building Year</td><td>Size</td><td>Building Name</td><td>Building Adress</td><td>Floor</td><td>Zipcode</td><td>Firm</td>
             </tr>
             <% DBFacade DBF = (DBFacade) session.getAttribute("database");
-                int user_id =  Integer.parseInt(session.getAttribute("user_id").toString());
-                ArrayList<Building> buildings = DBF.getAllCutsomerBuildings(user_id);
+                ArrayList<Building> buildings = DBF.getAllCutsomerBuildings(c);
                 for (Building building : buildings) {
                     out.println("<tr>");
                     out.println("<td>" + building.getBuilding_id()+ "</td>");

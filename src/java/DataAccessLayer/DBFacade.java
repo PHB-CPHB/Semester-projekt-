@@ -44,20 +44,20 @@ public class DBFacade implements AdminMapperInterface, BuildingMapperInterface, 
     /*Efter denne kommentar kan vi begynde at skrive kode som enten 
      kan hente fra databasen eller ligge nye ting ned i databasen.
      */
-    public ArrayList<Building> getAllCutsomerBuildings(int user_id) {
-        return BMapper.getAllCustomersBuildings(user_id);
+    public ArrayList<Building> getAllCutsomerBuildings(Customer customer) {
+        return BMapper.getAllCustomersBuildings(customer);
     }
 
     // This method is for 
     @Override
-    public void deleteBuilding(int building_id) {
-        BMapper.deleteBuilding(building_id);
+    public void deleteBuilding(Building building) {
+        BMapper.deleteBuilding(building);
     }
 
     // Made by Michael
     @Override
-    public void deleteAllBuildings(String building_firm) {
-        BMapper.deleteAllBuildings(building_firm);
+    public void deleteAllBuildings(Building building) {
+        BMapper.deleteAllBuildings(building);
     }
 
     public void addBuilding(Building building) {
@@ -65,59 +65,57 @@ public class DBFacade implements AdminMapperInterface, BuildingMapperInterface, 
      }
 
     @Override
-    public ArrayList<Customer> getAllUsers(String username) {
-        String user_firm = CMapper.getCustomer(username);
-        return CMapper.getAllUsers(user_firm);
+    public ArrayList<Customer> getAllUsers(Customer customer) {
+        return CMapper.getAllUsers(customer);
     }
 
     @Override
-    public boolean validate(String username, String password) {
-        return LMapper.validate(username, password);
+    public boolean validate(Customer customer) {
+        return LMapper.validate(customer);
     }
 
     @Override
-    public String getUserRole(String username) {
-        return LMapper.getUserRole(username);
+    public String getUserRole(Customer customer) {
+        return LMapper.getUserRole(customer);
     }
 
     @Override
-    public boolean createCustomer(String username, String password, String user_role, String user_firm) {
-        if (AMapper.createCustomer(username, password, user_role, user_firm) == true) {
-            int user_id = CMapper.getCustomerId(username);
-            return AMapper.createFirm(user_id, user_firm);
+    public boolean createCustomer(Customer customer) {
+        if (AMapper.createCustomer(customer) == true) {
+            return AMapper.createFirm(customer);
         }
         return false;
     }
 
     @Override
-    public void deleteCustomer(int user_id) {
+    public void deleteCustomer(Customer customer) {
 //        ArrayList<Building> array = BMapper.getAllCustomersBuildings(user_id);
 //        for(int i = 0; i < array.size(); i++){
 //            BMapper.getBuildingId(user_id);
 //            BMapper.deleteBuilding(user_id);
 //        }
-        AMapper.deleteCustomer(user_id);
+        AMapper.deleteCustomer(customer);
 
     }
 
     @Override
-    public boolean createFirm(int user_id, String user_firm) {
-        return AMapper.createFirm(user_id, user_firm);
+    public boolean createFirm(Customer customer) {
+        return AMapper.createFirm(customer);
     }
 
     @Override
-    public int getBuildingId(int user_id) {
-        return BMapper.getBuildingId(user_id);
+    public int getBuildingId(Customer customer) {
+        return AMapper.getBuildingId(customer);
     }
 
     @Override
-    public String getCity(int building_zipcode) {
-        return BMapper.getCity(building_zipcode);
+    public String getCity(Building building) {
+        return BMapper.getCity(building);
     }
 
     @Override
-    public String getFirm(String username) {
-        return BMapper.getFirm(username);
+    public String getFirm(Customer customer) {
+        return AMapper.getFirm(customer);
     }
 
     @Override
@@ -126,17 +124,21 @@ public class DBFacade implements AdminMapperInterface, BuildingMapperInterface, 
     }
 
     @Override
-    public String getCustomer(String username) {
-        return CMapper.getCustomer(username);
+    public String getCustomer(Customer customer) {
+        return CMapper.getCustomer(customer);
     }
 
     @Override
-    public int getCustomerId(String username) {
-        return CMapper.getCustomerId(username);
+    public int getCustomerId(Customer customer) {
+        return CMapper.getCustomerId(customer);
     }
 
-    public int getUserId(String user, String password) {
-        return LMapper.getUserId(user, password);
+    public int getUserId(Customer customer) {
+        return LMapper.getUserId(customer);
+    }
+
+    public Customer requestAccessWithRole(Customer customer) {
+        return LMapper.requestAccessRole(customer);
     }
 
 }

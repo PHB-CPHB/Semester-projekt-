@@ -6,6 +6,8 @@
 package PressentationLayer;
 
 import DataAccessLayer.DBFacade;
+import ServiceLayer.Controller;
+import ServiceLayer.Entity.Customer;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -72,7 +74,7 @@ public class DeleteBuildingController extends HttpServlet {
             throws ServletException, IOException {
         //processRequest(request, response);
         HttpSession session = request.getSession(true);
-        DBFacade DBF = (DBFacade) session.getAttribute("database");
+        Controller con = (Controller) session.getAttribute("Controller");
 
         String do_this = request.getParameter("do_this");
         if (do_this == null) {
@@ -84,16 +86,17 @@ public class DeleteBuildingController extends HttpServlet {
             case "delete":
                 String building_id_name = request.getParameter("deletebuilding");
                 int building_id = Integer.parseInt(building_id_name);
-                DBF.deleteBuilding(building_id);
+                con.deleteBuilding(building_id);
                 forward(request, response, "/DeleteBuilding.jsp");
             case "report":
                 forward(request,response,"/Report.jsp");
                 break;
                 //Made by Tim
             case "Return":
-                if(DBF.getUserRole((String)session.getAttribute("username")).equals("customer")){
+                Customer LoggedIn = (Customer) session.getAttribute("LoggedInCustomer");
+                if(LoggedIn.getUser_role().equals("customer")){
                     forward(request, response, "/CustomerLoggedIn.jsp");
-                }else if(DBF.getUserRole((String)session.getAttribute("username")).equals("admin")){
+                }else if(LoggedIn.getUser_role().equals("admin")){
                     forward(request,response,"/AdminLoggedIn.jsp");
                 }
                 
