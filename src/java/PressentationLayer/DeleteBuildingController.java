@@ -79,6 +79,7 @@ public class DeleteBuildingController extends HttpServlet {
             forward(request, response, "/customerLoggedIn.jsp");
             return;
         }
+        System.out.println("3");
         switch (do_this) {
             case "delete":
                 String building_id_name = request.getParameter("deletebuilding");
@@ -88,12 +89,19 @@ public class DeleteBuildingController extends HttpServlet {
             case "report":
                 forward(request,response,"/Report.jsp");
                 break;
-                
-          /*  case "addBuilding":   
-                forward(request, response, "/AddBuilding.jsp");
-
+                //Made by Tim
             case "Return":
-                forward(request, response, "/customerLoggedIn.jsp"); */
+                if(DBF.getUserRole((String)session.getAttribute("username")).equals("customer")){
+                    forward(request, response, "/CustomerLoggedIn.jsp");
+                }else if(DBF.getUserRole((String)session.getAttribute("username")).equals("admin")){
+                    forward(request,response,"/AdminLoggedIn.jsp");
+                }
+                
+                break;
+          /*  case "addBuilding":   
+                forward(request, response, "/AddBuilding.jsp");*/
+
+
         }
     }
 

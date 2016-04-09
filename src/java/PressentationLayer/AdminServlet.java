@@ -57,7 +57,7 @@ public class AdminServlet extends HttpServlet {
                 DBF.deleteCustomer(user_id);
                 forward(request, response, "/AllUsers.jsp");
                 break;
-
+                // Made by Oliver
             case "createUser":
                 String uName = request.getParameter("username");
                 String uPwd = request.getParameter("password");

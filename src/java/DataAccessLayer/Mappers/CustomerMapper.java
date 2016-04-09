@@ -67,7 +67,7 @@ public class CustomerMapper implements CustomerMapperInterface {
         }
         return true;
     }
-
+    // Made by Oliver corrected by Phillip
     @Override
     public ArrayList<Customer> getAllUsers(String user_firm) {
 
@@ -105,11 +105,11 @@ public class CustomerMapper implements CustomerMapperInterface {
     }
 
     @Override
-    public int getBuildingFirmId( String username) {
+    public int getBuildingFirmId(Customer customer) {
       int building_firm_id = 0;
       try {
-            PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("SELECT firm.firm_id FROM firm INNER JOIN login ON login.user_id = firm.firm_id WHERE login.username = ?");
-            pstmt.setString(1, username);
+            PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("SELECT firm.firm_id FROM firm INNER JOIN login ON login.user_id = firm.firm_id WHERE login.user_id = ?");
+            pstmt.setInt(1, customer.getUser_id());
             ResultSet rs = pstmt.executeQuery();
             rs.next();
             building_firm_id = rs.getInt("firm_id");

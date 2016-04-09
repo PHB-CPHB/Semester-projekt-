@@ -18,7 +18,7 @@ public interface CustomerMapperInterface {
 
     ArrayList<Customer> getAllUsers(String user_firm);
 
-    int getBuildingFirmId(String username);
+    int getBuildingFirmId(Customer customer);
 
     String getCustomer(String username);
 

@@ -74,20 +74,20 @@ public class BuildingMapper implements BuildingMapperInterface  {
 
     
     
-    public void addBuilding(String building_name, String building_type, String building_adress, int building_year, int building_zipcode, int building_areasize, String building_parcelno, String building_floor, int building_firm_id) {
+    public void addBuilding(Building b) {
         String building_status = "Ikke klar i nu";
         try {
             PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("INSERT INTO buildings (building_name, building_status, building_type, building_adress, building_year, building_zipcode, building_areasize, building_parcel_no, building_floor, building_firm_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-            pstmt.setString(1, building_name);
+            pstmt.setString(1, b.getBuilding_name());
             pstmt.setString(2, building_status);
-            pstmt.setString(3, building_type);
-            pstmt.setString(4, building_adress);
-            pstmt.setInt(5, building_year);
-            pstmt.setInt(6, building_zipcode);
-            pstmt.setInt(7, building_areasize);
-            pstmt.setString(8, building_parcelno);
-            pstmt.setString(9, building_floor);
-            pstmt.setInt(10, building_firm_id);
+            pstmt.setString(3, b.getBuilding_type());
+            pstmt.setString(4, b.getBuilding_adress());
+            pstmt.setInt(5, b.getBuilding_year());
+            pstmt.setInt(6, b.getBuilding_zipcode());
+            pstmt.setInt(7, b.getBuilding_areasize());
+            pstmt.setString(8, b.getBuilding_parcel_no());
+            pstmt.setString(9, b.getBuilding_floor());
+            pstmt.setInt(10, b.getBuilding_firm_id());
             pstmt.executeUpdate();
         } catch (SQLException ex) {
             System.out.println(ex);

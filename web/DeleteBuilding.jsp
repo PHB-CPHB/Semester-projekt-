@@ -63,8 +63,8 @@
             <input type="submit" value="Add Building"/>
         </form>
         <%--This is to return to previous site--%>
-    <td> <form action="AdminLoggedIn.jsp">
-            <input type="submit" value="Return"/>
+    <td> <form action="DeleteBuildingController" method="POST">
+            <input type="submit" name="do_this" value="Return"/>
         </form>
     </td>
 </body>

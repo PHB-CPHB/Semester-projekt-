@@ -61,6 +61,18 @@ public class Building {
         this.building_firm = building_firm;
     }
     
+    public Building (String building_name, String building_type, String building_adress, int building_year, int building_zipcode,int building_areasize, String building_parcelno, String building_floor, int building_firm_id) {
+        this.building_name = building_name;
+        this.building_type = building_type;
+        this.building_adress = building_adress;
+        this.building_year = building_year;
+        this.building_zipcode = building_zipcode; 
+        this.building_areasize = building_areasize;
+        this.building_parcel_no = building_parcelno;
+        this.building_floor = building_floor;
+        this.building_firm_id = building_firm_id;
+    }
+    
     
 
     public Building() {

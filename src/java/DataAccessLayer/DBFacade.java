@@ -60,10 +60,9 @@ public class DBFacade implements AdminMapperInterface, BuildingMapperInterface, 
         BMapper.deleteAllBuildings(building_firm);
     }
 
-    public void addBuilding(String building_name, String building_type, String building_adress, int building_year, int building_zipcode, int building_areasize, String building_parcelno, String building_floor, String username) {
-        int building_firm_id = CMapper.getBuildingFirmId(username);
-        BMapper.addBuilding(building_name, building_type, building_adress, building_year, building_zipcode, building_areasize, building_parcelno, building_floor, building_firm_id);
-    }
+    public void addBuilding(Building building) {
+        BMapper.addBuilding(building);
+     }
 
     @Override
     public ArrayList<Customer> getAllUsers(String username) {
@@ -122,8 +121,8 @@ public class DBFacade implements AdminMapperInterface, BuildingMapperInterface, 
     }
 
     @Override
-    public int getBuildingFirmId(String username) {
-        return CMapper.getBuildingFirmId(username);
+    public int getBuildingFirmId(Customer customer) {
+        return CMapper.getBuildingFirmId(customer);
     }
 
     @Override

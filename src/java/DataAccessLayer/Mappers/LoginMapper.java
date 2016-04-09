@@ -17,7 +17,7 @@ import java.sql.Statement;
  * @author Thesoap
  */
 public class LoginMapper implements LoginMapperInterface {
-
+    //Tim
     @Override
     public boolean validate(String username, String password) {
         try {
@@ -30,7 +30,7 @@ public class LoginMapper implements LoginMapperInterface {
             return false;
         }
     }
-
+    //Tim
     @Override
     public String getUserRole(String username) {
         try {

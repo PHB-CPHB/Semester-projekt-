@@ -1,7 +1,7 @@
 <%-- 
     Document   : CustomerLoggedIn
     Created on : 31-03-2016, 10:47:00
-    Author     : Oliver
+    Author     : Tim
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>

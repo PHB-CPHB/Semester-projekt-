@@ -6,6 +6,7 @@ package PressentationLayer;
  * and open the template in the editor.
  */
 import DataAccessLayer.DBFacade;
+import ServiceLayer.Controller;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -35,14 +36,17 @@ public class LoginController extends HttpServlet {
      * @throws java.lang.ClassNotFoundException
      * @throws java.sql.SQLException
      */
+    // Made by Tim corrected by Oliver
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ClassNotFoundException, SQLException {
         HttpSession session = request.getSession(true);
         session.setAttribute("database", DBFacade.getInstance());
+        session.setAttribute("Controller", Controller.getCon());
         DBFacade DBF = (DBFacade) session.getAttribute("database");
         String user = request.getParameter("username");
         String password = request.getParameter("password");
         //check if username and password maches.
+        //Made by Tim
                 if (DBF.validate(user, password) == true) {
                     int user_id = DBF.getUserId(user, password);
                     if (DBF.getUserRole(user).equals("admin")) {

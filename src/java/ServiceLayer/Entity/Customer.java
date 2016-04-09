@@ -31,6 +31,11 @@ public class Customer {
         this.user_role = user_role;
         this.user_firm = user_firm;
     }
+    
+    public Customer(String username, int user_id){
+       this.username = username;
+       this.user_id = user_id;
+    }   
 
     public String getUser_firm() {
         return user_firm;
