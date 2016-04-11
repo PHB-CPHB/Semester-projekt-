@@ -21,7 +21,7 @@ import java.util.logging.Logger;
  */
 public class CustomerMapper implements CustomerMapperInterface {
 
-
+    //Made by Phillip - gets customers firm by thier username
     @Override
     public String getCustomer(Customer c) {
         String user_firm = "";
@@ -37,12 +37,15 @@ public class CustomerMapper implements CustomerMapperInterface {
         return user_firm;
     }
 
+    //Made by Phillip - Gets customers id by thier Username and Password
+
     @Override
     public int getCustomerId(Customer c) {
         int user_id = 0;
         try {
-            PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("SELECT * FROM login WHERE username = ?");
+            PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("SELECT user_id FROM login WHERE username = ? and password = ?");
             pstmt.setString(1, c.getUsername());
+            pstmt.setString(2, c.getPassword());
             ResultSet rs = pstmt.executeQuery();
             rs.next();
             user_id = rs.getInt("user_id");
@@ -51,6 +54,8 @@ public class CustomerMapper implements CustomerMapperInterface {
         }
         return user_id;
     }
+
+    //Made by Oliver - Corrected by Phillip
 
     @Override
     public boolean createCustomer(Customer c) {
@@ -67,7 +72,10 @@ public class CustomerMapper implements CustomerMapperInterface {
         }
         return true;
     }
+
     // Made by Oliver corrected by Phillip
+    //Returns an ArrayList of all the users
+
     @Override
     public ArrayList<Customer> getAllUsers(Customer c) {
 
@@ -88,6 +96,8 @@ public class CustomerMapper implements CustomerMapperInterface {
         }
     }
 
+    //Made by Phillip - Return the customer firm by thier name
+
     @Override
     public String getFirm(Customer c) {
         String user_firm = "";
@@ -103,10 +113,12 @@ public class CustomerMapper implements CustomerMapperInterface {
         return user_firm;
     }
 
+    //Made by Phillip - Gets customer firm id by thier user id
+
     @Override
     public int getBuildingFirmId(Customer customer) {
-      int building_firm_id = 0;
-      try {
+        int building_firm_id = 0;
+        try {
             PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("SELECT firm.firm_id FROM firm INNER JOIN login ON login.user_id = firm.firm_id WHERE login.user_id = ?");
             pstmt.setInt(1, customer.getUser_id());
             ResultSet rs = pstmt.executeQuery();

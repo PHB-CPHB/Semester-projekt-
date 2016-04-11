@@ -5,7 +5,6 @@
  */
 package PressentationLayer;
 
-import DataAccessLayer.DBFacade;
 import ServiceLayer.Controller;
 import ServiceLayer.Entity.Customer;
 import java.io.IOException;
@@ -67,12 +66,12 @@ public class DeleteBuildingController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    
     // Made by Michael
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //processRequest(request, response);
+        //Made by Phillip
         HttpSession session = request.getSession(true);
         Controller con = (Controller) session.getAttribute("Controller");
 
@@ -81,29 +80,29 @@ public class DeleteBuildingController extends HttpServlet {
             forward(request, response, "/customerLoggedIn.jsp");
             return;
         }
-        System.out.println("3");
         switch (do_this) {
+            //Made by Phillip
             case "delete":
                 String building_id_name = request.getParameter("deletebuilding");
                 int building_id = Integer.parseInt(building_id_name);
                 con.deleteBuilding(building_id);
                 forward(request, response, "/DeleteBuilding.jsp");
+            //Made by Tim    
             case "report":
-                forward(request,response,"/Report.jsp");
+                forward(request, response, "/Report.jsp");
                 break;
-                //Made by Tim
+            //Made by Tim
             case "Return":
                 Customer LoggedIn = (Customer) session.getAttribute("LoggedInCustomer");
-                if(LoggedIn.getUser_role().equals("customer")){
+                if (LoggedIn.getUser_role().equals("customer")) {
                     forward(request, response, "/CustomerLoggedIn.jsp");
-                }else if(LoggedIn.getUser_role().equals("admin")){
-                    forward(request,response,"/AdminLoggedIn.jsp");
+                } else if (LoggedIn.getUser_role().equals("admin")) {
+                    forward(request, response, "/AdminLoggedIn.jsp");
                 }
-                
-                break;
-          /*  case "addBuilding":   
-                forward(request, response, "/AddBuilding.jsp");*/
 
+                break;
+            /*  case "addBuilding":   
+             forward(request, response, "/AddBuilding.jsp");*/
 
         }
     }

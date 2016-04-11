@@ -20,7 +20,9 @@ import java.util.logging.Logger;
  * @author Oliver
  */
 public class AdminMapper implements AdminMapperInterface {
+
     // Made by Oliver
+
     @Override
     public boolean createCustomer(Customer c) {
         try {
@@ -37,6 +39,8 @@ public class AdminMapper implements AdminMapperInterface {
         return true;
     }
 
+    //Made by Michael - Deletes a customer on user_id
+
     @Override
     public void deleteCustomer(Customer c) {
         try {
@@ -48,10 +52,12 @@ public class AdminMapper implements AdminMapperInterface {
         }
     }
 
+    //Made by Phillip - creates a firm based on the customers id and firm.
+
     @Override
     public boolean createFirm(Customer c) {
         try {
-            PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("INSERT INTO firm (firm.firm_name, firm.firm_leader_id) VALUES(?, ?)");
+            PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("INSERT INTO firm (firm_name, firm_leader_id) VALUES(?, ?)");
             pstmt.setString(1, c.getUser_firm());
             pstmt.setInt(2, c.getUser_id());
             pstmt.executeUpdate();
@@ -62,12 +68,14 @@ public class AdminMapper implements AdminMapperInterface {
         return true;
     }
 
+    //Made by Phillip - Get building id form the customers user id
+
     @Override
     public int getBuildingId(Customer c) {
         int building_id = 0;
         try {
             PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("SELECT firm.firm_id FROM firm INNER JOIN login ON login.user_id = firm.firm_id WHERE login.username = ?");
-            //pstmt.setString(1, c.getUser_id());
+            pstmt.setInt(1, c.getUser_id());
             ResultSet rs = pstmt.executeQuery();
             rs.next();
             building_id = rs.getInt("firm_id");
@@ -76,6 +84,8 @@ public class AdminMapper implements AdminMapperInterface {
         }
         return building_id;
     }
+
+    //Made by Phillip - Return firm of the customer
 
     @Override
     public String getFirm(Customer c) {

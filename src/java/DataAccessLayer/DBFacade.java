@@ -33,7 +33,6 @@ public class DBFacade implements AdminMapperInterface, BuildingMapperInterface, 
 
     }
 
-    //Dette er hvor vi kan kalde forbindelse og skrive hvad vi vil hente fra Databasen (Phillip)
     public static DBFacade getInstance() {
         if (instance == null) {
             instance = new DBFacade();
@@ -41,9 +40,6 @@ public class DBFacade implements AdminMapperInterface, BuildingMapperInterface, 
         return instance;
     }
 
-    /*Efter denne kommentar kan vi begynde at skrive kode som enten 
-     kan hente fra databasen eller ligge nye ting ned i databasen.
-     */
     public ArrayList<Building> getAllCutsomerBuildings(Customer customer) {
         return BMapper.getAllCustomersBuildings(customer);
     }
@@ -60,32 +56,45 @@ public class DBFacade implements AdminMapperInterface, BuildingMapperInterface, 
         BMapper.deleteAllBuildings(building);
     }
 
+    //Made by Phillip
+
     public void addBuilding(Building building) {
         BMapper.addBuilding(building);
-     }
+    }
+
+    //Made by Oliver
 
     @Override
     public ArrayList<Customer> getAllUsers(Customer customer) {
         return CMapper.getAllUsers(customer);
     }
 
+    //Made by Tim
+
     @Override
     public boolean validate(Customer customer) {
         return LMapper.validate(customer);
     }
+
+    //Made by Tim
 
     @Override
     public String getUserRole(Customer customer) {
         return LMapper.getUserRole(customer);
     }
 
+    //Made by Oliver
+
     @Override
     public boolean createCustomer(Customer customer) {
         if (AMapper.createCustomer(customer) == true) {
-            return AMapper.createFirm(customer);
+            Customer c = new Customer(customer.getUsername(), getCustomerId(customer), customer.getUser_role(), customer.getUser_firm());
+            return AMapper.createFirm(c);
         }
         return false;
     }
+
+    //Made by Michael corrected by Phillip
 
     @Override
     public void deleteCustomer(Customer customer) {
@@ -98,44 +107,62 @@ public class DBFacade implements AdminMapperInterface, BuildingMapperInterface, 
 
     }
 
+    //Made by Phillip
+
     @Override
     public boolean createFirm(Customer customer) {
         return AMapper.createFirm(customer);
     }
+
+    //Made by Phillip
 
     @Override
     public int getBuildingId(Customer customer) {
         return AMapper.getBuildingId(customer);
     }
 
+    //Made by Phillip
+
     @Override
     public String getCity(Building building) {
         return BMapper.getCity(building);
     }
+
+    //Made by Phillip
 
     @Override
     public String getFirm(Customer customer) {
         return AMapper.getFirm(customer);
     }
 
+    //Made by Phillip
+
     @Override
     public int getBuildingFirmId(Customer customer) {
         return CMapper.getBuildingFirmId(customer);
     }
+
+    //Made by Phillip
 
     @Override
     public String getCustomer(Customer customer) {
         return CMapper.getCustomer(customer);
     }
 
+    //Made by Phillip
+
     @Override
     public int getCustomerId(Customer customer) {
         return CMapper.getCustomerId(customer);
     }
 
+    //Made by Phillip
+
     public int getUserId(Customer customer) {
         return LMapper.getUserId(customer);
     }
+
+    //Made by Phillip
 
     public Customer requestAccessWithRole(Customer customer) {
         return LMapper.requestAccessRole(customer);
