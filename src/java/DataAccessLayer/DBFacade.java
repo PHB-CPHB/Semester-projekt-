@@ -30,7 +30,7 @@ public class DBFacade implements AdminMapperInterface, BuildingMapperInterface, 
     private AdminMapper AMapper = new AdminMapper();
     private LoginMapper LMapper = new LoginMapper();
 
-    private DBFacade() {
+    DBFacade() {
         
     }
 
