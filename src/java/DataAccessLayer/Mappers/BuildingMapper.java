@@ -9,6 +9,7 @@ import DataAccessLayer.Interfaces.BuildingMapperInterface;
 import DataAccessLayer.DBConnector;
 import ServiceLayer.Entity.Building;
 import ServiceLayer.Entity.Customer;
+import ServiceLayer.Entity.Firm;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -109,6 +110,30 @@ public class BuildingMapper implements BuildingMapperInterface {
             Logger.getLogger(CustomerMapper.class.getName()).log(Level.SEVERE, null, ex);
         }
         return city;
+    }
+
+    public ArrayList<Building> getAllBuilding() {
+        try {
+            ArrayList<Building> building = new ArrayList<>();
+            PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("select buildings.building_id, buildings.building_status, buildings.building_type, buildings.building_year, buildings.building_areasize, buildings.building_name, buildings.building_adress, buildings.building_floor, buildings.building_zipcode, firm.firm_name FROM buildings INNER JOIN firm ON buildings.building_firm_id = firm.firm_id;");
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                building.add(new Building(rs.getInt("building_id"),
+                        rs.getString("building_status"),
+                        rs.getString("building_type"),
+                        rs.getInt("building_year"),
+                        rs.getInt("building_areasize"),
+                        rs.getString("building_name"),
+                        rs.getString("building_adress"),
+                        rs.getString("building_floor"),
+                        rs.getInt("building_zipcode"),
+                        rs.getString("firm_name")));
+            }
+            return building;
+        } catch (SQLException ex) {
+            System.out.println(ex);
+            return null;
+        }
     }
 
     @Override

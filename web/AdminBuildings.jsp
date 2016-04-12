@@ -1,15 +1,16 @@
 <%-- 
-    Document   : CustomerBuildings
-    Created on : 31-03-2016, 11:24:56
-    Author     : Oliver
+    Document   : Cusdelete
+    Created on : 30-03-2016, 13:49:02
+    Author     : philliphbrink
 --%>
 
 <%@page import="ServiceLayer.Controller"%>
+<%@page import="ServiceLayer.Entity.Customer"%>
+<%@page import="DataAccessLayer.DBFacade"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="ServiceLayer.Entity.Building"%>
-<%@page import="DataAccessLayer.DBFacade"%>
-<%@page import="ServiceLayer.Entity.Customer"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -32,10 +33,10 @@
                 <%--This part is writen by Phillip
                 The code is to show the customers building and so that they can delete them
                 For them to see their buildings they need user_id--%>
-                <th>Building ID</th><th>Building Status</th><th>Building Type</th><th>Building Year</th><th>Size</th><th>Building Name</th><th>Building Adress</th><th>Floor</th><th>Zipcode</th><th>Firm</th><th> </th><th> </th><th> </th>
+                <th>Building ID</th><th>Building Status</th><th>Building Type</th><th>Building Year</th><th>Size</th><th>Building Name</th><th>Building Adress</th><th>Floor</th><th>Zipcode</th><th>Firm</th><th> </th><th> </th>
             </tr>
             <% Controller con = (Controller) session.getAttribute("Controller");
-                ArrayList<Building> buildings = con.getAllCutsomerBuildings(c);
+                ArrayList<Building> buildings = con.getAllBuildings();
                 for (Building building : buildings) {
                     out.println("<tr>");
                     out.println("<td>" + building.getBuilding_id() + "</td>");
@@ -61,12 +62,6 @@
                     <input type="submit" value="View reports" style="width: 100%; background: white; font-size: 110%"/>
                 </form>
             </td>
-            <td> <form action="DeleteBuildingController" method="POST">
-                    <input type="hidden" name="do_this" value="request"/>
-                    <input type="hidden" name="check-up" value="<%=building.getBuilding_id()%>" />
-                    <input type="submit" value="Request check-up" style="width: 100%; background: white; font-size: 110%"/>
-                </form>
-            </td>
             <%out.println("</tr>");
                 }
             %>
@@ -75,11 +70,11 @@
     <td>
         <%--This is to add a building--%>
         <form action="AddBuilding.jsp">
-            <input type="submit" value="Add Building" style="width: 10%; height: 5%; font-size: 100%;"/>
+            <input type="submit" value="Add Building" style="width: 30%; height: 30%; font-size: 100%;"/>
         </form>
         <%--This is to return to previous site--%>
     <td> <form action="DeleteBuildingController" method="POST">
-            <input type="submit" name="do_this" value="Return" style="width: 10%; height: 5%; font-size: 100%;"/>
+            <input type="submit" name="do_this" value="Return" style="width: 30%; height: 30%; font-size: 100%;"/>
         </form>
     </td>
 </body>

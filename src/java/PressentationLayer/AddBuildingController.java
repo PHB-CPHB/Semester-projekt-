@@ -80,31 +80,46 @@ public class AddBuildingController extends HttpServlet {
         Controller con = (Controller) session.getAttribute("Controller");
         Customer c = (Customer) session.getAttribute("LoggedInCustomer");
         String do_this = request.getParameter("do_this");
-        String building_name = request.getParameter("name");
-        String building_adress = request.getParameter("address");
-        String zipcode = request.getParameter("zipcode");
-        int building_zipcode = Integer.parseInt(zipcode);
-        String building_parcel_no = request.getParameter("parcel");
-        String areasize = request.getParameter("size");
-        int building_areasize = Integer.parseInt(areasize);
-        String year = request.getParameter("year");
-        int building_year = Integer.parseInt(year);
-        String building_type = request.getParameter("type");
-        String building_floor = request.getParameter("floor");
         if (do_this == null) {
-            forward(request, response, "/customerLoggedIn.jsp");
+            if (c.getUser_role().equals("admin")) {
+                forward(request, response, "/AdminLoggedIn.jsp");
+            } else {
+                forward(request, response, "/customerLoggedIn.jsp");
+            }
             return;
         }
 
         // Made by Michael
         switch (do_this) {
             case "add":
+
+                String building_name = request.getParameter("name");
+                String building_adress = request.getParameter("address");
+                String zipcode = request.getParameter("zipcode");
+                int building_zipcode = Integer.parseInt(zipcode);
+                String building_parcel_no = request.getParameter("parcel");
+                String areasize = request.getParameter("size");
+                int building_areasize = Integer.parseInt(areasize);
+                String year = request.getParameter("year");
+                int building_year = Integer.parseInt(year);
+                String building_type = request.getParameter("type");
+                String building_floor = request.getParameter("floor");
                 //inserts into database!
                 if ("zipcode".equals(building_zipcode) && "adress".equals(building_adress) && "parcel".equals(building_parcel_no)) {
                     forward(request, response, "/AddBuilding.jsp");
                 } else {
                     con.addNewBuilding(building_name, building_type, building_adress, building_year, building_zipcode, building_areasize, building_parcel_no, building_floor, c);
-                    forward(request, response, "/DeleteBuilding.jsp");
+                    if (c.getUser_role().equals("admin")) {
+                        forward(request, response, "/AdminBuilding.jsp");
+                    } else {
+                        forward(request, response, "/CustomerBuildings.jsp");
+                    }
+                }
+            case "return":
+                if (c.getUser_role().equals("admin")) {
+                    forward(request, response, "/AdminBuilding.jsp");
+                } else {
+                    forward(request, response, "/CustomerBuildings.jsp");
                 }
         }
 

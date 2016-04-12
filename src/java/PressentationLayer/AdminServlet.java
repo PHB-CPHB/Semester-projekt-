@@ -6,6 +6,7 @@
 package PressentationLayer;
 
 import ServiceLayer.Controller;
+import ServiceLayer.Entity.Customer;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -110,6 +111,7 @@ public class AdminServlet extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session = request.getSession(true);
         Controller con = (Controller) session.getAttribute("Controller");
+        Customer c = (Customer) session.getAttribute("CustomerLoggedIn");
         String do_this = request.getParameter("do_this");
         if (do_this == null) {
             forward(request, response, "/AllUsers.jsp");

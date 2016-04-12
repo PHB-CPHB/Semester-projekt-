@@ -24,7 +24,7 @@
                 <input type="submit" name="dothis" value="View User" style="width: 30%; height: 30%; font-size: 100%;">
             </form>
         <br>
-        <form action="DeleteBuilding.jsp">
+        <form action="AdminBuildings.jsp">
             <input type="submit" name="dothis" value="View Buildings" style="width: 30%; height: 30%; font-size: 100%;">
         </form>
         <br>

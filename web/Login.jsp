@@ -11,6 +11,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Login Page</title>
     </head>
+    <div 
     <body bgcolor="#33CCFF">
     <center><h1>Please enter your login</h1></center>
     <form action="LoginController" method="POST">

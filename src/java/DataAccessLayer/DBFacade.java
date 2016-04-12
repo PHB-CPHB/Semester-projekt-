@@ -15,6 +15,7 @@ import DataAccessLayer.Mappers.CustomerMapper;
 import DataAccessLayer.Mappers.LoginMapper;
 import ServiceLayer.Entity.Building;
 import ServiceLayer.Entity.Customer;
+import ServiceLayer.Entity.Firm;
 import java.util.ArrayList;
 
 /**
@@ -39,12 +40,16 @@ public class DBFacade implements AdminMapperInterface, BuildingMapperInterface, 
         }
         return instance;
     }
-
+    //Made by Phillip
     public ArrayList<Building> getAllCutsomerBuildings(Customer customer) {
         return BMapper.getAllCustomersBuildings(customer);
     }
+    
+    public ArrayList<Building> getAllBuildings() {
+        return BMapper.getAllBuilding();
+    }
 
-    // This method is for 
+    // Made by Phillip 
     @Override
     public void deleteBuilding(Building building) {
         BMapper.deleteBuilding(building);

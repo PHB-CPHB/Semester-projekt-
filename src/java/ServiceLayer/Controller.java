@@ -9,6 +9,7 @@ import ServiceLayer.Interfaces.IController;
 import DataAccessLayer.DBFacade;
 import ServiceLayer.Entity.Building;
 import ServiceLayer.Entity.Customer;
+import java.util.ArrayList;
 
 /**
  *
@@ -26,15 +27,9 @@ public class Controller implements IController {
     public static Controller getCon() {
         if (con == null) {
             return con = new Controller();
-        } else
-        return con;
-    }
-    public void addNewBuilding(String building_name,  String building_type, String building_adress, int building_year, int building_zipcode, int building_areasize, String building_parcelno, String building_floor, String username, int user_id) {
-        Customer c = new Customer(username, user_id);
-        int building_firm_id = DBF.getBuildingFirmId(c);
-        Building b = new Building(building_name, building_type, building_adress, building_year, building_zipcode, building_areasize, building_parcelno, building_floor, building_firm_id);
-        DBF.addBuilding(b);
-        
+        } else {
+            return con;
+        }
     }
 
     @Override
@@ -86,6 +81,19 @@ public class Controller implements IController {
         Customer customer = new Customer(username, password);
         return DBF.requestAccessWithRole(customer);
     }
+    
+    public ArrayList<Customer> getAllUsers(Customer customer) {
+        return DBF.getAllUsers(customer);
+    }
+    
+    public ArrayList<Building> getAllBuildings() {
+        return DBF.getAllBuildings();
+    }
+    
+    public ArrayList<Building> getAllCutsomerBuildings(Customer customer) {
+       return DBF.getAllCutsomerBuildings(customer);
+    }
+
     public void requestCheckUp(int building_id){
         Building building = new Building(building_id);
         DBF.requestCheckUp(building);
