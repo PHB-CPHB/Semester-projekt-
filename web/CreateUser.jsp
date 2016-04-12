@@ -12,6 +12,7 @@
         <title>JSP Page</title>
     </head>
     <body bgcolor="#33CCFF">
+    <center>
         <h1>Create user</h1>
         <form action="AdminServlet" method="POST">
             Username <br>
@@ -29,9 +30,10 @@
             <input type="submit" value="Create User" style="width: 30%; height: 30%; font-size: 100%;" />
         </form>
 
-    <td> <form action="AdminLoggedIn.jsp" method="POST">
-            <input type="submit" value="Return" style="width: 30%; height: 30%; font-size: 100%;" />
-        </form>
-    </td>
+        <td> <form action="AdminLoggedIn.jsp" method="POST">
+                <input type="submit" value="Return" style="width: 30%; height: 30%; font-size: 100%;" />
+            </form>
+        </td>
+    </center>
 </body>
 </html>

@@ -11,9 +11,9 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Login Page</title>
     </head>
-    <div style="width: 100%; background: lightblue"
+    <div
          <body bgcolor="#33CCFF">
-            <form action="LoginController" method="POST">
+            <form action="LoginController" method="POST" style= "background: lightblue">
                 <fieldset>
                     <center>
                         <legend>
