@@ -6,7 +6,6 @@
 package DataAccessLayer.Interfaces;
 
 import ServiceLayer.Entity.Building;
-import java.util.ArrayList;
 
 /**
  *
@@ -14,7 +13,6 @@ import java.util.ArrayList;
  */
 public interface BuildingMapperInterface {
 
-    
     void deleteAllBuildings(Building building);
 
     void deleteBuilding(Building Building);
@@ -23,5 +21,5 @@ public interface BuildingMapperInterface {
     String requestCheckUp(Building building);
     
     String getCity(Building Building);
-    
+
 }

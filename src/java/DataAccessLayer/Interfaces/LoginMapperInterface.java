@@ -16,5 +16,5 @@ public interface LoginMapperInterface {
     String getUserRole(Customer customer);
 
     boolean validate(Customer customer);
-    
+
 }

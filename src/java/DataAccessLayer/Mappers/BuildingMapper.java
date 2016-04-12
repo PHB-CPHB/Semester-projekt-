@@ -22,6 +22,7 @@ import java.util.logging.Logger;
  */
 public class BuildingMapper implements BuildingMapperInterface {
 
+    //Made by Phillip - Return an Arraylist with only the customers building by thier user id
     public ArrayList<Building> getAllCustomersBuildings(Customer c) {
         try {
             ArrayList<Building> list = new ArrayList<>();
@@ -47,6 +48,7 @@ public class BuildingMapper implements BuildingMapperInterface {
         }
     }
 
+    //Made by Phillip deletes a building on building id
     @Override
     public void deleteBuilding(Building b) {
         try {
@@ -57,7 +59,7 @@ public class BuildingMapper implements BuildingMapperInterface {
             System.out.println(ex);
         }
     }
-// Made by Michael
+// Made by Michael - deletes buildings on customer firm name
 
     @Override
     public void deleteAllBuildings(Building b) {
@@ -69,6 +71,8 @@ public class BuildingMapper implements BuildingMapperInterface {
             System.out.println(ex);
         }
     }
+
+    //Made by Phillip - Add a building to the customer firm
 
     public void addBuilding(Building b) {
         String building_status = "Ikke klar i nu";
@@ -89,6 +93,8 @@ public class BuildingMapper implements BuildingMapperInterface {
             System.out.println(ex);
         }
     }
+
+    //Made by Phillip - Returns the city of the zipcode
 
     @Override
     public String getCity(Building b) {

@@ -32,13 +32,6 @@ public class AdminLoggedInController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String dothis = request.getParameter("dothis");
-        switch(dothis){
-                case "Create user":
-                    forward(request,response,"/AdminLoggedIn.jsp");
-                case "View user":
-                    forward(request,response,"/AllUser.jsp");
-            }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -67,7 +60,14 @@ public class AdminLoggedInController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        //processRequest(request, response);
+        String dothis = request.getParameter("dothis");
+        switch (dothis) {
+            case "Create user":
+                forward(request, response, "/AdminLoggedIn.jsp");
+            case "View user":
+                forward(request, response, "/AllUser.jsp");
+        }
     }
 
     /**
@@ -79,7 +79,8 @@ public class AdminLoggedInController extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-       protected void forward(HttpServletRequest request, HttpServletResponse response, String url) throws IOException, ServletException {
+
+    protected void forward(HttpServletRequest request, HttpServletResponse response, String url) throws IOException, ServletException {
         RequestDispatcher requestDispatcher = getServletContext().getRequestDispatcher(url);
         requestDispatcher.forward(request, response);
     }

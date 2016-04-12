@@ -15,11 +15,21 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
     </head>
-    <body>
-        <table>
+    <%-- Style made by Phillip --%>
+    <style>table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 5px;
+        }
+    </style>
+    <body bgcolor="#33CCFF">
+        <table style="width: 100%; background: lightblue">
             <tr>
-                <td>Username</td><td>User Role</td><td>User ID</td><td>User Firm</td>
+                <th>Username</th><th>User Role</th><th>User ID</th><th>User Firm</th><th> </th>
             </tr>
+            <%-- Made by Oliver --%>
             <%  DBFacade DBF = (DBFacade) session.getAttribute("database");
                 Customer LoggedInCustomer = (Customer) session.getAttribute("LoggedInCustomer");
                 ArrayList<Customer> customers = DBF.getAllUsers(LoggedInCustomer);
@@ -34,10 +44,10 @@
             <td> <form action="AdminServlet" method="POST">
                     <input type="hidden" name="do_this" value="deleteUser"/>
                     <input type="hidden" name="RemoveCustomer" value="<%= customer.getUser_id()%>" />
-                    
+
                     <%-- Made by Michael --%>
                     <input type="hidden" name="deletebuilding" value="<%= customer.getUsername()%>" />
-                    <input type="submit" value="Delete"/>
+                    <input type="submit" value="Delete" style="width: 100%; background: white; font-size: 110% "/>
                 </form>
             </td>
             <%out.println("</tr>");
@@ -46,7 +56,7 @@
         </table>
     <td> <form action="AdminLoggedIn.jsp" method="POST">
 
-            <input type="submit" value="Return"/>
+            <input type="submit" value="Return" style="width: 30%; height: 30%; font-size: 100%;"/>
         </form>
     </td>
 </body>

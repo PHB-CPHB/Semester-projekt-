@@ -15,16 +15,24 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Delete Bulding</title>
     </head>
+    <style>table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 5px;
+        }
+    </style>
     <% Customer c = (Customer) session.getAttribute("LoggedInCustomer");%>
-    <body>
+    <body bgcolor="#33CCFF">
         <h1>Hello <%= c.getUsername()%></h1>
         <p>Here you have an overview of your buildings and are able to delete them</p>
-        <table>
+        <table style="width: 100%; background: lightblue">
             <tr>
                 <%--This part is writen by Phillip
                 The code is to show the customers building and so that they can delete them
                 For them to see their buildings they need user_id--%>
-                <td>Building ID</td><td>Building Status</td><td>Building Type</td><td>Building Year</td><td>Size</td><td>Building Name</td><td>Building Adress</td><td>Floor</td><td>Zipcode</td><td>Firm</td>
+                <th>Building ID</th><th>Building Status</th><th>Building Type</th><th>Building Year</th><th>Size</th><th>Building Name</th><th>Building Adress</th><th>Floor</th><th>Zipcode</th><th>Firm</th><th> </th><th> </th>
             </tr>
             <% DBFacade DBF = (DBFacade) session.getAttribute("database");
                 ArrayList<Building> buildings = DBF.getAllCutsomerBuildings(c);
@@ -44,13 +52,13 @@
             <td> <form action="DeleteBuildingController" method="POST">
                     <input type="hidden" name="do_this" value="delete"/>
                     <input type="hidden" name="deletebuilding" value="<%=building.getBuilding_id()%>" />
-                    <input type="submit" value="Delete"/>
+                    <input type="submit" value="Delete" style="width: 100%; background: white; font-size: 110%"/>
                 </form>
             </td>
             <td> <form action="DeleteBuildingController" method="POST">
                     <input type="hidden" name="do_this" value="report"/>
                     <input type="hidden" name="viewreport" value="<%=building.getBuilding_id()%>" />
-                    <input type="submit" value="View reports"/>
+                    <input type="submit" value="View reports" style="width: 100%; background: white; font-size: 110%"/>
                 </form>
             </td>
             <td> <form action="DeleteBuildingController" method="POST">
@@ -67,11 +75,11 @@
     <td>
         <%--This is to add a building--%>
         <form action="AddBuilding.jsp">
-            <input type="submit" value="Add Building"/>
+            <input type="submit" value="Add Building" style="width: 30%; height: 30%; font-size: 100%;"/>
         </form>
         <%--This is to return to previous site--%>
     <td> <form action="DeleteBuildingController" method="POST">
-            <input type="submit" name="do_this" value="Return"/>
+            <input type="submit" name="do_this" value="Return" style="width: 30%; height: 30%; font-size: 100%;"/>
         </form>
     </td>
 </body>
