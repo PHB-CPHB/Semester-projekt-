@@ -15,15 +15,13 @@ import java.util.ArrayList;
 public interface BuildingMapperInterface {
 
     
-    void deleteAllBuildings(String building_firm);
+    void deleteAllBuildings(Building building);
 
-    void deleteBuilding(int building_id);
+    void deleteBuilding(Building Building);
     // Made by Michael
 
-    int getBuildingId(int user_id);
-
-    String getCity(int building_zipcode);
-
-    String getFirm(String username);
+    String requestCheckUp(Building building);
+    
+    String getCity(Building Building);
     
 }

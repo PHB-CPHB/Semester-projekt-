@@ -6,6 +6,8 @@ package PressentationLayer;
  * and open the template in the editor.
  */
 import DataAccessLayer.DBFacade;
+import ServiceLayer.Controller;
+import ServiceLayer.Entity.Customer;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -40,19 +42,27 @@ public class LoginController extends HttpServlet {
             throws ServletException, IOException, ClassNotFoundException, SQLException {
         HttpSession session = request.getSession(true);
         session.setAttribute("database", DBFacade.getInstance());
-        DBFacade DBF = (DBFacade) session.getAttribute("database");
+        System.out.println("1");
+        session.setAttribute("Controller", Controller.getCon());
+        System.out.println("2");
+        Controller con = (Controller) session.getAttribute("Controller");
+        System.out.println("3");
         String user = request.getParameter("username");
+        System.out.println(user);
         String password = request.getParameter("password");
+        System.out.println(password);
         //check if username and password maches.
-                if (DBF.validate(user, password) == true) {
-                    int user_id = DBF.getUserId(user, password);
-                    if (DBF.getUserRole(user).equals("admin")) {
-                        session.setAttribute("username", user);
-                        session.setAttribute("user_id", user_id);
+        //Made by Tim
+                if (con.validate(user, password) == true) {
+                    System.out.println("Validate");
+                    Customer LoggedInCustomer = con.requestAccess(user, password);
+                    if (LoggedInCustomer.getUser_role().equals("admin")) {
+                        System.out.println("Admin");
+                        session.setAttribute("LoggedInCustomer", LoggedInCustomer);
                         forward(request, response, "/AdminLoggedIn.jsp");
-                    } else if (DBF.getUserRole(user).equals("customer")) {
-                        session.setAttribute("username", user);
-                        session.setAttribute("user_id", user_id);
+                    } else if (LoggedInCustomer.getUser_role().equals("customer")) {
+                        System.out.println("Customer");
+                        session.setAttribute("LoggedInCustomer", LoggedInCustomer);
                         forward(request, response, "/CustomerLoggedIn.jsp");
                     } else {
                         forward(request, response, "/Login.jsp");

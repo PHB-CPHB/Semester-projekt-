@@ -1,9 +1,10 @@
 <%-- 
     Document   : CustomerLoggedIn
     Created on : 31-03-2016, 10:47:00
-    Author     : Oliver
+    Author     : Tim
 --%>
 
+<%@page import="ServiceLayer.Entity.Customer"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -11,8 +12,9 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
     </head>
+    <% Customer c = (Customer) session.getAttribute("LoggedInCustomer"); %>
     <body>
-        <h1>Hello customer <%= session.getAttribute("username")%>.</h1>
+        <h1>Hello customer <%= c.getUsername() %>.</h1>
         View my buildings <br>
 
         <form action="DeleteBuilding.jsp" method="POST">

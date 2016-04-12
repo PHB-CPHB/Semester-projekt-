@@ -6,6 +6,7 @@
 package PressentationLayer;
 
 import DataAccessLayer.DBFacade;
+import ServiceLayer.Controller;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -37,7 +38,7 @@ public class AdminServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ClassNotFoundException, SQLException {
         HttpSession session = request.getSession(true);
-        DBFacade DBF = (DBFacade) session.getAttribute("database");
+        Controller con = (Controller) session.getAttribute("Controller");
 
         String do_this = request.getParameter("do_this");
         if (do_this == null) {
@@ -54,7 +55,8 @@ public class AdminServlet extends HttpServlet {
 //                DBF.deleteAllBuildings(building_firm);
                 String user_id_name = request.getParameter("RemoveCustomer");
                 int user_id = Integer.parseInt(user_id_name);
-                DBF.deleteCustomer(user_id);
+                String username = (String) session.getAttribute("username");
+                con.deleteCustomer(username, user_id);
                 forward(request, response, "/AllUsers.jsp");
                 break;
                 // Made by Oliver
@@ -63,7 +65,7 @@ public class AdminServlet extends HttpServlet {
                 String uPwd = request.getParameter("password");
                 String uFirm = request.getParameter("user_firm");
                 String uRole = request.getParameter("role");
-                DBF.createCustomer(uName, uPwd, uRole, uFirm);
+                con.createCustomer(uName, uPwd, uRole, uFirm);
                 forward(request, response, "/AllUsers.jsp");
             case "return":
                 forward(request, response, "/AdminLoggedIn.jsp");

@@ -5,16 +5,22 @@
  */
 package DataAccessLayer.Interfaces;
 
+import ServiceLayer.Entity.Customer;
+
 /**
  *
  * @author philliphbrink
  */
 public interface AdminMapperInterface {
 
-    boolean createCustomer(String username, String password, String user_role, String user_firm);
+    boolean createCustomer(Customer customer);
 
-    boolean createFirm(int user_id, String user_firm);
+    boolean createFirm(Customer customer);
 
-    void deleteCustomer(int user_id);
+    void deleteCustomer(Customer customer);
+    
+    int getBuildingId(Customer customer);
+    
+    String getFirm(Customer customer);
     
 }

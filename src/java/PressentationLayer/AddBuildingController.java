@@ -5,17 +5,12 @@
  */
 package PressentationLayer;
 
-import DataAccessLayer.DBConnector;
 import DataAccessLayer.DBFacade;
-import DataAccessLayer.PolygonDatabase;
+import ServiceLayer.Controller;
+import ServiceLayer.Entity.Customer;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Connection;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -83,14 +78,14 @@ public class AddBuildingController extends HttpServlet {
             throws ServletException, IOException {
             //processRequest(request, response);
         HttpSession session = request.getSession(true);
-            DBFacade DBF = (DBFacade) session.getAttribute("database");
-            String username = (String) session.getAttribute("username");
+            Controller con = (Controller) session.getAttribute("Controller");
+            Customer c = (Customer) session.getAttribute("LoggedInCustomer");
             String do_this = request.getParameter("do_this");
             String building_name = request.getParameter("name");
             String building_adress = request.getParameter("address");
             String zipcode = request.getParameter("zipcode");
             int building_zipcode = Integer.parseInt(zipcode);
-            String building_parcelno = request.getParameter("parcel");
+            String building_parcel_no = request.getParameter("parcel");
             String areasize = request.getParameter("size");
             int building_areasize = Integer.parseInt(areasize);
             String year = request.getParameter("year");
@@ -106,10 +101,12 @@ public class AddBuildingController extends HttpServlet {
             switch (do_this) {
                 case "add":
                     //inserts into database!
-                    if ("zipcode".equals(building_zipcode) && "adress".equals(building_adress) && "parcel".equals(building_parcelno)) {
+                    System.out.println("1");
+                    if ("zipcode".equals(building_zipcode) && "adress".equals(building_adress) && "parcel".equals(building_parcel_no)) {
                         forward(request, response, "/AddBuilding.jsp");
                     } else {
-                        DBF.addBuilding(building_name, building_type, building_adress, building_year, building_zipcode, building_areasize, building_parcelno, building_floor, username);
+                        System.out.println("2");
+                        con.addNewBuilding(building_name, building_type, building_adress, building_year, building_zipcode, building_areasize, building_parcel_no, building_floor, c.getUsername(), c.getUser_id());
                         forward(request, response, "/DeleteBuilding.jsp");
                     }
             }

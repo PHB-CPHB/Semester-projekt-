@@ -23,11 +23,11 @@ public class CustomerMapper implements CustomerMapperInterface {
 
 
     @Override
-    public String getCustomer(String username) {
+    public String getCustomer(Customer c) {
         String user_firm = "";
         try {
             PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("SELECT * FROM login WHERE username = '?'");
-            pstmt.setString(1, username);
+            pstmt.setString(1, c.getUsername());
             ResultSet rs = pstmt.executeQuery();
             rs.next();
             user_firm = rs.getString("user_firm");
@@ -38,11 +38,11 @@ public class CustomerMapper implements CustomerMapperInterface {
     }
 
     @Override
-    public int getCustomerId(String username) {
+    public int getCustomerId(Customer c) {
         int user_id = 0;
         try {
             PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("SELECT * FROM login WHERE username = ?");
-            pstmt.setString(1, username);
+            pstmt.setString(1, c.getUsername());
             ResultSet rs = pstmt.executeQuery();
             rs.next();
             user_id = rs.getInt("user_id");
@@ -53,13 +53,13 @@ public class CustomerMapper implements CustomerMapperInterface {
     }
 
     @Override
-    public boolean createCustomer(String username, String password, String user_role, String user_firm) {
+    public boolean createCustomer(Customer c) {
         try {
             PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("INSERT INTO login (username, password, user_role, user_firm) VALUES ('?', '?', ?, '?', '?')");
-            pstmt.setString(1, username);
-            pstmt.setString(2, password);
-            pstmt.setString(3, user_role);
-            pstmt.setString(4, user_firm);
+            pstmt.setString(1, c.getUsername());
+            pstmt.setString(2, c.getPassword());
+            pstmt.setString(3, c.getUser_role());
+            pstmt.setString(4, c.getUser_firm());
             pstmt.executeUpdate();
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -69,12 +69,11 @@ public class CustomerMapper implements CustomerMapperInterface {
     }
     // Made by Oliver corrected by Phillip
     @Override
-    public ArrayList<Customer> getAllUsers(String user_firm) {
+    public ArrayList<Customer> getAllUsers(Customer c) {
 
         try {
             ArrayList<Customer> list = new ArrayList<>();
             PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("select * from login");
-            //pstmt.setInt(1, user_firm);
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
                 list.add(new Customer(rs.getString("username"),
@@ -90,11 +89,11 @@ public class CustomerMapper implements CustomerMapperInterface {
     }
 
     @Override
-    public String getFirm(String username) {
+    public String getFirm(Customer c) {
         String user_firm = "";
         try {
             PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("SELECT * FROM login WHERE username = ?");
-            pstmt.setString(1, username);
+            pstmt.setString(1, c.getUsername());
             ResultSet rs = pstmt.executeQuery();
             rs.next();
             user_firm = rs.getString("user_firm");
@@ -105,11 +104,11 @@ public class CustomerMapper implements CustomerMapperInterface {
     }
 
     @Override
-    public int getBuildingFirmId( String username) {
+    public int getBuildingFirmId(Customer customer) {
       int building_firm_id = 0;
       try {
-            PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("SELECT firm.firm_id FROM firm INNER JOIN login ON login.user_id = firm.firm_id WHERE login.username = ?");
-            pstmt.setString(1, username);
+            PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("SELECT firm.firm_id FROM firm INNER JOIN login ON login.user_id = firm.firm_id WHERE login.user_id = ?");
+            pstmt.setInt(1, customer.getUser_id());
             ResultSet rs = pstmt.executeQuery();
             rs.next();
             building_firm_id = rs.getInt("firm_id");

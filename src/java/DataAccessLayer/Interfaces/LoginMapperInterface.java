@@ -5,14 +5,16 @@
  */
 package DataAccessLayer.Interfaces;
 
+import ServiceLayer.Entity.Customer;
+
 /**
  *
  * @author philliphbrink
  */
 public interface LoginMapperInterface {
 
-    String getUserRole(String username);
+    String getUserRole(Customer customer);
 
-    boolean validate(String username, String password);
+    boolean validate(Customer customer);
     
 }

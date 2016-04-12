@@ -4,6 +4,7 @@
     Author     : Oliver
 --%>
 
+<%@page import="ServiceLayer.Entity.Customer"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -11,8 +12,9 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
     </head>
+    <%Customer c = (Customer) session.getAttribute("LoggedInCustomer");%>
     <body>
-        <h1>Hello admin <%= session.getAttribute("username")%>.</h1>
+        <h1>Hello admin <%= c.getUsername() %>.</h1>
         <form action="CreateUser.jsp">
             <input type="submit" name="dothis" value="Create User">
         </form>
