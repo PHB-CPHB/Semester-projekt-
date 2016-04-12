@@ -18,7 +18,7 @@ public interface BuildingMapperInterface {
     void deleteBuilding(Building Building);
     // Made by Michael
 
-    String requestCheckUp(Building building);
+    void requestCheckUp(Building building);
     
     String getCity(Building Building);
 

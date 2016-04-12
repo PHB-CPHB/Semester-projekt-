@@ -32,7 +32,7 @@
                 <%--This part is writen by Phillip
                 The code is to show the customers building and so that they can delete them
                 For them to see their buildings they need user_id--%>
-                <th>Building ID</th><th>Building Status</th><th>Building Type</th><th>Building Year</th><th>Size</th><th>Building Name</th><th>Building Adress</th><th>Floor</th><th>Zipcode</th><th>Firm</th><th> </th><th> </th>
+                <th>Building ID</th><th>Building Status</th><th>Building Type</th><th>Building Year</th><th>Size</th><th>Building Name</th><th>Building Adress</th><th>Floor</th><th>Zipcode</th><th>Firm</th><th> </th><th> </th><th> </th>
             </tr>
             <% DBFacade DBF = (DBFacade) session.getAttribute("database");
                 ArrayList<Building> buildings = DBF.getAllCutsomerBuildings(c);
@@ -64,7 +64,7 @@
             <td> <form action="DeleteBuildingController" method="POST">
                     <input type="hidden" name="do_this" value="request"/>
                     <input type="hidden" name="check-up" value="<%=building.getBuilding_id()%>" />
-                    <input type="submit" value="Request check-up"/>
+                    <input type="submit" value="Request check-up" style="width: 100%; background: white; font-size: 110%"/>
                 </form>
             </td>
             <%out.println("</tr>");

@@ -169,8 +169,7 @@ public class DBFacade implements AdminMapperInterface, BuildingMapperInterface, 
     }
 
     @Override
-    public String requestCheckUp(Building building) {
-        return BMapper.requestCheckUp(building);
+    public void requestCheckUp(Building building) {
+        BMapper.requestCheckUp(building);
     }
-
 }

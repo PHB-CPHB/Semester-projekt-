@@ -86,9 +86,8 @@ public class Controller implements IController {
         Customer customer = new Customer(username, password);
         return DBF.requestAccessWithRole(customer);
     }
-    public void requestCheckUp(){
-        Building building = new Building();
-        building.getBuilding_id();
+    public void requestCheckUp(int building_id){
+        Building building = new Building(building_id);
         DBF.requestCheckUp(building);
     }
 }

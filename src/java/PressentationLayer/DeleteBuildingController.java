@@ -6,6 +6,7 @@
 package PressentationLayer;
 
 import ServiceLayer.Controller;
+import ServiceLayer.Entity.Building;
 import ServiceLayer.Entity.Customer;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -74,9 +75,10 @@ public class DeleteBuildingController extends HttpServlet {
         //Made by Phillip
         HttpSession session = request.getSession(true);
         Controller con = (Controller) session.getAttribute("Controller");
-
+        System.out.println("no");
         String do_this = request.getParameter("do_this");
         if (do_this == null) {
+            System.out.println("nope");
             forward(request, response, "/customerLoggedIn.jsp");
             return;
         }
@@ -100,18 +102,13 @@ public class DeleteBuildingController extends HttpServlet {
                     forward(request, response, "/AdminLoggedIn.jsp");
                 }
                 break;
-            case "Request":
-                con.requestCheckUp();
-                forward(request,response, "/DeketeBuilding.jsp");
-                
-                
-          /*  case "addBuilding":   
-                forward(request, response, "/AddBuilding.jsp");*/
-
+            case "request":
+                String building = request.getParameter("check-up");
+                int buildingid = Integer.parseInt(building);
+                System.out.println(buildingid);
+                con.requestCheckUp(buildingid);
+                forward(request,response, "/DeleteBuilding.jsp");
                 break;
-            /*  case "addBuilding":   
-             forward(request, response, "/AddBuilding.jsp");*/
-
         }
     }
 
