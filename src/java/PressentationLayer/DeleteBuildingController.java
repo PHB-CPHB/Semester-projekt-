@@ -105,7 +105,6 @@ public class DeleteBuildingController extends HttpServlet {
             case "request":
                 String building = request.getParameter("check-up");
                 int buildingid = Integer.parseInt(building);
-                System.out.println(buildingid);
                 con.requestCheckUp(buildingid);
                 forward(request,response, "/DeleteBuilding.jsp");
                 break;
