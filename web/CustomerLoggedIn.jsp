@@ -14,7 +14,7 @@
     </head>
     <% Customer c = (Customer) session.getAttribute("LoggedInCustomer");%>
     <body bgcolor="#33CCFF">
-        <h1>Hello customer <%= c.getUsername()%>.</h1>
+    <center><h1>Hello customer <%= c.getUsername()%>.</h1>
         View my buildings <br>
 
         <form action="CustomerBuildings.jsp" method="POST">
@@ -28,5 +28,6 @@
         <form action="AdminServlet" method="POST">
             <input type="submit" name="do_this" value="logout" style="width: 30%; height: 30%; font-size: 100%;">
         </form>
+    </center>
     </body>
 </html>

@@ -25,9 +25,9 @@
     </style>
     <% Customer c = (Customer) session.getAttribute("LoggedInCustomer");%>
     <body bgcolor="#33CCFF">
-        <h1>Hello <%= c.getUsername()%></h1>
-        <p>Here you have an overview of your buildings and are able to delete them</p>
-        <table style="width: 100%; background: lightblue">
+        <h1 align='center'>Hello <%= c.getUsername()%></h1>
+        <p align='center'>Here you have an overview of your buildings and are able to delete them</p>
+        <table style="width: 100%; background: lightblue" >
             <tr>
                 <%--This part is writen by Phillip
                 The code is to show the customers building and so that they can delete them
@@ -52,19 +52,19 @@
             <td> <form action="DeleteBuildingController" method="POST">
                     <input type="hidden" name="do_this" value="delete"/>
                     <input type="hidden" name="deletebuilding" value="<%=building.getBuilding_id()%>" />
-                    <input type="submit" value="Delete" style="width: 100%; background: white; font-size: 110%"/>
+                    <input type="submit" value="Delete" style="width: 100%; font-size: 110%"/>
                 </form>
             </td>
             <td> <form action="DeleteBuildingController" method="POST">
                     <input type="hidden" name="do_this" value="report"/>
                     <input type="hidden" name="viewreport" value="<%=building.getBuilding_id()%>" />
-                    <input type="submit" value="View reports" style="width: 100%; background: white; font-size: 110%"/>
+                    <input type="submit" value="View reports" style="width: 100%; font-size: 110%"/>
                 </form>
             </td>
             <td> <form action="DeleteBuildingController" method="POST">
                     <input type="hidden" name="do_this" value="request"/>
                     <input type="hidden" name="check-up" value="<%=building.getBuilding_id()%>" />
-                    <input type="submit" value="Request check-up" style="width: 100%; background: white; font-size: 110%"/>
+                    <input type="submit" value="Request check-up" width="200%" size="100%" style="width: 100%; font-size: 110%"/>
                 </form>
             </td>
             <%out.println("</tr>");
@@ -79,7 +79,7 @@
         </form>
         <%--This is to return to previous site--%>
     <td> <form action="DeleteBuildingController" method="POST">
-            <input type="submit" name="do_this" value="Return" style="width: 10%; height: 5%; font-size: 100%;"/>
+            <input  type="submit" name="do_this" value="Return" style="width: 10%; height: 5%; font-size: 100%;"/>
         </form>
     </td>
 </body>

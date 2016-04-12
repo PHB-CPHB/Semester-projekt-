@@ -12,6 +12,7 @@
         <title>JSP Page</title>
     </head>
     <body bgcolor="#33CCFF">
+    <center>
         <h1>Please enter building infomation</h1>
         <form action="AddBuildingController" method="POST">
             Name of building:<br>
@@ -37,5 +38,6 @@
             <input type="hidden" value="return" name="do_this">
             <input type="submit" value="Return" style="width: 30%; height: 30%; font-size: 100%;"/>
         </form>
-    </body>
+    </center>
+</body>
 </html>
