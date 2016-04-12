@@ -13,7 +13,7 @@
     </head>
     <body>
         <h1>Hello World!</h1>
-        <form action="DeleteBuilding.jsp" method="POST">
+        <form action="CustomerBuildings.jsp" method="POST">
             <input type="submit" value="Return"/>
         </form>
     </body>

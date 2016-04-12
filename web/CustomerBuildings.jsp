@@ -58,13 +58,13 @@
             <td> <form action="DeleteBuildingController" method="POST">
                     <input type="hidden" name="do_this" value="report"/>
                     <input type="hidden" name="viewreport" value="<%=building.getBuilding_id()%>" />
-                    <input type="submit" value="View reports" style="width: 100%; background: white; font-size: 110%"/>
+                    <input type="submit" value="View reports" style="width: 100% ; background: white; font-size: 110%"/>
                 </form>
             </td>
             <td> <form action="DeleteBuildingController" method="POST">
                     <input type="hidden" name="do_this" value="request"/>
                     <input type="hidden" name="check-up" value="<%=building.getBuilding_id()%>" />
-                    <input type="submit" value="Request check-up" style="width: 100%; background: white; font-size: 110%"/>
+                    <input type="submit" value="Request check-up" style="width: 100%; border: chartreuse; background: white; font-size: 110%"/>
                 </form>
             </td>
             <%out.println("</tr>");
