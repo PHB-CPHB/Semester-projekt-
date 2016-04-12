@@ -35,7 +35,7 @@
                 <th>Building ID</th><th>Building Status</th><th>Building Type</th><th>Building Year</th><th>Size</th><th>Building Name</th><th>Building Adress</th><th>Floor</th><th>Zipcode</th><th>Firm</th><th> </th><th> </th>
             </tr>
             <% DBFacade DBF = (DBFacade) session.getAttribute("database");
-                ArrayList<Building> buildings = DBF.getAllCutsomerBuildings(c);
+                ArrayList<Building> buildings = DBF.getAllBuildings();
                 for (Building building : buildings) {
                     out.println("<tr>");
                     out.println("<td>" + building.getBuilding_id() + "</td>");

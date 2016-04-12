@@ -8,10 +8,13 @@ package DataAccessLayer.Mappers;
 
 import DataAccessLayer.Interfaces.AdminMapperInterface;
 import DataAccessLayer.DBConnector;
+import ServiceLayer.Entity.Building;
 import ServiceLayer.Entity.Customer;
+import ServiceLayer.Entity.Firm;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -100,6 +103,23 @@ public class AdminMapper implements AdminMapperInterface {
             Logger.getLogger(CustomerMapper.class.getName()).log(Level.SEVERE, null, ex);
         }
         return building_firm;
+    }
+
+    public ArrayList<Firm> getAllFirms() {
+        try {
+            ArrayList<Firm> firm = new ArrayList<>();
+            PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("SELECT * FROM firm");
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                firm.add(new Firm(rs.getString("firm_name"),
+                        rs.getInt("firm_leader_id"),
+                        rs.getInt("firm_id")));
+            }
+            return firm;
+        } catch (SQLException ex) {
+            System.out.println(ex);
+            return null;
+        }
     }
 
 }

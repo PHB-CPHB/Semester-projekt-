@@ -17,7 +17,7 @@
         <h1>Hello customer <%= c.getUsername()%>.</h1>
         View my buildings <br>
 
-        <form action="DeleteBuilding.jsp" method="POST">
+        <form action="CustomerBuildings.jsp" method="POST">
             <input type="submit" value="View buildings" style="width: 30%; height: 30%; font-size: 100%;" </input>
         </form>
         <br>

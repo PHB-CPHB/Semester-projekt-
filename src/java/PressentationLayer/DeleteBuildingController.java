@@ -74,10 +74,14 @@ public class DeleteBuildingController extends HttpServlet {
         //Made by Phillip
         HttpSession session = request.getSession(true);
         Controller con = (Controller) session.getAttribute("Controller");
-
+        Customer c = (Customer) session.getAttribute("LoggedInCustomer");
         String do_this = request.getParameter("do_this");
         if (do_this == null) {
+            if(c.getUser_role().equals("admin")) {
+                forward(request, response, "/AdminLoggedIn.jsp");
+            } else {
             forward(request, response, "/customerLoggedIn.jsp");
+            }
             return;
         }
         switch (do_this) {
@@ -86,18 +90,21 @@ public class DeleteBuildingController extends HttpServlet {
                 String building_id_name = request.getParameter("deletebuilding");
                 int building_id = Integer.parseInt(building_id_name);
                 con.deleteBuilding(building_id);
-                forward(request, response, "/DeleteBuilding.jsp");
+                if(c.getUser_role().equals("admin")) {
+                forward(request, response, "/AdminBuildings.jsp");
+                } else {
+                  forward(request, response, "/CustomerBuildings.jsp");  
+                }
             //Made by Tim    
             case "report":
                 forward(request, response, "/Report.jsp");
                 break;
             //Made by Tim
             case "Return":
-                Customer LoggedIn = (Customer) session.getAttribute("LoggedInCustomer");
-                if (LoggedIn.getUser_role().equals("customer")) {
-                    forward(request, response, "/CustomerLoggedIn.jsp");
-                } else if (LoggedIn.getUser_role().equals("admin")) {
+                if (c.getUser_role().equals("admin")) {
                     forward(request, response, "/AdminLoggedIn.jsp");
+                } else {
+                    forward(request, response, "/CustomerLoggedIn.jsp");
                 }
 
                 break;
