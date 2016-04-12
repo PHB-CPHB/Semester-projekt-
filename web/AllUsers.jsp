@@ -4,6 +4,7 @@
     Author     : Oliver
 --%>
 
+<%@page import="ServiceLayer.Controller"%>
 <%@page import="ServiceLayer.Entity.Building"%>
 <%@page import="ServiceLayer.Entity.Customer"%>
 <%@page import="java.util.ArrayList"%>
@@ -30,10 +31,10 @@
                 <th>Username</th><th>User Role</th><th>User ID</th><th>User Firm</th><th> </th>
             </tr>
             <%-- Made by Oliver --%>
-            <%  DBFacade DBF = (DBFacade) session.getAttribute("database");
+            <%  Controller con = (Controller) session.getAttribute("Controller");
                 Customer LoggedInCustomer = (Customer) session.getAttribute("LoggedInCustomer");
-                ArrayList<Customer> customers = DBF.getAllUsers(LoggedInCustomer);
-                customers = DBF.getAllUsers(LoggedInCustomer);
+                ArrayList<Customer> customers = con.getAllUsers(LoggedInCustomer);
+                customers = con.getAllUsers(LoggedInCustomer);
 
                 for (Customer customer : customers) {
                     out.println("<tr>");

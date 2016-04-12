@@ -4,6 +4,7 @@
     Author     : Oliver
 --%>
 
+<%@page import="ServiceLayer.Controller"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="ServiceLayer.Entity.Building"%>
 <%@page import="DataAccessLayer.DBFacade"%>
@@ -33,8 +34,8 @@
                 For them to see their buildings they need user_id--%>
                 <th>Building ID</th><th>Building Status</th><th>Building Type</th><th>Building Year</th><th>Size</th><th>Building Name</th><th>Building Adress</th><th>Floor</th><th>Zipcode</th><th>Firm</th><th> </th><th> </th>
             </tr>
-            <% DBFacade DBF = (DBFacade) session.getAttribute("database");
-                ArrayList<Building> buildings = DBF.getAllCutsomerBuildings(c);
+            <% Controller con = (Controller) session.getAttribute("Controller");
+                ArrayList<Building> buildings = con.getAllCutsomerBuildings(c);
                 for (Building building : buildings) {
                     out.println("<tr>");
                     out.println("<td>" + building.getBuilding_id() + "</td>");

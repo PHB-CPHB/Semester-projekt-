@@ -9,6 +9,7 @@ import ServiceLayer.Interfaces.IController;
 import DataAccessLayer.DBFacade;
 import ServiceLayer.Entity.Building;
 import ServiceLayer.Entity.Customer;
+import java.util.ArrayList;
 
 /**
  *
@@ -79,5 +80,17 @@ public class Controller implements IController {
     public Customer requestAccess(String username, String password) {
         Customer customer = new Customer(username, password);
         return DBF.requestAccessWithRole(customer);
+    }
+    
+    public ArrayList<Customer> getAllUsers(Customer customer) {
+        return DBF.getAllUsers(customer);
+    }
+    
+    public ArrayList<Building> getAllBuildings() {
+        return DBF.getAllBuildings();
+    }
+    
+    public ArrayList<Building> getAllCutsomerBuildings(Customer customer) {
+       return DBF.getAllCutsomerBuildings(customer);
     }
 }
