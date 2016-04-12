@@ -77,10 +77,10 @@ public class DeleteBuildingController extends HttpServlet {
         Customer c = (Customer) session.getAttribute("LoggedInCustomer");
         String do_this = request.getParameter("do_this");
         if (do_this == null) {
-            if(c.getUser_role().equals("admin")) {
+            if (c.getUser_role().equals("admin")) {
                 forward(request, response, "/AdminLoggedIn.jsp");
             } else {
-            forward(request, response, "/customerLoggedIn.jsp");
+                forward(request, response, "/customerLoggedIn.jsp");
             }
             return;
         }
@@ -90,10 +90,10 @@ public class DeleteBuildingController extends HttpServlet {
                 String building_id_name = request.getParameter("deletebuilding");
                 int building_id = Integer.parseInt(building_id_name);
                 con.deleteBuilding(building_id);
-                if(c.getUser_role().equals("admin")) {
-                forward(request, response, "/AdminBuildings.jsp");
+                if (c.getUser_role().equals("admin")) {
+                    forward(request, response, "/AdminBuildings.jsp");
                 } else {
-                  forward(request, response, "/CustomerBuildings.jsp");  
+                    forward(request, response, "/CustomerBuildings.jsp");
                 }
             //Made by Tim    
             case "report":
@@ -106,11 +106,13 @@ public class DeleteBuildingController extends HttpServlet {
                 } else {
                     forward(request, response, "/CustomerLoggedIn.jsp");
                 }
-
                 break;
-            /*  case "addBuilding":   
-             forward(request, response, "/AddBuilding.jsp");*/
-
+            case "request":
+                String building = request.getParameter("check-up");
+                int buildingid = Integer.parseInt(building);
+                con.requestCheckUp(buildingid);
+                forward(request, response, "/CustomerBuildings.jsp");
+                break;
         }
     }
 

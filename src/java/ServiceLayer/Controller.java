@@ -93,4 +93,9 @@ public class Controller implements IController {
     public ArrayList<Building> getAllCutsomerBuildings(Customer customer) {
        return DBF.getAllCutsomerBuildings(customer);
     }
+
+    public void requestCheckUp(int building_id){
+        Building building = new Building(building_id);
+        DBF.requestCheckUp(building);
+    }
 }

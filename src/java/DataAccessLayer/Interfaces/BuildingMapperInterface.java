@@ -18,6 +18,8 @@ public interface BuildingMapperInterface {
     void deleteBuilding(Building Building);
     // Made by Michael
 
+    void requestCheckUp(Building building);
+    
     String getCity(Building Building);
 
 }

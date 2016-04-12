@@ -173,4 +173,8 @@ public class DBFacade implements AdminMapperInterface, BuildingMapperInterface, 
         return LMapper.requestAccessRole(customer);
     }
 
+    @Override
+    public void requestCheckUp(Building building) {
+        BMapper.requestCheckUp(building);
+    }
 }

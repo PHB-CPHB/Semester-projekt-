@@ -136,4 +136,16 @@ public class BuildingMapper implements BuildingMapperInterface {
         }
     }
 
+    @Override
+    public void requestCheckUp(Building building) {
+        String building_status = "check-up";
+        try {
+            PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("update buildings set buildings.building_status= ? where building_id = ?;");
+            pstmt.setString(1, building_status);
+            pstmt.setInt(2, building.getBuilding_id());
+            pstmt.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(BuildingMapper.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }
