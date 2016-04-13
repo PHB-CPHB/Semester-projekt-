@@ -111,7 +111,11 @@ public class DeleteBuildingController extends HttpServlet {
                 String building = request.getParameter("check-up");
                 int buildingid = Integer.parseInt(building);
                 con.requestCheckUp(buildingid);
-                forward(request, response, "/CustomerBuildings.jsp");
+                if (c.getUser_role().equals("admin")) {
+                    forward(request, response, "/AdminBuildings.jsp");
+                } else {
+                    forward(request, response, "/CustomerBuildings.jsp");
+                }
                 break;
         }
     }

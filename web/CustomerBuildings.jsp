@@ -67,6 +67,12 @@
                     <input type="submit" value="Request check-up" width="200%" size="100%" style="width: 100%; font-size: 110%"/>
                 </form>
             </td>
+            <td> <form action="AddBuildingController" method="POST">
+                    <input type="hidden" name="do_this" value="addFloor"/>
+                    <input type="hidden" name="floor" value="<%=building.getBuilding_id()%>" />
+                    <input type="submit" value="Floors" width="200%" size="100%" style="width: 100%; font-size: 110%"/>
+                </form>
+            </td>
             <%out.println("</tr>");
                 }
             %>

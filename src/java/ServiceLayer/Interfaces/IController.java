@@ -13,7 +13,7 @@ import ServiceLayer.Entity.Customer;
  */
 public interface IController {
 
-    void addNewBuilding(String building_name, String building_type, String building_adress, int building_year, int building_zipcode, int building_areasize, String building_parcelno, String building_floor, Customer c);
+    void addNewBuilding(String building_name, String building_type, String building_adress, int building_year, int building_zipcode, int building_areasize, String building_parcelno, Customer c);
 
     void createCustomer(String uName, String uPwd, String uRole, String uFirm);
 

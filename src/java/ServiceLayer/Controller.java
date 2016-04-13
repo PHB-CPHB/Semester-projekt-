@@ -9,6 +9,7 @@ import ServiceLayer.Interfaces.IController;
 import DataAccessLayer.DBFacade;
 import ServiceLayer.Entity.Building;
 import ServiceLayer.Entity.Customer;
+import ServiceLayer.Entity.Floor;
 import java.io.InputStream;
 import java.util.ArrayList;
 
@@ -34,8 +35,9 @@ public class Controller implements IController {
     }
 
     @Override
-    public void addNewBuilding(String building_name, String building_type, String building_adress, int building_year, int building_zipcode, int building_areasize, String building_parcelno, String building_floor, Customer c) {
+    public void addNewBuilding(String building_name, String building_type, String building_adress, int building_year, int building_zipcode, int building_areasize, String building_parcelno, Customer c) {
         int building_firm_id = DBF.getBuildingFirmId(c);
+        String building_floor = "0";
         Building b = new Building(building_name, building_type, building_adress, building_year, building_zipcode, building_areasize, building_parcelno, building_floor, building_firm_id);
         DBF.addBuilding(b);
 
@@ -103,5 +105,9 @@ public class Controller implements IController {
     public InputStream setImage(InputStream inputstream) {
         System.out.println("controller");
         return inputstream;
+    }
+
+    public ArrayList<Floor> buildingFloor(Building building) {
+        return DBF.getFloors(building);
     }
 }

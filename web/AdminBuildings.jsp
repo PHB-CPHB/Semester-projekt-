@@ -62,10 +62,10 @@
                     <input type="submit" value="View reports" style="width: 100%; background: white; font-size: 110%"/>
                 </form>
             </td>
-            <td> <form action="Floorplan.jsp" method="POST">
-                    <input type="hidden" name="" value="Floorplan"/>
-                    <input type="hidden" name="deletebuilding" value="<%=building.getBuilding_id()%>" />
-                    <input type="submit" value="Floorplan"/>
+            <td> <form action="AddBuildingController" method="POST">
+                    <input type="hidden" name="do_this" value="addFloor"/>
+                    <input type="hidden" name="floor" value="<%=building.getBuilding_id()%>" />
+                    <input type="submit" value="Floors" width="200%" size="100%" style="width: 100%; font-size: 110%"/>
                 </form>
             </td>
             <%out.println("</tr>");

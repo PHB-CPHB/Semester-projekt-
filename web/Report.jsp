@@ -13,8 +13,9 @@
     </head>
     <body>
         <h1>Hello World!</h1>
-        <form action="CustomerBuildings.jsp" method="POST">
-            <input type="submit" value="Return"/>
+        <form action="AddBuildingController" method="POST">
+            <input type="hidden" value="return" name="do_this">
+            <input type="submit" value="Return" style="width: 30%; height: 30%; font-size: 100%;"/>
         </form>
     </body>
 </html>

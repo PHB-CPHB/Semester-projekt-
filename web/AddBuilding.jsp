@@ -29,8 +29,6 @@
             <input type="text" name="type"><br>      
             Building year:<br>
             <input type="text" name="year"><br>
-            Building floor:<br>
-            <input type="text" name="floor"><br>
             <input type="submit" value="add" name="do_this">
         </form>
         <br>

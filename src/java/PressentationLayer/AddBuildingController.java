@@ -6,10 +6,13 @@
 package PressentationLayer;
 
 import ServiceLayer.Controller;
+import ServiceLayer.Entity.Building;
 import ServiceLayer.Entity.Customer;
+import ServiceLayer.Entity.Floor;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -103,24 +106,39 @@ public class AddBuildingController extends HttpServlet {
                 String year = request.getParameter("year");
                 int building_year = Integer.parseInt(year);
                 String building_type = request.getParameter("type");
-                String building_floor = request.getParameter("floor");
                 //inserts into database!
                 if ("zipcode".equals(building_zipcode) && "adress".equals(building_adress) && "parcel".equals(building_parcel_no)) {
                     forward(request, response, "/AddBuilding.jsp");
                 } else {
-                    con.addNewBuilding(building_name, building_type, building_adress, building_year, building_zipcode, building_areasize, building_parcel_no, building_floor, c);
+                    con.addNewBuilding(building_name, building_type, building_adress, building_year, building_zipcode, building_areasize, building_parcel_no, c);
                     if (c.getUser_role().equals("admin")) {
                         forward(request, response, "/AdminBuilding.jsp");
                     } else {
                         forward(request, response, "/CustomerBuildings.jsp");
                     }
                 }
+            
             case "return":
                 if (c.getUser_role().equals("admin")) {
                     forward(request, response, "/AdminBuilding.jsp");
                 } else {
                     forward(request, response, "/CustomerBuildings.jsp");
                 }
+            
+            case "addFloor":
+                try {
+                String buildingid = request.getParameter("floor");
+                int building_id = Integer.parseInt(buildingid);
+                Building building = new Building(building_id);
+                session.setAttribute("building", building);
+                if (c.getUser_role().equals("admin")) {
+                    forward(request, response, "/AdminFloor.jsp");
+                } else {
+                    forward(request, response, "/CustomerFloor.jsp");
+                }
+                } catch (NullPointerException ex) {
+                        System.out.println(ex);
+                        }
         }
 
     }

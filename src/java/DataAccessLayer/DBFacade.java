@@ -16,6 +16,7 @@ import DataAccessLayer.Mappers.ImageMapper;
 import DataAccessLayer.Mappers.LoginMapper;
 import ServiceLayer.Entity.Building;
 import ServiceLayer.Entity.Customer;
+import ServiceLayer.Entity.Floor;
 import ServiceLayer.Entity.Image;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -184,5 +185,9 @@ public class DBFacade implements AdminMapperInterface, BuildingMapperInterface, 
     @Override
     public void requestCheckUp(Building building) {
         BMapper.requestCheckUp(building);
+    }
+
+    public ArrayList<Floor> getFloors(Building building) {
+        return BMapper.getFloor(building);
     }
 }
