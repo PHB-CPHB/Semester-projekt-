@@ -25,5 +25,5 @@ public interface CustomerMapperInterface {
     int getCustomerId(Customer customer);
 
     String getFirm(Customer customer);
-    
+
 }

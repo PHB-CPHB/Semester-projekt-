@@ -11,28 +11,30 @@ import ServiceLayer.Entity.Customer;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 /**
  *
  * @author Thesoap
  */
 public class LoginMapper implements LoginMapperInterface {
+
     //Tim
+
     @Override
     public boolean validate(Customer c) {
-        System.out.println(c.getUsername() + " " + c.getPassword());
         try {
             PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("select * from login where username=? and password=?");
             pstmt.setString(1, c.getUsername());
-            pstmt.setString(2,c.getPassword());
+            pstmt.setString(2, c.getPassword());
             ResultSet rs = pstmt.executeQuery();
             return rs.next(); // If no next, it is because we did not find a match in the database
         } catch (SQLException ex) {
             return false;
         }
     }
+
     //Tim
+
     @Override
     public String getUserRole(Customer c) {
         try {
@@ -47,9 +49,11 @@ public class LoginMapper implements LoginMapperInterface {
         }
     }
 
+    //Made by Phillip - Returns customers id by Username and Password
+
     public int getUserId(Customer c) {
         int user_id = 0;
-    try {
+        try {
             PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("select * from login where username=? and password=?");
             pstmt.setString(1, c.getUsername());
             pstmt.setString(2, c.getPassword());
@@ -59,8 +63,10 @@ public class LoginMapper implements LoginMapperInterface {
         } catch (SQLException ex) {
             return 0;
         }
-    return user_id;
+        return user_id;
     }
+
+    //Made by Phillip - Returns the Customer/Admin how is logged in
 
     public Customer requestAccessRole(Customer customer) {
         try {

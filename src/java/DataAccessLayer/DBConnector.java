@@ -16,12 +16,13 @@ import org.jboss.logging.Logger;
  */
 public class DBConnector {
 //Dette er hvor vi opretter selve forbindelse (Phillip)
+
     public static String driver = "com.mysql.jdbc.Driver";
     public static String URL = "jdbc:mysql://localhost/polygon";
     public static String ID = "root";
     public static String PW = "1234";
     public static Connection connection = null;
-    
+
     public static Connection getConnection() {
         if (connection == null) {
             try {

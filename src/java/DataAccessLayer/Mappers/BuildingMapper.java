@@ -9,7 +9,7 @@ import DataAccessLayer.Interfaces.BuildingMapperInterface;
 import DataAccessLayer.DBConnector;
 import ServiceLayer.Entity.Building;
 import ServiceLayer.Entity.Customer;
-import ServiceLayer.Entity.Image;
+import ServiceLayer.Entity.Firm;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -23,6 +23,7 @@ import java.util.logging.Logger;
  */
 public class BuildingMapper implements BuildingMapperInterface {
 
+    //Made by Phillip - Return an Arraylist with only the customers building by thier user id
     public ArrayList<Building> getAllCustomersBuildings(Customer c) {
         try {
             ArrayList<Building> list = new ArrayList<>();
@@ -48,6 +49,7 @@ public class BuildingMapper implements BuildingMapperInterface {
         }
     }
 
+    //Made by Phillip deletes a building on building id
     @Override
     public void deleteBuilding(Building b) {
         try {
@@ -58,7 +60,7 @@ public class BuildingMapper implements BuildingMapperInterface {
             System.out.println(ex);
         }
     }
-// Made by Michael
+// Made by Michael - deletes buildings on customer firm name
 
     @Override
     public void deleteAllBuildings(Building b) {
@@ -70,6 +72,8 @@ public class BuildingMapper implements BuildingMapperInterface {
             System.out.println(ex);
         }
     }
+
+    //Made by Phillip - Add a building to the customer firm
 
     public void addBuilding(Building b) {
         String building_status = "Ikke klar i nu";
@@ -91,6 +95,8 @@ public class BuildingMapper implements BuildingMapperInterface {
         }
     }
 
+    //Made by Phillip - Returns the city of the zipcode
+
     @Override
     public String getCity(Building b) {
         String city = "";
@@ -106,6 +112,40 @@ public class BuildingMapper implements BuildingMapperInterface {
         return city;
     }
 
+    public ArrayList<Building> getAllBuilding() {
+        try {
+            ArrayList<Building> building = new ArrayList<>();
+            PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("select buildings.building_id, buildings.building_status, buildings.building_type, buildings.building_year, buildings.building_areasize, buildings.building_name, buildings.building_adress, buildings.building_floor, buildings.building_zipcode, firm.firm_name FROM buildings INNER JOIN firm ON buildings.building_firm_id = firm.firm_id;");
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                building.add(new Building(rs.getInt("building_id"),
+                        rs.getString("building_status"),
+                        rs.getString("building_type"),
+                        rs.getInt("building_year"),
+                        rs.getInt("building_areasize"),
+                        rs.getString("building_name"),
+                        rs.getString("building_adress"),
+                        rs.getString("building_floor"),
+                        rs.getInt("building_zipcode"),
+                        rs.getString("firm_name")));
+            }
+            return building;
+        } catch (SQLException ex) {
+            System.out.println(ex);
+            return null;
+        }
+    }
 
-
+    @Override
+    public void requestCheckUp(Building building) {
+        String building_status = "check-up";
+        try {
+            PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("update buildings set buildings.building_status= ? where building_id = ?;");
+            pstmt.setString(1, building_status);
+            pstmt.setInt(2, building.getBuilding_id());
+            pstmt.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(BuildingMapper.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }

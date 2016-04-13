@@ -18,9 +18,9 @@ public interface AdminMapperInterface {
     boolean createFirm(Customer customer);
 
     void deleteCustomer(Customer customer);
-    
+
     int getBuildingId(Customer customer);
-    
+
     String getFirm(Customer customer);
-    
+
 }

@@ -26,6 +26,7 @@ import javax.servlet.http.HttpSession;
  */
 @WebServlet(name = "LoginController", urlPatterns = {"/LoginController"})
 public class LoginController extends HttpServlet {
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -41,41 +42,32 @@ public class LoginController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ClassNotFoundException, SQLException {
         HttpSession session = request.getSession(true);
-        session.setAttribute("database", DBFacade.getInstance());
-        System.out.println("1");
-        session.setAttribute("Controller", Controller.getCon());
-        System.out.println("2");
-        Controller con = (Controller) session.getAttribute("Controller");
-        System.out.println("3");
-        String user = request.getParameter("username");
-        System.out.println(user);
-        String password = request.getParameter("password");
-        System.out.println(password);
-        //check if username and password maches.
-        //Made by Tim
-                if (con.validate(user, password) == true) {
-                    System.out.println("Validate");
-                    Customer LoggedInCustomer = con.requestAccess(user, password);
-                    if (LoggedInCustomer.getUser_role().equals("admin")) {
-                        System.out.println("Admin");
-                        session.setAttribute("LoggedInCustomer", LoggedInCustomer);
-                        forward(request, response, "/AdminLoggedIn.jsp");
-                    } else if (LoggedInCustomer.getUser_role().equals("customer")) {
-                        System.out.println("Customer");
-                        session.setAttribute("LoggedInCustomer", LoggedInCustomer);
-                        forward(request, response, "/CustomerLoggedIn.jsp");
-                    } else {
-                        forward(request, response, "/Login.jsp");
-                    }
+        /*session.setAttribute("database", DBFacade.getInstance());
+         session.setAttribute("Controller", Controller.getCon());
+         Controller con = (Controller) session.getAttribute("Controller");
+         String user = request.getParameter("username");
+         String password = request.getParameter("password");
+         //check if username and password maches.
+         //Made by Tim
+         if (con.validate(user, password) == true) {
+         Customer LoggedInCustomer = con.requestAccess(user, password);
+         if (LoggedInCustomer.getUser_role().equals("admin")) {
+         session.setAttribute("LoggedInCustomer", LoggedInCustomer);
+         forward(request, response, "/AdminLoggedIn.jsp");
+         } else if (LoggedInCustomer.getUser_role().equals("customer")) {
+         session.setAttribute("LoggedInCustomer", LoggedInCustomer);
+         forward(request, response, "/CustomerLoggedIn.jsp");
+         } else {
+         forward(request, response, "/Login.jsp");
+         }
                     
-                } else {
-                    forward(request, response, "/Login.jsp");
-                }
+         } else {
+         forward(request, response, "/Login.jsp");
+         }
                 
-                forward(request, response, "/Login.jsp");
-        
-        }
-    
+         forward(request, response, "/Login.jsp");
+         */
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -109,13 +101,32 @@ public class LoginController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+        HttpSession session = request.getSession(true);
+        session.setAttribute("database", DBFacade.getInstance());
+        session.setAttribute("Controller", Controller.getCon());
+        Controller con = (Controller) session.getAttribute("Controller");
+        String user = request.getParameter("username");
+        String password = request.getParameter("password");
+        //check if username and password maches.
+        //Made by Tim
+        if (con.validate(user, password) == true) {
+            Customer LoggedInCustomer = con.requestAccess(user, password);
+            if (LoggedInCustomer.getUser_role().equals("admin")) {
+                session.setAttribute("LoggedInCustomer", LoggedInCustomer);
+                forward(request, response, "/AdminLoggedIn.jsp");
+            } else if (LoggedInCustomer.getUser_role().equals("customer")) {
+                session.setAttribute("LoggedInCustomer", LoggedInCustomer);
+                forward(request, response, "/CustomerLoggedIn.jsp");
+            } else {
+                String Message = "You entered a wrong password";
+                forward(request, response, "/Login.jsp");
+            }
+
+        } else {
+            forward(request, response, "/Login.jsp");
         }
+
+        forward(request, response, "/Login.jsp");
     }
 
     /**

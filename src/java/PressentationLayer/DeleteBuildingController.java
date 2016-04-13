@@ -5,7 +5,6 @@
  */
 package PressentationLayer;
 
-import DataAccessLayer.DBFacade;
 import ServiceLayer.Controller;
 import ServiceLayer.Entity.Customer;
 import java.io.IOException;
@@ -67,44 +66,53 @@ public class DeleteBuildingController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    
     // Made by Michael
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //processRequest(request, response);
+        //Made by Phillip
         HttpSession session = request.getSession(true);
         Controller con = (Controller) session.getAttribute("Controller");
-
+        Customer c = (Customer) session.getAttribute("LoggedInCustomer");
         String do_this = request.getParameter("do_this");
         if (do_this == null) {
-            forward(request, response, "/customerLoggedIn.jsp");
+            if (c.getUser_role().equals("admin")) {
+                forward(request, response, "/AdminLoggedIn.jsp");
+            } else {
+                forward(request, response, "/customerLoggedIn.jsp");
+            }
             return;
         }
-        System.out.println("3");
         switch (do_this) {
+            //Made by Phillip
             case "delete":
                 String building_id_name = request.getParameter("deletebuilding");
                 int building_id = Integer.parseInt(building_id_name);
                 con.deleteBuilding(building_id);
-                forward(request, response, "/DeleteBuilding.jsp");
-            case "report":
-                forward(request,response,"/Report.jsp");
-                break;
-                //Made by Tim
-            case "Return":
-                Customer LoggedIn = (Customer) session.getAttribute("LoggedInCustomer");
-                if(LoggedIn.getUser_role().equals("customer")){
-                    forward(request, response, "/CustomerLoggedIn.jsp");
-                }else if(LoggedIn.getUser_role().equals("admin")){
-                    forward(request,response,"/AdminLoggedIn.jsp");
+                if (c.getUser_role().equals("admin")) {
+                    forward(request, response, "/AdminBuildings.jsp");
+                } else {
+                    forward(request, response, "/CustomerBuildings.jsp");
                 }
-                
+            //Made by Tim    
+            case "report":
+                forward(request, response, "/Report.jsp");
                 break;
-          /*  case "addBuilding":   
-                forward(request, response, "/AddBuilding.jsp");*/
-
-
+            //Made by Tim
+            case "Return":
+                if (c.getUser_role().equals("admin")) {
+                    forward(request, response, "/AdminLoggedIn.jsp");
+                } else {
+                    forward(request, response, "/CustomerLoggedIn.jsp");
+                }
+                break;
+            case "request":
+                String building = request.getParameter("check-up");
+                int buildingid = Integer.parseInt(building);
+                con.requestCheckUp(buildingid);
+                forward(request, response, "/CustomerBuildings.jsp");
+                break;
         }
     }
 
