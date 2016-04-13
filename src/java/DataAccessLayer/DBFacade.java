@@ -5,73 +5,184 @@
  */
 package DataAccessLayer;
 
+import DataAccessLayer.Interfaces.AdminMapperInterface;
+import DataAccessLayer.Interfaces.BuildingMapperInterface;
+import DataAccessLayer.Interfaces.CustomerMapperInterface;
+import DataAccessLayer.Interfaces.LoginMapperInterface;
 import DataAccessLayer.Mappers.AdminMapper;
 import DataAccessLayer.Mappers.BuildingMapper;
 import DataAccessLayer.Mappers.CustomerMapper;
+import DataAccessLayer.Mappers.ImageMapper;
 import DataAccessLayer.Mappers.LoginMapper;
 import ServiceLayer.Entity.Building;
 import ServiceLayer.Entity.Customer;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import ServiceLayer.Entity.Image;
+import java.io.InputStream;
 import java.util.ArrayList;
 
 /**
  *
  * @author philliphbrink
  */
-public class DBFacade {
+public class DBFacade implements AdminMapperInterface, BuildingMapperInterface, CustomerMapperInterface, LoginMapperInterface {
 
     private static DBFacade instance;
+    private BuildingMapper BMapper = new BuildingMapper();
+    private CustomerMapper CMapper = new CustomerMapper();
+    private AdminMapper AMapper = new AdminMapper();
+    private LoginMapper LMapper = new LoginMapper();
+    private ImageMapper IMapper = new ImageMapper();
 
     private DBFacade() {
+
     }
 
-    //Dette er hvor vi kan kalde forbindelse og skrive hvad vi vil hente fra Databasen (Phillip)
     public static DBFacade getInstance() {
         if (instance == null) {
             instance = new DBFacade();
         }
         return instance;
     }
-
-    /*Efter denne kommentar kan vi begynde at skrive kode som enten 
-      kan hente fra databasen eller ligge nye ting ned i databasen.
-     */
-    public ArrayList<Building> getAllCutsomerBuildings(String username) {
-        int user_id = CustomerMapper.getCustomerId(username);
-        System.out.println(user_id);
-        return BuildingMapper.getAllCustomersBuildings(user_id);
+    //Made by Phillip
+    public ArrayList<Building> getAllCutsomerBuildings(Customer customer) {
+        return BMapper.getAllCustomersBuildings(customer);
+    }
+    
+    public ArrayList<Building> getAllBuildings() {
+        return BMapper.getAllBuilding();
     }
 
-    // This method is for 
-    public void deleteBuilding(int building_id) {
-        BuildingMapper.deleteBuilding(building_id);
+    // Made by Phillip 
+    @Override
+    public void deleteBuilding(Building building) {
+        BMapper.deleteBuilding(building);
     }
 
-    public void addBuilding(String building_name, String building_type, String building_adress, int building_year, int building_zipcode, int building_areasize, String building_parcelno, String building_floor, String username) {
-        String building_firm = CustomerMapper.getFirm(username);
-        BuildingMapper.addBuilding(building_name, building_type, building_adress, building_year, building_zipcode, building_areasize, building_parcelno, building_floor, building_firm);
+    // Made by Michael
+    @Override
+    public void deleteAllBuildings(Building building) {
+        BMapper.deleteAllBuildings(building);
     }
 
-    public ArrayList<Customer> getAllUsers(String username) {
-        String user_firm = CustomerMapper.getCustomer(username);
-        return CustomerMapper.getAllUsers(user_firm);
+    //Made by Phillip
+
+    public void addBuilding(Building building) {
+        BMapper.addBuilding(building);
     }
 
-    public boolean validate(String username, String password) {
-        return LoginMapper.validate(username, password);
+    //Made by Oliver
+
+    @Override
+    public ArrayList<Customer> getAllUsers(Customer customer) {
+        return CMapper.getAllUsers(customer);
     }
 
-    public String getUserRole(String username) {
-        return LoginMapper.getUserRole(username);
+    //Made by Tim
+
+    @Override
+    public boolean validate(Customer customer) {
+        return LMapper.validate(customer);
     }
 
-    public void createCustomer(String username, String password, String user_role, String user_firm) {
-        AdminMapper.createCustomer(username, password, user_role, user_firm);
+    //Made by Tim
+
+    @Override
+    public String getUserRole(Customer customer) {
+        return LMapper.getUserRole(customer);
     }
 
-    public void deleteCustomer(int user_id) {
-        AdminMapper.deleteCustomer(user_id);
+    //Made by Oliver
+
+    @Override
+    public boolean createCustomer(Customer customer) {
+        if (AMapper.createCustomer(customer) == true) {
+            Customer c = new Customer(customer.getUsername(), getCustomerId(customer), customer.getUser_role(), customer.getUser_firm());
+            return AMapper.createFirm(c);
+        }
+        return false;
+    }
+
+    //Made by Michael corrected by Phillip
+
+    @Override
+    public void deleteCustomer(Customer customer) {
+//        ArrayList<Building> array = BMapper.getAllCustomersBuildings(user_id);
+//        for(int i = 0; i < array.size(); i++){
+//            BMapper.getBuildingId(user_id);
+//            BMapper.deleteBuilding(user_id);
+//        }
+        AMapper.deleteCustomer(customer);
+
+    }
+
+    //Made by Phillip
+
+    @Override
+    public boolean createFirm(Customer customer) {
+        return AMapper.createFirm(customer);
+    }
+
+    //Made by Phillip
+
+    @Override
+    public int getBuildingId(Customer customer) {
+        return AMapper.getBuildingId(customer);
+    }
+
+    //Made by Phillip
+
+    @Override
+    public String getCity(Building building) {
+        return BMapper.getCity(building);
+    }
+
+    //Made by Phillip
+
+    @Override
+    public String getFirm(Customer customer) {
+        return AMapper.getFirm(customer);
+    }
+
+    //Made by Phillip
+
+    @Override
+    public int getBuildingFirmId(Customer customer) {
+        return CMapper.getBuildingFirmId(customer);
+    }
+
+    //Made by Phillip
+
+    @Override
+    public String getCustomer(Customer customer) {
+        return CMapper.getCustomer(customer);
+    }
+
+    //Made by Phillip
+
+    @Override
+    public int getCustomerId(Customer customer) {
+        return CMapper.getCustomerId(customer);
+    }
+
+    //Made by Phillip
+
+    public int getUserId(Customer customer) {
+        return LMapper.getUserId(customer);
+    }
+
+    //Made by Phillip
+
+    public Customer requestAccessWithRole(Customer customer) {
+        return LMapper.requestAccessRole(customer);
+    }
+
+    public void setImage(InputStream inputstream) {
+        System.out.println("dbfacade");
+        IMapper.getImage(inputstream);
+    }
+
+    @Override
+    public void requestCheckUp(Building building) {
+        BMapper.requestCheckUp(building);
     }
 }

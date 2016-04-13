@@ -5,6 +5,7 @@
  */
 package DataAccessLayer.Mappers;
 
+import DataAccessLayer.Interfaces.CustomerMapperInterface;
 import DataAccessLayer.DBConnector;
 import ServiceLayer.Entity.Customer;
 import java.sql.PreparedStatement;
@@ -18,14 +19,15 @@ import java.util.logging.Logger;
  *
  * @author philliphbrink
  */
-public class CustomerMapper {
+public class CustomerMapper implements CustomerMapperInterface {
 
-
-    public static String getCustomer(String username) {
+    //Made by Phillip - gets customers firm by thier username
+    @Override
+    public String getCustomer(Customer c) {
         String user_firm = "";
         try {
             PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("SELECT * FROM login WHERE username = '?'");
-            pstmt.setString(1, username);
+            pstmt.setString(1, c.getUsername());
             ResultSet rs = pstmt.executeQuery();
             rs.next();
             user_firm = rs.getString("user_firm");
@@ -35,11 +37,15 @@ public class CustomerMapper {
         return user_firm;
     }
 
-    public static int getCustomerId(String username) {
+    //Made by Phillip - Gets customers id by thier Username and Password
+
+    @Override
+    public int getCustomerId(Customer c) {
         int user_id = 0;
         try {
-            PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("SELECT * FROM login WHERE username = ?");
-            pstmt.setString(1, username);
+            PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("SELECT user_id FROM login WHERE username = ? and password = ?");
+            pstmt.setString(1, c.getUsername());
+            pstmt.setString(2, c.getPassword());
             ResultSet rs = pstmt.executeQuery();
             rs.next();
             user_id = rs.getInt("user_id");
@@ -49,13 +55,16 @@ public class CustomerMapper {
         return user_id;
     }
 
-    public static boolean createCustomer(String username, String password, String user_role, String user_firm) {
+    //Made by Oliver - Corrected by Phillip
+
+    @Override
+    public boolean createCustomer(Customer c) {
         try {
             PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("INSERT INTO login (username, password, user_role, user_firm) VALUES ('?', '?', ?, '?', '?')");
-            pstmt.setString(1, username);
-            pstmt.setString(2, password);
-            pstmt.setString(3, user_role);
-            pstmt.setString(4, user_firm);
+            pstmt.setString(1, c.getUsername());
+            pstmt.setString(2, c.getPassword());
+            pstmt.setString(3, c.getUser_role());
+            pstmt.setString(4, c.getUser_firm());
             pstmt.executeUpdate();
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -64,12 +73,15 @@ public class CustomerMapper {
         return true;
     }
 
-    public static ArrayList<Customer> getAllUsers(String user_firm) {
+    // Made by Oliver corrected by Phillip
+    //Returns an ArrayList of all the users
+
+    @Override
+    public ArrayList<Customer> getAllUsers(Customer c) {
 
         try {
             ArrayList<Customer> list = new ArrayList<>();
             PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("select * from login");
-            //pstmt.setInt(1, user_firm);
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
                 list.add(new Customer(rs.getString("username"),
@@ -84,11 +96,14 @@ public class CustomerMapper {
         }
     }
 
-    public static String getFirm(String username) {
+    //Made by Phillip - Return the customer firm by thier name
+
+    @Override
+    public String getFirm(Customer c) {
         String user_firm = "";
         try {
             PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("SELECT * FROM login WHERE username = ?");
-            pstmt.setString(1, username);
+            pstmt.setString(1, c.getUsername());
             ResultSet rs = pstmt.executeQuery();
             rs.next();
             user_firm = rs.getString("user_firm");
@@ -96,5 +111,22 @@ public class CustomerMapper {
             Logger.getLogger(CustomerMapper.class.getName()).log(Level.SEVERE, null, ex);
         }
         return user_firm;
+    }
+
+    //Made by Phillip - Gets customer firm id by thier user id
+
+    @Override
+    public int getBuildingFirmId(Customer customer) {
+        int building_firm_id = 0;
+        try {
+            PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("SELECT firm.firm_id FROM firm INNER JOIN login ON login.user_id = firm.firm_id WHERE login.user_id = ?");
+            pstmt.setInt(1, customer.getUser_id());
+            ResultSet rs = pstmt.executeQuery();
+            rs.next();
+            building_firm_id = rs.getInt("firm_id");
+        } catch (SQLException ex) {
+            Logger.getLogger(CustomerMapper.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return building_firm_id;
     }
 }

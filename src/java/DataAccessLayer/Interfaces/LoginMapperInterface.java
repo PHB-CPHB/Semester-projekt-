@@ -3,12 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ServiceLayer.Interfaces;
+package DataAccessLayer.Interfaces;
+
+import ServiceLayer.Entity.Customer;
 
 /**
  *
  * @author philliphbrink
  */
-public interface ILogin {
-    
+public interface LoginMapperInterface {
+
+    String getUserRole(Customer customer);
+
+    boolean validate(Customer customer);
+
 }

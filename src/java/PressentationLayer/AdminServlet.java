@@ -5,11 +5,9 @@
  */
 package PressentationLayer;
 
-import DataAccessLayer.DBFacade;
-import DataAccessLayer.Mappers.AdminMapper;
-import DataAccessLayer.PolygonDatabase;
+import ServiceLayer.Controller;
+import ServiceLayer.Entity.Customer;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -39,32 +37,44 @@ public class AdminServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ClassNotFoundException, SQLException {
-        HttpSession session = request.getSession(true);
-        DBFacade DBF = (DBFacade) session.getAttribute("database");
+         HttpSession session = request.getSession(true);
+        /* Controller con = (Controller) session.getAttribute("Controller");
 
-        String do_this = request.getParameter("do_this");
-        if (do_this == null) {
-            forward(request, response, "/AllUsers.jsp");
-            return;
-        }
-        switch (do_this) {
-            case "deleteUser":
-                String user_id_name = request.getParameter("RemoveCustomer");
-                int user_id = Integer.parseInt(user_id_name);
-                DBF.deleteCustomer(user_id);
-                forward(request, response, "/AllUsers.jsp");
-                break;
-            case "createUser":
-                String uName = request.getParameter("username");
-                String uPwd = request.getParameter("password");
-                String uFirm = request.getParameter("user_firm");
-                String uRole = request.getParameter("role");
-                DBF.createCustomer(uName, uPwd, uFirm, uRole);
-                forward(request, response, "/AllUsers.jsp");
-            case "return":
-                forward(request, response, "/AdminLoggedIn.jsp");
-                break;
-        }
+         String do_this = request.getParameter("do_this");
+         if (do_this == null) {
+         forward(request, response, "/AllUsers.jsp");
+         return;
+         }
+         switch (do_this) {
+         // Made by Michael
+         case "deleteUser":
+         //                String username = (String) session.getAttribute("username");
+         //                
+         //                String building_firm_name = request.getParameter("deletebuilding");
+         //                String building_firm = request.getParameter(building_firm_name);
+         //                DBF.deleteAllBuildings(building_firm);
+         String user_id_name = request.getParameter("RemoveCustomer");
+         int user_id = Integer.parseInt(user_id_name);
+         String username = (String) session.getAttribute("username");
+         con.deleteCustomer(username, user_id);
+         forward(request, response, "/AllUsers.jsp");
+         break;
+         // Made by Oliver
+         case "createUser":
+         String uName = request.getParameter("username");
+         String uPwd = request.getParameter("password");
+         String uFirm = request.getParameter("user_firm");
+         String uRole = request.getParameter("role");
+         con.createCustomer(uName, uPwd, uRole, uFirm);
+         forward(request, response, "/AllUsers.jsp");
+         case "return":
+         forward(request, response, "/AdminLoggedIn.jsp");
+         break;
+         case "logout":
+         session.invalidate();
+         forward(request,response,"/Login.jsp");
+         break;
+         }*/
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -99,13 +109,45 @@ public class AdminServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(AdminServlet.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(AdminServlet.class.getName()).log(Level.SEVERE, null, ex);
+        HttpSession session = request.getSession(true);
+        Controller con = (Controller) session.getAttribute("Controller");
+        Customer c = (Customer) session.getAttribute("CustomerLoggedIn");
+        String do_this = request.getParameter("do_this");
+        if (do_this == null) {
+            forward(request, response, "/AllUsers.jsp");
+            return;
         }
+        switch (do_this) {
+            // Made by Michael
+            case "deleteUser":
+//                String username = (String) session.getAttribute("username");
+//                
+//                String building_firm_name = request.getParameter("deletebuilding");
+//                String building_firm = request.getParameter(building_firm_name);
+//                DBF.deleteAllBuildings(building_firm);
+                String user_id_name = request.getParameter("RemoveCustomer");
+                int user_id = Integer.parseInt(user_id_name);
+                String username = (String) session.getAttribute("username");
+                con.deleteCustomer(username, user_id);
+                forward(request, response, "/AllUsers.jsp");
+                break;
+            // Made by Oliver
+            case "createUser":
+                String uName = request.getParameter("username");
+                String uPwd = request.getParameter("password");
+                String uFirm = request.getParameter("user_firm");
+                String uRole = request.getParameter("role");
+                con.createCustomer(uName, uPwd, uRole, uFirm);
+                forward(request, response, "/AllUsers.jsp");
+            case "return":
+                forward(request, response, "/AdminLoggedIn.jsp");
+                break;
+            case "logout":
+                session.invalidate();
+                forward(request, response, "/Login.jsp");
+                break;
+        }
+        forward(request, response, "/AdminLoggedIn.jsp");
     }
 
     /**

@@ -5,20 +5,28 @@
  */
 package PressentationLayer;
 
+import ServiceLayer.Controller;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 
 /**
  *
- * @author Thesoap
+ * @author Oliver
  */
-@WebServlet(name = "AdminLoggedInController", urlPatterns = {"/AdminLoggedInController"})
-public class AdminLoggedInController extends HttpServlet {
+@WebServlet(name = "ImageController", urlPatterns = {"/ImageController"})
+@MultipartConfig
+public class ImageController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -31,7 +39,7 @@ public class AdminLoggedInController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -60,14 +68,17 @@ public class AdminLoggedInController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //processRequest(request, response);
-        String dothis = request.getParameter("dothis");
-        switch (dothis) {
-            case "Create user":
-                forward(request, response, "/AdminLoggedIn.jsp");
-            case "View user":
-                forward(request, response, "/AllUser.jsp");
-        }
+        System.out.println("servlet start");
+        HttpSession session = request.getSession(true);
+        System.out.println("s2");
+        Controller con = (Controller) session.getAttribute("Controller");
+        System.out.println("s3");
+        Part filePart = request.getPart("file");
+        System.out.println("s4");
+        InputStream inputstream = filePart.getInputStream();
+        System.out.println("servlet slut");
+        con.setImage(inputstream);
+        forward(request, response, "/AdminBuildings.jsp");
     }
 
     /**
@@ -79,7 +90,6 @@ public class AdminLoggedInController extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
     protected void forward(HttpServletRequest request, HttpServletResponse response, String url) throws IOException, ServletException {
         RequestDispatcher requestDispatcher = getServletContext().getRequestDispatcher(url);
         requestDispatcher.forward(request, response);

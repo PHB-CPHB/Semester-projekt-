@@ -6,28 +6,34 @@
  */
 package DataAccessLayer.Mappers;
 
+import DataAccessLayer.Interfaces.AdminMapperInterface;
 import DataAccessLayer.DBConnector;
-import static DataAccessLayer.DBConnector.getConnection;
+import ServiceLayer.Entity.Building;
+import ServiceLayer.Entity.Customer;
+import ServiceLayer.Entity.Firm;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author Oliver
  */
-public class AdminMapper {
+public class AdminMapper implements AdminMapperInterface {
 
-    public static boolean createCustomer(String username, String password, String user_role, String user_firm) {
+    // Made by Oliver
+
+    @Override
+    public boolean createCustomer(Customer c) {
         try {
             PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("INSERT INTO login (login.username, login.password, login.user_role, login.user_firm) VALUES(?, ?, ?, ?)");
-            pstmt.setString(1, username);
-            pstmt.setString(2, password);
-            pstmt.setString(3, user_role);
-            pstmt.setString(4, user_firm);
+            pstmt.setString(1, c.getUsername());
+            pstmt.setString(2, c.getPassword());
+            pstmt.setString(3, c.getUser_role());
+            pstmt.setString(4, c.getUser_firm());
             pstmt.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(AdminMapper.class.getName()).log(Level.SEVERE, null, ex);
@@ -36,13 +42,84 @@ public class AdminMapper {
         return true;
     }
 
-    public static void deleteCustomer(int user_id) {
+    //Made by Michael - Deletes a customer on user_id
+
+    @Override
+    public void deleteCustomer(Customer c) {
         try {
             PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("DELETE FROM login WHERE user_id = ?");
-            pstmt.setInt(1, user_id);
+            pstmt.setInt(1, c.getUser_id());
             pstmt.executeUpdate();
         } catch (SQLException ex) {
             System.out.println(ex);
         }
     }
+
+    //Made by Phillip - creates a firm based on the customers id and firm.
+
+    @Override
+    public boolean createFirm(Customer c) {
+        try {
+            PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("INSERT INTO firm (firm_name, firm_leader_id) VALUES(?, ?)");
+            pstmt.setString(1, c.getUser_firm());
+            pstmt.setInt(2, c.getUser_id());
+            pstmt.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminMapper.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
+        return true;
+    }
+
+    //Made by Phillip - Get building id form the customers user id
+
+    @Override
+    public int getBuildingId(Customer c) {
+        int building_id = 0;
+        try {
+            PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("SELECT firm.firm_id FROM firm INNER JOIN login ON login.user_id = firm.firm_id WHERE login.username = ?");
+            pstmt.setInt(1, c.getUser_id());
+            ResultSet rs = pstmt.executeQuery();
+            rs.next();
+            building_id = rs.getInt("firm_id");
+        } catch (SQLException ex) {
+            Logger.getLogger(CustomerMapper.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return building_id;
+    }
+
+    //Made by Phillip - Return firm of the customer
+
+    @Override
+    public String getFirm(Customer c) {
+        String building_firm = "";
+        try {
+            PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("SELECT * FROM firm WHERE firm_name = ?");
+            pstmt.setString(1, c.getUser_firm());
+            ResultSet rs = pstmt.executeQuery();
+            rs.next();
+            building_firm = rs.getString("firm_name");
+        } catch (SQLException ex) {
+            Logger.getLogger(CustomerMapper.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return building_firm;
+    }
+
+    public ArrayList<Firm> getAllFirms() {
+        try {
+            ArrayList<Firm> firm = new ArrayList<>();
+            PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("SELECT * FROM firm");
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                firm.add(new Firm(rs.getString("firm_name"),
+                        rs.getInt("firm_leader_id"),
+                        rs.getInt("firm_id")));
+            }
+            return firm;
+        } catch (SQLException ex) {
+            System.out.println(ex);
+            return null;
+        }
+    }
+
 }

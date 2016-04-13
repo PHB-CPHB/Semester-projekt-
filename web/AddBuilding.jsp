@@ -1,5 +1,5 @@
 <%-- 
-    Document   : Cusadd
+    Document   : AddBuilding
     Created on : Mar 30, 2016, 11:14:38 AM
     Author     : Thesoap
 --%>
@@ -11,7 +11,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
     </head>
-    <body>
+    <body bgcolor="#33CCFF">
         <h1>Please enter building infomation</h1>
         <form action="AddBuildingController" method="POST">
             Name of building:<br>
@@ -20,8 +20,6 @@
             <input type="text" name="address"><br>
             Zipcode:<br>
             <input type="text" name="zipcode"><br>
-            City:<br>
-            <input type="text" name="City"><br>
             Parcel no.:<br>
             <input type="text" name="parcel"><br>
             Size of building(m^2):<br>
@@ -35,9 +33,9 @@
             <input type="submit" value="add" name="do_this">
         </form>
         <br>
-        <form action="DeleteBuilding.jsp" method="POST">
-            
-            <input type="submit" value="Return"/>
+        <form action="AddBuildingController" method="POST">
+            <input type="hidden" value="return" name="do_this">
+            <input type="submit" value="Return" style="width: 30%; height: 30%; font-size: 100%;"/>
         </form>
     </body>
 </html>

@@ -9,6 +9,7 @@ package ServiceLayer.Entity;
  *
  * @author philliphbrink
  */
+// Made by Michael
 public class Building {
 
     private int roomId;
@@ -44,15 +45,38 @@ public class Building {
         this.building_firm = building_firm;
         this.building_firm_id = building_firm_id;
     }
-    
-    public Building (int buildingId, String adress, String buildingName, int zipCode, String city, String buildingStatus, String buildingFirm) {
-        this.building_id = buildingId;
-        this.building_adress = adress;
-        this.building_name = buildingName;
-        this.building_zipcode = zipCode;
-        this.building_city = city;
-        this.building_status = buildingStatus;
-        this.building_firm = buildingFirm;
+
+    public Building(int building_id, String building_status, String building_type, int building_year, int building_areasize, String building_name, String building_adress, String building_floor, int building_zipcode, String building_firm) {
+        this.building_id = building_id;
+        this.building_status = building_status;
+        this.building_type = building_type;
+        this.building_year = building_year;
+        this.building_areasize = building_areasize;
+        this.building_name = building_name;
+        this.building_adress = building_adress;
+        this.building_type = building_type;
+        this.building_floor = building_floor;
+        this.building_zipcode = building_zipcode;
+        this.building_firm = building_firm;
+    }
+
+    public Building(String building_name, String building_type, String building_adress, int building_year, int building_zipcode, int building_areasize, String building_parcelno, String building_floor, int building_firm_id) {
+        this.building_name = building_name;
+        this.building_type = building_type;
+        this.building_adress = building_adress;
+        this.building_year = building_year;
+        this.building_zipcode = building_zipcode;
+        this.building_areasize = building_areasize;
+        this.building_parcel_no = building_parcelno;
+        this.building_floor = building_floor;
+        this.building_firm_id = building_firm_id;
+    }
+
+    public Building(int building_id) {
+        this.building_id = building_id;
+    }
+
+    public Building() {
     }
 
     public int getRoomId() {
@@ -175,6 +199,4 @@ public class Building {
         this.building_firm_id = building_firm_id;
     }
 
-    
-    
 }

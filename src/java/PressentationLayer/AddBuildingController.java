@@ -5,17 +5,11 @@
  */
 package PressentationLayer;
 
-import DataAccessLayer.DBConnector;
-import DataAccessLayer.DBFacade;
-import DataAccessLayer.PolygonDatabase;
+import ServiceLayer.Controller;
+import ServiceLayer.Entity.Customer;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Connection;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -45,7 +39,7 @@ public class AddBuildingController extends HttpServlet {
             throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            
+
         }
     }
 
@@ -61,11 +55,11 @@ public class AddBuildingController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       /* try {
-            processRequest(request, response);
-        } catch (SQLException ex) {
-            Logger.getLogger(AddBuildingController.class.getName()).log(Level.SEVERE, null, ex);
-        }*/
+        /* try {
+         processRequest(request, response);
+         } catch (SQLException ex) {
+         Logger.getLogger(AddBuildingController.class.getName()).log(Level.SEVERE, null, ex);
+         }*/
     }
 
     /**
@@ -76,40 +70,59 @@ public class AddBuildingController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    // Made by Michael edit by Phillip
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-            //processRequest(request, response);
+        //processRequest(request, response);
+        //Made by Michael corrected by Phillip
         HttpSession session = request.getSession(true);
-            DBFacade DBF = (DBFacade) session.getAttribute("database");
-            String username = (String) session.getAttribute("username");
-            String do_this = request.getParameter("do_this");
-            String building_name = request.getParameter("name");
-            String building_adress = request.getParameter("address");
-            String zipcode = request.getParameter("zipcode");
-            int building_zipcode = Integer.parseInt(zipcode);
-            String building_parcelno = request.getParameter("parcel");
-            String areasize = request.getParameter("size");
-            int building_areasize = Integer.parseInt(areasize);
-            String year = request.getParameter("year");
-            int building_year = Integer.parseInt(year);
-            String building_type = request.getParameter("type");
-            String building_floor = request.getParameter("floor");
-            if (do_this == null) {
-            forward(request, response, "/customerLoggedIn.jsp");
+        Controller con = (Controller) session.getAttribute("Controller");
+        Customer c = (Customer) session.getAttribute("LoggedInCustomer");
+        String do_this = request.getParameter("do_this");
+        if (do_this == null) {
+            if (c.getUser_role().equals("admin")) {
+                forward(request, response, "/AdminLoggedIn.jsp");
+            } else {
+                forward(request, response, "/customerLoggedIn.jsp");
+            }
             return;
-            }
-            switch (do_this) {
-                case "add":
-                    //inserts into database!
-                    if ("zipcode".equals(building_zipcode) && "adress".equals(building_adress) && "parcel".equals(building_parcelno)) {
-                        forward(request, response, "/AddBuilding.jsp");
+        }
+
+        // Made by Michael
+        switch (do_this) {
+            case "add":
+
+                String building_name = request.getParameter("name");
+                String building_adress = request.getParameter("address");
+                String zipcode = request.getParameter("zipcode");
+                int building_zipcode = Integer.parseInt(zipcode);
+                String building_parcel_no = request.getParameter("parcel");
+                String areasize = request.getParameter("size");
+                int building_areasize = Integer.parseInt(areasize);
+                String year = request.getParameter("year");
+                int building_year = Integer.parseInt(year);
+                String building_type = request.getParameter("type");
+                String building_floor = request.getParameter("floor");
+                //inserts into database!
+                if ("zipcode".equals(building_zipcode) && "adress".equals(building_adress) && "parcel".equals(building_parcel_no)) {
+                    forward(request, response, "/AddBuilding.jsp");
+                } else {
+                    con.addNewBuilding(building_name, building_type, building_adress, building_year, building_zipcode, building_areasize, building_parcel_no, building_floor, c);
+                    if (c.getUser_role().equals("admin")) {
+                        forward(request, response, "/AdminBuilding.jsp");
                     } else {
-                        DBF.addBuilding(building_name, building_type, building_adress, building_year, building_zipcode, building_areasize, building_parcelno, building_floor, username);
-                        forward(request, response, "/DeleteBuilding.jsp");
+                        forward(request, response, "/CustomerBuildings.jsp");
                     }
-            }
-        
+                }
+            case "return":
+                if (c.getUser_role().equals("admin")) {
+                    forward(request, response, "/AdminBuilding.jsp");
+                } else {
+                    forward(request, response, "/CustomerBuildings.jsp");
+                }
+        }
+
     }
 
     /**

@@ -3,6 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+// Made by Michael
 package ServiceLayer.Entity;
 
 /**
@@ -10,6 +11,7 @@ package ServiceLayer.Entity;
  * @author philliphbrink
  */
 public class Customer {
+
     private String username;
     private String password;
     private int user_id;
@@ -30,6 +32,16 @@ public class Customer {
         this.user_firm = user_firm;
     }
 
+    public Customer(String username, int user_id) {
+        this.username = username;
+        this.user_id = user_id;
+    }
+
+    public Customer(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
+
     public String getUser_firm() {
         return user_firm;
     }
@@ -37,7 +49,6 @@ public class Customer {
     public void setUser_firm(String user_firm) {
         this.user_firm = user_firm;
     }
-    
 
     public String getUsername() {
         return username;
