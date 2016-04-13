@@ -8,6 +8,8 @@ package ServiceLayer;
 import DataAccessLayer.DBFacade;
 import ServiceLayer.Entity.Building;
 import ServiceLayer.Entity.Customer;
+import ServiceLayer.Entity.Image;
+import java.io.InputStream;
 
 /**
  *
@@ -70,5 +72,10 @@ public class Controller {
     public Customer requestAccess(String username, String password) {
         Customer customer = new Customer(username, password);
         return DBF.requestAccessWithRole(customer);
+    }
+    
+    public InputStream setImage(InputStream inputstream) {
+        System.out.println("controller");
+        return inputstream;
     }
 }

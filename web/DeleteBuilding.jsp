@@ -15,9 +15,9 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Delete Bulding</title>
     </head>
-    <% Customer c = (Customer) session.getAttribute("LoggedInCustomer"); %>
+    <% Customer c = (Customer) session.getAttribute("LoggedInCustomer");%>
     <body>
-        <h1>Hello <%= c.getUsername() %></h1>
+        <h1>Hello <%= c.getUsername()%></h1>
         <p>Here you have an overview of your buildings and are able to delete them</p>
         <table>
             <tr>
@@ -30,7 +30,7 @@
                 ArrayList<Building> buildings = DBF.getAllCutsomerBuildings(c);
                 for (Building building : buildings) {
                     out.println("<tr>");
-                    out.println("<td>" + building.getBuilding_id()+ "</td>");
+                    out.println("<td>" + building.getBuilding_id() + "</td>");
                     out.print("<td>" + building.getBuilding_status() + "</td>");
                     out.print("<td>" + building.getBuilding_type() + "</td>");
                     out.print("<td>" + building.getBuilding_year() + "</td>");
@@ -40,7 +40,7 @@
                     out.println("<td>" + building.getBuilding_floor() + "</td>");
                     out.println("<td>" + building.getBuilding_zipcode() + "</td>");
                     out.println("<td>" + building.getBuilding_firm() + "</td>");%>
-                    <%--This is the delete button--%>
+            <%--This is the delete button--%>
             <td> <form action="DeleteBuildingController" method="POST">
                     <input type="hidden" name="do_this" value="delete"/>
                     <input type="hidden" name="deletebuilding" value="<%=building.getBuilding_id()%>" />
@@ -51,6 +51,12 @@
                     <input type="hidden" name="do_this" value="report"/>
                     <input type="hidden" name="viewreport" value="<%=building.getBuilding_id()%>" />
                     <input type="submit" value="View reports"/>
+                </form>
+            </td>
+            <td> <form action="Floorplan.jsp" method="POST">
+                    <input type="hidden" name="" value="Floorplan"/>
+                    <input type="hidden" name="deletebuilding" value="<%=building.getBuilding_id()%>" />
+                    <input type="submit" value="Floorplan"/>
                 </form>
             </td>
             <%out.println("</tr>");

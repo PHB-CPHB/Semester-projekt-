@@ -6,6 +6,7 @@
 package DataAccessLayer.Interfaces;
 
 import ServiceLayer.Entity.Building;
+import ServiceLayer.Entity.Image;
 import java.util.ArrayList;
 
 /**
@@ -21,5 +22,6 @@ public interface BuildingMapperInterface {
     // Made by Michael
 
     String getCity(Building Building);
+    
     
 }

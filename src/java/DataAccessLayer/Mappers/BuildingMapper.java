@@ -9,6 +9,7 @@ import DataAccessLayer.Interfaces.BuildingMapperInterface;
 import DataAccessLayer.DBConnector;
 import ServiceLayer.Entity.Building;
 import ServiceLayer.Entity.Customer;
+import ServiceLayer.Entity.Image;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -20,10 +21,8 @@ import java.util.logging.Logger;
  *
  * @author philliphbrink
  */
-public class BuildingMapper implements BuildingMapperInterface  {
+public class BuildingMapper implements BuildingMapperInterface {
 
-    
-    
     public ArrayList<Building> getAllCustomersBuildings(Customer c) {
         try {
             ArrayList<Building> list = new ArrayList<>();
@@ -49,7 +48,6 @@ public class BuildingMapper implements BuildingMapperInterface  {
         }
     }
 
-    
     @Override
     public void deleteBuilding(Building b) {
         try {
@@ -61,7 +59,7 @@ public class BuildingMapper implements BuildingMapperInterface  {
         }
     }
 // Made by Michael
-    
+
     @Override
     public void deleteAllBuildings(Building b) {
         try {
@@ -73,8 +71,6 @@ public class BuildingMapper implements BuildingMapperInterface  {
         }
     }
 
-    
-    
     public void addBuilding(Building b) {
         String building_status = "Ikke klar i nu";
         try {
@@ -109,5 +105,7 @@ public class BuildingMapper implements BuildingMapperInterface  {
         }
         return city;
     }
+
+
 
 }
