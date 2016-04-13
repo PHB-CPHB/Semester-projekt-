@@ -9,6 +9,7 @@ import ServiceLayer.Interfaces.IController;
 import DataAccessLayer.DBFacade;
 import ServiceLayer.Entity.Building;
 import ServiceLayer.Entity.Customer;
+import java.io.InputStream;
 import java.util.ArrayList;
 
 /**
@@ -81,21 +82,26 @@ public class Controller implements IController {
         Customer customer = new Customer(username, password);
         return DBF.requestAccessWithRole(customer);
     }
-    
+
     public ArrayList<Customer> getAllUsers(Customer customer) {
         return DBF.getAllUsers(customer);
     }
-    
+
     public ArrayList<Building> getAllBuildings() {
         return DBF.getAllBuildings();
     }
-    
+
     public ArrayList<Building> getAllCutsomerBuildings(Customer customer) {
-       return DBF.getAllCutsomerBuildings(customer);
+        return DBF.getAllCutsomerBuildings(customer);
     }
 
-    public void requestCheckUp(int building_id){
+    public void requestCheckUp(int building_id) {
         Building building = new Building(building_id);
         DBF.requestCheckUp(building);
+    }
+
+    public InputStream setImage(InputStream inputstream) {
+        System.out.println("controller");
+        return inputstream;
     }
 }

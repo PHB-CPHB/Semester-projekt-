@@ -12,10 +12,12 @@ import DataAccessLayer.Interfaces.LoginMapperInterface;
 import DataAccessLayer.Mappers.AdminMapper;
 import DataAccessLayer.Mappers.BuildingMapper;
 import DataAccessLayer.Mappers.CustomerMapper;
+import DataAccessLayer.Mappers.ImageMapper;
 import DataAccessLayer.Mappers.LoginMapper;
 import ServiceLayer.Entity.Building;
 import ServiceLayer.Entity.Customer;
-import ServiceLayer.Entity.Firm;
+import ServiceLayer.Entity.Image;
+import java.io.InputStream;
 import java.util.ArrayList;
 
 /**
@@ -29,6 +31,7 @@ public class DBFacade implements AdminMapperInterface, BuildingMapperInterface, 
     private CustomerMapper CMapper = new CustomerMapper();
     private AdminMapper AMapper = new AdminMapper();
     private LoginMapper LMapper = new LoginMapper();
+    private ImageMapper IMapper = new ImageMapper();
 
     private DBFacade() {
 
@@ -171,6 +174,11 @@ public class DBFacade implements AdminMapperInterface, BuildingMapperInterface, 
 
     public Customer requestAccessWithRole(Customer customer) {
         return LMapper.requestAccessRole(customer);
+    }
+
+    public boolean setImage(InputStream inputstream) {
+        System.out.println("dbfacade");
+        return IMapper.getImage(inputstream);
     }
 
     @Override

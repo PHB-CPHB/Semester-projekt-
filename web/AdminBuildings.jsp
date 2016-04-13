@@ -62,6 +62,12 @@
                     <input type="submit" value="View reports" style="width: 100%; background: white; font-size: 110%"/>
                 </form>
             </td>
+            <td> <form action="Floorplan.jsp" method="POST">
+                    <input type="hidden" name="" value="Floorplan"/>
+                    <input type="hidden" name="deletebuilding" value="<%=building.getBuilding_id()%>" />
+                    <input type="submit" value="Floorplan"/>
+                </form>
+            </td>
             <%out.println("</tr>");
                 }
             %>
