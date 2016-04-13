@@ -11,15 +11,23 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Login Page</title>
     </head>
-    <div 
-    <body bgcolor="#33CCFF">
-    <center><h1>Please enter your login</h1></center>
-    <form action="LoginController" method="POST">
-        <center>Username:<br></center>
-        <center><input type="text" name="username" style="width: 20%; height: 40%;"><br></center>
-        <center>Password:<br></center>
-        <center><input type="password" name="password" style="width: 20%; height: 40%;"><br></center>
-        <center><input type="submit" value="Login" style="width: 30%; height: 120%; font-size: 120%;"></center>
-    </form>
-</body>
+    <div
+         <body bgcolor="#33CCFF">
+            <form action="LoginController" method="POST" style= "background: lightblue">
+                <fieldset>
+                    <center>
+                        <legend>
+                            <h1>Please enter your login</h1>
+                        </legend>
+                    </center>
+                    <center>Username:<br></center>
+                    <center><input type="text" name="username" style="width: 20%; height: 40%;"><br></center>
+                    <center>Password:<br></center>
+                    <center><input type="password" name="password" style="width: 20%; height: 40%;"><br></center>
+                    <center><input type="submit" value="Login" style="width: 30%; height: 120%; font-size: 120%;"></center>
+                </fieldset>
+            </form >
+            <center><image src="Polygon.jpg" style="width: 1255px; height:430px "/></center>
+        </body>
+        
 </html>
