@@ -21,26 +21,31 @@ import java.util.ArrayList;
  * @author philliphbrink
  */
 public class DBFacade {
+
     private static DBFacade instance;
+
     private DBFacade() {
     }
+
     //Dette er hvor vi kan kalde forbindelse og skrive hvad vi vil hente fra Databasen (Phillip)
     public static DBFacade getInstance() {
-        if(instance == null)
+        if (instance == null) {
             instance = new DBFacade();
+        }
         return instance;
     }
-    
+
     /*Efter denne kommentar kan vi begynde at skrive kode som enten 
       kan hente fra databasen eller ligge nye ting ned i databasen.
-    */
-    
+     */
     public ArrayList<Building> getAllCutsomerBuildings(String username) {
         int user_id = CustomerMapper.getCustomerId(username);
+        System.out.println(user_id);
         return BuildingMapper.getAllCustomersBuildings(user_id);
     }
+
     // This method is for 
-    public void deleteBuilding (int building_id) {
+    public void deleteBuilding(int building_id) {
         BuildingMapper.deleteBuilding(building_id);
     }
 
@@ -48,19 +53,25 @@ public class DBFacade {
         String building_firm = CustomerMapper.getFirm(username);
         BuildingMapper.addBuilding(building_name, building_type, building_adress, building_year, building_zipcode, building_areasize, building_parcelno, building_floor, building_firm);
     }
-    
-   public ArrayList<Customer> getAllUsers(String username) {
-       String user_firm = CustomerMapper.getCustomer(username);
-       return CustomerMapper.getAllUsers(user_firm);
-   }
-   public boolean validate(String username, String password) {
-       return LoginMapper.validate(username,password);
-   }
-       public String getUserRole(String username) {
-           return LoginMapper.getUserRole(username);
+
+    public ArrayList<Customer> getAllUsers(String username) {
+        String user_firm = CustomerMapper.getCustomer(username);
+        return CustomerMapper.getAllUsers(user_firm);
     }
-   
-   public void createCustomer(String username, String password, String user_role, String user_firm) {
-       AdminMapper.createCustomer(username, password, user_role, user_firm);
-   }
+
+    public boolean validate(String username, String password) {
+        return LoginMapper.validate(username, password);
+    }
+
+    public String getUserRole(String username) {
+        return LoginMapper.getUserRole(username);
+    }
+
+    public void createCustomer(String username, String password, String user_role, String user_firm) {
+        AdminMapper.createCustomer(username, password, user_role, user_firm);
+    }
+
+    public void deleteCustomer(int user_id) {
+        AdminMapper.deleteCustomer(user_id);
+    }
 }

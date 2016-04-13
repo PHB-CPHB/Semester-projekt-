@@ -5,6 +5,7 @@
  */
 package PressentationLayer;
 
+import DataAccessLayer.DBFacade;
 import DataAccessLayer.Mappers.AdminMapper;
 import DataAccessLayer.PolygonDatabase;
 import java.io.IOException;
@@ -38,15 +39,19 @@ public class AdminServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ClassNotFoundException, SQLException {
-        AdminMapper Mapper = new AdminMapper();
         HttpSession session = request.getSession(true);
-        PolygonDatabase Data = (PolygonDatabase) session.getAttribute("polygon");
-        Data = new PolygonDatabase();
+        DBFacade DBF = (DBFacade) session.getAttribute("database");
+
         String do_this = request.getParameter("do_this");
-                switch (do_this) {
+        if (do_this == null) {
+            forward(request, response, "/AllUsers.jsp");
+            return;
+        }
+        switch (do_this) {
             case "deleteUser":
-                String userToRemove = request.getParameter("userToRemove");
-                Mapper.deleteCustomer(userToRemove);
+                String user_id_name = request.getParameter("RemoveCustomer");
+                int user_id = Integer.parseInt(user_id_name);
+                DBF.deleteCustomer(user_id);
                 forward(request, response, "/AllUsers.jsp");
                 break;
             case "createUser":
@@ -54,15 +59,13 @@ public class AdminServlet extends HttpServlet {
                 String uPwd = request.getParameter("password");
                 String uFirm = request.getParameter("user_firm");
                 String uRole = request.getParameter("role");
-                Mapper.createCustomer(uName, uPwd, uFirm, uRole);
-                
+                DBF.createCustomer(uName, uPwd, uFirm, uRole);
                 forward(request, response, "/AllUsers.jsp");
             case "return":
                 forward(request, response, "/AdminLoggedIn.jsp");
                 break;
         }
     }
-
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -114,7 +117,8 @@ public class AdminServlet extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-        protected void forward(HttpServletRequest request, HttpServletResponse response, String url) throws IOException, ServletException {
+
+    protected void forward(HttpServletRequest request, HttpServletResponse response, String url) throws IOException, ServletException {
         RequestDispatcher requestDispatcher = getServletContext().getRequestDispatcher(url);
         requestDispatcher.forward(request, response);
     }

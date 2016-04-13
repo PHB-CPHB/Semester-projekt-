@@ -4,6 +4,7 @@
     Author     : Oliver
 --%>
 
+<%@page import="ServiceLayer.Entity.Building"%>
 <%@page import="ServiceLayer.Entity.Customer"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="DataAccessLayer.DBFacade"%>
@@ -15,24 +16,27 @@
         <title>JSP Page</title>
     </head>
     <body>
-                <table>
+        <table>
             <tr>
                 <td>Username</td><td>User Role</td><td>User ID</td><td>User Firm</td>
             </tr>
-            <%  DBFacade DBF = (DBFacade) session.getAttribute("database");
-                String username = (String) session.getAttribute("username");
-                System.out.println(username);
-                ArrayList<Customer> customers = new ArrayList();
-                customers = DBF.getAllUsers(username);
-                for (Customer customer : customers) {
-                    out.println("<tr>");
-                    out.println("<td>" + customer.getUsername() + "</td>");
-                    out.print("<td>" + customer.getUser_role() + "</td>");
-                    out.print("<td>" + customer.getUser_id() + "</td>");
-                    out.print("<td>" + customer.getUser_firm() + "</td>");%>
-                    <td> <form action="/AdminServlet" method="POST">
+                <%  DBFacade DBF = (DBFacade) session.getAttribute("database");
+                    String username = (String) session.getAttribute("username");
+
+                    ArrayList<Customer> customers = DBF.getAllUsers(username);
+                    ArrayList<Building> buildings = DBF.getAllCutsomerBuildings(username);
+
+                    customers = DBF.getAllUsers(username);
+
+                    for (Customer customer : customers) {
+                        out.println("<tr>");
+                        out.println("<td>" + customer.getUsername() + "</td>");
+                        out.print("<td>" + customer.getUser_role() + "</td>");
+                        out.print("<td>" + customer.getUser_id() + "</td>");
+                        out.print("<td>" + customer.getUser_firm() + "</td>");%>
+            <td> <form action="AdminServlet" method="POST">
                     <input type="hidden" name="do_this" value="deleteUser"/>
-                    <input type="hidden" name="RemoveCustomer" value="<%= customer.getUser_id() %>" />
+                    <input type="hidden" name="RemoveCustomer" value="<%= customer.getUser_id()%>" />
                     <input type="submit" value="Delete"/>
                 </form>
             </td>
@@ -45,5 +49,5 @@
             <input type="submit" value="Return"/>
         </form>
     </td>
-    </body>
+</body>
 </html>
