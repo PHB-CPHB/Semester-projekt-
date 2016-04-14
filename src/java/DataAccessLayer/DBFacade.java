@@ -12,10 +12,12 @@ import DataAccessLayer.Interfaces.LoginMapperInterface;
 import DataAccessLayer.Mappers.AdminMapper;
 import DataAccessLayer.Mappers.BuildingMapper;
 import DataAccessLayer.Mappers.CustomerMapper;
+import DataAccessLayer.Mappers.FloorMapper;
 import DataAccessLayer.Mappers.ImageMapper;
 import DataAccessLayer.Mappers.LoginMapper;
 import ServiceLayer.Entity.Building;
 import ServiceLayer.Entity.Customer;
+import ServiceLayer.Entity.Floor;
 import ServiceLayer.Entity.Image;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -32,6 +34,7 @@ public class DBFacade implements AdminMapperInterface, BuildingMapperInterface, 
     private AdminMapper AMapper = new AdminMapper();
     private LoginMapper LMapper = new LoginMapper();
     private ImageMapper IMapper = new ImageMapper();
+    private FloorMapper FloorMapper = new FloorMapper();
 
     private DBFacade() {
 
@@ -43,11 +46,13 @@ public class DBFacade implements AdminMapperInterface, BuildingMapperInterface, 
         }
         return instance;
     }
+
     //Made by Phillip
+
     public ArrayList<Building> getAllCutsomerBuildings(Customer customer) {
         return BMapper.getAllCustomersBuildings(customer);
     }
-    
+
     public ArrayList<Building> getAllBuildings() {
         return BMapper.getAllBuilding();
     }
@@ -65,34 +70,29 @@ public class DBFacade implements AdminMapperInterface, BuildingMapperInterface, 
     }
 
     //Made by Phillip
-
     public void addBuilding(Building building) {
         BMapper.addBuilding(building);
     }
 
     //Made by Oliver
-
     @Override
     public ArrayList<Customer> getAllUsers(Customer customer) {
         return CMapper.getAllUsers(customer);
     }
 
     //Made by Tim
-
     @Override
     public boolean validate(Customer customer) {
         return LMapper.validate(customer);
     }
 
     //Made by Tim
-
     @Override
     public String getUserRole(Customer customer) {
         return LMapper.getUserRole(customer);
     }
 
     //Made by Oliver
-
     @Override
     public boolean createCustomer(Customer customer) {
         if (AMapper.createCustomer(customer) == true) {
@@ -103,7 +103,6 @@ public class DBFacade implements AdminMapperInterface, BuildingMapperInterface, 
     }
 
     //Made by Michael corrected by Phillip
-
     @Override
     public void deleteCustomer(Customer customer) {
 //        ArrayList<Building> array = BMapper.getAllCustomersBuildings(user_id);
@@ -116,62 +115,53 @@ public class DBFacade implements AdminMapperInterface, BuildingMapperInterface, 
     }
 
     //Made by Phillip
-
     @Override
     public boolean createFirm(Customer customer) {
         return AMapper.createFirm(customer);
     }
 
     //Made by Phillip
-
     @Override
     public int getBuildingId(Customer customer) {
         return AMapper.getBuildingId(customer);
     }
 
     //Made by Phillip
-
     @Override
     public String getCity(Building building) {
         return BMapper.getCity(building);
     }
 
     //Made by Phillip
-
     @Override
     public String getFirm(Customer customer) {
         return AMapper.getFirm(customer);
     }
 
     //Made by Phillip
-
     @Override
     public int getBuildingFirmId(Customer customer) {
         return CMapper.getBuildingFirmId(customer);
     }
 
     //Made by Phillip
-
     @Override
     public String getCustomer(Customer customer) {
         return CMapper.getCustomer(customer);
     }
 
     //Made by Phillip
-
     @Override
     public int getCustomerId(Customer customer) {
         return CMapper.getCustomerId(customer);
     }
 
     //Made by Phillip
-
     public int getUserId(Customer customer) {
         return LMapper.getUserId(customer);
     }
 
     //Made by Phillip
-
     public Customer requestAccessWithRole(Customer customer) {
         return LMapper.requestAccessRole(customer);
     }
@@ -183,5 +173,13 @@ public class DBFacade implements AdminMapperInterface, BuildingMapperInterface, 
     @Override
     public void requestCheckUp(Building building) {
         BMapper.requestCheckUp(building);
+    }
+
+    public ArrayList<Floor> getFloors(Building building) {
+        return BMapper.getFloor(building);
+    }
+
+    public void addFloor(Building building, Floor floor) {
+        FloorMapper.addFloor(building, floor);
     }
 }

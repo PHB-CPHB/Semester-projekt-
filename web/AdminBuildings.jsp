@@ -33,7 +33,7 @@
                 <%--This part is writen by Phillip
                 The code is to show the customers building and so that they can delete them
                 For them to see their buildings they need user_id--%>
-                <th>Building ID</th><th>Building Status</th><th>Building Type</th><th>Building Year</th><th>Size</th><th>Building Name</th><th>Building Adress</th><th>Floor</th><th>Zipcode</th><th>Firm</th><th> </th><th> </th>
+                <th>Building ID</th><th>Building Status</th><th>Building Type</th><th>Building Year</th><th>Size</th><th>Building Name</th><th>Building Adress</th><th>Floor</th><th>Zipcode</th><th>Firm</th><th> </th><th> </th><th></th>
             </tr>
             <% Controller con = (Controller) session.getAttribute("Controller");
                 ArrayList<Building> buildings = con.getAllBuildings();
@@ -53,18 +53,19 @@
             <td> <form action="DeleteBuildingController" method="POST">
                     <input type="hidden" name="do_this" value="delete"/>
                     <input type="hidden" name="deletebuilding" value="<%=building.getBuilding_id()%>" />
-                    <input type="submit" value="Delete" style="width: 100%; background: white; font-size: 110%"/>
+                    <input type="submit" value="Delete" width="200%" size="100%" style="width: 100%; font-size: 110%"/>
                 </form>
             </td>
             <td> <form action="DeleteBuildingController" method="POST">
                     <input type="hidden" name="do_this" value="report"/>
                     <input type="hidden" name="viewreport" value="<%=building.getBuilding_id()%>" />
-                    <input type="submit" value="View reports" style="width: 100%; background: white; font-size: 110%"/>
+                    <input type="submit" value="View reports" width="200%" size="100%" style="width: 100%; font-size: 110%"/>
                 </form>
             </td>
-            <td> <form action="Floorplan.jsp" method="POST">
-                    <input type="hidden" name="deletebuilding" value="<%=building.getBuilding_id()%>" />
-                    <input type="submit" value="Floorplan" style="width: 100%; background: white; font-size: 110%"/>
+            <td> <form action="Floorplan.jsp">
+                    <input type="hidden" name="do_this" value="viewFloor"/>
+                    <input type="hidden" name="floor" value="<%=building.getBuilding_id()%>" />
+                    <input type="submit" value="View Floors" width="200%" size="100%" style="width: 100%; font-size: 110%"/>
                 </form>
             </td>
             <%out.println("</tr>");

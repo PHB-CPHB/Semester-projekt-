@@ -22,8 +22,10 @@ public class ImageMapper {
     public void setImage(InputStream inputstream) {
         try {
             System.out.println("mapper start");
-            PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("INSERT INTO images values (?)");
-            pstmt.setBlob(1, inputstream);
+            PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("INSERT INTO images values (?, ?, ?)");
+            pstmt.setInt(1, 003);
+            pstmt.setString(2, "1");
+            pstmt.setBlob(3, inputstream);
             System.out.println("mapper før execute");
             pstmt.executeUpdate();
             System.out.println("mapper slut");

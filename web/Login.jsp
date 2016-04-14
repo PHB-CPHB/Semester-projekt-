@@ -27,5 +27,7 @@
                     <center><input type="submit" value="Login" style="width: 30%; height: 120%; font-size: 120%;"></center>
                 </fieldset>
             </form >
+            <%-- <center><image src="Polygon.jpg" style="width: 1255px; height:430px "/></center> --%>
         </body>
+        
 </html>

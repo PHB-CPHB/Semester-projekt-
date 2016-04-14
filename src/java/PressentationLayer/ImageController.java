@@ -7,6 +7,7 @@ package PressentationLayer;
 
 import ServiceLayer.Controller;
 import ServiceLayer.Entity.Building;
+import ServiceLayer.Entity.Floor;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -72,16 +73,17 @@ public class ImageController extends HttpServlet {
         String do_this = request.getParameter("do_this");
         HttpSession session = request.getSession(true);
         Controller con = (Controller) session.getAttribute("Controller");
-        switch (do_this) {
-            case "set image":
+     //   Floor floor = new Floor;
+       // switch (do_this) {
+         //   case "set image":
                 Part filePart = request.getPart("file");
                 InputStream inputstream = filePart.getInputStream();
                 con.setImage(inputstream);
                 forward(request, response, "/AdminBuildings.jsp");
-            case "get image":
-                request.getParameter(Building.getBuilding_id);
-                request.getParameter(Building.getFloor_id);
-        }
+           // case "get image":
+             //   request.getParameter(Floor.getFloor_building_id());
+               // request.getParameter(Floor.getFloor_number());
+        
         
     }
 
