@@ -30,6 +30,13 @@ public class Floor {
         this.floor_arpartments = floor_arpartments;
         this.floor_rooms = floor_rooms;
     }
+
+    public Floor(int floor_size, String floor_arpartments, String floor_rooms) {
+        this.floor_size = floor_size;
+        this.floor_arpartments = floor_arpartments;
+        this.floor_rooms = floor_rooms;
+    }
+    
     
 
     public int getFloor_building_id() {

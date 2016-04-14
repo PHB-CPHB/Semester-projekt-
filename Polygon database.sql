@@ -95,8 +95,3 @@ INSERT INTO buildings (building_name, building_status, building_type, building_a
 VALUES ('Olivers bygning', 'I stand', 'Hus', 'Kappa 123', 1992, 8000, 70, '123', '1', 4);
 INSERT INTO buildings (building_name, building_status, building_type, building_adress, building_year, building_zipcode, building_areasize, building_parcel_no, building_floor, building_firm_id) 
 VALUES ('Olivers bygning', 'I stand', 'Hus', 'Kappa 123', 1992, 9000, 70, '123', '1', 4);
-select buildings.building_id, buildings.building_status, buildings.building_type, buildings.building_year, buildings.building_areasize, buildings.building_name, buildings.building_adress, buildings.building_floor, buildings.building_zipcode, firm.firm_name FROM buildings INNER JOIN firm ON buildings.building_firm_id = firm.firm_id Where building_firm_id = 1 ;
-SELECT firm.firm_id FROM firm INNER JOIN login ON login.user_id = firm.firm_leader_id WHERE login.user_id = 2;
-SELECT buildings.building_id FROM buildings INNER JOIN login ON login.user_id = firm.firm_leader_id INNER JOIN firm ON firm.firm_id = buildings.building_firm_id WHERE user_id = 2;
-Select * from login;
-select * from firm;
