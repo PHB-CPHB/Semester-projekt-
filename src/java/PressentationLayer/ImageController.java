@@ -6,6 +6,8 @@
 package PressentationLayer;
 
 import ServiceLayer.Controller;
+import ServiceLayer.Entity.Building;
+import ServiceLayer.Entity.Floor;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -68,17 +70,21 @@ public class ImageController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        System.out.println("servlet start");
+        String do_this = request.getParameter("do_this");
         HttpSession session = request.getSession(true);
-        System.out.println("s2");
         Controller con = (Controller) session.getAttribute("Controller");
-        System.out.println("s3");
-        Part filePart = request.getPart("file");
-        System.out.println("s4");
-        InputStream inputstream = filePart.getInputStream();
-        System.out.println("servlet slut");
-        con.setImage(inputstream);
-        forward(request, response, "/AdminBuildings.jsp");
+     //   Floor floor = new Floor;
+       // switch (do_this) {
+         //   case "set image":
+                Part filePart = request.getPart("file");
+                InputStream inputstream = filePart.getInputStream();
+                con.setImage(inputstream);
+                forward(request, response, "/AdminBuildings.jsp");
+           // case "get image":
+             //   request.getParameter(Floor.getFloor_building_id());
+               // request.getParameter(Floor.getFloor_number());
+        
+        
     }
 
     /**
@@ -90,6 +96,7 @@ public class ImageController extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
     protected void forward(HttpServletRequest request, HttpServletResponse response, String url) throws IOException, ServletException {
         RequestDispatcher requestDispatcher = getServletContext().getRequestDispatcher(url);
         requestDispatcher.forward(request, response);

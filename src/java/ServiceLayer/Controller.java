@@ -104,7 +104,7 @@ public class Controller implements IController {
     }
 
     public void setImage(InputStream inputstream) {
-        System.out.println("controller");
+        System.out.println(inputstream);
         DBF.setImage(inputstream);
     }
 

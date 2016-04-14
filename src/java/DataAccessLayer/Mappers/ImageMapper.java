@@ -19,19 +19,20 @@ import java.util.logging.Logger;
  * @author Oliver
  */
 public class ImageMapper {
-    public void getImage(InputStream inputstream) {
+    public void setImage(InputStream inputstream) {
         try {
-            System.out.println("mapper start");
-            PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("INSERT INTO images values (image_name = ?, Photo = ?)");
-            pstmt.setString(1, "test");
+            PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("INSERT INTO images (image_name, Photo, image_id) values (?, ?, ?)");
+            pstmt.setString(1, "1");
             pstmt.setBlob(2, inputstream);
-            System.out.println("mapper før execute");
-            pstmt.executeUpdate();
-            System.out.println("mapper slut");
-            
+            pstmt.setInt(3, 001);
+            pstmt.executeUpdate();            
         } catch (SQLException ex) {
             Logger.getLogger(CustomerMapper.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+    }
+    
+    public void getImage(InputStream inputstream) {
         
     }
 }

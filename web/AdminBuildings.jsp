@@ -62,7 +62,7 @@
                     <input type="submit" value="View reports" width="200%" size="100%" style="width: 100%; font-size: 110%"/>
                 </form>
             </td>
-            <td> <form action="AddBuildingController" method="POST">
+            <td> <form action="Floorplan.jsp">
                     <input type="hidden" name="do_this" value="viewFloor"/>
                     <input type="hidden" name="floor" value="<%= building.getBuilding_id() %>">
                     <input type="submit" value="View Floors" width="200%" size="100%" style="width: 100%; font-size: 110%"/>
