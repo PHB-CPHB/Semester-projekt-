@@ -118,15 +118,16 @@ public class LoginController extends HttpServlet {
                 session.setAttribute("LoggedInCustomer", LoggedInCustomer);
                 forward(request, response, "/CustomerLoggedIn.jsp");
             } else {
-                String Message = "You entered a wrong password";
+                String Message = "You have entered a wrong password";
+                request.setAttribute("Message", Message);
                 forward(request, response, "/Login.jsp");
             }
 
         } else {
+            String Message = "Please enter a correct Password and Username";
+            request.setAttribute("Message", Message);
             forward(request, response, "/Login.jsp");
         }
-
-        forward(request, response, "/Login.jsp");
     }
 
     /**

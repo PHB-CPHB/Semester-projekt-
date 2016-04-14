@@ -89,6 +89,7 @@ public class DeleteBuildingController extends HttpServlet {
             case "delete":
                 String building_id_name = request.getParameter("deletebuilding");
                 int building_id = Integer.parseInt(building_id_name);
+                con.deleteFloors(building_id);
                 con.deleteBuilding(building_id);
                 if (c.getUser_role().equals("admin")) {
                     forward(request, response, "/AdminBuildings.jsp");

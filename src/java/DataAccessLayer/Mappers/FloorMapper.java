@@ -99,5 +99,15 @@ public class FloorMapper {
             System.out.println(ex);
         } 
     }
+
+    public void deleteFloor(Floor floor) {
+        try {
+            PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("DELETE FROM building_floors WHERE floor_building_id = ?;");
+            pstmt.setInt(1, floor.getFloor_building_id());
+            pstmt.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+    }
     
 }

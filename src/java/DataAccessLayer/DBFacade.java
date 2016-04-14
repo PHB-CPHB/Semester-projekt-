@@ -199,4 +199,8 @@ public class DBFacade implements AdminMapperInterface, BuildingMapperInterface, 
     public void updateFloor(Floor editFloor) {
         FloorMapper.updateFloor(editFloor);
     }
+
+    public void deleteFloor(Floor floor) {
+        FloorMapper.deleteFloor(floor);
+    }
 }

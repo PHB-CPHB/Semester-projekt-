@@ -149,4 +149,9 @@ public class Controller implements IController {
         Floor editFloor = new Floor(floor_b_id, floor_n, floor_si, floor_apt, floor_ro);
         DBF.updateFloor(editFloor);
     }
+
+    public void deleteFloors(int building_id) {
+    Floor floor = new Floor(building_id);
+    DBF.deleteFloor(floor);
+    }
 }
