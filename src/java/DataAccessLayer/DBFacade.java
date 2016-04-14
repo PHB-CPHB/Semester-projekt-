@@ -191,4 +191,12 @@ public class DBFacade implements AdminMapperInterface, BuildingMapperInterface, 
     public ArrayList<Floor> getTotalSize(Floor floor) {
         return FloorMapper.getTotalSize(floor);
     }
+
+    public Floor getFloor(Floor floor) {
+        return FloorMapper.getFloor(floor);
+    }
+
+    public void updateFloor(Floor editFloor) {
+        FloorMapper.updateFloor(editFloor);
+    }
 }

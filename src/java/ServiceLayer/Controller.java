@@ -139,4 +139,14 @@ public class Controller implements IController {
         }
         return totalBuildingSize;
     }
+
+    public Floor getFloor(int floor_no, Building CurrentBuilding) {
+        Floor floor = new Floor(CurrentBuilding.getBuilding_id(), floor_no);
+        return DBF.getFloor(floor);
+    }
+
+    public void updateFloor(int floor_b_id, int floor_n, int floor_si, String floor_apt, String floor_ro) {
+        Floor editFloor = new Floor(floor_b_id, floor_n, floor_si, floor_apt, floor_ro);
+        DBF.updateFloor(editFloor);
+    }
 }

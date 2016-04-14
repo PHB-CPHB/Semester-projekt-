@@ -45,15 +45,15 @@
                     out.print("<td>" + floor.getFloor_size() + "</td>");
                     out.print("<td>" + floor.getFloor_arpartments() + "</td>");
                    out.print("<td>" + floor.getFloor_rooms() + "</td>");%>
-            <td> <form action="AddBuildingController" method="POST">
+            <td> <form action="Floorplan.jsp" method="POST">
                     <input type="hidden" name="" value="Floorplan"/>
                     <input type="hidden" name="deletebuilding" value="<%= floor.getFloor_no()%>" />
                     <input type="submit" value="Floorplan" width="200%" size="100%" style="width: 100%; font-size: 110%"/>
                 </form>
             </td>
             <td> <form action="AddBuildingController" method="POST">
-                    <input type="hidden" name="" value="editFloor"/>
-                    <input type="hidden" name="deletebuilding" value="<%= floor.getFloor_no()%>" />
+                    <input type="hidden" name="do_this" value="editFloor"/>
+                    <input type="hidden" name="floorno" value="<%= floor.getFloor_no()%>" />
                     <input type="submit" value="Edit Floor" width="200%" size="100%" style="width: 100%; font-size: 110%"/>
                 </form>
             </td>

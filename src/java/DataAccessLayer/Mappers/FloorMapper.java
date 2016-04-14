@@ -67,5 +67,37 @@ public class FloorMapper {
             return null;
         }        
     }
+
+    public Floor getFloor(Floor floor) {
+        try {
+            PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("SELECT floor_size, floor_arpartments, floor_rooms from building_floors WHERE floor_no = ? and floor_building_id = ?");
+            pstmt.setInt(1, floor.getFloor_no());
+            pstmt.setInt(2, floor.getFloor_building_id());
+            ResultSet rs = pstmt.executeQuery();
+            rs.next();
+             Floor newFloor = new Floor(rs.getInt("floor_size"),
+                        rs.getString("floor_arpartments"),
+                        rs.getString("floor_rooms"));
+            
+            return newFloor;
+        } catch (SQLException ex) {
+            System.out.println(ex);
+            return null;
+        } 
+    }
+
+    public void updateFloor(Floor editFloor) {
+       try {
+            PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("UPDATE building_floors set floor_size = ?, floor_arpartments = ?, floor_rooms = ? WHERE floor_no = ? and floor_building_id = ?;");
+            pstmt.setInt(1, editFloor.getFloor_size());
+            pstmt.setString(2, editFloor.getFloor_arpartments());
+            pstmt.setString(3, editFloor.getFloor_rooms());
+            pstmt.setInt(4, editFloor.getFloor_no());
+            pstmt.setInt(5, editFloor.getFloor_building_id());
+            pstmt.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        } 
+    }
     
 }

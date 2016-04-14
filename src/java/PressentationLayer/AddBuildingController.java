@@ -116,7 +116,7 @@ public class AddBuildingController extends HttpServlet {
                 }
                 break;
             case "viewFloor":
-                int buildingid =  Integer.parseInt(request.getParameter("floor"));
+                int buildingid = Integer.parseInt(request.getParameter("floor"));
                 Building building = new Building(buildingid);
                 session.setAttribute("building", building);
                 if (c.getUser_role().equals("admin")) {
@@ -125,7 +125,7 @@ public class AddBuildingController extends HttpServlet {
                     forward(request, response, "/CustomerFloor.jsp");
                 }
                 break;
-            
+
             case "addNewFloor":
                 forward(request, response, "/addFloor.jsp");
                 //Knapperne virker ikke inde i Floor så orden dem find ud af fejl "PWC6117: File "null" not found"
@@ -134,12 +134,42 @@ public class AddBuildingController extends HttpServlet {
             case "addFloor":
                 Building buildings = (Building) session.getAttribute("building");
                 String floor_s = (String) request.getParameter("floor_size");
-                System.out.println("yolo" + floor_s);
-                System.out.println("hey" + buildings.getBuilding_id());
                 int floor_size = Integer.parseInt(floor_s);
                 String floor_apartments = (String) request.getParameter("floor_apartments");
                 String floor_rooms = (String) request.getParameter("floor_rooms");
                 con.addFloor(buildings, floor_size, floor_apartments, floor_rooms);
+                if (c.getUser_role().equals("admin")) {
+                    forward(request, response, "/AdminFloor.jsp");
+                } else {
+                    forward(request, response, "/CustomerFloor.jsp");
+                }
+                break;
+            case "editFloor":
+                String floorno = request.getParameter("floorno");
+                int floor_no = Integer.parseInt(floorno);
+                Building CurrentBuilding = (Building) session.getAttribute("building");
+                Floor currentFloor = con.getFloor(floor_no, CurrentBuilding);
+                request.setAttribute("floor_si", currentFloor.getFloor_size());
+                request.setAttribute("floor_apt", currentFloor.getFloor_arpartments());
+                request.setAttribute("floor_ro", currentFloor.getFloor_rooms());
+                request.setAttribute("floor_n", floor_no);
+                request.setAttribute("floor_b_id", CurrentBuilding.getBuilding_id());
+                if (c.getUser_role().equals("admin")) {
+                    forward(request, response, "/editFloor.jsp");
+                } else {
+                    forward(request, response, "/editFloor.jsp");
+                }
+                break;
+            case "edit":
+                String floorsi = (String) request.getParameter("floor_si");
+                int floor_si = Integer.parseInt(floorsi);
+                String floor_apt = (String) request.getParameter("floor_apt");
+                String floor_ro = (String) request.getParameter("floor_ro");
+                String floorn = (String) request.getParameter("floor_n");
+                int floor_n = Integer.parseInt(floorn);
+                String floorbid = (String) request.getParameter("floor_b_id");
+                int floor_b_id = Integer.parseInt(floorbid);
+                con.updateFloor(floor_b_id, floor_n, floor_si, floor_apt, floor_ro);
                 if (c.getUser_role().equals("admin")) {
                     forward(request, response, "/AdminFloor.jsp");
                 } else {
@@ -155,7 +185,7 @@ public class AddBuildingController extends HttpServlet {
                 }
                 break;
             case "returnFloor":
-               if (c.getUser_role().equals("admin")) {
+                if (c.getUser_role().equals("admin")) {
                     forward(request, response, "/AdminFloor.jsp");
                 } else {
                     forward(request, response, "/CustomerFloor.jsp");
