@@ -31,39 +31,41 @@
             <fieldset>
                 <table>
                     <%-- first part: --%>
-                    <td style="font-size: x-large; border: 1px solid white;">
-                        General information om bygningen
-                    </td>
-                    <tr></tr>
-                    <td style="border: 1px solid white;">
-                        Byggeär:______________________________________________________________________________________
-                    </td>
-                    <tr>
-                        <td style="border: 1px solid white">
-                                Bygningsareal i m2 (hver etage tælles separat):________________________________________________________
-                            </td>
-                        </tr>
-                        <td style="border: 1px solid white">
-                            Hvad bruges bygningen til / Hvad har bygningen været brugt til?:_________________________________________
+                    <table style="width:  100%">
+                            <td style="font-size: x-large; border: 1px solid white;">
+                            General information om bygningen
                         </td>
                         <tr></tr>
+                        <td style="border: 1px solid white;">
+                            Byggeär:______________________________________________________________________________________
+                        </td>
+                        <tr>
+                            <td style="border: 1px solid white">
+                                    Bygningsareal i m2 (hver etage tælles separat):________________________________________________________
+                                </td>
+                            </tr>
+                            <td style="border: 1px solid white">
+                                Hvad bruges bygningen til / Hvad har bygningen været brugt til?:_________________________________________
+                            </td>
+                            <tr></tr>
+                        </table>
 
 
                         <%-- second part --%>
                         <tr><td style="height: 50px; border: 1px solid white"</td></tr>
-                        <td style="font-size: x-large; border: 1px solid white;">
-                        Gennemgang af bygningen udvendig
-                    </td>
-                    <table style="width: 100%">
+                        <table style="width: 100%">
+                            <td style="font-size: x-large; border: 1px solid white; border-bottom: 1px solid black">
+                                Gennemgang af bygningen udvendig
+                            </td>
                             <tr>
-                                <th> Tag</th>
+                                <th style="border: 1px solid black"> Tag</th>
                                 <td>Bemërkninger:<input type="checkbox" name="remark" value="yes"></td>
                                 <td>Ingen bemërkninger: <input type="checkbox" name="no-remark" value="no"> </td>
                                 <td> Billede: <input type="checkbox" name="picture" value="pic"></td>
                             </tr>
                         </table>
                         <table style="width: 100%">
-                            <td style="height: 50px; width: 100%;"><input type="text" style="width: 100%; height: 100%">
+                            <input type="text" style="width: 100%; height: 50px; border: 1px solid black; border-top: 1px solid white">
                         </table>
 
                         <table style="width: 100%">
@@ -74,117 +76,145 @@
                             </tr>
                         </table>
                         <table style="width: 100%">
-                            <td style="height: 50px; width: 100%;"><input type="text" style="width: 100%; height: 100%">
+                            <input type="text" style="width: 100%; height: 50px; border: 1px solid black; border-top: 1px solid white ">
+                            <tr><td style="height: 50px; border: 1px solid white"</td></tr>
                         </table>
-                        <tr><td style="height: 50px; border: 1px solid white"</td></tr>
 
                         <table style="width: 100%">
-                            <td style="border: 1px solid white; border-right: 1px solid black"> Lokale______________</td>
-                            <td> Bemërkninger:<input type="checkbox" name="remark" value="yes"></td>
-                            <td> Ingen bemërkninger: <input type="checkbox" name="no-remark" value="no"> </td>
+                            <td style="border: 1px solid white; border-right: 1px solid black; width: 60%"> Lokale______________</td>
+
+                            <td style="border: 1px solid black"> Bemërkninger:<input type="checkbox" name="remark" value="yes"></td>
+                            <td style="border: 1px solid black"> Ingen bemërkninger: <input type="checkbox" name="no-remark" value="no"> </td>
                             <tr>
-                                <td style="font-size: x-large; border: 1px solid white; border-bottom: 1px solid black">
-                                    Skade og reparation
-                                </td>
+                            <tr><td style="border: 1px solid white"></td></tr>
+                        </table>
+                        <table style="width: 100%">
+                            <td style="width: 100%; font-size: x-large; border: 1px solid white;">
+                            Skade og reparation
+                        </td>
+                    </table>
+                    <table style="width: 100%">
                             </tr>
-                            <th style="border: 1px solid black"> Har der været skade i lokalet? </th>
+                            <th style="width: 10%"> Har der været skade i lokalet? </th>
                             <td><input type="checkbox" name="yesDamage" value="yesD"> Ja</td>
                             <td><input type="checkbox" name="noDamage" value="noD"> Nej</td>
-                            <tr>
-                                <th> Hvornår </th>
-                                <td></td>
-                                <th> Hvor</th>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <th> Hvad er der sket </th>
-                                <td></td>
-                                <th> Hvad er repareret</th>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <th style="border-bottom: 1px solid lightgray">Skade</th>
-                                <td style="border-right: 1px solid white"><input type="checkbox" name="Fugt" value="YesFugt"> Fugt </td>
-                                <td style="border-right: 1px solid white"></td><td></td>
-                            <tr></tr>
-                            <th style="border-bottom: 1px solid lightgray"></th>
-                            <td style="border-right: 1px solid white"><input type="checkbox" name="RadOgSvamp" value="yesRadOgSvamp"> Räd og svamp </td>
-                            <td style="border-right: 1px solid white"></td><td></td>
-                            <tr></tr>
-                            <th style="border-bottom: 1px solid lightgray; border-top: 1px solid lightgray"></th>
-                            <td style="border-right: 1px solid white"><input type="checkbox" name="Skimmel" value="yesSkimmel"> Skimmel,</td>
-                            <td style="border-right: 1px solid white"></td><td></td>
-                            <tr></tr>
-                            <th style="border-bottom:  1px solid lightgray; border-top: 1px solid lightgray"></th>
-                            <td style="border-right: 1px solid white"><input type="checkbox" name="Brand" value="yesBrand"> Brand,</td>
-                            <td style="border-right: 1px solid white"></td><td></td>
-                            <tr></tr>
-                            <th style="border-top: 1px solid lightgray"></th>
-                            <td style="border-right: 1px solid white"><input type="checkbox" name="AndenSkade" value="yesAndenSkade"> Anden skade:</td>
-                            <td style="border-right: 1px solid white">_______________</td><td></td>
-                            </td>
+                        </table>
+                        <table style="width: 100%">
+                            <th style="border-top: 1px solid white; width: 10%"> Hvornår </th>
+                            <td style="border-top: 1px solid white"><input type="text" style="width: 100%; height: 20px"></td>
+                            <th style="border-top: 1px solid white; width: 10%"> Hvor</th>
+                            <td style="border-top: 1px solid white"><input type="text" style="width: 100%; height: 20px;"></td>
+
+                        <tr>
+                            <th style="border-top: 1px solid white"> Hvad er der sket </th>
+                                <td style="border-top: 1px solid white"><input type="text" style="width: 100%; height: 20px"></td>
+                                <th style="border-top: 1px solid white"> Hvad er repareret</th>
+                                <td style="border-top: 1px solid white"><input type="text" style="width: 100%; height: 20px"></td>
                             </tr>
                         </table>
+                        <table style="width: 100%">
+                            <tr>
+                                <th style="border-bottom: 1px solid lightgray; border-top: 1px solid white; width: 10%">Skade</th>
+                                <td style="border-top: 1px solid white"><input type="checkbox" name="Fugt" value="YesFugt"> Fugt </td>
 
-                        <tr><td style="height: 50px; border: 1px solid white"</td></tr>
+                            <tr></tr>
+                            <th style="border-bottom: 1px solid lightgray"></th>
+                            <td><input type="checkbox" name="RadOgSvamp" value="yesRadOgSvamp"> Räd og svamp </td>
+
+                            <tr></tr>
+                            <th style="border-bottom: 1px solid lightgray; border-top: 1px solid lightgray"></th>
+                            <td><input type="checkbox" name="Skimmel" value="yesSkimmel"> Skimmel</td>
+
+                            <tr></tr>
+                            <th style="border-bottom:  1px solid lightgray; border-top: 1px solid lightgray"></th>
+                            <td><input type="checkbox" name="Brand" value="yesBrand"> Brand</td>
+
+                            <tr></tr>
+                            <th style="border-top: 1px solid lightgray"></th>
+                            <td><input type="checkbox" name="AndenSkade" value="yesAndenSkade"> Anden skade:<input type="text" style="border-bottom: 1px solid black"</td>
+
+                            </td>
+                            </tr>
+                            <tr><td style="height: 50px; border: 1px solid white"</td></tr>
+                        </table>
+
 
                         <table style="width: 100%">
                             <tr>
                                 <td style="font-size: x-large; border: 1px solid white;"> Gennemgang af…</td>
                         </tr>
-                        <td style="border-left: 1px solid white; border-right: 1px solid white"></td>
+                        <td style="border: 1px solid white"></td>
+                            <table style="width: 100%">
+                                <td style="border: 1px solid white; border-right: 1px solid black; width: 40% "></td>
+                                <td style="border-bottom: 1px solid white; width: 20%">Bemërkninger:</td>
+                                <td style="border-bottom: 1px solid white; width: 20%">Ingen bemërkninger:</td>
+                                <td style="border-bottom: 1px solid white; width: 20%"> Billede:</td>              
+                            </table>
+                            <table style="width: 100%">
+                                <tr>
+                                    <th style="width: 40%"> Vëgge</th>
+                                    <td style="width: 20%"><input type="checkbox" name="remarkL" value="yesL"></td>
+                                    <td style="width: 20%"><input type="checkbox" name="no-remarkL" value="noL"> </td>
+                                    <td style="width: 20%"><input type="checkbox" name="pictureL" value="picL"></td>
+                                </tr>
+                            </table>
+                            <table style="width: 100%">
+                                <input type="text" style="width: 100%; height: 50px; border: 1px solid black; border-top: 1px solid white ">
+                            </table>
+                            <table style="width: 100%">
+                                <tr>
+                                    <th style="width: 40%">Loft </th>
+                                    <td style="width: 20%"><input type="checkbox" name="remarkL" value="yesL"></td>
+                                    <td style="width: 20%"><input type="checkbox" name="no-remarkL" value="noL"> </td>
+                                    <td style="width: 20%"><input type="checkbox" name="pictureL" value="picL"></td>
+                                </tr>
+                            </table>
+                            <table style="width: 100%">
+                                <input type="text" style="width: 100%; height: 50px; border: 1px solid black; border-top: 1px solid white ">
+                            </table></table>
+                        <table style="width: 100%">
                             <tr>
-                                <th> Vëgge</th>
-                                <td>Bemërkninger:<input type="checkbox" name="remarkV" value="yesV"></td>
-                                <td>Ingen bemërkninger: <input type="checkbox" name="no-remarkV" value="noV"> </td>
-                                <td> Billede: <input type="checkbox" name="pictureV" value="picV"></td>
+                                <th style="width: 40%">Gulv </th>
+                                <td style="width: 20%"><input type="checkbox" name="remarkG" value="yesG"></td>
+                                <td style="width: 20%"><input type="checkbox" name="no-remarkG" value="noG"> </td>
+                                <td style="width: 20%"><input type="checkbox" name="pictureG" value="picG"></td>
                             </tr>
-                            <td style="height: 50px; border-right: 1px solid white"> <td style="border-left: 1px solid white; border-right: 1px solid white;"></td></td><td style="border-right: 1px solid white"><td></td>
+                        </table>
+                        <table style="width: 100%">
+                            <input type="text" style="width: 100%; height: 50px; border: 1px solid black; border-top: 1px solid white ">
                         </table>
                         <table style="width: 100%">
                             <tr>
-                                <th>Loft </th>
-                                <td><input type="checkbox" name="remarkL" value="yesL"></td>
-                                <td><input type="checkbox" name="no-remarkL" value="noL"> </td>
-                                <td><input type="checkbox" name="pictureL" value="picL"></td>
+                                <th style="width: 40%">Vinduer/døre </th>
+                                <td style="width: 20%"><input type="checkbox" name="remarkVD" value="yesVD"></td>
+                                <td style="width: 20%"><input type="checkbox" name="no-remarkVD" value="noVD"> </td>
+                                <td style="width: 20%"><input type="checkbox" name="pictureVD" value="picVD"></td>
                             </tr>
-                            <td style="height: 50px; border-right: 1px solid white"> <td style="border-left: 1px solid white; border-right: 1px solid white;"></td></td><td style="border-right: 1px solid white"><td></td>
+                        </table>
+                        <table style="width: 100%">
+                            <input type="text" style="width: 100%; height: 50px; border: 1px solid black; border-top: 1px solid white ">
                         </table>
                         <table style="width: 100%">
                             <tr>
-                                <th>Gulv </th>
-                                <td><input type="checkbox" name="remarkG" value="yesG"></td>
-                                <td><input type="checkbox" name="no-remarkG" value="noG"> </td>
-                                <td><input type="checkbox" name="pictureG" value="picG"></td>
+                                <th style="width: 40%"></th>
+                                <td style="width: 20%"><input type="checkbox" name="remark" value="yes"></td>
+                                <td style="width: 20%"><input type="checkbox" name="no-remark" value="no"> </td>
+                                <td style="width: 20%"><input type="checkbox" name="picture" value="pic"></td>
                             </tr>
-                            <td style="height: 50px; border-right: 1px solid white"> <td style="border-left: 1px solid white; border-right: 1px solid white;"></td></td><td style="border-right: 1px solid white"><td></td>
+                        </table>
+                        <table style="width: 100%">
+                            <input type="text" style="width: 100%; height: 50px; border: 1px solid black; border-top: 1px solid white ">
                         </table>
                         <table style="width: 100%">
                             <tr>
-                                <th>Vinduer/døre </th>
-                                <td><input type="checkbox" name="remarkVD" value="yesVD"></td>
-                                <td><input type="checkbox" name="no-remarkVD" value="noVD"> </td>
-                                <td><input type="checkbox" name="pictureVD" value="picVD"></td>
+                                <th style="width: 40%"></th>
+                                <td style="width: 20%"><input type="checkbox" name="remark" value="yes"></td>
+                                <td style="width: 20%"><input type="checkbox" name="no-remark" value="no"> </td>
+                                <td style="width: 20%"><input type="checkbox" name="picture" value="pic"></td>
                             </tr>
-                            <td style="height: 50px; border-right: 1px solid white"> <td style="border-left: 1px solid white; border-right: 1px solid white;"></td></td><td style="border-right: 1px solid white"><td></td>
                         </table>
                         <table style="width: 100%">
-                            <tr>
-                                <th></th>
-                                <td><input type="checkbox" name="remark" value="yes"></td>
-                                <td><input type="checkbox" name="no-remark" value="no"> </td>
-                                <td><input type="checkbox" name="picture" value="pic"></td>
-                            </tr>
-                            <td style="height: 50px; border-right: 1px solid white"> <td style="border-left: 1px solid white; border-right: 1px solid white;"></td></td><td style="border-right: 1px solid white"><td></td>
-                        </table>
-                        <table style="width: 100%">
-                            <tr>
-                                <th></th>
-                                <td><input type="checkbox" name="remark" value="yes"></td>
-                                <td><input type="checkbox" name="no-remark" value="no"> </td>
-                                <td><input type="checkbox" name="picture" value="pic"></td>
-                            </tr>
-                            <td style="height: 50px; border-right: 1px solid white"> <td style="border-left: 1px solid white; border-right: 1px solid white;"></td></td><td style="border-right: 1px solid white"><td></td>
+                            <input type="text" style="width: 100%; height: 50px; border: 1px solid black; border-top: 1px solid white ">
                         </table>
                         <table style="width: 100%">
                             <tr><td style="height: 50px; border: 1px solid white"</td></tr>
@@ -193,41 +223,65 @@
                             </tr>
 
                             <tr>
-                                <th>Er der foretaget fugtscanning?</th>
-                                <td><input type="checkbox" name="yesFugtscanning" value="yesFugt">Ja</td>
-                                <td><input type="checkbox" name="noFugtscanning" value="noFugt">Nej</td>
+                                <th style="width: 30%">Er der foretaget fugtscanning?</th>
+                                <td style="width: 20%"><input type="checkbox" name="yesFugtscanning" value="yesFugt">Ja</td>
+                                <td style="width: 20%"><input type="checkbox" name="noFugtscanning" value="noFugt">Nej</td>
                             <tr></tr>
                             <th style="border: 1px solid black"> Fugtscanning </th>
-                            <td></td>
+                            <td><input type="text" style="width: 100%"></td>
                             <th> Målepunkt</th>
-                            <td></td>
+                            <td><input type="text" style="width: 100%"></td>
                             </tr>
-                            <td style="height: 50px; border-right: 1px solid white"> <td style="border-left: 1px solid white; border-right: 1px solid white;"></td></td><td style="border-right: 1px solid white"><td></td>
+                        </table>
+                        <table style="width: 100%">
+                            <input type="text" style="width: 100%; height: 50px; border: 1px solid black; border-top: 1px solid white ">
                             <tr><td style="height: 50px; border: 1px solid white"</td></tr>
                         </table>
                         <table style="width: 100%"
-                            <tr>
+                               <tr>
                                 <td style="font-size: x-large; border: 1px solid white; border-bottom: 1px solid black"> Konklussion</td>
                             </tr>
                             <th style="width: 20%">Lokale</th>
                             <th style="width: 80%">Anbefalinger</th>
-                            <tr><td style="height: 20px; border-right: 1px solid black"> <td style="border-left: 1px solid black; border-right: 1px solid black;"></td></tr>
-                        <tr><td style="height: 20px; border-right: 1px solid black"> <td style="border-left: 1px solid black; border-right: 1px solid black;"></td></tr>
-                        <tr><td style="height: 20px; border-right: 1px solid black"> <td style="border-left: 1px solid black; border-right: 1px solid black;"></td></tr>
-                        <tr><td style="height: 20px; border-right: 1px solid black"> <td style="border-left: 1px solid black; border-right: 1px solid black;"></td></tr>
-                        <tr><td style="height: 20px; border-right: 1px solid black"> <td style="border-left: 1px solid black; border-right: 1px solid black;"></td></tr>
-                        <tr><td style="height: 20px; border-right: 1px solid black"> <td style="border-left: 1px solid black; border-right: 1px solid black;"></td></tr>
-                    </table>
-                    <table style="width: 100%"
-                           <tr><td style="border: 1px solid white"></td></tr>
-                            <tr><td style="border: 1px solid white; width: 800px">Bygningsgennemgangen er foretaget af _________________________________________,Polygon</td></tr>
-                            <tr><td style="border: 1px solid white"> I samarbejde med___________________________________________________________,(bygningsansvarlig),</td></tr>
+                            <table style="width: 100%">
+                                <td style="width: 20%"><input type="text" style="width: 100%; height: 50px; border: 1px solid black"></td>
+                                <td style="width: 80%"><input type="text" style="width: 100%; height: 50px; border: 1px solid black"></td>
+                                <tr>
+                                    <td style="width: 20%"><input type="text" style="width: 100%; height: 50px; border: 1px solid black"></td>
+                                    <td style="width: 80%"><input type="text" style="width: 100%; height: 50px; border: 1px solid black"></td>
+                                </tr>
+                                <td><input type="text" style="width: 100%; height: 50px; border: 1px solid black"></td>
+                                <td><input type="text" style="width: 100%; height: 50px; border: 1px solid black"></td>
+                                <tr>
+                                    <td><input type="text" style="width: 100%; height: 50px; border: 1px solid black"></td>
+                                    <td><input type="text" style="width: 100%; height: 50px; border: 1px solid black"></td>
+                                </tr>
+                                <tr>
+                                    <td><input type="text" style="width: 100%; height: 50px; border: 1px solid black"></td>
+                                    <td><input type="text" style="width: 100%; height: 50px; border: 1px solid black"></td>
+                                </tr>
+                                <tr>
+                                    <td><input type="text" style="width: 100%; height: 50px; border: 1px solid black"></td>
+                                    <td><input type="text" style="width: 100%; height: 50px; border: 1px solid black"></td>
+                                </tr>
+                                <tr>
+                                    <td><input type="text" style="width: 100%; height: 50px; border: 1px solid black"></td>
+                                    <td><input type="text" style="width: 100%; height: 50px; border: 1px solid black"></td>
+                                </tr>
+                                <tr>
+                                    <td><input type="text" style="width: 100%; height: 50px; border: 1px solid black"></td>
+                                    <td><input type="text" style="width: 100%; height: 50px; border: 1px solid black"></td>
+                                </tr></table>
+                            <table style="width: 100%"
+                                   <tr><td style="border: 1px solid white"></td></tr>
+                                <tr><td style="border: 1px solid white; width: 800px">Bygningsgennemgangen er foretaget af <input type="text" style="width: 350px; border-bottom: 1px solid black">,Polygon</td></tr>
+                                <tr><td style="border: 1px solid white"> I samarbejde med<input type="text" style="width: 493px; border-bottom: 1px solid black">,(bygningsansvarlig),</td></tr>
 
-                            <tr><td style="height: 20px; border: 1px solid white"></td></tr>
-                            <td style="font-size: x-large; border: 1px solid white;">
-                            Bygningen er kategoriseret som
-                        </td>
-                    </table>
+                                <tr><td style="height: 20px; border: 1px solid white"></td></tr>
+                                <td style="font-size: x-large; border: 1px solid white;">
+                                Bygningen er kategoriseret som
+                            </td>
+                        </table>
                         <tr></tr>
                         <table style="width: 100%">
                                 <th style="width: 100px">Tilstand</th>
