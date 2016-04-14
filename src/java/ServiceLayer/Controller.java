@@ -113,7 +113,30 @@ public class Controller implements IController {
     }
 
     public void addFloor(Building building, int floor_size, String floor_apartments, String floor_rooms) {
-        Floor floor = new Floor(floor_size, floor_apartments, floor_rooms);
-        DBF.addFloor(building, floor);
+        int floor_no = maxFloor(building);
+        Floor floor = new Floor(floor_no, floor_size, floor_apartments, floor_rooms);
+        floor.setFloor_building_id(building.getBuilding_id());
+        DBF.addFloor(floor);
+    }
+    public int maxFloor(Building building){
+        Floor floor = new Floor(building.getBuilding_id());
+        int currentFloor = DBF.getAllFloors(floor);
+        int newFloor = currentFloor + 1;
+        return newFloor;
+      }
+    
+    public int getAllFloors(int building_id){
+        Floor floor = new Floor(building_id);
+        return DBF.getAllFloors(floor);
+    }
+    
+    public int getTotalSize(int building_id){
+        int totalBuildingSize = 0;
+        Floor buildingfloor = new Floor(building_id);
+        ArrayList<Floor> floors = DBF.getTotalSize(buildingfloor);
+        for (Floor floor : floors) {
+            totalBuildingSize = totalBuildingSize + floor.getFloor_size();
+        }
+        return totalBuildingSize;
     }
 }

@@ -23,8 +23,6 @@
             <input type="text" name="zipcode"><br>
             Parcel no.:<br>
             <input type="text" name="parcel"><br>
-            Size of building(m^2):<br>
-            <input type="text" name="size"><br>
             Building type:<br>
             <input type="text" name="type"><br>      
             Building year:<br>

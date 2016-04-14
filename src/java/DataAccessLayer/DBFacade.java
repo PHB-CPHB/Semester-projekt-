@@ -180,7 +180,15 @@ public class DBFacade implements AdminMapperInterface, BuildingMapperInterface, 
         return BMapper.getFloor(building);
     }
 
-    public void addFloor(Building building, Floor floor) {
-        FloorMapper.addFloor(building, floor);
+    public void addFloor(Floor floor) {
+        FloorMapper.addFloor(floor);
+    }
+
+    public int getAllFloors(Floor floor) {
+        return FloorMapper.getAllFloors(floor);
+    }
+
+    public ArrayList<Floor> getTotalSize(Floor floor) {
+        return FloorMapper.getTotalSize(floor);
     }
 }

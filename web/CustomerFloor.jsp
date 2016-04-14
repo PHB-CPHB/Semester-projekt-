@@ -45,13 +45,13 @@
                     out.print("<td>" + floor.getFloor_size() + "</td>");
                     out.print("<td>" + floor.getFloor_arpartments() + "</td>");
                    out.print("<td>" + floor.getFloor_rooms() + "</td>");%>
-            <td> <form action="Floorplan.jsp" method="POST">
+            <td> <form action="AddBuildingController" method="POST">
                     <input type="hidden" name="" value="Floorplan"/>
                     <input type="hidden" name="deletebuilding" value="<%= floor.getFloor_no()%>" />
                     <input type="submit" value="Floorplan" width="200%" size="100%" style="width: 100%; font-size: 110%"/>
                 </form>
             </td>
-            <td> <form action="AddBuildingController.jsp" method="POST">
+            <td> <form action="AddBuildingController" method="POST">
                     <input type="hidden" name="" value="editFloor"/>
                     <input type="hidden" name="deletebuilding" value="<%= floor.getFloor_no()%>" />
                     <input type="submit" value="Edit Floor" width="200%" size="100%" style="width: 100%; font-size: 110%"/>
@@ -62,7 +62,7 @@
             %>
         </table>
         <br>
-    <td> <form action="AddBuildingController.jsp" method="POST">
+    <td> <form action="AddBuildingController" method="POST">
             <input type="hidden" name="do_this" value="addNewFloor"/>
             <input type="hidden" name="addFloor" value="<%= building.getBuilding_id()%>" />
             <input type="submit" value="Add New Floor" style="width: 30%; height: 30%; font-size: 100%;"/>

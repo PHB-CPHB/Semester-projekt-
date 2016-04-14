@@ -95,7 +95,6 @@ public class AddBuildingController extends HttpServlet {
         // Made by Michael
         switch (do_this) {
             case "add":
-
                 String building_name = request.getParameter("name");
                 String building_adress = request.getParameter("address");
                 String zipcode = request.getParameter("zipcode");
@@ -110,46 +109,59 @@ public class AddBuildingController extends HttpServlet {
                 } else {
                     con.addNewBuilding(building_name, building_type, building_adress, building_year, building_zipcode, building_parcel_no, c);
                     if (c.getUser_role().equals("admin")) {
-                        forward(request, response, "/AdminBuilding.jsp");
+                        forward(request, response, "/AdminBuildings.jsp");
                     } else {
                         forward(request, response, "/CustomerBuildings.jsp");
                     }
                 }
-            
+                break;
             case "viewFloor":
-                try {
-                String buildingid = request.getParameter("floor");
-                int building_id = Integer.parseInt(buildingid);
-                Building building = new Building(building_id);
+                int buildingid =  Integer.parseInt(request.getParameter("floor"));
+                Building building = new Building(buildingid);
+                    System.out.println("Ørvur" + building.getBuilding_id());
                 session.setAttribute("building", building);
                 if (c.getUser_role().equals("admin")) {
                     forward(request, response, "/AdminFloor.jsp");
                 } else {
                     forward(request, response, "/CustomerFloor.jsp");
                 }
-                } catch (NullPointerException ex) {
-                        System.out.println(ex);
-                        }
+                break;
             
             case "addNewFloor":
                 forward(request, response, "/addFloor.jsp");
                 //Knapperne virker ikke inde i Floor så orden dem find ud af fejl "PWC6117: File "null" not found"
                 //Kig methoden add floor over og tal med Michael omkring raport. Derudover så lav interfaces til mapper og ryd op i koden.
-            
+                break;
             case "addFloor":
-                Building building = (Building) session.getAttribute("building");
+                Building buildings = (Building) session.getAttribute("building");
                 String floor_s = (String) request.getParameter("floor_size");
+                System.out.println("yolo" + floor_s);
+                System.out.println("hey" + buildings.getBuilding_id());
                 int floor_size = Integer.parseInt(floor_s);
                 String floor_apartments = (String) request.getParameter("floor_apartments");
                 String floor_rooms = (String) request.getParameter("floor_rooms");
-                con.addFloor(building, floor_size, floor_apartments, floor_rooms);
-            
+                con.addFloor(buildings, floor_size, floor_apartments, floor_rooms);
+                if (c.getUser_role().equals("admin")) {
+                    forward(request, response, "/AdminFloor.jsp");
+                } else {
+                    forward(request, response, "/CustomerFloor.jsp");
+                }
+                break;
             case "return":
+                session.removeValue("building");
                 if (c.getUser_role().equals("admin")) {
                     forward(request, response, "/AdminBuildings.jsp");
                 } else {
                     forward(request, response, "/CustomerBuildings.jsp");
                 }
+                break;
+            case "returnFloor":
+               if (c.getUser_role().equals("admin")) {
+                    forward(request, response, "/AdminFloor.jsp");
+                } else {
+                    forward(request, response, "/CustomerFloor.jsp");
+                }
+                break;
         }
 
     }
