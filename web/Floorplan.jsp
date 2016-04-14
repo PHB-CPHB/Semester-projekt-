@@ -13,7 +13,7 @@
     </head>
     <body>
         <h1>You have not yet uploaded any floorplan for this building. Do you want to upload it now?</h1>
-        <form action="ImageController" enctype="multipart/form-data">
+        <form action="ImageController" method="POST" enctype="multipart/form-data">
             <input type="hidden" name="file" accept="image/*"/>
             <input type="file" value="Choose file"/>
             <input type="submit">

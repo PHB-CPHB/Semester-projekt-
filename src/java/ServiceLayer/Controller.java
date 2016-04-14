@@ -103,9 +103,9 @@ public class Controller implements IController {
         DBF.requestCheckUp(building);
     }
 
-    public InputStream setImage(InputStream inputstream) {
+    public void setImage(InputStream inputstream) {
         System.out.println("controller");
-        return inputstream;
+        DBF.setImage(inputstream);
     }
 
     public ArrayList<Floor> buildingFloor(Building building) {

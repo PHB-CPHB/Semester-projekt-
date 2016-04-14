@@ -10,6 +10,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -38,16 +39,7 @@ public class ImageController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        System.out.println("servlet start");
-        HttpSession session = request.getSession(true);
-        System.out.println("s2");
-        Controller con = (Controller) session.getAttribute("Controller");
-        System.out.println("s3");
-        Part filePart = request.getPart("file");
-        System.out.println("s4");
-        InputStream inputstream = filePart.getInputStream();
-        System.out.println("servlet slut");
-        con.setImage(inputstream);
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -76,7 +68,17 @@ public class ImageController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        System.out.println("servlet start");
+        HttpSession session = request.getSession(true);
+        System.out.println("s2");
+        Controller con = (Controller) session.getAttribute("Controller");
+        System.out.println("s3");
+        Part filePart = request.getPart("file");
+        System.out.println("s4");
+        InputStream inputstream = filePart.getInputStream();
+        System.out.println("servlet slut");
+        con.setImage(inputstream);
+        forward(request, response, "/AdminBuildings.jsp");
     }
 
     /**
@@ -88,5 +90,8 @@ public class ImageController extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
+    protected void forward(HttpServletRequest request, HttpServletResponse response, String url) throws IOException, ServletException {
+        RequestDispatcher requestDispatcher = getServletContext().getRequestDispatcher(url);
+        requestDispatcher.forward(request, response);
+    }
 }

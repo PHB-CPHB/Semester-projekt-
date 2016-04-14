@@ -166,9 +166,9 @@ public class DBFacade implements AdminMapperInterface, BuildingMapperInterface, 
         return LMapper.requestAccessRole(customer);
     }
 
-    public boolean setImage(InputStream inputstream) {
+    public void setImage(InputStream inputstream) {
         System.out.println("dbfacade");
-        return IMapper.getImage(inputstream);
+        IMapper.getImage(inputstream);
     }
 
     @Override
