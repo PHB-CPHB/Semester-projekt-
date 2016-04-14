@@ -42,10 +42,10 @@
                     out.print("<td>" + building.getBuilding_status() + "</td>");
                     out.print("<td>" + building.getBuilding_type() + "</td>");
                     out.print("<td>" + building.getBuilding_year() + "</td>");
-                    out.print("<td>" + building.getBuilding_areasize() + "</td>");
+                    out.print("<td>" + con.getTotalSize(building.getBuilding_id()) + "</td>");
                     out.print("<td>" + building.getBuilding_name() + "</td>");
                     out.print("<td>" + building.getBuilding_adress() + "</td>");
-                    out.println("<td>" + building.getBuilding_floor() + "</td>");
+                    out.println("<td>" + con.getAllFloors(building.getBuilding_id()) + "</td>");
                     out.println("<td>" + building.getBuilding_zipcode() + "</td>");
                     out.println("<td>" + building.getBuilding_firm() + "</td>");%>
             <%--This is the delete button--%>

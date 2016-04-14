@@ -118,7 +118,6 @@ public class AddBuildingController extends HttpServlet {
             case "viewFloor":
                 int buildingid =  Integer.parseInt(request.getParameter("floor"));
                 Building building = new Building(buildingid);
-                    System.out.println("Ørvur" + building.getBuilding_id());
                 session.setAttribute("building", building);
                 if (c.getUser_role().equals("admin")) {
                     forward(request, response, "/AdminFloor.jsp");
