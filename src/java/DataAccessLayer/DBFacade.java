@@ -177,8 +177,7 @@ public class DBFacade implements AdminMapperInterface, BuildingMapperInterface, 
     }
 
     public void setImage(InputStream inputstream) {
-        System.out.println("dbfacade");
-        IMapper.getImage(inputstream);
+        IMapper.setImage(inputstream);
     }
 
     @Override
