@@ -10,6 +10,7 @@ import DataAccessLayer.DBConnector;
 import ServiceLayer.Entity.Building;
 import ServiceLayer.Entity.Customer;
 import ServiceLayer.Entity.Firm;
+import ServiceLayer.Entity.Floor;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -74,7 +75,6 @@ public class BuildingMapper implements BuildingMapperInterface {
     }
 
     //Made by Phillip - Add a building to the customer firm
-
     public void addBuilding(Building b) {
         String building_status = "Ikke klar i nu";
         try {
@@ -96,7 +96,6 @@ public class BuildingMapper implements BuildingMapperInterface {
     }
 
     //Made by Phillip - Returns the city of the zipcode
-
     @Override
     public String getCity(Building b) {
         String city = "";
@@ -111,7 +110,7 @@ public class BuildingMapper implements BuildingMapperInterface {
         }
         return city;
     }
-
+    
     public ArrayList<Building> getAllBuilding() {
         try {
             ArrayList<Building> building = new ArrayList<>();
@@ -135,7 +134,7 @@ public class BuildingMapper implements BuildingMapperInterface {
             return null;
         }
     }
-
+    
     @Override
     public void requestCheckUp(Building building) {
         String building_status = "check-up";
@@ -146,6 +145,25 @@ public class BuildingMapper implements BuildingMapperInterface {
             pstmt.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(BuildingMapper.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public ArrayList<Floor> getFloor(Building building) {
+        try {
+            ArrayList<Floor> floor = new ArrayList<>();
+            PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("SELECT building_floors.floor_no, building_floors.floor_size, building_floors.floor_arpartments, building_floors.floor_rooms  from building_floors inner join buildings ON building_floors.floor_building_id = buildings.building_id WHERE building_id = ?;");
+            pstmt.setInt(1, building.getBuilding_id());
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                floor.add(new Floor(rs.getInt("floor_no"),
+                        rs.getInt("floor_size"),
+                        rs.getString("floor_arpartments"),
+                        rs.getString("floor_rooms")));
+            }
+            return floor;
+        } catch (SQLException ex) {
+            System.out.println(ex);
+            return null;
         }
     }
 }

@@ -6,10 +6,13 @@
 package PressentationLayer;
 
 import ServiceLayer.Controller;
+import ServiceLayer.Entity.Building;
 import ServiceLayer.Entity.Customer;
+import ServiceLayer.Entity.Floor;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -98,26 +101,52 @@ public class AddBuildingController extends HttpServlet {
                 String zipcode = request.getParameter("zipcode");
                 int building_zipcode = Integer.parseInt(zipcode);
                 String building_parcel_no = request.getParameter("parcel");
-                String areasize = request.getParameter("size");
-                int building_areasize = Integer.parseInt(areasize);
                 String year = request.getParameter("year");
                 int building_year = Integer.parseInt(year);
                 String building_type = request.getParameter("type");
-                String building_floor = request.getParameter("floor");
                 //inserts into database!
                 if ("zipcode".equals(building_zipcode) && "adress".equals(building_adress) && "parcel".equals(building_parcel_no)) {
                     forward(request, response, "/AddBuilding.jsp");
                 } else {
-                    con.addNewBuilding(building_name, building_type, building_adress, building_year, building_zipcode, building_areasize, building_parcel_no, building_floor, c);
+                    con.addNewBuilding(building_name, building_type, building_adress, building_year, building_zipcode, building_parcel_no, c);
                     if (c.getUser_role().equals("admin")) {
                         forward(request, response, "/AdminBuilding.jsp");
                     } else {
                         forward(request, response, "/CustomerBuildings.jsp");
                     }
                 }
+            
+            case "viewFloor":
+                try {
+                String buildingid = request.getParameter("floor");
+                int building_id = Integer.parseInt(buildingid);
+                Building building = new Building(building_id);
+                session.setAttribute("building", building);
+                if (c.getUser_role().equals("admin")) {
+                    forward(request, response, "/AdminFloor.jsp");
+                } else {
+                    forward(request, response, "/CustomerFloor.jsp");
+                }
+                } catch (NullPointerException ex) {
+                        System.out.println(ex);
+                        }
+            
+            case "addNewFloor":
+                forward(request, response, "/addFloor.jsp");
+                //Knapperne virker ikke inde i Floor så orden dem find ud af fejl "PWC6117: File "null" not found"
+                //Kig methoden add floor over og tal med Michael omkring raport. Derudover så lav interfaces til mapper og ryd op i koden.
+            
+            case "addFloor":
+                Building building = (Building) session.getAttribute("building");
+                String floor_s = (String) request.getParameter("floor_size");
+                int floor_size = Integer.parseInt(floor_s);
+                String floor_apartments = (String) request.getParameter("floor_apartments");
+                String floor_rooms = (String) request.getParameter("floor_rooms");
+                con.addFloor(building, floor_size, floor_apartments, floor_rooms);
+            
             case "return":
                 if (c.getUser_role().equals("admin")) {
-                    forward(request, response, "/AdminBuilding.jsp");
+                    forward(request, response, "/AdminBuildings.jsp");
                 } else {
                     forward(request, response, "/CustomerBuildings.jsp");
                 }
