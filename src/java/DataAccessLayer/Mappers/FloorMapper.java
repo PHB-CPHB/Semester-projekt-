@@ -21,8 +21,8 @@ public class FloorMapper {
         try {
             PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("INSERT INTO building_floors (floor_building_id, floor_size, floor_arpartments, floor_rooms) VALUES (?, ?, ?, ?);");
             pstmt.setInt(1, building.getBuilding_id());
-            pstmt.setString(2, floor.getFloor_arpartments());
-            pstmt.setString(3, floor.getFloor_rooms());
+            pstmt.setInt(2, floor.getFloor_size());
+            pstmt.setString(3, floor.getFloor_arpartments());
             pstmt.setString(4, floor.getFloor_rooms());
             pstmt.executeUpdate();
         } catch (SQLException ex) {

@@ -21,8 +21,8 @@
             <input type="text" name="floor_apartments"><br>
             Rooms:<br>
             <input type="text" name="floor_rooms"><br>
-            <input type="hidden" name="do_this" value="addFloor"
-            <input type="submit" value="Add Floor">
+            <input type="hidden" name="do_this" value="addFloor">
+            <input type="submit" value="add" style="width: 30%; height: 30%; font-size: 100%;">
         </form>
         <br>
         <form action="AddBuildingController" method="POST">
