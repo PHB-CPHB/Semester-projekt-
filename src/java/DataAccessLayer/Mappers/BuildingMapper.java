@@ -25,6 +25,7 @@ import java.util.logging.Logger;
 public class BuildingMapper implements BuildingMapperInterface {
 
     //Made by Phillip - Return an Arraylist with only the customers building by thier user id
+    @Override
     public ArrayList<Building> getAllCustomersBuildings(Customer c) {
         try {
             ArrayList<Building> list = new ArrayList<>();
@@ -75,6 +76,7 @@ public class BuildingMapper implements BuildingMapperInterface {
     }
 
     //Made by Phillip - Add a building to the customer firm
+    @Override
     public void addBuilding(Building b) {
         String building_status = "Ikke klar i nu";
         try {
@@ -111,6 +113,7 @@ public class BuildingMapper implements BuildingMapperInterface {
         return city;
     }
     
+    @Override
     public ArrayList<Building> getAllBuilding() {
         try {
             ArrayList<Building> building = new ArrayList<>();
@@ -148,6 +151,7 @@ public class BuildingMapper implements BuildingMapperInterface {
         }
     }
     
+    @Override
     public ArrayList<Floor> getFloor(Building building) {
         try {
             ArrayList<Floor> floor = new ArrayList<>();

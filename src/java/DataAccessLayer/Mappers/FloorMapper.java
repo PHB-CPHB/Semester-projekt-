@@ -5,6 +5,7 @@
  */
 package DataAccessLayer.Mappers;
 
+import DataAccessLayer.Interfaces.FloorMapperInterface;
 import DataAccessLayer.DBConnector;
 import ServiceLayer.Entity.Building;
 import ServiceLayer.Entity.Floor;
@@ -17,8 +18,9 @@ import java.util.ArrayList;
  *
  * @author philliphbrink
  */
-public class FloorMapper {
+public class FloorMapper implements FloorMapperInterface {
     
+    @Override
     public void addFloor(Floor floor) {
         try {
             PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("INSERT INTO building_floors (floor_building_id, floor_no, floor_size, floor_arpartments, floor_rooms) VALUES (?, ?, ?, ?, ?);");
@@ -33,6 +35,7 @@ public class FloorMapper {
         }        
     }
     
+    @Override
     public int getAllFloors(Floor floor) {
         int floor_no = 0;
         try {
@@ -49,6 +52,7 @@ public class FloorMapper {
         return floor_no;
     }
     
+    @Override
     public ArrayList<Floor> getTotalSize(Floor floor) {
         try {
             ArrayList<Floor> list = new ArrayList<>();
@@ -68,6 +72,7 @@ public class FloorMapper {
         }        
     }
 
+    //@Override
     public Floor getFloor(Floor floor) {
         try {
             PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("SELECT floor_size, floor_arpartments, floor_rooms from building_floors WHERE floor_no = ? and floor_building_id = ?");
@@ -86,6 +91,7 @@ public class FloorMapper {
         } 
     }
 
+    @Override
     public void updateFloor(Floor editFloor) {
        try {
             PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("UPDATE building_floors set floor_size = ?, floor_arpartments = ?, floor_rooms = ? WHERE floor_no = ? and floor_building_id = ?;");
@@ -100,6 +106,7 @@ public class FloorMapper {
         } 
     }
 
+    @Override
     public void deleteFloor(Floor floor) {
         try {
             PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("DELETE FROM building_floors WHERE floor_building_id = ?;");

@@ -5,6 +5,7 @@
  */
 package DataAccessLayer.Mappers;
 
+import DataAccessLayer.Interfaces.ImageMapperInterface;
 import DataAccessLayer.DBConnector;
 import ServiceLayer.Entity.Image;
 import java.io.InputStream;
@@ -18,7 +19,8 @@ import java.util.logging.Logger;
  *
  * @author Oliver
  */
-public class ImageMapper {
+public class ImageMapper implements ImageMapperInterface {
+    @Override
     public void setImage(InputStream inputstream) {
         try {
             PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("INSERT INTO images (image_name, Photo, image_id) values (?, ?, ?)");
@@ -32,6 +34,7 @@ public class ImageMapper {
         
     }
     
+    @Override
     public void getImage(InputStream inputstream) {
         
     }

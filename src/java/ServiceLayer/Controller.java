@@ -86,38 +86,46 @@ public class Controller implements IController {
         return DBF.requestAccessWithRole(customer);
     }
 
+    @Override
     public ArrayList<Customer> getAllUsers(Customer customer) {
         return DBF.getAllUsers(customer);
     }
 
+    @Override
     public ArrayList<Building> getAllBuildings() {
         return DBF.getAllBuildings();
     }
 
+    @Override
     public ArrayList<Building> getAllCutsomerBuildings(Customer customer) {
         return DBF.getAllCutsomerBuildings(customer);
     }
 
+    @Override
     public void requestCheckUp(int building_id) {
         Building building = new Building(building_id);
         DBF.requestCheckUp(building);
     }
 
+    @Override
     public void setImage(InputStream inputstream) {
         System.out.println(inputstream);
         DBF.setImage(inputstream);
     }
 
+    @Override
     public ArrayList<Floor> buildingFloor(Building building) {
         return DBF.getFloors(building);
     }
 
+    @Override
     public void addFloor(Building building, int floor_size, String floor_apartments, String floor_rooms) {
         int floor_no = maxFloor(building);
         Floor floor = new Floor(floor_no, floor_size, floor_apartments, floor_rooms);
         floor.setFloor_building_id(building.getBuilding_id());
         DBF.addFloor(floor);
     }
+    @Override
     public int maxFloor(Building building){
         Floor floor = new Floor(building.getBuilding_id());
         int currentFloor = DBF.getAllFloors(floor);
@@ -125,11 +133,13 @@ public class Controller implements IController {
         return newFloor;
       }
     
+    @Override
     public int getAllFloors(int building_id){
         Floor floor = new Floor(building_id);
         return DBF.getAllFloors(floor);
     }
     
+    @Override
     public int getTotalSize(int building_id){
         int totalBuildingSize = 0;
         Floor buildingfloor = new Floor(building_id);
@@ -140,16 +150,19 @@ public class Controller implements IController {
         return totalBuildingSize;
     }
 
+    @Override
     public Floor getFloor(int floor_no, Building CurrentBuilding) {
         Floor floor = new Floor(CurrentBuilding.getBuilding_id(), floor_no);
         return DBF.getFloor(floor);
     }
 
+    @Override
     public void updateFloor(int floor_b_id, int floor_n, int floor_si, String floor_apt, String floor_ro) {
         Floor editFloor = new Floor(floor_b_id, floor_n, floor_si, floor_apt, floor_ro);
         DBF.updateFloor(editFloor);
     }
 
+    @Override
     public void deleteFloors(int building_id) {
     Floor floor = new Floor(building_id);
     DBF.deleteFloor(floor);

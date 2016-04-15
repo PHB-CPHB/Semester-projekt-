@@ -5,10 +5,16 @@
  */
 package DataAccessLayer.Interfaces;
 
+import java.io.InputStream;
+
 /**
  *
- * @author Oliver
+ * @author philliphbrink
  */
 public interface ImageMapperInterface {
+
+    void getImage(InputStream inputstream);
+
+    void setImage(InputStream inputstream);
     
 }
