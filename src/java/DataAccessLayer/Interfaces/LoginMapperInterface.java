@@ -13,8 +13,16 @@ import ServiceLayer.Entity.Customer;
  */
 public interface LoginMapperInterface {
 
-    String getUserRole(Customer customer);
+    //Made by Phillip - Returns customers id by Username and Password
+    int getUserId(Customer c);
 
-    boolean validate(Customer customer);
+    //Tim
+    String getUserRole(Customer c);
 
+    //Made by Phillip - Returns the Customer/Admin how is logged in
+    Customer requestAccessRole(Customer customer);
+
+    //Tim
+    boolean validate(Customer c);
+    
 }

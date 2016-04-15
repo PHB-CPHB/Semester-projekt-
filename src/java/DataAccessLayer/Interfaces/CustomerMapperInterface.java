@@ -14,16 +14,23 @@ import java.util.ArrayList;
  */
 public interface CustomerMapperInterface {
 
-    boolean createCustomer(Customer customer);
+    //Made by Oliver - Corrected by Phillip
+    boolean createCustomer(Customer c);
 
-    ArrayList<Customer> getAllUsers(Customer customer);
+    // Made by Oliver corrected by Phillip
+    //Returns an ArrayList of all the users
+    ArrayList<Customer> getAllUsers(Customer c);
 
+    //Made by Phillip - Gets customer firm id by thier user id
     int getBuildingFirmId(Customer customer);
 
-    String getCustomer(Customer customer);
+    //Made by Phillip - gets customers firm by thier username
+    String getCustomer(Customer c);
 
-    int getCustomerId(Customer customer);
+    //Made by Phillip - Gets customers id by thier Username and Password
+    int getCustomerId(Customer c);
 
-    String getFirm(Customer customer);
-
+    //Made by Phillip - Return the customer firm by thier name
+    String getFirm(Customer c);
+    
 }

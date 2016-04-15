@@ -8,6 +8,8 @@ package DataAccessLayer;
 import DataAccessLayer.Interfaces.AdminMapperInterface;
 import DataAccessLayer.Interfaces.BuildingMapperInterface;
 import DataAccessLayer.Interfaces.CustomerMapperInterface;
+import DataAccessLayer.Interfaces.FloorMapperInterface;
+import DataAccessLayer.Interfaces.ImageMapperInterface;
 import DataAccessLayer.Interfaces.LoginMapperInterface;
 import DataAccessLayer.Mappers.AdminMapper;
 import DataAccessLayer.Mappers.BuildingMapper;
@@ -17,6 +19,7 @@ import DataAccessLayer.Mappers.ImageMapper;
 import DataAccessLayer.Mappers.LoginMapper;
 import ServiceLayer.Entity.Building;
 import ServiceLayer.Entity.Customer;
+import ServiceLayer.Entity.Firm;
 import ServiceLayer.Entity.Floor;
 import ServiceLayer.Entity.Image;
 import java.io.InputStream;
@@ -26,7 +29,7 @@ import java.util.ArrayList;
  *
  * @author philliphbrink
  */
-public class DBFacade implements AdminMapperInterface, BuildingMapperInterface, CustomerMapperInterface, LoginMapperInterface {
+public class DBFacade implements AdminMapperInterface, BuildingMapperInterface, CustomerMapperInterface, LoginMapperInterface, FloorMapperInterface, ImageMapperInterface {
 
     private static DBFacade instance;
     private BuildingMapper BMapper = new BuildingMapper();
@@ -70,6 +73,7 @@ public class DBFacade implements AdminMapperInterface, BuildingMapperInterface, 
     }
 
     //Made by Phillip
+    @Override
     public void addBuilding(Building building) {
         BMapper.addBuilding(building);
     }
@@ -157,6 +161,7 @@ public class DBFacade implements AdminMapperInterface, BuildingMapperInterface, 
     }
 
     //Made by Phillip
+    @Override
     public int getUserId(Customer customer) {
         return LMapper.getUserId(customer);
     }
@@ -166,9 +171,10 @@ public class DBFacade implements AdminMapperInterface, BuildingMapperInterface, 
         return LMapper.requestAccessRole(customer);
     }
 
+    @Override
     public void setImage(InputStream inputstream) {
-        System.out.println("dbfacade");
-        IMapper.getImage(inputstream);
+        System.out.println(inputstream);
+        IMapper.setImage(inputstream);
     }
 
     @Override
@@ -180,7 +186,63 @@ public class DBFacade implements AdminMapperInterface, BuildingMapperInterface, 
         return BMapper.getFloor(building);
     }
 
-    public void addFloor(Building building, Floor floor) {
-        FloorMapper.addFloor(building, floor);
+    @Override
+    public void addFloor(Floor floor) {
+        FloorMapper.addFloor(floor);
+    }
+
+    @Override
+    public int getAllFloors(Floor floor) {
+        return FloorMapper.getAllFloors(floor);
+    }
+
+    @Override
+    public ArrayList<Floor> getTotalSize(Floor floor) {
+        return FloorMapper.getTotalSize(floor);
+    }
+
+    @Override
+    public Floor getFloor(Floor floor) {
+        return FloorMapper.getFloor(floor);
+    }
+
+    @Override
+    public void updateFloor(Floor editFloor) {
+        FloorMapper.updateFloor(editFloor);
+    }
+
+    @Override
+    public void deleteFloor(Floor floor) {
+        FloorMapper.deleteFloor(floor);
+    }
+
+    @Override
+    public ArrayList<Firm> getAllFirms() {
+        return AMapper.getAllFirms();
+    }
+
+    @Override
+    public ArrayList<Building> getAllBuilding() {
+        return BMapper.getAllBuilding();
+    }
+
+    @Override
+    public ArrayList<Building> getAllCustomersBuildings(Customer c) {
+        return BMapper.getAllCustomersBuildings(c);
+    }
+
+    @Override
+    public ArrayList<Floor> getFloor(Building building) {
+        return BMapper.getFloor(building);
+    }
+
+    @Override
+    public Customer requestAccessRole(Customer customer) {
+        return LMapper.requestAccessRole(customer);
+    }
+
+    @Override
+    public void getImage(InputStream inputstream) {
+        IMapper.getImage(inputstream);
     }
 }

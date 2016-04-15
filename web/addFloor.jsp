@@ -26,7 +26,7 @@
         </form>
         <br>
         <form action="AddBuildingController" method="POST">
-            <input type="hidden" value="return" name="do_this">
+            <input type="hidden" value="returnFloor" name="do_this">
             <input type="submit" value="Return" style="width: 30%; height: 30%; font-size: 100%;"/>
         </form>
     </center>
