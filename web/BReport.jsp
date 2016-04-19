@@ -34,15 +34,15 @@
                 </td>
                 <tr></tr>
                 <td style="border: 1px solid white;">
-                    Byggeår:______________________________________________________________________________________
+                    Byggeår:<input style="border-bottom: 1px solid black; width: 54%" type="text"> 
                 </td>
                 <tr>
                     <td style="border: 1px solid white">
-                            Bygningsareal i m2 (hver etage tælles separat):________________________________________________________
+                            Bygningsareal i m2 (hver etage tælles separat):<input style="border-bottom: 1px solid black; width: 38%" type="text"> 
                         </td>
                     </tr>
                     <td style="border: 1px solid white">
-                        Hvad bruges bygningen til / Hvad har bygningen været brugt til?:_________________________________________
+                        Hvad bruges bygningen til / Hvad har bygningen været brugt til?:<input style="border-bottom: 1px solid black; width: 30%" type="text"> 
                     </td>
                     <tr></tr>
                 </table>
@@ -71,7 +71,9 @@
                     <td> Billede: <input type="checkbox" name="picture" value="pic"></td>
                     </tr>
                 </table>
-
+                <table style="width: 100%">
+                    <input type="text" style="width: 100%; height: 50px; border: 1px solid black; border-top: 1px solid white">
+                </table>
                 <table style="width: 100%">
                     <tr><td style="border: 1px solid white"></td></tr>
                     <tr><td style="border: 1px solid white; width: 800px">Bygningsgennemgangen er foretaget af <input type="text" style="width: 350px; border-bottom: 1px solid black">,Polygon</td></tr>
@@ -112,11 +114,26 @@
                     <th>Funktionen er nedsat – fare for følgeskader</th>
                     <td><input type="checkbox" name="tilstand3" value="tre" </td>
                 </table>
-
-            </center>
-            <form action="AddBuildingController" method="POST">
-                <input type="hidden" value="return" name="do_this">
-                <input type="submit" value="Return" style="width: 30%; height: 30%; font-size: 100%;"/>
+                <table style="width: 100%">
+                    <tr>
+                        <td style="width: 1200px; border: 1px solid white; text-align: left; ">
+                        Denne rapport og bygningsgennemgang er lavet for at klarlægge umiddelbare visuelle problemstillinger. Vores formål er at sikre, at
+                        bygningens anvendelse kan opretholdes. Vi udbedrer ikke skader som en del af bygningsgennemgangen/rapporten. Gennemgangen
+                        af bygningen indeholder ikke fugtmålinger af hele bygningen, men vi kan foretage fugtscanninger enkelte steder i bygningen, hvis vi
+                        finder det nødvendigt. Hvis vi finder kritiske områder i bygningen vil vi fremlægge anbefalinger angående yderligere tiltag så som
+                        yderligere undersøgelser, reparationer eller bygningsopdateringer.
+                        Bemærk at vi skal have adgang til hele bygningen for at kunne udføre en fuld gennemgang (dette inkluderer adgang til tag, tagrum,
+                        kælder, krybekælder eller andre aflukkede områder). Denne bygningsgennemgang er ikke-destruktiv. Hvis der skal laves destruktive
+                        indgreb, skal dette først godkendes af de bygningsansvarlige. Destruktive indgreb er ikke en del af denne rapport eller
+                        bygningsgennemgang.
+                        Den bygningsansvarlige skal udlevere plantegning over bygningen inden bygningsgennemgangen kan foretages. 
+                    </td>
+                </tr>
+            </table>
+        </center>
+        <form action="AddBuildingController" method="POST">
+            <input type="hidden" value="return" name="do_this">
+            <input type="submit" value="Return" style="width: 30%; height: 30%; font-size: 100%;"/>
         </form>
     </body>
 </html>
