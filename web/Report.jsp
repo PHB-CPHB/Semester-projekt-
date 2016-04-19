@@ -272,7 +272,7 @@
                                     <td><input type="text" style="width: 100%; height: 50px; border: 1px solid black"></td>
                                     <td><input type="text" style="width: 100%; height: 50px; border: 1px solid black"></td>
                                 </tr></table>
-                            <table style="width: 100%"
+                            <table style="width: 100%">
                                    <tr><td style="border: 1px solid white"></td></tr>
                                 <tr><td style="border: 1px solid white; width: 800px">Bygningsgennemgangen er foretaget af <input type="text" style="width: 350px; border-bottom: 1px solid black">,Polygon</td></tr>
                                 <tr><td style="border: 1px solid white"> I samarbejde med<input type="text" style="width: 493px; border-bottom: 1px solid black">,(bygningsansvarlig),</td></tr>
@@ -282,8 +282,12 @@
                                 Bygningen er kategoriseret som
                             </td>
                         </table>
-                        <tr></tr>
                         <table style="width: 100%">
+                                <input type="text" style="width: 100%; height: 50px; border: 1px solid black; border-top: 1px solid white ">
+                                <tr><td style="height: 50px; border: 1px solid white"</td></tr>
+                            </table>
+                            <tr></tr>
+                            <table style="width: 100%">
                                 <th style="width: 100px">Tilstand</th>
                                 <th style="width: 275px">Beskrivelse af bygningen</th>
                                 <th style="width: 275px">Funktion af bygningen</th>
