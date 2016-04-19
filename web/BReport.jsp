@@ -34,7 +34,7 @@
                 </td>
                 <tr></tr>
                 <td style="border: 1px solid white;">
-                    Byggeår:<input style="border-bottom: 1px solid black; width: 54%" type="text"> 
+                    Byggeår:<input style="border-bottom: 1px solid black; width: 54%" type="text" name="BuildingYear"> 
                 </td>
                 <tr>
                     <td style="border: 1px solid white">
