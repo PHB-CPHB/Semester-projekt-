@@ -5,13 +5,20 @@
  */
 package PressentationLayer;
 
+import DataAccessLayer.DBConnector;
 import ServiceLayer.Controller;
 import ServiceLayer.Entity.Building;
 import ServiceLayer.Entity.Floor;
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -54,9 +61,47 @@ public class ImageController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+        protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+                System.out.println("0");
+            InputStream photoStream = getPhotos();
+
+            // Prepare streams.
+            BufferedInputStream input = null;
+            BufferedOutputStream output = null;
+            System.out.println("1");
+            try {
+                System.out.println("2");
+                // Open streams
+                input = new BufferedInputStream(photoStream, 16177215);
+
+                response.setContentType("image/jpeg");
+
+                output = new BufferedOutputStream(response.getOutputStream(),
+                        16177215);
+                System.out.println("3");
+                // Write file contents to response.
+                byte[] buffer = new byte[16177215];
+                int length;
+                while ((length = input.read(buffer)) > 0) {
+                    output.write(buffer, 0, length);
+                }
+
+            } finally {
+                output.close();
+                input.close();
+            }
+
+            //Redirect it to profile page
+            
+            RequestDispatcher rd = request.getRequestDispatcher("/login.jsp");
+            rd.forward(request, response);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
     /**

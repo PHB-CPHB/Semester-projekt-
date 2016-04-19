@@ -8,6 +8,7 @@ package DataAccessLayer.Mappers;
 import DataAccessLayer.DBConnector;
 import ServiceLayer.Entity.Image;
 import java.io.InputStream;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -35,6 +36,31 @@ public class ImageMapper {
             Logger.getLogger(CustomerMapper.class.getName()).log(Level.SEVERE, null, ex);
         }
         
+    }
+    
+    private InputStream getPhotos() throws
+            IllegalArgumentException, SQLException, ClassNotFoundException {
+
+        Connection connection = DBConnector.getConnection();
+        PreparedStatement preparedStatement = null;
+        ResultSet resultset = null;
+        InputStream binaryStream = null;
+
+        try {
+
+            preparedStatement = connection.prepareStatement("SELECT photo FROM images WHERE image_id=?");
+            preparedStatement.setString(1, "3");
+            resultset = preparedStatement.executeQuery();
+
+            while (resultset.next()) {
+                binaryStream = resultset.getBinaryStream("photo");
+            }
+
+        } catch (SQLException e) {
+            throw new SQLException(e);
+        } finally {
+        }
+        return binaryStream;
     }
     
     public void getImage(InputStream inputstream) {

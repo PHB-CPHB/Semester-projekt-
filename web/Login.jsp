@@ -13,6 +13,8 @@
     </head>
     <div
         <body bgcolor="#33CCFF">
+            <img src="ImageController" alt="some_text">
+            </form>
             <form action="LoginController" method="POST" style= "background: lightblue">
                 <fieldset>
                     <center>
@@ -20,6 +22,7 @@
                             <h1>Please enter your login</h1>
                         </legend>
                     </center>
+
                     <center>Username:<br></center>
                     <center><input type="text" name="username" style="width: 20%; height: 40%;"><br></center>
                     <center>Password:<br></center>
@@ -29,5 +32,5 @@
             </form >
             <%-- <center><image src="Polygon.jpg" style="width: 1255px; height:430px "/></center> --%>
         </body>
-        
+
 </html>
