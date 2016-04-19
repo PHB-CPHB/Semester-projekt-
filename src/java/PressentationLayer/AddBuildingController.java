@@ -94,26 +94,40 @@ public class AddBuildingController extends HttpServlet {
         // Made by Michael
         switch (do_this) {
             case "add":
-                String building_name = request.getParameter("name");
-                String building_adress = request.getParameter("address");
-                String zipcode = request.getParameter("zipcode");
-                int building_zipcode = Integer.parseInt(zipcode);
-                String building_parcel_no = request.getParameter("parcel");
-                String year = request.getParameter("year");
-                int building_year = Integer.parseInt(year);
-                String building_type = request.getParameter("type");
-                //inserts into database!
-                if ("zipcode".equals(building_zipcode) && "adress".equals(building_adress) && "parcel".equals(building_parcel_no)) {
-                    forward(request, response, "/AddBuilding.jsp");
-                } else {
-                    con.addNewBuilding(building_name, building_type, building_adress, building_year, building_zipcode, building_parcel_no, c);
-                    if (c.getUser_role().equals("admin")) {
-                        forward(request, response, "/AdminBuildings.jsp");
+                try {
+                    String building_name = request.getParameter("name");
+                    String building_adress = request.getParameter("address");
+                    String zipcode = request.getParameter("zipcode");
+                    int building_zipcode = Integer.parseInt(zipcode);
+                    String building_parcel_no = request.getParameter("parcel");
+                    String year = request.getParameter("year");
+                    int building_year = Integer.parseInt(year);
+                    String building_type = request.getParameter("type");
+                    //inserts into database!
+                    if ("zipcode".equals(building_zipcode) && "adress".equals(building_adress) && "parcel".equals(building_parcel_no)) {
+                        forward(request, response, "/AddBuilding.jsp");
                     } else {
-                        forward(request, response, "/CustomerBuildings.jsp");
+                        try {
+                            con.addNewBuilding(building_name, building_type, building_adress, building_year, building_zipcode, building_parcel_no, c);
+                        } catch (SQLException sqle) {
+                            String ErrorMessage = "Du skal skrive tal i Zipcodes og Year for at kunne forsætte. HUSK kun hele 1000 tal i Zipcode";
+                            request.setAttribute("ErrorMessage", ErrorMessage);
+                            forward(request, response, "/AddBuilding.jsp");
+                        }
+                        if (c.getUser_role().equals("admin")) {
+                            forward(request, response, "/AdminBuildings.jsp");
+                        } else {
+                            forward(request, response, "/CustomerBuildings.jsp");
+                        }
                     }
+                } catch (NumberFormatException | NullPointerException NFE) {
+                    String ErrorMessage = "Du skal skrive noget i alle felterne for at kunne oprette en bygning kun hele 1000 tal i Zipcodes";
+                    request.setAttribute("ErrorMessage", ErrorMessage);
+                    forward(request, response, "/AddBuilding.jsp");
                 }
+
                 break;
+
             case "viewFloor":
                 int buildingid = Integer.parseInt(request.getParameter("floor"));
                 Building building = new Building(buildingid);

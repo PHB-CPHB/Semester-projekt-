@@ -36,6 +36,11 @@
             </tr>
             <% Controller con = (Controller) session.getAttribute("Controller");
                 ArrayList<Building> buildings = con.getAllCutsomerBuildings(c);
+                if (buildings.size() == 0) {%>
+            <%= "Du har ingen bygninger endnu"%>
+            <%} else if (buildings == null) {%>
+            <%="Der er sketen fejl i serveren"%>
+            <%} else {
                 for (Building building : buildings) {
                     out.println("<tr>");
                     out.println("<td>" + building.getBuilding_id() + "</td>");
@@ -47,7 +52,7 @@
                     out.print("<td>" + building.getBuilding_adress() + "</td>");
                     out.println("<td>" + con.getAllFloors(building.getBuilding_id()) + "</td>");
                     out.println("<td>" + building.getBuilding_zipcode() + "</td>");
-                    out.println("<td>" + building.getBuilding_firm() + "</td>");%>
+                        out.println("<td>" + building.getBuilding_firm() + "</td>");%>
             <%--This is the delete button--%>
             <td> <form action="DeleteBuildingController" method="POST">
                     <input type="hidden" name="do_this" value="delete"/>
@@ -74,6 +79,7 @@
                 </form>
             </td>
             <%out.println("</tr>");
+                    }
                 }
             %>
         </table>
