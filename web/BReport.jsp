@@ -116,7 +116,7 @@
                 </table>
                 <table style="width: 100%">
                     <tr>
-                        <td style="width: 1200px; border: 1px solid white; text-align: left; ">
+                        <td style="width: 1200px; border-top: 1px solid white; text-align: left; ">
                         Denne rapport og bygningsgennemgang er lavet for at klarlægge umiddelbare visuelle problemstillinger. Vores formål er at sikre, at
                         bygningens anvendelse kan opretholdes. Vi udbedrer ikke skader som en del af bygningsgennemgangen/rapporten. Gennemgangen
                         af bygningen indeholder ikke fugtmålinger af hele bygningen, men vi kan foretage fugtscanninger enkelte steder i bygningen, hvis vi

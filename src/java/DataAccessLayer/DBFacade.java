@@ -23,6 +23,7 @@ import ServiceLayer.Entity.Firm;
 import ServiceLayer.Entity.Floor;
 import ServiceLayer.Entity.Image;
 import java.io.InputStream;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
@@ -51,8 +52,7 @@ public class DBFacade implements AdminMapperInterface, BuildingMapperInterface, 
     }
 
     //Made by Phillip
-
-    public ArrayList<Building> getAllCutsomerBuildings(Customer customer) {
+    public ArrayList<Building> getAllCutsomerBuildings(Customer customer) throws SQLException {
         return BMapper.getAllCustomersBuildings(customer);
     }
 
@@ -74,7 +74,7 @@ public class DBFacade implements AdminMapperInterface, BuildingMapperInterface, 
 
     //Made by Phillip
     @Override
-    public void addBuilding(Building building) {
+    public void addBuilding(Building building) throws SQLException {
         BMapper.addBuilding(building);
     }
 
@@ -227,7 +227,7 @@ public class DBFacade implements AdminMapperInterface, BuildingMapperInterface, 
     }
 
     @Override
-    public ArrayList<Building> getAllCustomersBuildings(Customer c) {
+    public ArrayList<Building> getAllCustomersBuildings(Customer c) throws SQLException {
         return BMapper.getAllCustomersBuildings(c);
     }
 

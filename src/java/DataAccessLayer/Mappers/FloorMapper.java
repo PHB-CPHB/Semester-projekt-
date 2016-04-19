@@ -52,6 +52,26 @@ public class FloorMapper implements FloorMapperInterface {
         return floor_no;
     }
     
+    public ArrayList<Floor> getAllFloorsArray(Floor floor) {
+        ArrayList<Floor> list = new ArrayList();
+        try {
+            PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("SELECT floor_no, floor_size, floor_arpartments, floor_rooms FROM building_floors WHERE floor_building_id = ?");
+            pstmt.setInt(1, floor.getFloor_building_id());
+            ResultSet rs = pstmt.executeQuery();
+            while(rs.next()) {
+            list.add(new Floor(rs.getInt("floor_no"),
+            rs.getInt("floor_size"), 
+            rs.getString("floor_arpartments"),
+            rs.getString("floor_rooms")));
+            }
+            return list;
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+        System.out.println("FAIL");
+        return list;
+    }
+    
     @Override
     public ArrayList<Floor> getTotalSize(Floor floor) {
         try {

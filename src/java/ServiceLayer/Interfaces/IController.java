@@ -9,6 +9,7 @@ import ServiceLayer.Entity.Building;
 import ServiceLayer.Entity.Customer;
 import ServiceLayer.Entity.Floor;
 import java.io.InputStream;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
@@ -19,7 +20,7 @@ public interface IController {
 
     void addFloor(Building building, int floor_size, String floor_apartments, String floor_rooms);
 
-    void addNewBuilding(String building_name, String building_type, String building_adress, int building_year, int building_zipcode, String building_parcelno, Customer c);
+    void addNewBuilding(String building_name, String building_type, String building_adress, int building_year, int building_zipcode, String building_parcelno, Customer c) throws SQLException;
 
     ArrayList<Floor> buildingFloor(Building building);
 

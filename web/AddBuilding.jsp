@@ -34,6 +34,10 @@
             <input type="hidden" value="return" name="do_this">
             <input type="submit" value="Return" style="width: 30%; height: 30%; font-size: 100%;"/>
         </form>
+        <br>
+        <%if(request.getAttribute("ErrorMessage") != null) {%>
+        <%=request.getAttribute("ErrorMessage")%>
+        <%}%>
     </center>
 </body>
 </html>

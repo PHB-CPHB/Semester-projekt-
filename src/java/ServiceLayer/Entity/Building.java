@@ -5,6 +5,8 @@
  */
 package ServiceLayer.Entity;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author philliphbrink
@@ -12,8 +14,6 @@ package ServiceLayer.Entity;
 // Made by Michael
 public class Building {
 
-    private int roomId;
-    private int roomSize;
     private int building_id;
     private String building_name;
     private String building_status;
@@ -27,10 +27,10 @@ public class Building {
     private String building_floor;
     private String building_firm;
     private int building_firm_id;
+    private ArrayList<Floor> building_floors = new ArrayList();
+    private ArrayList<Room> building_rooms = new ArrayList();
 
-    public Building(int roomId, int roomSize, int building_id, String buildingName, String buildingStatus, String building_type, String building_adress, int building_year, int building_zipcode, String building_city, int building_areasize, String building_parcel_no, String building_floor, String building_firm, int building_firm_id) {
-        this.roomId = roomId;
-        this.roomSize = roomSize;
+    public Building(int building_id, String buildingName, String buildingStatus, String building_type, String building_adress, int building_year, int building_zipcode, String building_city, int building_areasize, String building_parcel_no, String building_floor, String building_firm, int building_firm_id) {
         this.building_id = building_id;
         this.building_name = buildingName;
         this.building_status = buildingStatus;
@@ -45,6 +45,22 @@ public class Building {
         this.building_firm = building_firm;
         this.building_firm_id = building_firm_id;
     }
+
+    public Building(int building_id, String building_name, String building_status, String building_type, String building_adress, int building_year, int building_zipcode, int building_areasize, String building_parcel_no, String building_firm, int building_firm_id) {
+        this.building_id = building_id;
+        this.building_name = building_name;
+        this.building_status = building_status;
+        this.building_type = building_type;
+        this.building_adress = building_adress;
+        this.building_year = building_year;
+        this.building_zipcode = building_zipcode;
+        this.building_areasize = building_areasize;
+        this.building_parcel_no = building_parcel_no;
+        this.building_firm = building_firm;
+        this.building_firm_id = building_firm_id;
+    }
+    
+    
 
     public Building(int building_id, String building_status, String building_type, int building_year, int building_areasize, String building_name, String building_adress, String building_floor, int building_zipcode, String building_firm) {
         this.building_id = building_id;
@@ -71,28 +87,25 @@ public class Building {
         this.building_floor = building_floor;
         this.building_firm_id = building_firm_id;
     }
+    
+    public Building(String building_name, String building_type, String building_adress, int building_year, int building_zipcode, int building_areasize, String building_parcelno, String building_floor, int building_firm_id, ArrayList<Floor> building_floors) {
+        this.building_name = building_name;
+        this.building_type = building_type;
+        this.building_adress = building_adress;
+        this.building_year = building_year;
+        this.building_zipcode = building_zipcode;
+        this.building_areasize = building_areasize;
+        this.building_parcel_no = building_parcelno;
+        this.building_floor = building_floor;
+        this.building_firm_id = building_firm_id;
+        this.building_floors = building_floors;
+    }
 
     public Building(int building_id) {
         this.building_id = building_id;
     }
 
     public Building() {
-    }
-
-    public int getRoomId() {
-        return roomId;
-    }
-
-    public void setRoomId(int roomId) {
-        this.roomId = roomId;
-    }
-
-    public int getRoomSize() {
-        return roomSize;
-    }
-
-    public void setRoomSize(int roomSize) {
-        this.roomSize = roomSize;
     }
 
     public int getBuilding_id() {
@@ -197,6 +210,18 @@ public class Building {
 
     public void setBuilding_firm_id(int building_firm_id) {
         this.building_firm_id = building_firm_id;
+    }
+
+    public ArrayList<Floor> getBuilding_floors() {
+        return building_floors;
+    }
+
+    public void setBuilding_floors(ArrayList<Floor> building_floors) {
+        this.building_floors = building_floors;
+    }
+    
+    public void addBuilding_floors(Floor floor) {
+        building_floors.add(floor);
     }
 
 }

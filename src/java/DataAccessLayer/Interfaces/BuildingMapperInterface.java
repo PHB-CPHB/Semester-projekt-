@@ -8,6 +8,7 @@ package DataAccessLayer.Interfaces;
 import ServiceLayer.Entity.Building;
 import ServiceLayer.Entity.Customer;
 import ServiceLayer.Entity.Floor;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
@@ -17,7 +18,7 @@ import java.util.ArrayList;
 public interface BuildingMapperInterface {
 
     //Made by Phillip - Add a building to the customer firm
-    void addBuilding(Building b);
+    void addBuilding(Building b) throws SQLException;
 
     void deleteAllBuildings(Building b);
 
@@ -28,7 +29,7 @@ public interface BuildingMapperInterface {
     ArrayList<Building> getAllBuilding();
 
     //Made by Phillip - Return an Arraylist with only the customers building by thier user id
-    ArrayList<Building> getAllCustomersBuildings(Customer c);
+    ArrayList<Building> getAllCustomersBuildings(Customer c) throws SQLException;
 
     //Made by Phillip - Returns the city of the zipcode
     String getCity(Building b);

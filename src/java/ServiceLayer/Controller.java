@@ -11,6 +11,7 @@ import ServiceLayer.Entity.Building;
 import ServiceLayer.Entity.Customer;
 import ServiceLayer.Entity.Floor;
 import java.io.InputStream;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
@@ -35,7 +36,7 @@ public class Controller implements IController {
     }
 
     @Override
-    public void addNewBuilding(String building_name, String building_type, String building_adress, int building_year, int building_zipcode, String building_parcelno, Customer c) {
+    public void addNewBuilding(String building_name, String building_type, String building_adress, int building_year, int building_zipcode, String building_parcelno, Customer c) throws SQLException {
         int building_firm_id = DBF.getBuildingFirmId(c);
         String building_floor = "0";
         int building_size = 0;
@@ -98,7 +99,12 @@ public class Controller implements IController {
 
     @Override
     public ArrayList<Building> getAllCutsomerBuildings(Customer customer) {
-        return DBF.getAllCutsomerBuildings(customer);
+        try {
+        return DBF.getAllCustomersBuildings(customer);
+        } catch (SQLException ex) {
+            ArrayList<Building> ErrorBuilding = null;
+            return ErrorBuilding;
+        }
     }
 
     @Override
