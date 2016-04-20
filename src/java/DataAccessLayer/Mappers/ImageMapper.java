@@ -5,6 +5,7 @@
  */
 package DataAccessLayer.Mappers;
 
+import DataAccessLayer.Interfaces.ImageMapperInterface;
 import DataAccessLayer.DBConnector;
 import ServiceLayer.Entity.Image;
 import java.io.InputStream;
@@ -19,26 +20,23 @@ import java.util.logging.Logger;
  *
  * @author Oliver
  */
-public class ImageMapper {
+public class ImageMapper implements ImageMapperInterface {
+    @Override
     public void setImage(InputStream inputstream) {
         try {
-            System.out.println("mapper start");
-            PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("INSERT INTO images values (?, ?, ?)");
-            pstmt.setInt(1, 003);
-            pstmt.setString(2, "1");
-            pstmt.setBlob(3, inputstream);
-            System.out.println("mapper før execute");
-            pstmt.executeUpdate();
-            System.out.println("mapper slut");
-            
-            
+            PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("INSERT INTO images (image_name, Photo, image_id) values (?, ?, ?)");
+            pstmt.setString(1, "1");
+            pstmt.setBlob(2, inputstream);
+            pstmt.setInt(3, 001);
+            pstmt.executeUpdate();            
         } catch (SQLException ex) {
             Logger.getLogger(CustomerMapper.class.getName()).log(Level.SEVERE, null, ex);
         }
         
     }
     
-    private InputStream getPhotos() throws
+    @Override
+    public InputStream getImage(InputStream inputstream) throws
             IllegalArgumentException, SQLException, ClassNotFoundException {
 
         Connection connection = DBConnector.getConnection();
@@ -56,14 +54,9 @@ public class ImageMapper {
                 binaryStream = resultset.getBinaryStream("photo");
             }
 
-        } catch (SQLException e) {
-            throw new SQLException(e);
-        } finally {
+        } catch (SQLException ex) {
+            Logger.getLogger(CustomerMapper.class.getName()).log(Level.SEVERE, null, ex);
         }
         return binaryStream;
-    }
-    
-    public void getImage(InputStream inputstream) {
-        
     }
 }

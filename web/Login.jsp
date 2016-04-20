@@ -29,7 +29,12 @@
                     <center><input type="password" name="password" style="width: 20%; height: 40%;"><br></center>
                     <center><input type="submit" value="Login" style="width: 30%; height: 120%; font-size: 120%;"></center>
                 </fieldset>
-            </form >
+            </form>
+            <br>
+            <% if (request.getAttribute("Message") != null) {%>
+                <%= request.getAttribute("Message") %>
+                <%}%>
+                
             <%-- <center><image src="Polygon.jpg" style="width: 1255px; height:430px "/></center> --%>
         </body>
 

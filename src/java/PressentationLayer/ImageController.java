@@ -64,8 +64,9 @@ public class ImageController extends HttpServlet {
         protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-                System.out.println("0");
-            InputStream photoStream = getPhotos();
+            HttpSession session = request.getSession(true);
+            Building building = (Building) session.getAttribute("building");
+            InputStream photoStream = getImage(building.getBuilding_id(),);
 
             // Prepare streams.
             BufferedInputStream input = null;
@@ -78,8 +79,7 @@ public class ImageController extends HttpServlet {
 
                 response.setContentType("image/jpeg");
 
-                output = new BufferedOutputStream(response.getOutputStream(),
-                        16177215);
+                output = new BufferedOutputStream(response.getOutputStream(),16177215);
                 System.out.println("3");
                 // Write file contents to response.
                 byte[] buffer = new byte[16177215];

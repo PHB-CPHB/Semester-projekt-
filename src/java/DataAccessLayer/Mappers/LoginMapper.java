@@ -51,6 +51,7 @@ public class LoginMapper implements LoginMapperInterface {
 
     //Made by Phillip - Returns customers id by Username and Password
 
+    @Override
     public int getUserId(Customer c) {
         int user_id = 0;
         try {
@@ -68,6 +69,7 @@ public class LoginMapper implements LoginMapperInterface {
 
     //Made by Phillip - Returns the Customer/Admin how is logged in
 
+    @Override
     public Customer requestAccessRole(Customer customer) {
         try {
             PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("select * from login where username=? and password =?");

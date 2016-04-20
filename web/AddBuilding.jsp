@@ -23,8 +23,6 @@
             <input type="text" name="zipcode"><br>
             Parcel no.:<br>
             <input type="text" name="parcel"><br>
-            Size of building(m^2):<br>
-            <input type="text" name="size"><br>
             Building type:<br>
             <input type="text" name="type"><br>      
             Building year:<br>
@@ -36,6 +34,10 @@
             <input type="hidden" value="return" name="do_this">
             <input type="submit" value="Return" style="width: 30%; height: 30%; font-size: 100%;"/>
         </form>
+        <br>
+        <%if(request.getAttribute("ErrorMessage") != null) {%>
+        <%=request.getAttribute("ErrorMessage")%>
+        <%}%>
     </center>
 </body>
 </html>

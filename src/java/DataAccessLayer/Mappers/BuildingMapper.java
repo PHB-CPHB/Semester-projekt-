@@ -25,8 +25,8 @@ import java.util.logging.Logger;
 public class BuildingMapper implements BuildingMapperInterface {
 
     //Made by Phillip - Return an Arraylist with only the customers building by thier user id
-    public ArrayList<Building> getAllCustomersBuildings(Customer c) {
-        try {
+    @Override
+    public ArrayList<Building> getAllCustomersBuildings(Customer c) throws SQLException {
             ArrayList<Building> list = new ArrayList<>();
             PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("select buildings.building_id, buildings.building_status, buildings.building_type, buildings.building_year, buildings.building_areasize, buildings.building_name, buildings.building_adress, buildings.building_floor, buildings.building_zipcode, firm.firm_name FROM buildings INNER JOIN firm ON buildings.building_firm_id = firm.firm_id Where building_firm_id = ?");
             pstmt.setInt(1, c.getUser_id());
@@ -44,10 +44,7 @@ public class BuildingMapper implements BuildingMapperInterface {
                         rs.getString("firm_name")));
             }
             return list;
-        } catch (SQLException ex) {
-            System.out.println(ex);
-            return null;
-        }
+        
     }
 
     //Made by Phillip deletes a building on building id
@@ -75,9 +72,9 @@ public class BuildingMapper implements BuildingMapperInterface {
     }
 
     //Made by Phillip - Add a building to the customer firm
-    public void addBuilding(Building b) {
-        String building_status = "Ikke klar i nu";
-        try {
+    @Override
+    public void addBuilding(Building b) throws SQLException {
+        String building_status = "Ikke klar endnu";
             PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("INSERT INTO buildings (building_name, building_status, building_type, building_adress, building_year, building_zipcode, building_areasize, building_parcel_no, building_floor, building_firm_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
             pstmt.setString(1, b.getBuilding_name());
             pstmt.setString(2, building_status);
@@ -90,9 +87,6 @@ public class BuildingMapper implements BuildingMapperInterface {
             pstmt.setString(9, b.getBuilding_floor());
             pstmt.setInt(10, b.getBuilding_firm_id());
             pstmt.executeUpdate();
-        } catch (SQLException ex) {
-            System.out.println(ex);
-        }
     }
 
     //Made by Phillip - Returns the city of the zipcode
@@ -111,6 +105,7 @@ public class BuildingMapper implements BuildingMapperInterface {
         return city;
     }
     
+    @Override
     public ArrayList<Building> getAllBuilding() {
         try {
             ArrayList<Building> building = new ArrayList<>();
@@ -148,6 +143,7 @@ public class BuildingMapper implements BuildingMapperInterface {
         }
     }
     
+    @Override
     public ArrayList<Floor> getFloor(Building building) {
         try {
             ArrayList<Floor> floor = new ArrayList<>();

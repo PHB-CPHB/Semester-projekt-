@@ -36,8 +36,15 @@ public class Floor {
         this.floor_arpartments = floor_arpartments;
         this.floor_rooms = floor_rooms;
     }
-    
-    
+
+    public Floor(int floor_building_id) {
+        this.floor_building_id = floor_building_id;
+    }
+
+    public Floor(int floor_building_id, int floor_no) {
+        this.floor_building_id = floor_building_id;
+        this.floor_no = floor_no;
+    }
 
     public int getFloor_building_id() {
         return floor_building_id;

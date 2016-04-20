@@ -11,6 +11,7 @@ import ServiceLayer.Entity.Building;
 import ServiceLayer.Entity.Customer;
 import ServiceLayer.Entity.Floor;
 import java.io.InputStream;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
@@ -35,7 +36,7 @@ public class Controller implements IController {
     }
 
     @Override
-    public void addNewBuilding(String building_name, String building_type, String building_adress, int building_year, int building_zipcode, String building_parcelno, Customer c) {
+    public void addNewBuilding(String building_name, String building_type, String building_adress, int building_year, int building_zipcode, String building_parcelno, Customer c) throws SQLException {
         int building_firm_id = DBF.getBuildingFirmId(c);
         String building_floor = "0";
         int building_size = 0;
@@ -86,33 +87,94 @@ public class Controller implements IController {
         return DBF.requestAccessWithRole(customer);
     }
 
+    @Override
     public ArrayList<Customer> getAllUsers(Customer customer) {
         return DBF.getAllUsers(customer);
     }
 
+    @Override
     public ArrayList<Building> getAllBuildings() {
         return DBF.getAllBuildings();
     }
 
+    @Override
     public ArrayList<Building> getAllCutsomerBuildings(Customer customer) {
-        return DBF.getAllCutsomerBuildings(customer);
+        try {
+        return DBF.getAllCustomersBuildings(customer);
+        } catch (SQLException ex) {
+            ArrayList<Building> ErrorBuilding = null;
+            return ErrorBuilding;
+        }
     }
 
+    @Override
     public void requestCheckUp(int building_id) {
         Building building = new Building(building_id);
         DBF.requestCheckUp(building);
     }
 
+    @Override
     public void setImage(InputStream inputstream) {
+        System.out.println(inputstream);
         DBF.setImage(inputstream);
     }
 
+    @Override
     public ArrayList<Floor> buildingFloor(Building building) {
         return DBF.getFloors(building);
     }
 
+    @Override
     public void addFloor(Building building, int floor_size, String floor_apartments, String floor_rooms) {
-        Floor floor = new Floor(floor_size, floor_apartments, floor_rooms);
-        DBF.addFloor(building, floor);
+        int floor_no = maxFloor(building);
+        Floor floor = new Floor(floor_no, floor_size, floor_apartments, floor_rooms);
+        floor.setFloor_building_id(building.getBuilding_id());
+        DBF.addFloor(floor);
+    }
+    @Override
+    public int maxFloor(Building building){
+        Floor floor = new Floor(building.getBuilding_id());
+        int currentFloor = DBF.getAllFloors(floor);
+        int newFloor = currentFloor + 1;
+        return newFloor;
+      }
+    
+    @Override
+    public int getAllFloors(int building_id){
+        Floor floor = new Floor(building_id);
+        return DBF.getAllFloors(floor);
+    }
+    
+    @Override
+    public int getTotalSize(int building_id){
+        int totalBuildingSize = 0;
+        Floor buildingfloor = new Floor(building_id);
+        ArrayList<Floor> floors = DBF.getTotalSize(buildingfloor);
+        for (Floor floor : floors) {
+            totalBuildingSize = totalBuildingSize + floor.getFloor_size();
+        }
+        return totalBuildingSize;
+    }
+
+    @Override
+    public Floor getFloor(int floor_no, Building CurrentBuilding) {
+        Floor floor = new Floor(CurrentBuilding.getBuilding_id(), floor_no);
+        return DBF.getFloor(floor);
+    }
+
+    @Override
+    public void updateFloor(int floor_b_id, int floor_n, int floor_si, String floor_apt, String floor_ro) {
+        Floor editFloor = new Floor(floor_b_id, floor_n, floor_si, floor_apt, floor_ro);
+        DBF.updateFloor(editFloor);
+    }
+
+    @Override
+    public void deleteFloors(int building_id) {
+    Floor floor = new Floor(building_id);
+    DBF.deleteFloor(floor);
+    }
+    @Override
+    public InputStream getImage(Building_Floor_id){
+        return DBF.getImage(inputstream);
     }
 }

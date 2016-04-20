@@ -105,6 +105,7 @@ public class AdminMapper implements AdminMapperInterface {
         return building_firm;
     }
 
+    @Override
     public ArrayList<Firm> getAllFirms() {
         try {
             ArrayList<Firm> firm = new ArrayList<>();

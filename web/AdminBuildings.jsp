@@ -43,10 +43,10 @@
                     out.print("<td>" + building.getBuilding_status() + "</td>");
                     out.print("<td>" + building.getBuilding_type() + "</td>");
                     out.print("<td>" + building.getBuilding_year() + "</td>");
-                    out.print("<td>" + building.getBuilding_areasize() + "</td>");
+                    out.print("<td>" + con.getTotalSize(building.getBuilding_id()) + "</td>");
                     out.print("<td>" + building.getBuilding_name() + "</td>");
                     out.print("<td>" + building.getBuilding_adress() + "</td>");
-                    out.println("<td>" + building.getBuilding_floor() + "</td>");
+                    out.println("<td>" + con.getAllFloors(building.getBuilding_id()) + "</td>");
                     out.println("<td>" + building.getBuilding_zipcode() + "</td>");
                     out.println("<td>" + building.getBuilding_firm() + "</td>");%>
             <%--This is the delete button--%>
@@ -62,13 +62,13 @@
                     <input type="submit" value="View reports" width="200%" size="100%" style="width: 100%; font-size: 110%"/>
                 </form>
             </td>
-            <td> <form action="Floorplan.jsp">
+            <td> <form action="AddBuildingController" method="POST">
                     <input type="hidden" name="do_this" value="viewFloor"/>
-                    <input type="hidden" name="floor" value="<%=building.getBuilding_id()%>" />
+                    <input type="hidden" name="floor" value="<%= building.getBuilding_id() %>">
                     <input type="submit" value="View Floors" width="200%" size="100%" style="width: 100%; font-size: 110%"/>
                 </form>
             </td>
-            <%out.println("</tr>");
+            <% out.println("</tr>");
                 }
             %>
         </table>

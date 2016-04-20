@@ -6,6 +6,8 @@
 package DataAccessLayer.Interfaces;
 
 import ServiceLayer.Entity.Customer;
+import ServiceLayer.Entity.Firm;
+import java.util.ArrayList;
 
 /**
  *
@@ -13,14 +15,21 @@ import ServiceLayer.Entity.Customer;
  */
 public interface AdminMapperInterface {
 
-    boolean createCustomer(Customer customer);
+    // Made by Oliver
+    boolean createCustomer(Customer c);
 
-    boolean createFirm(Customer customer);
+    //Made by Phillip - creates a firm based on the customers id and firm.
+    boolean createFirm(Customer c);
 
-    void deleteCustomer(Customer customer);
+    //Made by Michael - Deletes a customer on user_id
+    void deleteCustomer(Customer c);
 
-    int getBuildingId(Customer customer);
+    ArrayList<Firm> getAllFirms();
 
-    String getFirm(Customer customer);
+    //Made by Phillip - Get building id form the customers user id
+    int getBuildingId(Customer c);
 
+    //Made by Phillip - Return firm of the customer
+    String getFirm(Customer c);
+    
 }
