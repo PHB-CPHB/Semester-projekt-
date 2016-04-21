@@ -252,7 +252,10 @@ Author : Thesoap
         <form action="AddBuildingController" method="POST">
             <input type="hidden" value="return" name="do_this">
             <input type="submit" value="Return" style="width: 30%; height: 30%; font-size: 100%;"/>
-
         </form>
+    <form action="RoomReportController" method="post">
+        <input type="hidden" value="submit" name="do_this">
+        <input type="submit" value="Submit" style="width: 30%; height: 30%; font-size: 100%"/>
+    </form>
     </body>
 </html>
