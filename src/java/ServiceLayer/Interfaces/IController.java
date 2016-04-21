@@ -54,12 +54,13 @@ public interface IController {
 
     void requestCheckUp(int building_id);
 
-    void setImage(InputStream inputstream);
+    void setImage(InputStream inputstream,int bID,String floor_no);
 
     void updateFloor(int floor_b_id, int floor_n, int floor_si, String floor_apt, String floor_ro);
 
     boolean validate(String user, String password);
     
     void report(int reportId, String outerRoof, String outerWall, String usageOfBuilding, String theBuildingManager, int buildingCondition);
+    InputStream getImage(int bID,String floorno);
     
 }
