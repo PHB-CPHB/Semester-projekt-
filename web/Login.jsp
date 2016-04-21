@@ -13,7 +13,6 @@
     </head>
     <div
         <body bgcolor="#33CCFF">
-            <img src="ImageController" alt="some_text">
             </form>
             <form action="LoginController" method="POST" style= "background: lightblue">
                 <fieldset>

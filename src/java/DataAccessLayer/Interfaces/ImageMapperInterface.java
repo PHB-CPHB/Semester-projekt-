@@ -13,8 +13,8 @@ import java.io.InputStream;
  */
 public interface ImageMapperInterface {
 
-    InputStream getImage(InputStream inputstream);
+    InputStream getImage(int bID, String floorno);
 
-    void setImage(InputStream inputstream);
+    void setImage(InputStream inputstream,int bID, String floorno);
     
 }
