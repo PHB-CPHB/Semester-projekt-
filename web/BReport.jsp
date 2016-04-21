@@ -35,9 +35,9 @@
                 <tr></tr>
                 <td style="border: 1px solid white;">
                     Byggeår:<input style="border-bottom: 1px solid black; width: 54%" type="text" name="BuildingYear"> 
-                </td>
-                <tr>
-                    <td style="border: 1px solid white">
+                    </td>
+                    <tr>
+                        <td style="border: 1px solid white">
                             Bygningsareal i m2 (hver etage tælles separat):<input style="border-bottom: 1px solid black; width: 38%" type="text"> 
                         </td>
                     </tr>
@@ -56,9 +56,11 @@
                     </td>
                     <tr>
                         <th style="border: 1px solid black; width: 40%"> Tag</th>
-                        <td>Bemærkninger:<input type="checkbox" name="remark" value="yes"></td>
-                        <td>Ingen bemærkninger: <input type="checkbox" name="no-remark" value="no"> </td>
-                        <td> Billede: <input type="checkbox" name="picture" value="pic"></td>
+                    <form action="BuildingReportController" method="POST">
+                        <td>Bemærkninger:<input type="radio" name="remark" value="remark"></td>
+                        <td>Ingen bemærkninger: <input type="radio" name="remark" value="no"> </td>
+                    </form>
+                        <td> Billede: <input type="file" name="do_this" value="pic"></td>
                     </tr>
                 </table>
                 <table style="width: 100%">
@@ -66,9 +68,9 @@
                 </table>
                 <table style="width: 100%">
                     <th style="width: 40%">Ydervægge</th>
-                    <td>Bemærkninger:<input type="checkbox" name="remark" value="yes"></td>
-                    <td>Ingen bemærkninger: <input type="checkbox" name="no-remark" value="no"> </td>
-                    <td> Billede: <input type="checkbox" name="picture" value="pic"></td>
+                    <td>Bemærkninger:<input type="radio" name="no-remark" value="yes"></td>
+                    <td>Ingen bemærkninger: <input type="radio" name="no-remark" value="no"> </td>
+                    <td> Billede: <input type="file" name="picture" value="pic"></td>
                     </tr>
                 </table>
                 <table style="width: 100%">
@@ -95,24 +97,24 @@
                     <th>Tilstandsgrad 0</th>
                     <th>Bygningsdelen er ny og som bygget</th>
                     <th>Funktionen er som beskrevet</th>
-                    <td><input type="checkbox" name="tilstand0" value="nul" </td>
+                    <td><input type="radio" name="condition" value="zero" </td>
                     <tr></tr>
                     <th>Tilstandsgrad 1</th>
                     <th>Bygningsdelen er intakt, men med begyndende slid og synlige skader (kun kosmetiske skader)
                     </th>
                     <th>Funktionen er som beskrevet
                     </th>
-                    <td><input type="checkbox" name="tilstand1" value="en" </td>
+                    <td><input type="radio" name="condition" value="one" </td>
                     <tr></tr>
                     <th>Tilstandsgrad 2</th>
                     <th>Bygningsdelen er begyndt at forfalde, med enkelte defekte komponenter</th>
                     <th>Funktionen er nedsat – fare for følgeskader</th>
-                    <td><input type="checkbox" name="tilstand2" value="to" </td>
+                    <td><input type="radio" name="condition" value="two" </td>
                     <tr></tr>
                     <th>Tilstandsgrad 3</th>
                     <th>Bygningsdelen er nedbrudt og skal udskiftes</th>
                     <th>Funktionen er nedsat – fare for følgeskader</th>
-                    <td><input type="checkbox" name="tilstand3" value="tre" </td>
+                    <td><input type="radio" name="condition" value="three" </td>
                 </table>
                 <table style="width: 100%">
                     <tr>
@@ -135,5 +137,9 @@
             <input type="hidden" value="return" name="do_this">
             <input type="submit" value="Return" style="width: 30%; height: 30%; font-size: 100%;"/>
         </form>
-    </body>
-</html>
+        <form action="BuildingReportController" method="POST">
+            <input type="hidden" value="submit" name="do_this">
+            <input type="submit" value="Submit" style="width: 30%; height: 30%; font-size: 100%"/>
+            </form>
+        </body>
+    </html>

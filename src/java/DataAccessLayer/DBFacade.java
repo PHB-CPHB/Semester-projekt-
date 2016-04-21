@@ -11,17 +11,20 @@ import DataAccessLayer.Interfaces.CustomerMapperInterface;
 import DataAccessLayer.Interfaces.FloorMapperInterface;
 import DataAccessLayer.Interfaces.ImageMapperInterface;
 import DataAccessLayer.Interfaces.LoginMapperInterface;
+import DataAccessLayer.Interfaces.ReportMapperInterface;
 import DataAccessLayer.Mappers.AdminMapper;
 import DataAccessLayer.Mappers.BuildingMapper;
 import DataAccessLayer.Mappers.CustomerMapper;
 import DataAccessLayer.Mappers.FloorMapper;
 import DataAccessLayer.Mappers.ImageMapper;
 import DataAccessLayer.Mappers.LoginMapper;
+import DataAccessLayer.Mappers.ReportMapper;
 import ServiceLayer.Entity.Building;
 import ServiceLayer.Entity.Customer;
 import ServiceLayer.Entity.Firm;
 import ServiceLayer.Entity.Floor;
 import ServiceLayer.Entity.Image;
+import ServiceLayer.Entity.Report;
 import java.io.InputStream;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -30,7 +33,7 @@ import java.util.ArrayList;
  *
  * @author philliphbrink
  */
-public class DBFacade implements AdminMapperInterface, BuildingMapperInterface, CustomerMapperInterface, LoginMapperInterface, FloorMapperInterface, ImageMapperInterface {
+public class DBFacade implements AdminMapperInterface, BuildingMapperInterface, CustomerMapperInterface, LoginMapperInterface, FloorMapperInterface, ImageMapperInterface, ReportMapperInterface {
 
     private static DBFacade instance;
     private BuildingMapper BMapper = new BuildingMapper();
@@ -39,6 +42,8 @@ public class DBFacade implements AdminMapperInterface, BuildingMapperInterface, 
     private LoginMapper LMapper = new LoginMapper();
     private ImageMapper IMapper = new ImageMapper();
     private FloorMapper FloorMapper = new FloorMapper();
+    private ReportMapper ReportMapper = new ReportMapper();
+    
 
     private DBFacade() {
 
@@ -245,4 +250,10 @@ public class DBFacade implements AdminMapperInterface, BuildingMapperInterface, 
     public void getImage(InputStream inputstream) {
         IMapper.getImage(inputstream);
     }
+
+
+    @Override
+    public void createReport(Report report) {
+        ReportMapper.createReport(report);
+    } 
 }

@@ -73,16 +73,17 @@ primary key (image_id)
 CREATE TABLE building_report(
 report_id INT (10),
 report_outer_roof VARCHAR (20),
-report_outer_roof_pic MEDIUMBLOB,
+/*report_outer_roof_pic MEDIUMBLOB,*/
 report_outer_wall VARCHAR (20),
-report_outer_wall_pic MEDIUMBLOB,
+/*report_outer_wall_pic MEDIUMBLOB,*/
 report_building_usage VARCHAR (20),
-report_report_filler VARCHAR (20),
+/*report_report_filler VARCHAR (20),*/
 report_building_manager VARCHAR (20),
 report_building_condetion INT (10),
 FOREIGN KEY (report_building_condetion) 
 REFERENCES buildings(building_id)
 );
+
 
 CREATE TABLE building_room(
 room_apartment_id INT (10),
@@ -1338,6 +1339,11 @@ INSERT INTO buildings (building_name, building_status, building_type, building_a
 VALUES ('Olivers bygning', 'I stand', 'Hus', 'Kappa 123', 1992, 8000, 70, '123', '1', 4);
 INSERT INTO buildings (building_name, building_status, building_type, building_adress, building_year, building_zipcode, building_areasize, building_parcel_no, building_floor, building_firm_id) 
 VALUES ('Olivers bygning', 'I stand', 'Hus', 'Kappa 123', 1992, 9000, 70, '123', '1', 4);
+
+INSERT INTO building_report (report_id, report_outer_roof, report_outer_wall, report_building_usage, report_building_manager, report_building_condetion)
+VALUES (1, 'Good', 'Medium', 'Shallo', 'Poly', 2);
+
+select * from building_report;
 
 /*
 SELECT * FROM building_floors;

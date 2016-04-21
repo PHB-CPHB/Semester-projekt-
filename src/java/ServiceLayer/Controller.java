@@ -10,6 +10,7 @@ import DataAccessLayer.DBFacade;
 import ServiceLayer.Entity.Building;
 import ServiceLayer.Entity.Customer;
 import ServiceLayer.Entity.Floor;
+import ServiceLayer.Entity.Report;
 import java.io.InputStream;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -172,5 +173,11 @@ public class Controller implements IController {
     public void deleteFloors(int building_id) {
     Floor floor = new Floor(building_id);
     DBF.deleteFloor(floor);
+    }
+
+    @Override
+    public void report(int reportId, String outerRoof, String outerWall, String usageOfBuilding, String theBuildingManager, int buildingCondition) {
+        Report report = new Report(reportId, outerRoof, outerWall, usageOfBuilding, theBuildingManager, buildingCondition);
+        DBF.createReport(report);
     }
 }
