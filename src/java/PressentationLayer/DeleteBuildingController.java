@@ -87,9 +87,7 @@ public class DeleteBuildingController extends HttpServlet {
         switch (do_this) {
             //Made by Phillip
             case "delete":
-                System.out.println("1");
                 String building_id_name = request.getParameter("deletebuilding");
-                System.out.println(building_id_name);
                 int building_id = Integer.parseInt(building_id_name);
                 con.deleteReport(building_id);
                 con.deleteFloors(building_id);
@@ -102,12 +100,10 @@ public class DeleteBuildingController extends HttpServlet {
             break;
             //Made by Tim    
             case "report":
-                System.out.println("2");
                 forward(request, response, "/Report.jsp");
                 break;
             //Made by Tim
             case "Return":
-                System.out.println("3");
                 if (c.getUser_role().equals("admin")) {
                     forward(request, response, "/AdminLoggedIn.jsp");
                 } else {
@@ -115,7 +111,6 @@ public class DeleteBuildingController extends HttpServlet {
                 }
                 break;
             case "request":
-                System.out.println("4");
                 String building = request.getParameter("check-up");
                 int buildingid = Integer.parseInt(building);
                 con.requestCheckUp(buildingid);

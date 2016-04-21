@@ -86,9 +86,7 @@
             <input type="submit" name="do_this" value="Return" style="width: 30%; height: 30%; font-size: 100%;"/>
         </form>
     </td>
-    <% if (request.getAttribute("addFloorError") != null) {%>
-    <%= request.getAttribute("addFloorError")%>
-    <%} else if (request.getAttribute("viewFloorError") != null) {%>
+    <% if (request.getAttribute("viewFloorError") != null) {%>
     <%= request.getAttribute("viewFloorError")%>
     <%}%>
 </body>

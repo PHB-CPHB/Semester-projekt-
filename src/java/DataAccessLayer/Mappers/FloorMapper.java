@@ -31,19 +31,14 @@ public class FloorMapper implements FloorMapperInterface {
     }
     
     @Override
-    public int getAllFloors(Floor floor) {
-        int floor_no = 0;
-        try {
+    public int getAllFloors(Floor floor) throws SQLException {
+        int floor_no;
             PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("SELECT floor_no FROM building_floors WHERE floor_building_id = ?");
             pstmt.setInt(1, floor.getFloor_building_id());
             ResultSet rs = pstmt.executeQuery();
             rs.last();
             floor_no = rs.getInt("floor_no");
             return floor_no;
-        } catch (SQLException ex) {
-            System.out.println(ex);
-        }
-        return floor_no;
     }
     
     public ArrayList<Floor> getAllFloorsArray(Floor floor) {

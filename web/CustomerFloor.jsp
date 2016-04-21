@@ -45,7 +45,7 @@
                     out.print("<td>" + floor.getFloor_size() + "</td>");
                     out.print("<td>" + floor.getFloor_arpartments() + "</td>");
                    out.print("<td>" + floor.getFloor_rooms() + "</td>");%>
-            <td> <form action="Floorplan.jsp" method="POST">
+            <td> <form action="ImageController" method="POST">
                     <input type="hidden" name="" value="Floorplan"/>
                     <input type="hidden" name="deletebuilding" value="<%= floor.getFloor_no()%>" />
                     <input type="submit" value="Floorplan" width="200%" size="100%" style="width: 100%; font-size: 110%"/>
@@ -75,5 +75,11 @@
             <input type="submit" value="Return" style="width: 30%; height: 30%; font-size: 100%;"/>
         </form>
     </td>
+    
+    <% if (request.getAttribute("editFloorError") != null) {%>
+    <%= request.getAttribute("editFloorError")%>
+    <%} else if (request.getAttribute("addFloorError") != null) {%>
+    <%= request.getAttribute("addFloorError") %>
+    <%}%>
 </body>
 </html>

@@ -130,99 +130,114 @@ public class AddBuildingController extends HttpServlet {
 
             case "viewFloor":
                 try {
-                int buildingid = Integer.parseInt(request.getParameter("floor"));
-                Building building = new Building(buildingid);
-                session.setAttribute("building", building);
-                if (c.getUser_role().equals("admin")) {
-                    forward(request, response, "/AdminFloor.jsp");
-                } else {
-                    forward(request, response, "/CustomerFloor.jsp");
-                }
+                    int buildingid = Integer.parseInt(request.getParameter("floor"));
+                    Building building = new Building(buildingid);
+                    session.setAttribute("building", building);
+                    if (c.getUser_role().equals("admin")) {
+                        forward(request, response, "/AdminFloor.jsp");
+                    } else {
+                        forward(request, response, "/CustomerFloor.jsp");
+                    }
                 } catch (NullPointerException ex) {
                     String viewFloorError = "Du kan desvære ikke se dine etager lige nu";
                     request.setAttribute("viewFloorError", viewFloorError);
                     if (c.getUser_role().equals("admin")) {
-                            forward(request, response, "/AdminBuildings.jsp");
-                        } else {
-                            forward(request, response, "/CustomerBuildings.jsp");
-                        }
+                        forward(request, response, "/AdminBuildings.jsp");
+                    } else {
+                        forward(request, response, "/CustomerBuildings.jsp");
+                    }
                 }
                 break;
 
             case "addNewFloor":
                 forward(request, response, "/addFloor.jsp");
                 break;
-                
+
             case "addFloor":
                 try {
-                Building buildings = (Building) session.getAttribute("building");
-                String floor_s = (String) request.getParameter("floor_size");
-                int floor_size = Integer.parseInt(floor_s);
-                String floor_apartments = (String) request.getParameter("floor_apartments");
-                String floor_rooms = (String) request.getParameter("floor_rooms");
-                con.addFloor(buildings, floor_size, floor_apartments, floor_rooms);
-                if (c.getUser_role().equals("admin")) {
-                    forward(request, response, "/AdminFloor.jsp");
-                } else {
-                    forward(request, response, "/CustomerFloor.jsp");
-                }
+                    Building buildings = (Building) session.getAttribute("building");
+                    String floor_s = (String) request.getParameter("floor_size");
+                    int floor_size = Integer.parseInt(floor_s);
+                    String floor_apartments = (String) request.getParameter("floor_apartments");
+                    String floor_rooms = (String) request.getParameter("floor_rooms");
+                    con.addFloor(buildings, floor_size, floor_apartments, floor_rooms);
+                    if (c.getUser_role().equals("admin")) {
+                        forward(request, response, "/AdminFloor.jsp");
+                    } else {
+                        forward(request, response, "/CustomerFloor.jsp");
+                    }
                 } catch (SQLException | NullPointerException sqle) {
                     String FloorError = "Du kan desvære ikke se dine etager grundet fejl i databasen";
                     request.setAttribute("addFloorError", FloorError);
                     if (c.getUser_role().equals("admin")) {
-                            forward(request, response, "/AdminBuildings.jsp");
-                        } else {
-                            forward(request, response, "/CustomerBuildings.jsp");
-                        }
+                        forward(request, response, "/AdminBuildings.jsp");
+                    } else {
+                        forward(request, response, "/CustomerBuildings.jsp");
+                    }
                 }
                 break;
+
             case "editFloor":
                 try {
-                String floorno = request.getParameter("floorno");
-                int floor_no = Integer.parseInt(floorno);
-                Building CurrentBuilding = (Building) session.getAttribute("building");
-                Floor currentFloor = con.getFloor(floor_no, CurrentBuilding);
-                request.setAttribute("floor_si", currentFloor.getFloor_size());
-                request.setAttribute("floor_apt", currentFloor.getFloor_arpartments());
-                request.setAttribute("floor_ro", currentFloor.getFloor_rooms());
-                request.setAttribute("floor_n", floor_no);
-                request.setAttribute("floor_b_id", CurrentBuilding.getBuilding_id());
-                if (c.getUser_role().equals("admin")) {
-                    forward(request, response, "/editFloor.jsp");
-                } else {
-                    forward(request, response, "/editFloor.jsp");
-                }
+                    String floorno = request.getParameter("floorno");
+                    int floor_no = Integer.parseInt(floorno);
+                    Building CurrentBuilding = (Building) session.getAttribute("building");
+                    Floor currentFloor = con.getFloor(floor_no, CurrentBuilding);
+                    request.setAttribute("floor_si", currentFloor.getFloor_size());
+                    request.setAttribute("floor_apt", currentFloor.getFloor_arpartments());
+                    request.setAttribute("floor_ro", currentFloor.getFloor_rooms());
+                    request.setAttribute("floor_n", floor_no);
+                    request.setAttribute("floor_b_id", CurrentBuilding.getBuilding_id());
+                    if (c.getUser_role().equals("admin")) {
+                        forward(request, response, "/editFloor.jsp");
+                    } else {
+                        forward(request, response, "/editFloor.jsp");
+                    }
                 } catch (NullPointerException npe) {
                     String editFloorError = "Der er sket en fejl, du kan desværre ikke ændre noget lige nu";
                     request.setAttribute("editFloorError", editFloorError);
                     if (c.getUser_role().equals("admin")) {
-                    forward(request, response, "/AdminFloor.jsp");
-                } else {
-                    forward(request, response, "/CustomerFloor.jsp");
-                }
+                        forward(request, response, "/AdminFloor.jsp");
+                    } else {
+                        forward(request, response, "/CustomerFloor.jsp");
+                    }
                 }
                 break;
+
             case "edit":
                 try {
-                String floorsi = (String) request.getParameter("floor_si");
-                int floor_si = Integer.parseInt(floorsi);
-                String floor_apt = (String) request.getParameter("floor_apt");
-                String floor_ro = (String) request.getParameter("floor_ro");
-                String floorn = (String) request.getParameter("floor_n");
-                int floor_n = Integer.parseInt(floorn);
-                String floorbid = (String) request.getParameter("floor_b_id");
-                int floor_b_id = Integer.parseInt(floorbid);
-                con.updateFloor(floor_b_id, floor_n, floor_si, floor_apt, floor_ro);
-                if (c.getUser_role().equals("admin")) {
-                    forward(request, response, "/AdminFloor.jsp");
-                } else {
-                    forward(request, response, "/CustomerFloor.jsp");
-                }
-                } catch (NullPointerException | SQLException npe) {
-                    String editError = "Du skal udfylde alle felterne";
-                    request.setAttribute("editError", editError);
+                    String floorsi = (String) request.getParameter("floor_si");
+                    int floor_si = Integer.parseInt(floorsi);
+                    String floor_apt = (String) request.getParameter("floor_apt");
+                    String floor_ro = (String) request.getParameter("floor_ro");
+                    String floorn = (String) request.getParameter("floor_n");
+                    int floor_n = Integer.parseInt(floorn);
+                    String floorbid = (String) request.getParameter("floor_b_id");
+                    int floor_b_id = Integer.parseInt(floorbid);
+                    con.updateFloor(floor_b_id, floor_n, floor_si, floor_apt, floor_ro);
+                    if (c.getUser_role().equals("admin")) {
+                        forward(request, response, "/AdminFloor.jsp");
+                    } else {
+                        forward(request, response, "/CustomerFloor.jsp");
+                    }
+                } catch (NullPointerException | SQLException | NumberFormatException npe) {
+                    if (request.getParameter("floor_si").equals("")) {
+                        request.setAttribute("floor_si", 0);
+                        String floorapt = request.getParameter("floor_apt");
+                        request.setAttribute("floor_apt", floorapt);
+                        String floorno = request.getParameter("floor_ro");
+                        request.setAttribute("floor_ro", floorno);
+                        String editError = "Du skal udfylde Floor Size";
+                        request.setAttribute("editError", editError);
+                    }
+                    if (c.getUser_role().equals("admin")) {
+                        forward(request, response, "/editFloor.jsp");
+                    } else {
+                        forward(request, response, "/editFloor.jsp");
+                    }
                 }
                 break;
+
             case "return":
                 session.removeValue("building");
                 if (c.getUser_role().equals("admin")) {
@@ -231,6 +246,7 @@ public class AddBuildingController extends HttpServlet {
                     forward(request, response, "/CustomerBuildings.jsp");
                 }
                 break;
+
             case "returnFloor":
                 if (c.getUser_role().equals("admin")) {
                     forward(request, response, "/AdminFloor.jsp");

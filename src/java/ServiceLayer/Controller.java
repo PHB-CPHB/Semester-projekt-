@@ -143,15 +143,24 @@ public class Controller implements IController {
     @Override
     public int maxFloor(Building building){
         Floor floor = new Floor(building.getBuilding_id());
+        try {
         int currentFloor = DBF.getAllFloors(floor);
         int newFloor = currentFloor + 1;
         return newFloor;
+        } catch (SQLException sqle) {
+            System.out.println("Dette er i Controller maxFloor");
+            return 0;
+        }
       }
     
     @Override
     public int getAllFloors(int building_id){
         Floor floor = new Floor(building_id);
+        try {
         return DBF.getAllFloors(floor);
+        } catch (SQLException sqle) {
+            return 0;
+        }
     }
     
     @Override

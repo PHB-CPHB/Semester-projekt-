@@ -196,7 +196,7 @@ public class DBFacade implements AdminMapperInterface, BuildingMapperInterface, 
     }
 
     @Override
-    public int getAllFloors(Floor floor) {
+    public int getAllFloors(Floor floor) throws SQLException {
         return FloorMapper.getAllFloors(floor);
     }
 

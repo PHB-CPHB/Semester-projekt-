@@ -84,6 +84,8 @@
     </td>
     <% if (request.getAttribute("editFloorError") != null) {%>
     <%= request.getAttribute("editFloorError")%>
+    <%} else if (request.getAttribute("addFloorError") != null) {%>
+    <%= request.getAttribute("addFloorError") %>
     <%}%>
 </body>
 </html>

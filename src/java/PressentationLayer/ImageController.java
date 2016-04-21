@@ -8,6 +8,7 @@ package PressentationLayer;
 import DataAccessLayer.DBConnector;
 import ServiceLayer.Controller;
 import ServiceLayer.Entity.Building;
+import ServiceLayer.Entity.Customer;
 import ServiceLayer.Entity.Floor;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -113,6 +114,7 @@ public class ImageController extends HttpServlet {
             throws ServletException, IOException {
         String do_this = request.getParameter("do_this");
         HttpSession session = request.getSession(true);
+        Customer c = (Customer) session.getAttribute("LoggedInCustomer");
         Controller con = (Controller) session.getAttribute("Controller");
         //Floor floor = new Floor;
         switch (do_this) {
@@ -126,7 +128,11 @@ public class ImageController extends HttpServlet {
                 Part filePart = request.getPart("file");
                 InputStream inputstream = filePart.getInputStream();
                 con.setImage(inputstream, building.getBuilding_id(), floorno);
-                forward(request, response, "/AdminBuildings.jsp");
+                if (c.getUser_role().equals("admin")) {
+                    forward(request, response, "/AdminBuildings.jsp");
+                } else {
+                    forward(request, response, "/CustomerBuildings.jsp");
+                }
                 break;
                 
         }

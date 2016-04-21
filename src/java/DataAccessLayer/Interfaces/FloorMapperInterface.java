@@ -19,7 +19,7 @@ public interface FloorMapperInterface {
 
     void deleteFloor(Floor floor);
 
-    int getAllFloors(Floor floor);
+    int getAllFloors(Floor floor) throws SQLException;
 
     Floor getFloor(Floor floor);
 
