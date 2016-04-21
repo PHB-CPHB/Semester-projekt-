@@ -34,7 +34,7 @@ public interface BuildingMapperInterface {
     //Made by Phillip - Returns the city of the zipcode
     String getCity(Building b);
 
-    ArrayList<Floor> getFloor(Building building);
+    ArrayList<Floor> getFloor(Building building) throws SQLException;
 
     void requestCheckUp(Building building);
     

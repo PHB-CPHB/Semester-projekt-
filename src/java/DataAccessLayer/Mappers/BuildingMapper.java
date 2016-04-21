@@ -9,8 +9,8 @@ import DataAccessLayer.Interfaces.BuildingMapperInterface;
 import DataAccessLayer.DBConnector;
 import ServiceLayer.Entity.Building;
 import ServiceLayer.Entity.Customer;
-import ServiceLayer.Entity.Firm;
 import ServiceLayer.Entity.Floor;
+import ServiceLayer.Entity.Report;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -144,8 +144,7 @@ public class BuildingMapper implements BuildingMapperInterface {
     }
     
     @Override
-    public ArrayList<Floor> getFloor(Building building) {
-        try {
+    public ArrayList<Floor> getFloor(Building building) throws SQLException {
             ArrayList<Floor> floor = new ArrayList<>();
             PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("SELECT building_floors.floor_no, building_floors.floor_size, building_floors.floor_arpartments, building_floors.floor_rooms  from building_floors inner join buildings ON building_floors.floor_building_id = buildings.building_id WHERE building_id = ?;");
             pstmt.setInt(1, building.getBuilding_id());
@@ -157,9 +156,36 @@ public class BuildingMapper implements BuildingMapperInterface {
                         rs.getString("floor_rooms")));
             }
             return floor;
-        } catch (SQLException ex) {
-            System.out.println(ex);
-            return null;
-        }
+       
+    }
+
+    public int getBuildingCondition(Building building) throws SQLException {
+        int buildingCondition = 0;
+            PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("SELECT report_building_condetion FROM building_report INNER JOIN buildings ON building_report.report_id = buildings.building_id WHERE buildings.building_id = ?;");
+            pstmt.setInt(1, building.getBuilding_id());
+            ResultSet rs = pstmt.executeQuery();
+            rs.last();
+            buildingCondition = rs.getInt("report_building_condetion");
+            return buildingCondition;
+        
+    }
+    
+    public ArrayList<Report> getSortedBuildings() throws SQLException {
+    ArrayList<Report> reports = new ArrayList();
+            PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("SELECT building_report.report_building_condetion, buildings.building_id, buildings.building_name, buildings.building_status, buildings.building_type, buildings.building_adress, buildings.building_year, buildings.building_zipcode, buildings.building_areasize, buildings.building_parcel_no, buildings.building_floor, firm.firm_name FROM building_report INNER JOIN buildings ON building_report.report_id = buildings.building_id INNER JOIN firm ON buildings.building_firm_id = firm_id  ORDER BY report_building_condetion DESC;");
+            ResultSet rs = pstmt.executeQuery();
+            while(rs.next()) {
+                reports.add(new Report(rs.getInt("report_building_condetion"), new Building(rs.getInt("building_id"),
+                        rs.getString("building_status"),
+                        rs.getString("building_type"),
+                        rs.getInt("building_year"),
+                        rs.getInt("building_areasize"),
+                        rs.getString("building_name"),
+                        rs.getString("building_adress"),
+                        rs.getString("building_floor"),
+                        rs.getInt("building_zipcode"),
+                        rs.getString("firm_name"))));
+            }
+            return reports;
     }
 }

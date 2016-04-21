@@ -21,6 +21,18 @@ public class Report {
     private String theBuildingManager;
     private Building building;
     private ArrayList<Room> rooms = new ArrayList();
+    private ArrayList<Building> buildings = new ArrayList();
+
+    public Report(int buildingCondition, Building building) {
+        this.buildingCondition = buildingCondition;
+        this.building = building;
+    }
+
+    public Report(int reportId) {
+        this.reportId = reportId;
+    }
+    
+    
 
     public int getReportId() {
         return reportId;
@@ -97,6 +109,17 @@ public class Report {
     public void addRoom(Room room) {
         rooms.add(room);
     }
+
+    public ArrayList<Building> getBuildings() {
+        return buildings;
+    }
+
+    public void setBuildings(ArrayList<Building> buildings) {
+        this.buildings = buildings;
+    }
     
-    
+    public void addBuilding(Building building) {
+        buildings.add(building);
+    }
+
 }

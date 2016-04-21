@@ -7,7 +7,6 @@ package DataAccessLayer.Mappers;
 
 import DataAccessLayer.Interfaces.FloorMapperInterface;
 import DataAccessLayer.DBConnector;
-import ServiceLayer.Entity.Building;
 import ServiceLayer.Entity.Floor;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -21,18 +20,14 @@ import java.util.ArrayList;
 public class FloorMapper implements FloorMapperInterface {
     
     @Override
-    public void addFloor(Floor floor) {
-        try {
+    public void addFloor(Floor floor) throws SQLException {
             PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("INSERT INTO building_floors (floor_building_id, floor_no, floor_size, floor_arpartments, floor_rooms) VALUES (?, ?, ?, ?, ?);");
             pstmt.setInt(1, floor.getFloor_building_id());
             pstmt.setInt(2, floor.getFloor_no());
             pstmt.setInt(3, floor.getFloor_size());
             pstmt.setString(4, floor.getFloor_arpartments());
             pstmt.setString(5, floor.getFloor_rooms());
-            pstmt.executeUpdate();
-        } catch (SQLException ex) {
-            System.out.println(ex);
-        }        
+            pstmt.executeUpdate();   
     }
     
     @Override
@@ -48,7 +43,6 @@ public class FloorMapper implements FloorMapperInterface {
         } catch (SQLException ex) {
             System.out.println(ex);
         }
-        System.out.println("FAIL");
         return floor_no;
     }
     
@@ -112,8 +106,7 @@ public class FloorMapper implements FloorMapperInterface {
     }
 
     @Override
-    public void updateFloor(Floor editFloor) {
-       try {
+    public void updateFloor(Floor editFloor) throws SQLException {
             PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("UPDATE building_floors set floor_size = ?, floor_arpartments = ?, floor_rooms = ? WHERE floor_no = ? and floor_building_id = ?;");
             pstmt.setInt(1, editFloor.getFloor_size());
             pstmt.setString(2, editFloor.getFloor_arpartments());
@@ -121,9 +114,6 @@ public class FloorMapper implements FloorMapperInterface {
             pstmt.setInt(4, editFloor.getFloor_no());
             pstmt.setInt(5, editFloor.getFloor_building_id());
             pstmt.executeUpdate();
-        } catch (SQLException ex) {
-            System.out.println(ex);
-        } 
     }
 
     @Override

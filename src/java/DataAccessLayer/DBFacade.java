@@ -17,11 +17,13 @@ import DataAccessLayer.Mappers.CustomerMapper;
 import DataAccessLayer.Mappers.FloorMapper;
 import DataAccessLayer.Mappers.ImageMapper;
 import DataAccessLayer.Mappers.LoginMapper;
+import DataAccessLayer.Mappers.ReportMapper;
 import ServiceLayer.Entity.Building;
 import ServiceLayer.Entity.Customer;
 import ServiceLayer.Entity.Firm;
 import ServiceLayer.Entity.Floor;
 import ServiceLayer.Entity.Image;
+import ServiceLayer.Entity.Report;
 import java.io.InputStream;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -39,6 +41,7 @@ public class DBFacade implements AdminMapperInterface, BuildingMapperInterface, 
     private LoginMapper LMapper = new LoginMapper();
     private ImageMapper IMapper = new ImageMapper();
     private FloorMapper FloorMapper = new FloorMapper();
+    private ReportMapper RMapper = new ReportMapper();
 
     private DBFacade() {
 
@@ -182,12 +185,12 @@ public class DBFacade implements AdminMapperInterface, BuildingMapperInterface, 
         BMapper.requestCheckUp(building);
     }
 
-    public ArrayList<Floor> getFloors(Building building) {
+    public ArrayList<Floor> getFloors(Building building) throws SQLException {
         return BMapper.getFloor(building);
     }
 
     @Override
-    public void addFloor(Floor floor) {
+    public void addFloor(Floor floor) throws SQLException {
         FloorMapper.addFloor(floor);
     }
 
@@ -207,7 +210,7 @@ public class DBFacade implements AdminMapperInterface, BuildingMapperInterface, 
     }
 
     @Override
-    public void updateFloor(Floor editFloor) {
+    public void updateFloor(Floor editFloor) throws SQLException {
         FloorMapper.updateFloor(editFloor);
     }
 
@@ -232,7 +235,7 @@ public class DBFacade implements AdminMapperInterface, BuildingMapperInterface, 
     }
 
     @Override
-    public ArrayList<Floor> getFloor(Building building) {
+    public ArrayList<Floor> getFloor(Building building) throws SQLException {
         return BMapper.getFloor(building);
     }
 
@@ -244,5 +247,17 @@ public class DBFacade implements AdminMapperInterface, BuildingMapperInterface, 
     @Override
     public void getImage(InputStream inputstream) {
         IMapper.getImage(inputstream);
+    }
+
+    public int getBuildingCondition(Building building) throws SQLException {
+        return BMapper.getBuildingCondition(building);
+    }
+
+    public ArrayList<Report> getSortedBuildings() throws SQLException {
+        return BMapper.getSortedBuildings();
+    }
+
+    public void deleteReports(Report report) {
+        RMapper.deleteReports(report);
     }
 }

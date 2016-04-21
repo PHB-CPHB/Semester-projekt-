@@ -44,6 +44,7 @@
                 for (Building building : buildings) {
                     out.println("<tr>");
                     out.println("<td>" + building.getBuilding_id() + "</td>");
+                    out.print("<td>" + con.getBuildingCondition(building.getBuilding_id()) + "</td>");
                     out.print("<td>" + building.getBuilding_status() + "</td>");
                     out.print("<td>" + building.getBuilding_type() + "</td>");
                     out.print("<td>" + building.getBuilding_year() + "</td>");
@@ -93,6 +94,11 @@
     <td> <form action="DeleteBuildingController" method="POST">
             <input  type="submit" name="do_this" value="Return" style="width: 10%; height: 5%; font-size: 100%;"/>
         </form>
+        <% if (request.getAttribute("addFloorError") != null) {%>
+    <%= request.getAttribute("addFloorError")%>
+    <%} else if (request.getAttribute("viewFloorError") != null) {%>
+    <%= request.getAttribute("viewFloorError")%>
+    <%}%>
     </td>
 </body>
 </html>

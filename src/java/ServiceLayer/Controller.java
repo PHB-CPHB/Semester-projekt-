@@ -10,6 +10,7 @@ import DataAccessLayer.DBFacade;
 import ServiceLayer.Entity.Building;
 import ServiceLayer.Entity.Customer;
 import ServiceLayer.Entity.Floor;
+import ServiceLayer.Entity.Report;
 import java.io.InputStream;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -94,7 +95,9 @@ public class Controller implements IController {
 
     @Override
     public ArrayList<Building> getAllBuildings() {
+        ArrayList<Building> bla = new ArrayList();
         return DBF.getAllBuildings();
+        
     }
 
     @Override
@@ -121,11 +124,16 @@ public class Controller implements IController {
 
     @Override
     public ArrayList<Floor> buildingFloor(Building building) {
+        try {
         return DBF.getFloors(building);
+        } catch (SQLException sqle) {
+            ArrayList<Floor> ErrorArray = new ArrayList();
+            return ErrorArray;
+        }
     }
 
     @Override
-    public void addFloor(Building building, int floor_size, String floor_apartments, String floor_rooms) {
+    public void addFloor(Building building, int floor_size, String floor_apartments, String floor_rooms) throws SQLException {
         int floor_no = maxFloor(building);
         Floor floor = new Floor(floor_no, floor_size, floor_apartments, floor_rooms);
         floor.setFloor_building_id(building.getBuilding_id());
@@ -163,7 +171,7 @@ public class Controller implements IController {
     }
 
     @Override
-    public void updateFloor(int floor_b_id, int floor_n, int floor_si, String floor_apt, String floor_ro) {
+    public void updateFloor(int floor_b_id, int floor_n, int floor_si, String floor_apt, String floor_ro) throws SQLException {
         Floor editFloor = new Floor(floor_b_id, floor_n, floor_si, floor_apt, floor_ro);
         DBF.updateFloor(editFloor);
     }
@@ -172,5 +180,28 @@ public class Controller implements IController {
     public void deleteFloors(int building_id) {
     Floor floor = new Floor(building_id);
     DBF.deleteFloor(floor);
+    }
+    
+    public int getBuildingCondition(int building_id) {
+        try {
+        Building building = new Building(building_id);
+        return DBF.getBuildingCondition(building);
+        } catch (SQLException sqle) {
+        return -1;
+        }
+    }
+    
+    public ArrayList<Report> getSortedBuildings() {
+        ArrayList<Report> ErrorArray = new ArrayList();
+        try {
+        return DBF.getSortedBuildings();
+        } catch (SQLException sqle) {
+            return ErrorArray;
+        }
+    }
+
+    public void deleteReport(int building_id) {
+        Report report = new Report(building_id);
+        DBF.deleteReports(report);
     }
 }
