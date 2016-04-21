@@ -12,10 +12,13 @@
         <title>JSP Page</title>
     </head>
     <body>
+        <img src="ImageController" alt="some_text">
         <h1>You have not yet uploaded any floorplan for this building. Do you want to upload it now?</h1>
         <form action="ImageController" method="POST" enctype="multipart/form-data">
+            <input type="hidden" name="do_this" value="setimage"/>
             <input type="file" name="file" size="50"/>
             <input type="submit">
         </form>
+
     </body>
 </html>

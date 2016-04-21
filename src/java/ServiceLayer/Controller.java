@@ -117,9 +117,10 @@ public class Controller implements IController {
     }
 
     @Override
-    public void setImage(InputStream inputstream) {
+    public void setImage(InputStream inputstream,int bID,String floorno) {
+        System.out.println("3");
         System.out.println(inputstream);
-        DBF.setImage(inputstream);
+        DBF.setImage(inputstream,bID,floorno);
     }
 
     @Override
@@ -203,5 +204,10 @@ public class Controller implements IController {
     public void deleteReport(int building_id) {
         Report report = new Report(building_id);
         DBF.deleteReports(report);
+    }
+
+    @Override
+    public InputStream getImage(int bID,String floorno) {
+        return DBF.getImage(bID, floorno);
     }
 }

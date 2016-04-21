@@ -9,6 +9,7 @@ import DataAccessLayer.Interfaces.ImageMapperInterface;
 import DataAccessLayer.DBConnector;
 import ServiceLayer.Entity.Image;
 import java.io.InputStream;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -21,12 +22,15 @@ import java.util.logging.Logger;
  */
 public class ImageMapper implements ImageMapperInterface {
     @Override
-    public void setImage(InputStream inputstream) {
+    public void setImage(InputStream inputstream,int bID,String floor_no) {
         try {
-            PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("INSERT INTO images (image_name, Photo, image_id) values (?, ?, ?)");
-            pstmt.setString(1, "1");
-            pstmt.setBlob(2, inputstream);
-            pstmt.setInt(3, 001);
+            System.out.println("6");
+            System.out.println(bID);
+            System.out.println(floor_no);
+            PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("UPDATE building_floors SET Photo=? where floor_building_id=? and floor_no=?");
+            pstmt.setBlob(1, inputstream);
+            pstmt.setInt(2,bID );
+            pstmt.setString(3, floor_no);
             pstmt.executeUpdate();            
         } catch (SQLException ex) {
             Logger.getLogger(CustomerMapper.class.getName()).log(Level.SEVERE, null, ex);
@@ -35,7 +39,27 @@ public class ImageMapper implements ImageMapperInterface {
     }
     
     @Override
-    public void getImage(InputStream inputstream) {
-        
+    public InputStream getImage(int bID,String floorno) {
+
+        Connection connection = DBConnector.getConnection();
+        PreparedStatement preparedStatement = null;
+        ResultSet resultset = null;
+        InputStream binaryStream = null;
+
+        try {
+
+            preparedStatement = connection.prepareStatement("SELECT photo FROM building_floors WHERE floor_building_id=? and floor_no=?");
+            preparedStatement.setInt(1, bID);
+            preparedStatement.setString(2, floorno);
+            resultset = preparedStatement.executeQuery();
+
+            while (resultset.next()) {
+                binaryStream = resultset.getBinaryStream("photo");
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(CustomerMapper.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return binaryStream;
     }
 }

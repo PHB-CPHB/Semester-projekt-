@@ -5,13 +5,20 @@
  */
 package PressentationLayer;
 
+import DataAccessLayer.DBConnector;
 import ServiceLayer.Controller;
 import ServiceLayer.Entity.Building;
 import ServiceLayer.Entity.Floor;
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -56,7 +63,41 @@ public class ImageController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            HttpSession session = request.getSession(true);
+            Building building = (Building) session.getAttribute("building");
+            String floorno = (String) session.getAttribute("floorno");
+            Controller con = (Controller) session.getAttribute("Controller");
+            InputStream photoStream = con.getImage(building.getBuilding_id(), floorno);
+
+            // Prepare streams.
+            BufferedInputStream input = null;
+            BufferedOutputStream output = null;
+            try {
+                // Open streams
+                input = new BufferedInputStream(photoStream, 16177215);
+
+                response.setContentType("image/jpeg");
+
+                output = new BufferedOutputStream(response.getOutputStream(), 16177215);
+                // Write file contents to response.
+                byte[] buffer = new byte[16177215];
+                int length;
+                while ((length = input.read(buffer)) > 0) {
+                    output.write(buffer, 0, length);
+                }
+
+            } finally {
+                output.close();
+                input.close();
+            }
+
+            forward(request, response, "/Login.jsp");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
     /**
@@ -73,18 +114,22 @@ public class ImageController extends HttpServlet {
         String do_this = request.getParameter("do_this");
         HttpSession session = request.getSession(true);
         Controller con = (Controller) session.getAttribute("Controller");
-     //   Floor floor = new Floor;
-       // switch (do_this) {
-         //   case "set image":
+        //Floor floor = new Floor;
+        switch (do_this) {
+            case "showfloors":
+                session.setAttribute("floorno", request.getParameter("floorno"));
+                forward(request, response, "/Floorplan.jsp");
+                break;
+            case "setimage":
+                Building building = (Building) session.getAttribute("building");
+                String floorno = (String) session.getAttribute("floorno");
                 Part filePart = request.getPart("file");
                 InputStream inputstream = filePart.getInputStream();
-                con.setImage(inputstream);
+                con.setImage(inputstream, building.getBuilding_id(), floorno);
                 forward(request, response, "/AdminBuildings.jsp");
-           // case "get image":
-             //   request.getParameter(Floor.getFloor_building_id());
-               // request.getParameter(Floor.getFloor_number());
-        
-        
+                break;
+                
+        }
     }
 
     /**
@@ -92,11 +137,12 @@ public class ImageController extends HttpServlet {
      *
      * @return a String containing servlet description
      */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
-
+//        @Override
+//        public String getServletInfo
+//        
+//            () {
+//        return "Short description";
+//        }// </editor-fold>
     protected void forward(HttpServletRequest request, HttpServletResponse response, String url) throws IOException, ServletException {
         RequestDispatcher requestDispatcher = getServletContext().getRequestDispatcher(url);
         requestDispatcher.forward(request, response);

@@ -54,10 +54,12 @@ public interface IController {
 
     void requestCheckUp(int building_id);
 
-    void setImage(InputStream inputstream);
+    void setImage(InputStream inputstream,int bID,String floor_no);
 
     void updateFloor(int floor_b_id, int floor_n, int floor_si, String floor_apt, String floor_ro) throws SQLException;
 
     boolean validate(String user, String password);
+    
+    InputStream getImage(int bID,String floorno);
     
 }
