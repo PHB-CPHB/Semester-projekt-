@@ -23,7 +23,7 @@ public class ControllerTest {
 
     @Before
     public void init() throws Exception {
-        Controller ctrl = Controller.getCon();
+        Controller ctrl = new Controller();
         boolean a = true;
         System.out.println("Init 1");
         if (ctrl.validate("Test", "123")) {
