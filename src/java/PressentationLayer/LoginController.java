@@ -103,7 +103,7 @@ public class LoginController extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session = request.getSession(true);
         session.setAttribute("database", DBFacade.getInstance());
-        session.setAttribute("Controller", Controller.getCon());
+        session.setAttribute("Controller", new Controller());
         Controller con = (Controller) session.getAttribute("Controller");
         String user = request.getParameter("username");
         String password = request.getParameter("password");

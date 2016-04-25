@@ -6,7 +6,6 @@ DROP TABLE IF EXISTS firm;
 DROP TABLE IF EXISTS Zip;
 DROP TABLE IF EXISTS buildings;
 DROP TABLE IF EXISTS building_floors;
-DROP TABLE IF EXISTS images;
 DROP TABLE IF EXISTS building_report;
 DROP TABLE IF EXISTS building_room;
 
@@ -59,31 +58,24 @@ floor_no INT(10),
 floor_size int(10),
 floor_arpartments VARCHAR(20),
 floor_rooms VARCHAR(20),
+photo mediumblob,
 FOREIGN KEY (floor_building_id) 
 REFERENCES Buildings(building_id)
-);
-
-CREATE TABLE images(
-image_id INT(10) not null auto_increment,
-image_name VARCHAR(10) not null,
-Photo mediumblob,
-primary key (image_id)
 );
 
 CREATE TABLE building_report(
 report_id INT (10),
 report_outer_roof VARCHAR (20),
-/*report_outer_roof_pic MEDIUMBLOB,*/
+report_outer_roof_pic MEDIUMBLOB,
 report_outer_wall VARCHAR (20),
-/*report_outer_wall_pic MEDIUMBLOB,*/
+report_outer_wall_pic MEDIUMBLOB,
 report_building_usage VARCHAR (20),
-/*report_report_filler VARCHAR (20),*/
+report_employee_filler VARCHAR (20),
 report_building_manager VARCHAR (20),
 report_building_condetion INT (10),
-FOREIGN KEY (report_building_condetion) 
+FOREIGN KEY (report_id) 
 REFERENCES buildings(building_id)
 );
-
 
 CREATE TABLE building_room(
 room_apartment_id INT (10),
@@ -1306,46 +1298,19 @@ INSERT INTO Zip VALUES ('9990', 'Skagen');
 
 INSERT INTO login (username, password, user_role, user_firm) 
 VALUES ('Oliver', '123', 'admin', 'Polygon1');
-INSERT INTO login (username, password, user_role, user_firm) 
-VALUES ('Tim', '1234', 'admin', 'Polygon');
-INSERT INTO login (username, password, user_role, user_firm) 
-VALUES ('Phillip', '12345', 'customer', 'ABE');
-INSERT INTO login (username, password, user_role, user_firm) 
-VALUES ('Michael', '123456', 'admin', 'Polygon2');
-INSERT INTO login (username, password, user_role, user_firm) 
-VALUES ('Brink', '123', 'customer', 'PC');
 
 INSERT INTO firm (firm_name, firm_leader_id) VALUES ('Polygon1', 1);
-INSERT INTO firm (firm_name, firm_leader_id) VALUES ('Polygon', 2);
-INSERT INTO firm (firm_name, firm_leader_id) VALUES ('ABE', 3);
-INSERT INTO firm (firm_name, firm_leader_id) VALUES ('Polygon2', 4);
-INSERT INTO firm (firm_name, firm_leader_id) VALUES ('PC', 5);
 
-INSERT INTO buildings (building_name, building_status, building_type, building_adress, building_year, building_zipcode, building_areasize, building_parcel_no, building_floor, building_firm_id)
-VALUES ('Olivers bygning', 'I stand', 'Hus', 'Kappa 123', 1992, 1000, 70, '123', '1', 1);
-INSERT INTO buildings (building_name, building_status, building_type, building_adress, building_year, building_zipcode, building_areasize, building_parcel_no, building_floor, building_firm_id) 
-VALUES ('Olivers bygning', 'I stand', 'Hus', 'Kappa 123', 1992, 2000, 70, '123', '1', 1);
-INSERT INTO buildings (building_name, building_status, building_type, building_adress, building_year, building_zipcode, building_areasize, building_parcel_no, building_floor, building_firm_id) 
-VALUES ('Olivers bygning', 'I stand', 'Hus', 'Kappa 123', 1992, 3000, 70, '123', '1', 2);
-INSERT INTO buildings (building_name, building_status, building_type, building_adress, building_year, building_zipcode, building_areasize, building_parcel_no, building_floor, building_firm_id) 
-VALUES ('Olivers bygning', 'I stand', 'Hus', 'Kappa 123', 1992, 4000, 70, '123', '1', 2);
-INSERT INTO buildings (building_name, building_status, building_type, building_adress, building_year, building_zipcode, building_areasize, building_parcel_no, building_floor, building_firm_id) 
-VALUES ('Olivers bygning', 'I stand', 'Hus', 'Kappa 123', 1992, 5000, 70, '123', '1', 3);
-INSERT INTO buildings (building_name, building_status, building_type, building_adress, building_year, building_zipcode, building_areasize, building_parcel_no, building_floor, building_firm_id)
-VALUES ('Olivers bygning', 'I stand', 'Hus', 'Kappa 123', 1992, 6000, 70, '123', '1', 3);
-INSERT INTO buildings (building_name, building_status, building_type, building_adress, building_year, building_zipcode, building_areasize, building_parcel_no, building_floor, building_firm_id)
-VALUES ('Olivers bygning', 'I stand', 'Hus', 'Kappa 123', 1992, 7000, 70, '123', '1', 4);
-INSERT INTO buildings (building_name, building_status, building_type, building_adress, building_year, building_zipcode, building_areasize, building_parcel_no, building_floor, building_firm_id) 
-VALUES ('Olivers bygning', 'I stand', 'Hus', 'Kappa 123', 1992, 8000, 70, '123', '1', 4);
-INSERT INTO buildings (building_name, building_status, building_type, building_adress, building_year, building_zipcode, building_areasize, building_parcel_no, building_floor, building_firm_id) 
-VALUES ('Olivers bygning', 'I stand', 'Hus', 'Kappa 123', 1992, 9000, 70, '123', '1', 4);
-
-INSERT INTO building_report (report_id, report_outer_roof, report_outer_wall, report_building_usage, report_building_manager, report_building_condetion)
-VALUES (1, 'Good', 'Medium', 'Shallo', 'Poly', 2);
-
-select * from building_report;
 
 /*
+SELECT * FROM buildings;
+
+SELECT building_report.report_building_condetion, buildings.building_id, buildings.building_name, buildings.building_status, buildings.building_type, buildings.building_adress, buildings.building_year, buildings.building_zipcode, buildings.building_areasize, buildings.building_parcel_no, buildings.building_floor, firm.firm_name FROM building_report INNER JOIN buildings ON building_report.report_id = buildings.building_id INNER JOIN firm ON buildings.building_firm_id = firm_id  ORDER BY report_building_condetion DESC;
+SELECT * FROM buildings;
+SELECT buildings.building_name, buildings.building_type, buildings.building_adress, buildings.building_year, buildings.building_zipcode, buildings.building_parcel_no, firm.firm_name FROM buildings INNER JOIN firm ON buildings.building_firm_id = firm.firm_id INNER JOIN login ON login.user_id = firm.firm_leader_id WHERE login.user_id = 10;
+SELECT * FROM login;
+/*
+SELECT report_building_condetion FROM building_report INNER JOIN buildings ON building_report.report_id = buildings.building_id WHERE buildings.building_id = 1;
 SELECT * FROM building_floors;
 DELETE FROM building_floors WHERE floor_building_id = 10;
 

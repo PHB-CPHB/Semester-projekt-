@@ -188,17 +188,17 @@ public class DBFacade implements AdminMapperInterface, BuildingMapperInterface, 
         BMapper.requestCheckUp(building);
     }
 
-    public ArrayList<Floor> getFloors(Building building) {
+    public ArrayList<Floor> getFloors(Building building) throws SQLException {
         return BMapper.getFloor(building);
     }
 
     @Override
-    public void addFloor(Floor floor) {
+    public void addFloor(Floor floor) throws SQLException {
         FloorMapper.addFloor(floor);
     }
 
     @Override
-    public int getAllFloors(Floor floor) {
+    public int getAllFloors(Floor floor) throws SQLException {
         return FloorMapper.getAllFloors(floor);
     }
 
@@ -213,7 +213,7 @@ public class DBFacade implements AdminMapperInterface, BuildingMapperInterface, 
     }
 
     @Override
-    public void updateFloor(Floor editFloor) {
+    public void updateFloor(Floor editFloor) throws SQLException {
         FloorMapper.updateFloor(editFloor);
     }
 
@@ -238,7 +238,7 @@ public class DBFacade implements AdminMapperInterface, BuildingMapperInterface, 
     }
 
     @Override
-    public ArrayList<Floor> getFloor(Building building) {
+    public ArrayList<Floor> getFloor(Building building) throws SQLException {
         return BMapper.getFloor(building);
     }
 
@@ -252,6 +252,17 @@ public class DBFacade implements AdminMapperInterface, BuildingMapperInterface, 
         return IMapper.getImage(bID,floorno);
     }
 
+    public int getBuildingCondition(Building building) throws SQLException {
+        return BMapper.getBuildingCondition(building);
+    }
+
+    public ArrayList<Report> getSortedBuildings() throws SQLException {
+        return BMapper.getSortedBuildings();
+    }
+
+    public void deleteReports(Report report) {
+        ReportMapper.deleteReports(report);
+    }
 
     @Override
     public void createReport(Report report) {

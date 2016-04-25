@@ -32,7 +32,7 @@
                 <%--This part is writen by Phillip
                 The code is to show the customers building and so that they can delete them
                 For them to see their buildings they need user_id--%>
-                <th>Building ID</th><th>Building Status</th><th>Building Type</th><th>Building Year</th><th>Size</th><th>Building Name</th><th>Building Adress</th><th>Floor</th><th>Zipcode</th><th>Firm</th><th> </th><th> </th><th> </th><th> </th>
+                <th>Building ID</th><th>Building Status</th><th>Building Type</th><th>Building Year</th><th>Size</th><th>Building Name</th><th>Building Adress</th><th>Floor</th><th>Zipcode</th><th>Firm</th><th> </th><th></th><th> </th><th> </th><th> </th>
             </tr>
             <% Controller con = (Controller) session.getAttribute("Controller");
                 ArrayList<Building> buildings = con.getAllCutsomerBuildings(c);
@@ -44,6 +44,7 @@
                 for (Building building : buildings) {
                     out.println("<tr>");
                     out.println("<td>" + building.getBuilding_id() + "</td>");
+                    out.print("<td>" + con.getBuildingCondition(building.getBuilding_id()) + "</td>");
                     out.print("<td>" + building.getBuilding_status() + "</td>");
                     out.print("<td>" + building.getBuilding_type() + "</td>");
                     out.print("<td>" + building.getBuilding_year() + "</td>");
@@ -93,6 +94,9 @@
     <td> <form action="DeleteBuildingController" method="POST">
             <input  type="submit" name="do_this" value="Return" style="width: 10%; height: 5%; font-size: 100%;"/>
         </form>
+    <% if (request.getAttribute("viewFloorError") != null) {%>
+    <%= request.getAttribute("viewFloorError")%>
+    <%}%>
     </td>
 </body>
 </html>

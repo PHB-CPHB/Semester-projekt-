@@ -6,6 +6,7 @@
 package DataAccessLayer.Interfaces;
 
 import ServiceLayer.Entity.Floor;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
@@ -14,16 +15,16 @@ import java.util.ArrayList;
  */
 public interface FloorMapperInterface {
 
-    void addFloor(Floor floor);
+    void addFloor(Floor floor) throws SQLException;
 
     void deleteFloor(Floor floor);
 
-    int getAllFloors(Floor floor);
+    int getAllFloors(Floor floor) throws SQLException;
 
     Floor getFloor(Floor floor);
 
     ArrayList<Floor> getTotalSize(Floor floor);
 
-    void updateFloor(Floor editFloor);
+    void updateFloor(Floor editFloor) throws SQLException;
     
 }

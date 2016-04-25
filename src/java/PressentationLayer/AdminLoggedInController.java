@@ -5,6 +5,7 @@
  */
 package PressentationLayer;
 
+import ServiceLayer.Entity.Customer;
 import java.io.IOException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -12,6 +13,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -61,12 +63,27 @@ public class AdminLoggedInController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //processRequest(request, response);
+        HttpSession session = request.getSession(true);
+        Customer c = (Customer) session.getAttribute("LoggedInCustomer");
         String dothis = request.getParameter("dothis");
         switch (dothis) {
             case "Create user":
-                forward(request, response, "/AdminLoggedIn.jsp");
+                if (c.getUser_role().equals("admin")) {
+                    forward(request, response, "/AdminLoggedIn.jsp");
+                } else {
+                    forward(request, response, "/CustomerLoggedIn.jsp");
+                }
+                break;
             case "View user":
                 forward(request, response, "/AllUser.jsp");
+                break;
+            case "return":
+                if (c.getUser_role().equals("admin")) {
+                    forward(request, response, "/AdminLoggedIn.jsp");
+                } else {
+                    forward(request, response, "/CustomerLoggedIn.jsp");
+                }
+            break;
         }
     }
 

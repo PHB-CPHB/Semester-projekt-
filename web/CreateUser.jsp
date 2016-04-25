@@ -30,7 +30,8 @@
             <input type="submit" value="Create User" style="width: 30%; height: 30%; font-size: 100%;" />
         </form>
 
-        <td> <form action="AdminLoggedIn.jsp" method="POST">
+        <td> <form action="AdminLoggedInController" method="POST">
+                <input type="hidden" name="dothis" value="return"/>
                 <input type="submit" value="Return" style="width: 30%; height: 30%; font-size: 100%;" />
             </form>
         </td>

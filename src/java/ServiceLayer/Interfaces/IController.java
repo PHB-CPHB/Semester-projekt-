@@ -18,7 +18,7 @@ import java.util.ArrayList;
  */
 public interface IController {
 
-    void addFloor(Building building, int floor_size, String floor_apartments, String floor_rooms);
+    void addFloor(Building building, int floor_size, String floor_apartments, String floor_rooms) throws SQLException;
 
     void addNewBuilding(String building_name, String building_type, String building_adress, int building_year, int building_zipcode, String building_parcelno, Customer c) throws SQLException;
 
@@ -56,11 +56,12 @@ public interface IController {
 
     void setImage(InputStream inputstream,int bID,String floor_no);
 
-    void updateFloor(int floor_b_id, int floor_n, int floor_si, String floor_apt, String floor_ro);
+    void updateFloor(int floor_b_id, int floor_n, int floor_si, String floor_apt, String floor_ro) throws SQLException;
 
     boolean validate(String user, String password);
     
-    void report(int reportId, String outerRoof, String outerWall, String usageOfBuilding, String theBuildingManager, int buildingCondition);
     InputStream getImage(int bID,String floorno);
+
+    void report(int reportId, String outerRoof, String outerWall, String usageOfBuilding, String theBuildingManager, int buildingCondition);
     
 }

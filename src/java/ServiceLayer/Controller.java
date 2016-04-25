@@ -20,20 +20,10 @@ import java.util.ArrayList;
  * @author philliphbrink
  */
 public class Controller implements IController {
-
-    private static Controller con;
     private final DBFacade DBF = DBFacade.getInstance();
 
-    private Controller() {
+    public Controller() {
 
-    }
-
-    public static Controller getCon() {
-        if (con == null) {
-            return con = new Controller();
-        } else {
-            return con;
-        }
     }
 
     @Override
@@ -96,6 +86,7 @@ public class Controller implements IController {
     @Override
     public ArrayList<Building> getAllBuildings() {
         return DBF.getAllBuildings();
+        
     }
 
     @Override
@@ -123,11 +114,16 @@ public class Controller implements IController {
 
     @Override
     public ArrayList<Floor> buildingFloor(Building building) {
+        try {
         return DBF.getFloors(building);
+        } catch (SQLException sqle) {
+            ArrayList<Floor> ErrorArray = new ArrayList();
+            return ErrorArray;
+        }
     }
 
     @Override
-    public void addFloor(Building building, int floor_size, String floor_apartments, String floor_rooms) {
+    public void addFloor(Building building, int floor_size, String floor_apartments, String floor_rooms) throws SQLException {
         int floor_no = maxFloor(building);
         Floor floor = new Floor(floor_no, floor_size, floor_apartments, floor_rooms);
         floor.setFloor_building_id(building.getBuilding_id());
@@ -137,15 +133,24 @@ public class Controller implements IController {
     @Override
     public int maxFloor(Building building) {
         Floor floor = new Floor(building.getBuilding_id());
+        try {
         int currentFloor = DBF.getAllFloors(floor);
         int newFloor = currentFloor + 1;
         return newFloor;
-    }
-
+        } catch (SQLException sqle) {
+            System.out.println("Dette er i Controller maxFloor");
+            return 0;
+        }
+      }
+    
     @Override
     public int getAllFloors(int building_id) {
         Floor floor = new Floor(building_id);
+        try {
         return DBF.getAllFloors(floor);
+        } catch (SQLException sqle) {
+            return 0;
+        }
     }
 
     @Override
@@ -166,7 +171,7 @@ public class Controller implements IController {
     }
 
     @Override
-    public void updateFloor(int floor_b_id, int floor_n, int floor_si, String floor_apt, String floor_ro) {
+    public void updateFloor(int floor_b_id, int floor_n, int floor_si, String floor_apt, String floor_ro) throws SQLException {
         Floor editFloor = new Floor(floor_b_id, floor_n, floor_si, floor_apt, floor_ro);
         DBF.updateFloor(editFloor);
     }
@@ -175,6 +180,29 @@ public class Controller implements IController {
     public void deleteFloors(int building_id) {
         Floor floor = new Floor(building_id);
         DBF.deleteFloor(floor);
+    }
+    
+    public int getBuildingCondition(int building_id) {
+        try {
+        Building building = new Building(building_id);
+        return DBF.getBuildingCondition(building);
+        } catch (SQLException sqle) {
+        return -1;
+        }
+    }
+    
+    public ArrayList<Report> getSortedBuildings() {
+        ArrayList<Report> ErrorArray = new ArrayList();
+        try {
+        return DBF.getSortedBuildings();
+        } catch (SQLException sqle) {
+            return ErrorArray;
+        }
+    }
+
+    public void deleteReport(int building_id) {
+        Report report = new Report(building_id);
+        DBF.deleteReports(report);
     }
 
     @Override

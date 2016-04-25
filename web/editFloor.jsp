@@ -31,6 +31,9 @@
             <input type="hidden" value="returnFloor" name="do_this">
             <input type="submit" value="Return" style="width: 30%; height: 30%; font-size: 100%;"/>
         </form>
+        <% if (request.getAttribute("editError") != null) {%>
+        <%= request.getAttribute("editError")%>
+        <%}%>
     </center>
 </body>
 </html>

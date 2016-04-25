@@ -37,4 +37,15 @@ public class ReportMapper implements ReportMapperInterface {
 
     }
 
+
+    public void deleteReports(Report report) {
+        PreparedStatement pstmt;
+        try {
+            pstmt = (PreparedStatement) DBConnector.getConnection().prepareStatement("DELETE FROM building_report WHERE report_id = ?");
+            pstmt.setInt(1, report.getReportId());
+            pstmt.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+    }
 }

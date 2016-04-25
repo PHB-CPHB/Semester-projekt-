@@ -139,6 +139,7 @@ public class AdminServlet extends HttpServlet {
                 String uRole = request.getParameter("role");
                 con.createCustomer(uName, uPwd, uRole, uFirm);
                 forward(request, response, "/AllUsers.jsp");
+                break;
             case "return":
                 forward(request, response, "/AdminLoggedIn.jsp");
                 break;
@@ -147,7 +148,6 @@ public class AdminServlet extends HttpServlet {
                 forward(request, response, "/Login.jsp");
                 break;
         }
-        forward(request, response, "/AdminLoggedIn.jsp");
     }
 
     /**
