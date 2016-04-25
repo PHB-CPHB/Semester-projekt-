@@ -139,7 +139,7 @@ public class Controller implements IController {
         return newFloor;
         } catch (SQLException sqle) {
             System.out.println("Dette er i Controller maxFloor");
-            return 0;
+            return 1;
         }
       }
     
@@ -187,7 +187,7 @@ public class Controller implements IController {
         Building building = new Building(building_id);
         return DBF.getBuildingCondition(building);
         } catch (SQLException sqle) {
-        return -1;
+        return 0;
         }
     }
     
