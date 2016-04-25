@@ -95,7 +95,6 @@ public class Controller implements IController {
 
     @Override
     public ArrayList<Building> getAllBuildings() {
-        ArrayList<Building> bla = new ArrayList();
         return DBF.getAllBuildings();
         
     }

@@ -206,14 +206,16 @@ public class AddBuildingController extends HttpServlet {
 
             case "edit":
                 try {
-                    String floorsi = (String) request.getParameter("floor_si");
-                    int floor_si = Integer.parseInt(floorsi);
-                    String floor_apt = (String) request.getParameter("floor_apt");
-                    String floor_ro = (String) request.getParameter("floor_ro");
                     String floorn = (String) request.getParameter("floor_n");
                     int floor_n = Integer.parseInt(floorn);
                     String floorbid = (String) request.getParameter("floor_b_id");
                     int floor_b_id = Integer.parseInt(floorbid);
+                    request.setAttribute("floor_n", floor_n);
+                    request.setAttribute("floor_b_id", floor_b_id);
+                    String floorsi = (String) request.getParameter("floor_si");
+                    int floor_si = Integer.parseInt(floorsi);
+                    String floor_apt = (String) request.getParameter("floor_apt");
+                    String floor_ro = (String) request.getParameter("floor_ro");
                     con.updateFloor(floor_b_id, floor_n, floor_si, floor_apt, floor_ro);
                     if (c.getUser_role().equals("admin")) {
                         forward(request, response, "/AdminFloor.jsp");
@@ -221,6 +223,13 @@ public class AddBuildingController extends HttpServlet {
                         forward(request, response, "/CustomerFloor.jsp");
                     }
                 } catch (NullPointerException | SQLException | NumberFormatException npe) {
+                    System.out.println(npe);
+                    String floorn = (String) request.getParameter("floor_n");
+                    int floor_n = Integer.parseInt(floorn);
+                    String floorbid = (String) request.getParameter("floor_b_id");
+                    int floor_b_id = Integer.parseInt(floorbid);
+                    request.setAttribute("floor_n", floor_n);
+                    request.setAttribute("floor_b_id", floor_b_id);
                     if (request.getParameter("floor_si").equals("")) {
                         request.setAttribute("floor_si", 0);
                         String floorapt = request.getParameter("floor_apt");
