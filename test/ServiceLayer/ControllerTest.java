@@ -48,7 +48,7 @@ public class ControllerTest {
     public void testGetCon() {
         System.out.println("Here i will test if there is a connection to the Database, by making a connection making a new customer"
                 + "Here after i will get all customer to see if the ArrayList isnt empty we got a connection");
-        Controller ctrl = Controller.getCon();
+        Controller ctrl = new Controller();
         String uName = "Test";
         String uPwd = "123";
         Customer c = ctrl.requestAccess(uName, uPwd);
@@ -63,7 +63,7 @@ public class ControllerTest {
     public void testAddNewBuilding() throws Exception {
         System.out.println("Here i will test Create a building and get a building.");
         boolean b = true;
-        Controller ctrl = Controller.getCon();
+        Controller ctrl = new Controller();
         String building_name = "Test";
         String building_type = "Test Type";
         String building_adress = "Test Vej 34";
@@ -100,7 +100,7 @@ public class ControllerTest {
     @Test
     public void testCreateCustomer() throws Exception {
         System.out.println("Here i will test Create a Customer and get a customer");
-        Controller ctrl = Controller.getCon();
+        Controller ctrl = new Controller();
         String uName = "Test";
         String uPwd = "123";
         System.out.println("Create Customer 1");
@@ -124,7 +124,7 @@ public class ControllerTest {
     @Test
     public void testDeleteBuilding() throws Exception {
         System.out.println("Here i will test delete building by using getAllCustomerBuildings");
-        Controller ctrl = Controller.getCon();
+        Controller ctrl = new Controller();
         String uName = "Test";
         String uPwd = "123";
         String building_name = "Test";

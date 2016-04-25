@@ -20,20 +20,10 @@ import java.util.ArrayList;
  * @author philliphbrink
  */
 public class Controller implements IController {
-
-    private static Controller con;
     private final DBFacade DBF = DBFacade.getInstance();
 
-    private Controller() {
+    public Controller() {
 
-    }
-
-    public static Controller getCon() {
-        if (con == null) {
-            return con = new Controller();
-        } else {
-            return con;
-        }
     }
 
     @Override
