@@ -183,6 +183,7 @@ public class Controller implements IController {
         DBF.createReport(report);
     }
 
+    @Override
     public InputStream getImage(int bID, String floorno) {
         return DBF.getImage(bID, floorno);
     }
