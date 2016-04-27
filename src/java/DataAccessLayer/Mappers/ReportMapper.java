@@ -48,4 +48,20 @@ public class ReportMapper implements ReportMapperInterface {
             System.out.println(ex);
         }
     }
+
+    public void setBuildingCondition(Report report) {
+        PreparedStatement pstmt;
+        try {
+            System.out.println("4");
+            pstmt = (PreparedStatement) DBConnector.getConnection().prepareStatement("INSERT INTO building_report (report_id, report_building_condetion) VALUES (?, ?);");
+            pstmt.setInt(1, report.getBuilding().getBuilding_id());
+            pstmt.setInt(2, report.getBuildingCondition());
+            System.out.println("5");
+            pstmt.executeUpdate();
+            System.out.println("6");
+        } catch (SQLException ex) {
+            System.out.println("7");
+            System.out.println(ex);
+        }
+    }
 }

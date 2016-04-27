@@ -268,4 +268,9 @@ public class DBFacade implements AdminMapperInterface, BuildingMapperInterface, 
     public void createReport(Report report) {
         ReportMapper.createReport(report);
     } 
+
+    public void setBuildingCondition(Report report) {
+        System.out.println("3");
+        ReportMapper.setBuildingCondition(report);
+    }
 }
