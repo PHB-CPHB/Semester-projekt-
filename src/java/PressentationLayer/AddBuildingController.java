@@ -110,7 +110,7 @@ public class AddBuildingController extends HttpServlet {
                         try {
                             con.addNewBuilding(building_name, building_type, building_adress, building_year, building_zipcode, building_parcel_no, c);
                         } catch (SQLException sqle) {
-                            String ErrorMessage = "Du skal skrive tal i Zipcodes og Year for at kunne forsætte. HUSK kun hele 1000 tal i Zipcode";
+                            String ErrorMessage = "Du skal skrive tal i Zipcodes og Year for at kunne forsætte.";
                             request.setAttribute("ErrorMessage", ErrorMessage);
                             forward(request, response, "/AddBuilding.jsp");
                         }
@@ -121,7 +121,7 @@ public class AddBuildingController extends HttpServlet {
                         }
                     }
                 } catch (NumberFormatException | NullPointerException NFE) {
-                    String ErrorMessage = "Du skal skrive noget i alle felterne for at kunne oprette en bygning kun hele 1000 tal i Zipcodes";
+                    String ErrorMessage = "Du skal skrive noget i alle felterne for at kunne oprette en bygning.";
                     request.setAttribute("ErrorMessage", ErrorMessage);
                     forward(request, response, "/AddBuilding.jsp");
                 }

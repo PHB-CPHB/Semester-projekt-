@@ -28,7 +28,6 @@ public class Building {
     private String building_firm;
     private int building_firm_id;
     private ArrayList<Floor> building_floors = new ArrayList();
-    private ArrayList<Room> building_rooms = new ArrayList();
 
     public Building(int building_id, String buildingName, String buildingStatus, String building_type, String building_adress, int building_year, int building_zipcode, String building_city, int building_areasize, String building_parcel_no, String building_floor, String building_firm, int building_firm_id) {
         this.building_id = building_id;
