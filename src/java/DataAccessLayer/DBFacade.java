@@ -178,8 +178,6 @@ public class DBFacade implements AdminMapperInterface, BuildingMapperInterface, 
 
     @Override
     public void setImage(InputStream inputstream,int bID,String floor_no) {
-        System.out.println("5");
-        System.out.println(inputstream);
         IMapper.setImage(inputstream,bID,floor_no);
     }
 
