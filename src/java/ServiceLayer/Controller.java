@@ -31,8 +31,17 @@ public class Controller implements IController {
         int building_firm_id = DBF.getBuildingFirmId(c);
         String building_floor = "0";
         int building_size = 0;
-        Building b = new Building(building_name, building_type, building_adress, building_year, building_zipcode, building_size, building_parcelno, building_floor, building_firm_id);
+        Building b = new Building(building_name, building_type, building_adress, building_year, building_zipcode, building_size, building_parcelno, building_floor, building_firm_id);       
+        System.out.println("Ctrl + 1");
         DBF.addBuilding(b);
+        System.out.println("Ctrl + 2");
+        int buildingStartCondition = 0;
+        System.out.println("Ctrl + 3");
+        b.setBuilding_id(DBF.getBuildingId(c));
+        System.out.println("Ctrl + 4");
+        Report report = new Report(buildingStartCondition, b);
+        System.out.println("Ctrl + 5");
+        DBF.setBuildingCondition(report);
 
     }
 
