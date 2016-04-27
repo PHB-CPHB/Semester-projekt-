@@ -7,6 +7,7 @@ package PressentationLayer;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -33,7 +34,7 @@ public class BuildingReportController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            
+
         }
     }
 
@@ -65,6 +66,11 @@ public class BuildingReportController extends HttpServlet {
             throws ServletException, IOException {
         processRequest(request, response);
         String do_this = request.getParameter("do_this");
+        switch (do_this) {
+            case "remark":
+                System.out.println("2");
+                forward(request, response, "/BReport.jsp");
+        }
     }
 
     /**
@@ -77,4 +83,8 @@ public class BuildingReportController extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
+    protected void forward(HttpServletRequest request, HttpServletResponse response, String url) throws IOException, ServletException {
+        RequestDispatcher requestDispatcher = getServletContext().getRequestDispatcher(url);
+        requestDispatcher.forward(request, response);
+    }
 }

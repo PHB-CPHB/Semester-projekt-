@@ -92,7 +92,7 @@ public class Controller implements IController {
     @Override
     public ArrayList<Building> getAllCutsomerBuildings(Customer customer) {
         try {
-        return DBF.getAllCustomersBuildings(customer);
+            return DBF.getAllCustomersBuildings(customer);
         } catch (SQLException ex) {
             ArrayList<Building> ErrorBuilding = null;
             return ErrorBuilding;
@@ -106,10 +106,10 @@ public class Controller implements IController {
     }
 
     @Override
-    public void setImage(InputStream inputstream,int bID,String floorno) {
+    public void setImage(InputStream inputstream, int bID, String floorno) {
         System.out.println("3");
         System.out.println(inputstream);
-        DBF.setImage(inputstream,bID,floorno);
+        DBF.setImage(inputstream, bID, floorno);
     }
 
     @Override
@@ -129,8 +129,9 @@ public class Controller implements IController {
         floor.setFloor_building_id(building.getBuilding_id());
         DBF.addFloor(floor);
     }
+
     @Override
-    public int maxFloor(Building building){
+    public int maxFloor(Building building) {
         Floor floor = new Floor(building.getBuilding_id());
         try {
         int currentFloor = DBF.getAllFloors(floor);
@@ -143,7 +144,7 @@ public class Controller implements IController {
       }
     
     @Override
-    public int getAllFloors(int building_id){
+    public int getAllFloors(int building_id) {
         Floor floor = new Floor(building_id);
         try {
         return DBF.getAllFloors(floor);
@@ -151,9 +152,9 @@ public class Controller implements IController {
             return 0;
         }
     }
-    
+
     @Override
-    public int getTotalSize(int building_id){
+    public int getTotalSize(int building_id) {
         int totalBuildingSize = 0;
         Floor buildingfloor = new Floor(building_id);
         ArrayList<Floor> floors = DBF.getTotalSize(buildingfloor);
@@ -177,8 +178,8 @@ public class Controller implements IController {
 
     @Override
     public void deleteFloors(int building_id) {
-    Floor floor = new Floor(building_id);
-    DBF.deleteFloor(floor);
+        Floor floor = new Floor(building_id);
+        DBF.deleteFloor(floor);
     }
     
     public int getBuildingCondition(int building_id) {
@@ -205,7 +206,13 @@ public class Controller implements IController {
     }
 
     @Override
-    public InputStream getImage(int bID,String floorno) {
+    public void report(int reportId, String outerRoof, String outerWall, String usageOfBuilding, String theBuildingManager, int buildingCondition) {
+        Report report = new Report(reportId, outerRoof, outerWall, usageOfBuilding, theBuildingManager, buildingCondition);
+        DBF.createReport(report);
+    }
+
+    @Override
+    public InputStream getImage(int bID, String floorno) {
         return DBF.getImage(bID, floorno);
     }
 }

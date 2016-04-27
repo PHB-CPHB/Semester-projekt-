@@ -61,5 +61,7 @@ public interface IController {
     boolean validate(String user, String password);
     
     InputStream getImage(int bID,String floorno);
+
+    void report(int reportId, String outerRoof, String outerWall, String usageOfBuilding, String theBuildingManager, int buildingCondition);
     
 }
