@@ -28,7 +28,10 @@ public class BuildingMapper implements BuildingMapperInterface {
     @Override
     public ArrayList<Building> getAllCustomersBuildings(Customer c) throws SQLException {
             ArrayList<Building> list = new ArrayList<>();
-            PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("select buildings.building_id, buildings.building_status, buildings.building_type, buildings.building_year, buildings.building_areasize, buildings.building_name, buildings.building_adress, buildings.building_floor, buildings.building_zipcode, firm.firm_name FROM buildings INNER JOIN firm ON buildings.building_firm_id = firm.firm_id Where building_firm_id = ?");
+            PreparedStatement pstmt = DBConnector.getConnection().prepareStatement(
+                    "SELECT buildings.building_id, buildings.building_status, buildings.building_type, buildings.building_year, buildings.building_areasize, buildings.building_name, buildings.building_adress, buildings.building_floor, buildings.building_zipcode, firm.firm_name FROM buildings"
+                    + " INNER JOIN firm ON buildings.building_firm_id = firm.firm_id "
+                    + "Where building_firm_id = ?");
             pstmt.setInt(1, c.getUser_id());
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
@@ -51,7 +54,9 @@ public class BuildingMapper implements BuildingMapperInterface {
     @Override
     public void deleteBuilding(Building b) {
         try {
-            PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("DELETE FROM buildings WHERE building_id = ?");
+            PreparedStatement pstmt = DBConnector.getConnection().prepareStatement(
+                    "DELETE FROM buildings WHERE building_id = ?"
+            );
             pstmt.setInt(1, b.getBuilding_id());
             pstmt.executeUpdate();
         } catch (SQLException ex) {
@@ -75,7 +80,11 @@ public class BuildingMapper implements BuildingMapperInterface {
     @Override
     public void addBuilding(Building b) throws SQLException {
         String building_status = "Ikke klar endnu";
-            PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("INSERT INTO buildings (building_name, building_status, building_type, building_adress, building_year, building_zipcode, building_areasize, building_parcel_no, building_floor, building_firm_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            PreparedStatement pstmt = DBConnector.getConnection().prepareStatement(
+                    "INSERT INTO buildings (building_name, building_status, building_type, building_adress, building_year,"
+                    + " building_zipcode, building_areasize, building_parcel_no, building_floor, building_firm_id) "
+                    + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
+            );
             pstmt.setString(1, b.getBuilding_name());
             pstmt.setString(2, building_status);
             pstmt.setString(3, b.getBuilding_type());
