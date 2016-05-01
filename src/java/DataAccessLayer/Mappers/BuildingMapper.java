@@ -113,7 +113,7 @@ public class BuildingMapper implements BuildingMapperInterface {
         }
         return city;
     }
-    
+    // Made by Phillip - Returns a list of all buildings with their firm name
     @Override
     public ArrayList<Building> getAllBuilding() {
         try {
@@ -138,7 +138,7 @@ public class BuildingMapper implements BuildingMapperInterface {
             return null;
         }
     }
-    
+    // Made by Michael
     @Override
     public void requestCheckUp(Building building) {
         String building_status = "check-up";
@@ -151,7 +151,7 @@ public class BuildingMapper implements BuildingMapperInterface {
             Logger.getLogger(BuildingMapper.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+    //Made by Phillip - Returns a ArrayList of Floors for the buildings id
     @Override
     public ArrayList<Floor> getFloor(Building building) throws SQLException {
             ArrayList<Floor> floor = new ArrayList<>();
@@ -167,7 +167,7 @@ public class BuildingMapper implements BuildingMapperInterface {
             return floor;
        
     }
-
+    // Made by Phillip - Returns the buildings condition
     public int getBuildingCondition(Building building) throws SQLException {
         int buildingCondition = 0;
             PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("SELECT report_building_condetion FROM building_report INNER JOIN buildings ON building_report.report_id = buildings.building_id WHERE buildings.building_id = ?;");
@@ -178,7 +178,7 @@ public class BuildingMapper implements BuildingMapperInterface {
             return buildingCondition;
         
     }
-    
+    // Made by Phillip - Returns a sorted list of buildings by thier conditions
     public ArrayList<Report> getSortedBuildings() throws SQLException {
     ArrayList<Report> reports = new ArrayList();
             PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("SELECT building_report.report_building_condetion, buildings.building_id, buildings.building_name, buildings.building_status, buildings.building_type, buildings.building_adress, buildings.building_year, buildings.building_zipcode, buildings.building_areasize, buildings.building_parcel_no, buildings.building_floor, firm.firm_name FROM building_report INNER JOIN buildings ON building_report.report_id = buildings.building_id INNER JOIN firm ON buildings.building_firm_id = firm_id  ORDER BY report_building_condetion DESC;");

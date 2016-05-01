@@ -108,7 +108,7 @@ public class AdminMapper implements AdminMapperInterface {
         }
         return building_firm;
     }
-
+    // Made by Phillip - Returns all firms
     @Override
     public ArrayList<Firm> getAllFirms() {
         try {
