@@ -32,7 +32,7 @@
                 <%--This part is writen by Phillip
                 The code is to show the customers building and so that they can delete them
                 For them to see their buildings they need user_id--%>
-                <th>Building ID</th><th>Building Status</th><th>Building Type</th><th>Building Year</th><th>Size</th><th>Building Name</th><th>Building Adress</th><th>Floor</th><th>Zipcode</th><th>Firm</th><th> </th><th></th><th> </th><th> </th><th> </th>
+                <th>Building ID</th><th>Building Condition</th><th>Building Status</th><th>Building Type</th><th>Building Year</th><th>Size</th><th>Building Name</th><th>Building Adress</th><th>Floor</th><th>Zipcode</th><th>Firm</th><th> </th><th></th><th> </th><th> </th>
             </tr>
             <% Controller con = (Controller) session.getAttribute("Controller");
                 ArrayList<Building> buildings = con.getAllCutsomerBuildings(c);

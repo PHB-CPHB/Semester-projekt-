@@ -31,8 +31,12 @@ public class Controller implements IController {
         int building_firm_id = DBF.getBuildingFirmId(c);
         String building_floor = "0";
         int building_size = 0;
-        Building b = new Building(building_name, building_type, building_adress, building_year, building_zipcode, building_size, building_parcelno, building_floor, building_firm_id);
+        Building b = new Building(building_name, building_type, building_adress, building_year, building_zipcode, building_size, building_parcelno, building_floor, building_firm_id);       
         DBF.addBuilding(b);
+        int buildingStartCondition = 0;
+        b.setBuilding_id(DBF.getBuildingId(c));
+        Report report = new Report(buildingStartCondition, b);
+        DBF.setBuildingCondition(report);
 
     }
 
@@ -92,7 +96,7 @@ public class Controller implements IController {
     @Override
     public ArrayList<Building> getAllCutsomerBuildings(Customer customer) {
         try {
-        return DBF.getAllCustomersBuildings(customer);
+            return DBF.getAllCustomersBuildings(customer);
         } catch (SQLException ex) {
             ArrayList<Building> ErrorBuilding = null;
             return ErrorBuilding;
@@ -106,10 +110,10 @@ public class Controller implements IController {
     }
 
     @Override
-    public void setImage(InputStream inputstream,int bID,String floorno) {
+    public void setImage(InputStream inputstream, int bID, String floorno) {
         System.out.println("3");
         System.out.println(inputstream);
-        DBF.setImage(inputstream,bID,floorno);
+        DBF.setImage(inputstream, bID, floorno);
     }
 
     @Override
@@ -129,21 +133,21 @@ public class Controller implements IController {
         floor.setFloor_building_id(building.getBuilding_id());
         DBF.addFloor(floor);
     }
+
     @Override
-    public int maxFloor(Building building){
+    public int maxFloor(Building building) {
         Floor floor = new Floor(building.getBuilding_id());
         try {
         int currentFloor = DBF.getAllFloors(floor);
         int newFloor = currentFloor + 1;
         return newFloor;
         } catch (SQLException sqle) {
-            System.out.println("Dette er i Controller maxFloor");
-            return 0;
+            return 1;
         }
       }
     
     @Override
-    public int getAllFloors(int building_id){
+    public int getAllFloors(int building_id) {
         Floor floor = new Floor(building_id);
         try {
         return DBF.getAllFloors(floor);
@@ -151,9 +155,9 @@ public class Controller implements IController {
             return 0;
         }
     }
-    
+
     @Override
-    public int getTotalSize(int building_id){
+    public int getTotalSize(int building_id) {
         int totalBuildingSize = 0;
         Floor buildingfloor = new Floor(building_id);
         ArrayList<Floor> floors = DBF.getTotalSize(buildingfloor);
@@ -177,8 +181,8 @@ public class Controller implements IController {
 
     @Override
     public void deleteFloors(int building_id) {
-    Floor floor = new Floor(building_id);
-    DBF.deleteFloor(floor);
+        Floor floor = new Floor(building_id);
+        DBF.deleteFloor(floor);
     }
     
     public int getBuildingCondition(int building_id) {
@@ -186,7 +190,7 @@ public class Controller implements IController {
         Building building = new Building(building_id);
         return DBF.getBuildingCondition(building);
         } catch (SQLException sqle) {
-        return -1;
+        return 0;
         }
     }
     
@@ -205,7 +209,13 @@ public class Controller implements IController {
     }
 
     @Override
-    public InputStream getImage(int bID,String floorno) {
+    public void report(int reportId, String outerRoof, String outerWall, String usageOfBuilding, String theBuildingManager, int buildingCondition) {
+        Report report = new Report(reportId, outerRoof, outerWall, usageOfBuilding, theBuildingManager, buildingCondition);
+        DBF.createReport(report);
+    }
+
+    @Override
+    public InputStream getImage(int bID, String floorno) {
         return DBF.getImage(bID, floorno);
     }
 }

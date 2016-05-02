@@ -8,7 +8,6 @@ package DataAccessLayer.Mappers;
 
 import DataAccessLayer.Interfaces.AdminMapperInterface;
 import DataAccessLayer.DBConnector;
-import ServiceLayer.Entity.Building;
 import ServiceLayer.Entity.Customer;
 import ServiceLayer.Entity.Firm;
 import java.sql.PreparedStatement;
@@ -77,11 +76,16 @@ public class AdminMapper implements AdminMapperInterface {
     public int getBuildingId(Customer c) {
         int building_id = 0;
         try {
-            PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("SELECT firm.firm_id FROM firm INNER JOIN login ON login.user_id = firm.firm_id WHERE login.username = ?");
+            PreparedStatement pstmt = DBConnector.getConnection().prepareStatement(
+                    "SELECT buildings.building_id FROM buildings "
+                    + "INNER JOIN firm ON buildings.building_firm_id = firm.firm_id "
+                    + "INNER JOIN login ON firm.firm_leader_id = login.user_id "
+                    + "WHERE user_id = ?;"
+            );
             pstmt.setInt(1, c.getUser_id());
             ResultSet rs = pstmt.executeQuery();
-            rs.next();
-            building_id = rs.getInt("firm_id");
+            rs.last();
+            building_id = rs.getInt("building_id");
         } catch (SQLException ex) {
             Logger.getLogger(CustomerMapper.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -104,7 +108,7 @@ public class AdminMapper implements AdminMapperInterface {
         }
         return building_firm;
     }
-
+    // Made by Phillip - Returns all firms
     @Override
     public ArrayList<Firm> getAllFirms() {
         try {

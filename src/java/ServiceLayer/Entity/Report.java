@@ -34,6 +34,16 @@ public class Report {
     
     
 
+    public Report(int reportId, String outerRoof, String outerWall, String usageOfBuilding, String theBuildingManager, int buildingCondition) {
+        this.reportId = reportId;
+        this.outerRoof = outerRoof;
+        this.outerWall = outerWall;
+        this.usageOfBuilding = usageOfBuilding;
+        this.theBuildingManager = theBuildingManager;
+        this.buildingCondition = buildingCondition;
+        
+    }
+
     public int getReportId() {
         return reportId;
     }

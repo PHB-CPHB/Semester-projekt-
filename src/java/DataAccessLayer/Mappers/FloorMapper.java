@@ -19,6 +19,7 @@ import java.util.ArrayList;
  */
 public class FloorMapper implements FloorMapperInterface {
     
+    //Made by Phillip - Add a floor to building by buildings id
     @Override
     public void addFloor(Floor floor) throws SQLException {
             PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("INSERT INTO building_floors (floor_building_id, floor_no, floor_size, floor_arpartments, floor_rooms) VALUES (?, ?, ?, ?, ?);");
@@ -29,7 +30,7 @@ public class FloorMapper implements FloorMapperInterface {
             pstmt.setString(5, floor.getFloor_rooms());
             pstmt.executeUpdate();   
     }
-    
+    //Made by Phillip - Returns the last Floor for the building by buildings id
     @Override
     public int getAllFloors(Floor floor) throws SQLException {
         int floor_no;
@@ -40,7 +41,7 @@ public class FloorMapper implements FloorMapperInterface {
             floor_no = rs.getInt("floor_no");
             return floor_no;
     }
-    
+    //Made by Phillip - Returns a ArrayList of Floors for the building by buildings id
     public ArrayList<Floor> getAllFloorsArray(Floor floor) {
         ArrayList<Floor> list = new ArrayList();
         try {
@@ -60,7 +61,7 @@ public class FloorMapper implements FloorMapperInterface {
         System.out.println("FAIL");
         return list;
     }
-    
+    //Made by Phillip - Returns ArrayList of Floors
     @Override
     public ArrayList<Floor> getTotalSize(Floor floor) {
         try {
@@ -80,8 +81,8 @@ public class FloorMapper implements FloorMapperInterface {
             return null;
         }        
     }
-
-    //@Override
+    //Made by Phillip - returns a specifik floor for a building
+    @Override
     public Floor getFloor(Floor floor) {
         try {
             PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("SELECT floor_size, floor_arpartments, floor_rooms from building_floors WHERE floor_no = ? and floor_building_id = ?");
@@ -99,7 +100,7 @@ public class FloorMapper implements FloorMapperInterface {
             return null;
         } 
     }
-
+    //Made by Phillip - Updates a floor
     @Override
     public void updateFloor(Floor editFloor) throws SQLException {
             PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("UPDATE building_floors set floor_size = ?, floor_arpartments = ?, floor_rooms = ? WHERE floor_no = ? and floor_building_id = ?;");
@@ -110,7 +111,7 @@ public class FloorMapper implements FloorMapperInterface {
             pstmt.setInt(5, editFloor.getFloor_building_id());
             pstmt.executeUpdate();
     }
-
+    // Made by Phillip - Delete all the floors in a building
     @Override
     public void deleteFloor(Floor floor) {
         try {

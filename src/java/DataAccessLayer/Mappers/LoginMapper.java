@@ -18,8 +18,7 @@ import java.sql.SQLException;
  */
 public class LoginMapper implements LoginMapperInterface {
 
-    //Tim
-
+    //Made by Tim - Returns true if the user is in the database
     @Override
     public boolean validate(Customer c) {
         try {
@@ -33,8 +32,7 @@ public class LoginMapper implements LoginMapperInterface {
         }
     }
 
-    //Tim
-
+    //Made by Tim - Returns the customers role
     @Override
     public String getUserRole(Customer c) {
         try {
@@ -50,7 +48,6 @@ public class LoginMapper implements LoginMapperInterface {
     }
 
     //Made by Phillip - Returns customers id by Username and Password
-
     @Override
     public int getUserId(Customer c) {
         int user_id = 0;
@@ -68,8 +65,7 @@ public class LoginMapper implements LoginMapperInterface {
     }
 
     //Made by Phillip - Returns the Customer/Admin how is logged in
-
-        @Override
+    @Override
     public Customer requestAccessRole(Customer customer) {
         try {
             PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("select * from login where username=? and password =?");
