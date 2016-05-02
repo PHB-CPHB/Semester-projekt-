@@ -58,6 +58,7 @@
                     <input type="submit" value="Delete" width="200%" size="100%" style="width: 100%; font-size: 110%"/>
                 </form>
             </td>
+            <%--This button is made by Michael--%>
             <td> <form action="DeleteBuildingController" method="POST">
                     <input type="hidden" name="do_this" value="report"/>
                     <input type="hidden" name="viewreport" value="<%=building.getBuilding_id()%>" />

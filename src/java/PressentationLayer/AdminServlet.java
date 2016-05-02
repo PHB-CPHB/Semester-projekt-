@@ -82,6 +82,7 @@ public class AdminServlet extends HttpServlet {
         }
         switch (do_this) {
             // Made by Michael
+            // Deletes the user 
             case "deleteUser":
 //                String username = (String) session.getAttribute("username");
 //                
@@ -95,6 +96,7 @@ public class AdminServlet extends HttpServlet {
                 forward(request, response, "/AllUsers.jsp");
                 break;
             // Made by Oliver
+            //Creates user
             case "createUser":
                 String uName = request.getParameter("username");
                 String uPwd = request.getParameter("password");
@@ -103,9 +105,11 @@ public class AdminServlet extends HttpServlet {
                 con.createCustomer(uName, uPwd, uRole, uFirm);
                 forward(request, response, "/AllUsers.jsp");
                 break;
+            //Returns back to main menu
             case "return":
                 forward(request, response, "/AdminLoggedIn.jsp");
                 break;
+            //Closes the session and returns the user back to login
             case "logout":
                 session.invalidate();
                 forward(request, response, "/Login.jsp");
