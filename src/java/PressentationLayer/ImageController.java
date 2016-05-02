@@ -64,37 +64,27 @@ public class ImageController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        //Tim
         try {
             HttpSession session = request.getSession(true);
             Building building = (Building) session.getAttribute("building");
             String floorno = (String) session.getAttribute("floorno");
             Controller con = (Controller) session.getAttribute("Controller");
             InputStream photoStream = con.getImage(building.getBuilding_id(), floorno);
-
             // Prepare streams.
             BufferedInputStream input = null;
             BufferedOutputStream output = null;
             try {
-                // Open streams
                 input = new BufferedInputStream(photoStream, 16177215);
-
-                response.setContentType("image/jpeg");
-
                 output = new BufferedOutputStream(response.getOutputStream(), 16177215);
-                // Write file contents to response.
                 byte[] buffer = new byte[16177215];
                 int length;
-                while ((length = input.read(buffer)) > 0) {
-                    output.write(buffer, 0, length);
-                }
-
+                length = input.read(buffer);
+                output.write(buffer, 0, length);
             } finally {
                 output.close();
                 input.close();
             }
-
-            forward(request, response, "/Login.jsp");
-
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -112,6 +102,7 @@ public class ImageController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        //Oliver
         String do_this = request.getParameter("do_this");
         HttpSession session = request.getSession(true);
         Customer c = (Customer) session.getAttribute("LoggedInCustomer");
@@ -134,7 +125,6 @@ public class ImageController extends HttpServlet {
                     forward(request, response, "/CustomerBuildings.jsp");
                 }
                 break;
-                
         }
     }
 
