@@ -60,7 +60,7 @@
                     <input type="hidden" name="do_this" value="editFloor"/>
                     <input type="hidden" name="floorno" value="<%= floor.getFloor_no()%>" />
                     <input type="submit" value="Edit Floor" width="200%" size="100%" style="width: 100%; font-size: 110%"/>
-                </form>
+                </form> 
             </td>
             <%-- Her slutter floors ArrayListen --%>
             <%out.println("</tr>");

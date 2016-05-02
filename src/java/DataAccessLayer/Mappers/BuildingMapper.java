@@ -28,7 +28,10 @@ public class BuildingMapper implements BuildingMapperInterface {
     @Override
     public ArrayList<Building> getAllCustomersBuildings(Customer c) throws SQLException {
             ArrayList<Building> list = new ArrayList<>();
-            PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("select buildings.building_id, buildings.building_status, buildings.building_type, buildings.building_year, buildings.building_areasize, buildings.building_name, buildings.building_adress, buildings.building_floor, buildings.building_zipcode, firm.firm_name FROM buildings INNER JOIN firm ON buildings.building_firm_id = firm.firm_id Where building_firm_id = ?");
+            PreparedStatement pstmt = DBConnector.getConnection().prepareStatement(
+                    "SELECT buildings.building_id, buildings.building_status, buildings.building_type, buildings.building_year, buildings.building_areasize, buildings.building_name, buildings.building_adress, buildings.building_floor, buildings.building_zipcode, firm.firm_name FROM buildings"
+                    + " INNER JOIN firm ON buildings.building_firm_id = firm.firm_id "
+                    + "Where building_firm_id = ?");
             pstmt.setInt(1, c.getUser_id());
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
@@ -51,7 +54,9 @@ public class BuildingMapper implements BuildingMapperInterface {
     @Override
     public void deleteBuilding(Building b) {
         try {
-            PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("DELETE FROM buildings WHERE building_id = ?");
+            PreparedStatement pstmt = DBConnector.getConnection().prepareStatement(
+                    "DELETE FROM buildings WHERE building_id = ?"
+            );
             pstmt.setInt(1, b.getBuilding_id());
             pstmt.executeUpdate();
         } catch (SQLException ex) {
@@ -75,7 +80,11 @@ public class BuildingMapper implements BuildingMapperInterface {
     @Override
     public void addBuilding(Building b) throws SQLException {
         String building_status = "Ikke klar endnu";
-            PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("INSERT INTO buildings (building_name, building_status, building_type, building_adress, building_year, building_zipcode, building_areasize, building_parcel_no, building_floor, building_firm_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            PreparedStatement pstmt = DBConnector.getConnection().prepareStatement(
+                    "INSERT INTO buildings (building_name, building_status, building_type, building_adress, building_year,"
+                    + " building_zipcode, building_areasize, building_parcel_no, building_floor, building_firm_id) "
+                    + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
+            );
             pstmt.setString(1, b.getBuilding_name());
             pstmt.setString(2, building_status);
             pstmt.setString(3, b.getBuilding_type());
@@ -104,7 +113,7 @@ public class BuildingMapper implements BuildingMapperInterface {
         }
         return city;
     }
-    
+    // Made by Phillip - Returns a list of all buildings with their firm name
     @Override
     public ArrayList<Building> getAllBuilding() {
         try {
@@ -129,7 +138,7 @@ public class BuildingMapper implements BuildingMapperInterface {
             return null;
         }
     }
-    
+    // Made by Michael
     @Override
     public void requestCheckUp(Building building) {
         String building_status = "check-up";
@@ -142,7 +151,7 @@ public class BuildingMapper implements BuildingMapperInterface {
             Logger.getLogger(BuildingMapper.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+    //Made by Phillip - Returns a ArrayList of Floors for the buildings id
     @Override
     public ArrayList<Floor> getFloor(Building building) throws SQLException {
             ArrayList<Floor> floor = new ArrayList<>();
@@ -158,7 +167,7 @@ public class BuildingMapper implements BuildingMapperInterface {
             return floor;
        
     }
-
+    // Made by Phillip - Returns the buildings condition
     public int getBuildingCondition(Building building) throws SQLException {
         int buildingCondition = 0;
             PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("SELECT report_building_condetion FROM building_report INNER JOIN buildings ON building_report.report_id = buildings.building_id WHERE buildings.building_id = ?;");
@@ -169,7 +178,7 @@ public class BuildingMapper implements BuildingMapperInterface {
             return buildingCondition;
         
     }
-    
+    // Made by Phillip - Returns a sorted list of buildings by thier conditions
     public ArrayList<Report> getSortedBuildings() throws SQLException {
     ArrayList<Report> reports = new ArrayList();
             PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("SELECT building_report.report_building_condetion, buildings.building_id, buildings.building_name, buildings.building_status, buildings.building_type, buildings.building_adress, buildings.building_year, buildings.building_zipcode, buildings.building_areasize, buildings.building_parcel_no, buildings.building_floor, firm.firm_name FROM building_report INNER JOIN buildings ON building_report.report_id = buildings.building_id INNER JOIN firm ON buildings.building_firm_id = firm_id  ORDER BY report_building_condetion DESC;");

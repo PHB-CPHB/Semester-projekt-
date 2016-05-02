@@ -268,7 +268,6 @@ public class DBFacade implements AdminMapperInterface, BuildingMapperInterface, 
     } 
 
     public void setBuildingCondition(Report report) {
-        System.out.println("3");
         ReportMapper.setBuildingCondition(report);
     }
 }

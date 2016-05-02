@@ -12,7 +12,7 @@
         <title>Login Page</title>
     </head>
     <div
-        <body bgcolor="#33CCFF">
+        <body
             </form>
             <form action="LoginController" method="POST" style= "background: lightblue">
                 <fieldset>

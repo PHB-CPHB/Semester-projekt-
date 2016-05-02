@@ -67,6 +67,8 @@ public class AdminLoggedInController extends HttpServlet {
         Customer c = (Customer) session.getAttribute("LoggedInCustomer");
         String dothis = request.getParameter("dothis");
         switch (dothis) {
+            // Oliver
+            // Creates an user
             case "Create user":
                 if (c.getUser_role().equals("admin")) {
                     forward(request, response, "/AdminLoggedIn.jsp");
@@ -74,9 +76,11 @@ public class AdminLoggedInController extends HttpServlet {
                     forward(request, response, "/CustomerLoggedIn.jsp");
                 }
                 break;
+                //forwards to the list of users
             case "View user":
                 forward(request, response, "/AllUser.jsp");
                 break;
+                //Returns to the main menu
             case "return":
                 if (c.getUser_role().equals("admin")) {
                     forward(request, response, "/AdminLoggedIn.jsp");

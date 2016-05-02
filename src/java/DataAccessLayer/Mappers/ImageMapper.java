@@ -24,9 +24,6 @@ public class ImageMapper implements ImageMapperInterface {
     @Override
     public void setImage(InputStream inputstream,int bID,String floor_no) {
         try {
-            System.out.println("6");
-            System.out.println(bID);
-            System.out.println(floor_no);
             PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("UPDATE building_floors SET Photo=? where floor_building_id=? and floor_no=?");
             pstmt.setBlob(1, inputstream);
             pstmt.setInt(2,bID );
@@ -35,7 +32,6 @@ public class ImageMapper implements ImageMapperInterface {
         } catch (SQLException ex) {
             Logger.getLogger(CustomerMapper.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
     }
     
     @Override
@@ -47,7 +43,6 @@ public class ImageMapper implements ImageMapperInterface {
         InputStream binaryStream = null;
 
         try {
-
             preparedStatement = connection.prepareStatement("SELECT photo FROM building_floors WHERE floor_building_id=? and floor_no=?");
             preparedStatement.setInt(1, bID);
             preparedStatement.setString(2, floorno);

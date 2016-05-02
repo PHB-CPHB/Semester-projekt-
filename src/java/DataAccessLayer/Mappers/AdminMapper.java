@@ -76,7 +76,12 @@ public class AdminMapper implements AdminMapperInterface {
     public int getBuildingId(Customer c) {
         int building_id = 0;
         try {
-            PreparedStatement pstmt = DBConnector.getConnection().prepareStatement("SELECT buildings.building_id FROM buildings INNER JOIN firm ON buildings.building_firm_id = firm.firm_id INNER JOIN login ON firm.firm_leader_id = login.user_id WHERE user_id = ?;");
+            PreparedStatement pstmt = DBConnector.getConnection().prepareStatement(
+                    "SELECT buildings.building_id FROM buildings "
+                    + "INNER JOIN firm ON buildings.building_firm_id = firm.firm_id "
+                    + "INNER JOIN login ON firm.firm_leader_id = login.user_id "
+                    + "WHERE user_id = ?;"
+            );
             pstmt.setInt(1, c.getUser_id());
             ResultSet rs = pstmt.executeQuery();
             rs.last();
@@ -103,7 +108,7 @@ public class AdminMapper implements AdminMapperInterface {
         }
         return building_firm;
     }
-
+    // Made by Phillip - Returns all firms
     @Override
     public ArrayList<Firm> getAllFirms() {
         try {
