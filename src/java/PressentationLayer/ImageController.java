@@ -5,21 +5,13 @@
  */
 package PressentationLayer;
 
-import DataAccessLayer.DBConnector;
 import ServiceLayer.Controller;
 import ServiceLayer.Entity.Building;
 import ServiceLayer.Entity.Customer;
-import ServiceLayer.Entity.Floor;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.PrintWriter;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;

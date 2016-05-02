@@ -85,7 +85,7 @@ public class DeleteBuildingController extends HttpServlet {
             return;
         }
         switch (do_this) {
-            //Made by Phillip
+            //Made by Phillip - Deletes Reports, Floors and buildings. By building id.
             case "delete":
                 String building_id_name = request.getParameter("deletebuilding");
                 int building_id = Integer.parseInt(building_id_name);
@@ -98,11 +98,13 @@ public class DeleteBuildingController extends HttpServlet {
                     forward(request, response, "/CustomerBuildings.jsp");
                 }
             break;
-            //Made by Tim    
+                
+            //Made by Tim - Forwards to Report.    
             case "report":
                 forward(request, response, "/Report.jsp");
                 break;
-            //Made by Tim
+                
+            //Made by Tim - Forwards to Main Menu by Role.
             case "Return":
                 if (c.getUser_role().equals("admin")) {
                     forward(request, response, "/AdminLoggedIn.jsp");
@@ -110,6 +112,8 @@ public class DeleteBuildingController extends HttpServlet {
                     forward(request, response, "/CustomerLoggedIn.jsp");
                 }
                 break;
+                
+            //Made by Michael - Chance status of the building.    
             case "request":
                 String building = request.getParameter("check-up");
                 int buildingid = Integer.parseInt(building);

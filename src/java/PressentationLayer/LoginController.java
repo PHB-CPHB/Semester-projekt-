@@ -41,32 +41,7 @@ public class LoginController extends HttpServlet {
     // Made by Tim corrected by Oliver
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ClassNotFoundException, SQLException {
-        HttpSession session = request.getSession(true);
-        /*session.setAttribute("database", DBFacade.getInstance());
-         session.setAttribute("Controller", Controller.getCon());
-         Controller con = (Controller) session.getAttribute("Controller");
-         String user = request.getParameter("username");
-         String password = request.getParameter("password");
-         //check if username and password maches.
-         //Made by Tim
-         if (con.validate(user, password) == true) {
-         Customer LoggedInCustomer = con.requestAccess(user, password);
-         if (LoggedInCustomer.getUser_role().equals("admin")) {
-         session.setAttribute("LoggedInCustomer", LoggedInCustomer);
-         forward(request, response, "/AdminLoggedIn.jsp");
-         } else if (LoggedInCustomer.getUser_role().equals("customer")) {
-         session.setAttribute("LoggedInCustomer", LoggedInCustomer);
-         forward(request, response, "/CustomerLoggedIn.jsp");
-         } else {
-         forward(request, response, "/Login.jsp");
-         }
-                    
-         } else {
-         forward(request, response, "/Login.jsp");
-         }
-                
-         forward(request, response, "/Login.jsp");
-         */
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -108,7 +83,7 @@ public class LoginController extends HttpServlet {
         String user = request.getParameter("username");
         String password = request.getParameter("password");
         //check if username and password maches.
-        //Made by Tim
+        //Made by Tim - Edit by Phillip.
         if (con.validate(user, password) == true) {
             Customer LoggedInCustomer = con.requestAccess(user, password);
             if (LoggedInCustomer.getUser_role().equals("admin")) {

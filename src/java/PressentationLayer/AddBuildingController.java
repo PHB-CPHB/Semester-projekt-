@@ -91,8 +91,9 @@ public class AddBuildingController extends HttpServlet {
             return;
         }
 
-        // Made by Michael
+        
         switch (do_this) {
+            //Made by Michael - Adds a building.
             case "add":
                 try {
                     String building_name = request.getParameter("name");
@@ -127,7 +128,8 @@ public class AddBuildingController extends HttpServlet {
                 }
 
                 break;
-
+                
+                //Made by Phillip - Forwards to the buildings floors by building id.
             case "viewFloor":
                 try {
                     int buildingid = Integer.parseInt(request.getParameter("floor"));
@@ -148,11 +150,13 @@ public class AddBuildingController extends HttpServlet {
                     }
                 }
                 break;
-
+                
+                //Made by Phillip - Forward to add Floor.
             case "addNewFloor":
                 forward(request, response, "/addFloor.jsp");
                 break;
-
+                
+                //Made by Phillip - Adds a new Floor.
             case "addFloor":
                 try {
                     Building buildings = (Building) session.getAttribute("building");
@@ -176,7 +180,8 @@ public class AddBuildingController extends HttpServlet {
                     }
                 }
                 break;
-
+                
+                //Made by Phillip - Forward to the edit Floor.
             case "editFloor":
                 try {
                     String floorno = request.getParameter("floorno");
@@ -203,7 +208,8 @@ public class AddBuildingController extends HttpServlet {
                     }
                 }
                 break;
-
+                
+                //Made by Phillip - Updates the floor with new size, arpartment and room
             case "edit":
                 try {
                     String floorn = (String) request.getParameter("floor_n");
@@ -246,7 +252,8 @@ public class AddBuildingController extends HttpServlet {
                     }
                 }
                 break;
-
+                
+                //Made by Phillip - Forwards to Main Menu and removes the session value of buildings.
             case "return":
                 session.removeValue("building");
                 if (c.getUser_role().equals("admin")) {
@@ -256,6 +263,7 @@ public class AddBuildingController extends HttpServlet {
                 }
                 break;
 
+                //Made by Phillip - Forwards to floor by your role
             case "returnFloor":
                 if (c.getUser_role().equals("admin")) {
                     forward(request, response, "/AdminFloor.jsp");

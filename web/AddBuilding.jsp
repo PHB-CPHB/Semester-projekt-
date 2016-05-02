@@ -13,6 +13,7 @@
     </head>
     <body bgcolor="#33CCFF">
     <center>
+        <%-- This part is editet by Phillip --%>
         <h1>Please enter building infomation</h1>
         <form action="AddBuildingController" method="POST">
             Name of building:<br>

@@ -50,6 +50,7 @@
                     out.print("<td>" + floor.getFloor_size() + "</td>");
                     out.print("<td>" + floor.getFloor_arpartments() + "</td>");
                    out.print("<td>" + floor.getFloor_rooms() + "</td>");%>
+                   <%-- This Button is made by Oliver --%>
             <td> <form action="ImageController" method="POST">
                     <input type="hidden" name="" value="Floorplan"/>
                     <input type="hidden" name="floorno" value="<%= floor.getFloor_no()%>" />

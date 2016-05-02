@@ -286,9 +286,6 @@ public class ControllerTest {
         }
         assertTrue(ctrl.getAllFloors(building.get(building.size()-1).getBuilding_id()) == 3);
         assertTrue(ctrl.getTotalSize(building.get(building.size()-1).getBuilding_id()) == 400 + floor_size1 + floor_size2);
-        /*
-        System.out.println(ctrl.getAllFloors(building.size()-1));
-        assertTrue(ctrl.getAllFloors(building.size()-1) == 1);
-        */
+        
     }
 }
