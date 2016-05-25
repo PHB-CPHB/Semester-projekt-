@@ -35,7 +35,7 @@ public class AdminMapper implements AdminMapperInterface {
             pstmt.setString(4, c.getUser_firm());
             pstmt.executeUpdate();
         } catch (SQLException ex) {
-            Logger.getLogger(AdminMapper.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex);
             return false;
         }
         return true;
@@ -87,7 +87,7 @@ public class AdminMapper implements AdminMapperInterface {
             rs.last();
             building_id = rs.getInt("building_id");
         } catch (SQLException ex) {
-            Logger.getLogger(CustomerMapper.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex);
         }
         return building_id;
     }

@@ -124,7 +124,7 @@ public class CustomerMapper implements CustomerMapperInterface {
             rs.next();
             building_firm_id = rs.getInt("firm_id");
         } catch (SQLException ex) {
-            Logger.getLogger(CustomerMapper.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex);
         }
         return building_firm_id;
     }
